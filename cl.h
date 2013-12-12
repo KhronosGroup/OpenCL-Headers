@@ -295,6 +295,9 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_MAX_ON_DEVICE_EVENTS                  0x1052
 #define CL_DEVICE_SVM_CAPABILITIES                      0x1053
 #define CL_DEVICE_GLOBAL_VARIABLE_PREFERRED_TOTAL_SIZE  0x1054
+#define CL_DEVICE_MAX_PIPE_ARGS                         0x1055
+#define CL_DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS          0x1056
+#define CL_DEVICE_PIPE_MAX_PACKET_SIZE                  0x1057
 
 /* cl_device_fp_config - bitfield */
 #define CL_FP_DENORM                                (1 << 0)
@@ -322,6 +325,8 @@ typedef struct _cl_buffer_region {
 /* cl_command_queue_properties - bitfield */
 #define CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE      (1 << 0)
 #define CL_QUEUE_PROFILING_ENABLE                   (1 << 1)
+#define CL_QUEUE_ON_DEVICE                          (1 << 2)
+#define CL_QUEUE_ON_DEVICE_DEFAULT                  (1 << 3)
 
 /* cl_context_info  */
 #define CL_CONTEXT_REFERENCE_COUNT                  0x1080
@@ -358,7 +363,7 @@ typedef struct _cl_buffer_region {
 #define CL_QUEUE_DEVICE                             0x1091
 #define CL_QUEUE_REFERENCE_COUNT                    0x1092
 #define CL_QUEUE_PROPERTIES                         0x1093
-#define CL_QUEUE_SIZE
+#define CL_QUEUE_SIZE                               0x1094
 
 /* cl_mem_flags and cl_svm_mem_flags - bitfield */
 #define CL_MEM_READ_WRITE                           (1 << 0)
@@ -553,7 +558,7 @@ typedef struct _cl_buffer_region {
 #define CL_KERNEL_GLOBAL_WORK_SIZE                  0x11B5
     
 /* cl_kernel_exec_info */
-#define CL_KERNEL_EXEC_INFO_SVM_PTS                 0x11B6
+#define CL_KERNEL_EXEC_INFO_SVM_PTRS                0x11B6
 #define CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM   0x11B7
 
 /* cl_event_info  */
@@ -1272,9 +1277,8 @@ clEnqueueSVMMap(cl_command_queue  /* command_queue */,
                 cl_event *        /* event */) CL_API_SUFFIX__VERSION_2_0;
     
 extern CL_API_ENTRY cl_int CL_API_CALL
-clEnqueueSVMUnMap(cl_command_queue  /* command_queue */,
+clEnqueueSVMUnmap(cl_command_queue  /* command_queue */,
                   void *            /* svm_ptr */,
-                  size_t            /* size */,
                   cl_uint           /* num_events_in_wait_list */,
                   const cl_event *  /* event_wait_list */,
                   cl_event *        /* event */) CL_API_SUFFIX__VERSION_2_0;
