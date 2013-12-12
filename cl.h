@@ -55,6 +55,7 @@ typedef cl_bitfield         cl_device_fp_config;
 typedef cl_uint             cl_device_mem_cache_type;
 typedef cl_uint             cl_device_local_mem_type;
 typedef cl_bitfield         cl_device_exec_capabilities;
+typedef cl_bitfield         cl_device_svm_capabilities;
 typedef cl_bitfield         cl_command_queue_properties;
 typedef intptr_t            cl_device_partition_property;
 typedef cl_bitfield         cl_device_affinity_domain;
