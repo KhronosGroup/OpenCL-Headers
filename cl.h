@@ -78,6 +78,7 @@ typedef cl_uint             cl_filter_mode;
 typedef cl_uint             cl_sampler_info;
 typedef cl_bitfield         cl_map_flags;
 typedef intptr_t            cl_pipe_properties;
+typedef cl_uint             cl_pipe_info;
 typedef cl_uint             cl_program_info;
 typedef cl_uint             cl_program_build_info;
 typedef cl_uint             cl_program_binary_type;
