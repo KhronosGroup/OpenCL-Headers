@@ -182,6 +182,8 @@ typedef struct _cl_buffer_region {
 #define CL_INVALID_COMPILER_OPTIONS                 -66
 #define CL_INVALID_LINKER_OPTIONS                   -67
 #define CL_INVALID_DEVICE_PARTITION_COUNT           -68
+#define CL_INVALID_PIPE_SIZE                        -69
+#define CL_INVALID_DEVICE_QUEUE                     -70
 
 /* OpenCL Version */
 #define CL_VERSION_1_0                              1
@@ -300,6 +302,9 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_MAX_PIPE_ARGS                         0x1055
 #define CL_DEVICE_PIPE_MAX_ACTIVE_RESERVATIONS          0x1056
 #define CL_DEVICE_PIPE_MAX_PACKET_SIZE                  0x1057
+#define CL_DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT   0x1058
+#define CL_DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT     0x1059
+#define CL_DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT      0x105A
 
 /* cl_device_fp_config - bitfield */
 #define CL_FP_DENORM                                (1 << 0)
@@ -405,6 +410,7 @@ typedef struct _cl_buffer_region {
 #define CL_sRGBx                                    0x10C0
 #define CL_sRGBA                                    0x10C1
 #define CL_sBGRA                                    0x10C2
+#define CL_ABGR                                     0x10C3
 
 /* cl_channel_type */
 #define CL_SNORM_INT8                               0x10D0
@@ -432,6 +438,7 @@ typedef struct _cl_buffer_region {
 #define CL_MEM_OBJECT_IMAGE1D                       0x10F4
 #define CL_MEM_OBJECT_IMAGE1D_ARRAY                 0x10F5
 #define CL_MEM_OBJECT_IMAGE1D_BUFFER                0x10F6
+#define CL_MEM_OBJECT_PIPE                          0x10F7
 
 /* cl_mem_info */
 #define CL_MEM_TYPE                                 0x1100
@@ -771,7 +778,7 @@ clGetImageInfo(cl_mem           /* image */,
     
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetPipeInfo(cl_mem           /* pipe */,
-              cl_image_info    /* param_name */,
+              cl_pipe_info     /* param_name */,
               size_t           /* param_value_size */,
               void *           /* param_value */,
               size_t *         /* param_value_size_ret */) CL_API_SUFFIX__VERSION_2_0;
