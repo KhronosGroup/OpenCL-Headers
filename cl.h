@@ -557,6 +557,7 @@ typedef struct _cl_buffer_region {
 #define CL_KERNEL_ARG_TYPE_CONST                    (1 << 0)
 #define CL_KERNEL_ARG_TYPE_RESTRICT                 (1 << 1)
 #define CL_KERNEL_ARG_TYPE_VOLATILE                 (1 << 2)
+#define CL_KERNEL_ARG_TYPE_PIPE                     (1 << 3)
 
 /* cl_kernel_work_group_info */
 #define CL_KERNEL_WORK_GROUP_SIZE                   0x11B0
