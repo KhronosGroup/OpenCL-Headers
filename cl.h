@@ -110,7 +110,10 @@ typedef struct _cl_image_desc {
     size_t                  image_slice_pitch;
     cl_uint                 num_mip_levels;
     cl_uint                 num_samples;
-    cl_mem                  mem_object;
+    union {
+      cl_mem                  buffer;
+      cl_mem                  mem_object;
+    };
 } cl_image_desc;
 
 typedef struct _cl_buffer_region {
