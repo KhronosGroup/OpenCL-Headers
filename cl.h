@@ -255,7 +255,7 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_AVAILABLE                             0x1027
 #define CL_DEVICE_COMPILER_AVAILABLE                    0x1028
 #define CL_DEVICE_EXECUTION_CAPABILITIES                0x1029
-//#define CL_DEVICE_QUEUE_PROPERTIES                  0x102A    // deprecated
+#define CL_DEVICE_QUEUE_PROPERTIES                  0x102A    // deprecated
 #define CL_DEVICE_QUEUE_ON_HOST_PROPERTIES              0x102A
 #define CL_DEVICE_NAME                                  0x102B
 #define CL_DEVICE_VENDOR                                0x102C
