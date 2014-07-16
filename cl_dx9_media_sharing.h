@@ -52,34 +52,34 @@ typedef struct _cl_dx9_surface_info_khr
 
 /******************************************************************************/
 
-// Error Codes
+/* Error Codes */
 #define CL_INVALID_DX9_MEDIA_ADAPTER_KHR                -1010
 #define CL_INVALID_DX9_MEDIA_SURFACE_KHR                -1011
 #define CL_DX9_MEDIA_SURFACE_ALREADY_ACQUIRED_KHR       -1012
 #define CL_DX9_MEDIA_SURFACE_NOT_ACQUIRED_KHR           -1013
 
-// cl_media_adapter_type_khr
+/* cl_media_adapter_type_khr */
 #define CL_ADAPTER_D3D9_KHR                              0x2020
 #define CL_ADAPTER_D3D9EX_KHR                            0x2021
 #define CL_ADAPTER_DXVA_KHR                              0x2022
 
-// cl_media_adapter_set_khr
+/* cl_media_adapter_set_khr */
 #define CL_PREFERRED_DEVICES_FOR_DX9_MEDIA_ADAPTER_KHR   0x2023
 #define CL_ALL_DEVICES_FOR_DX9_MEDIA_ADAPTER_KHR         0x2024
 
-// cl_context_info
+/* cl_context_info */
 #define CL_CONTEXT_ADAPTER_D3D9_KHR                      0x2025
 #define CL_CONTEXT_ADAPTER_D3D9EX_KHR                    0x2026
 #define CL_CONTEXT_ADAPTER_DXVA_KHR                      0x2027
 
-// cl_mem_info
+/* cl_mem_info */
 #define CL_MEM_DX9_MEDIA_ADAPTER_TYPE_KHR                0x2028
 #define CL_MEM_DX9_MEDIA_SURFACE_INFO_KHR                0x2029
 
-// cl_image_info
+/* cl_image_info */
 #define CL_IMAGE_DX9_MEDIA_PLANE_KHR                     0x202A
 
-// cl_command_type
+/* cl_command_type */
 #define CL_COMMAND_ACQUIRE_DX9_MEDIA_SURFACES_KHR        0x202B
 #define CL_COMMAND_RELEASE_DX9_MEDIA_SURFACES_KHR        0x202C
 
@@ -123,5 +123,5 @@ typedef CL_API_ENTRY cl_int (CL_API_CALL *clEnqueueReleaseDX9MediaSurfacesKHR_fn
 }
 #endif
 
-#endif  // __OPENCL_CL_DX9_MEDIA_SHARING_H
+#endif  /* __OPENCL_CL_DX9_MEDIA_SHARING_H */
 

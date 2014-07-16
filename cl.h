@@ -62,7 +62,7 @@ typedef cl_bitfield         cl_device_affinity_domain;
 
 typedef intptr_t            cl_context_properties;
 typedef cl_uint             cl_context_info;
-typedef intptr_t            cl_queue_properties;
+typedef cl_bitfield         cl_queue_properties;
 typedef cl_uint             cl_command_queue_info;
 typedef cl_uint             cl_channel_order;
 typedef cl_uint             cl_channel_type;
@@ -92,7 +92,7 @@ typedef cl_uint             cl_kernel_work_group_info;
 typedef cl_uint             cl_event_info;
 typedef cl_uint             cl_command_type;
 typedef cl_uint             cl_profiling_info;
-typedef intptr_t            cl_sampler_properties;
+typedef cl_bitfield         cl_sampler_properties;
 typedef cl_uint             cl_kernel_exec_info;
 
 typedef struct _cl_image_format {
@@ -110,6 +110,9 @@ typedef struct _cl_image_desc {
     size_t                  image_slice_pitch;
     cl_uint                 num_mip_levels;
     cl_uint                 num_samples;
+#ifdef __GNUC__
+    __extension__   /* Prevents warnings about anonymous union in -pedantic builds */
+#endif
     union {
       cl_mem                  buffer;
       cl_mem                  mem_object;
@@ -258,7 +261,7 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_AVAILABLE                             0x1027
 #define CL_DEVICE_COMPILER_AVAILABLE                    0x1028
 #define CL_DEVICE_EXECUTION_CAPABILITIES                0x1029
-#define CL_DEVICE_QUEUE_PROPERTIES                  0x102A    // deprecated
+#define CL_DEVICE_QUEUE_PROPERTIES                      0x102A    /* deprecated */
 #define CL_DEVICE_QUEUE_ON_HOST_PROPERTIES              0x102A
 #define CL_DEVICE_NAME                                  0x102B
 #define CL_DEVICE_VENDOR                                0x102C
@@ -270,7 +273,7 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_DOUBLE_FP_CONFIG                      0x1032
 /* 0x1033 reserved for CL_DEVICE_HALF_FP_CONFIG */
 #define CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF           0x1034
-#define CL_DEVICE_HOST_UNIFIED_MEMORY                   0x1035   // deprecated
+#define CL_DEVICE_HOST_UNIFIED_MEMORY                   0x1035   /* deprecated */
 #define CL_DEVICE_NATIVE_VECTOR_WIDTH_CHAR              0x1036
 #define CL_DEVICE_NATIVE_VECTOR_WIDTH_SHORT             0x1037
 #define CL_DEVICE_NATIVE_VECTOR_WIDTH_INT               0x1038
@@ -382,12 +385,12 @@ typedef struct _cl_buffer_region {
 #define CL_MEM_USE_HOST_PTR                         (1 << 3)
 #define CL_MEM_ALLOC_HOST_PTR                       (1 << 4)
 #define CL_MEM_COPY_HOST_PTR                        (1 << 5)
-// reserved                                         (1 << 6)    
+/* reserved                                         (1 << 6)    */
 #define CL_MEM_HOST_WRITE_ONLY                      (1 << 7)
 #define CL_MEM_HOST_READ_ONLY                       (1 << 8)
 #define CL_MEM_HOST_NO_ACCESS                       (1 << 9)
-#define CL_MEM_SVM_FINE_GRAIN_BUFFER                (1 << 10)   // used by cl_svm_mem_flags only
-#define CL_MEM_SVM_ATOMICS                          (1 << 11)   // used by cl_svm_mem_flags only
+#define CL_MEM_SVM_FINE_GRAIN_BUFFER                (1 << 10)   /* used by cl_svm_mem_flags only */
+#define CL_MEM_SVM_ATOMICS                          (1 << 11)   /* used by cl_svm_mem_flags only */
 
 /* cl_mem_migration_flags - bitfield */
 #define CL_MIGRATE_MEM_OBJECT_HOST                  (1 << 0)
@@ -1309,7 +1312,7 @@ clGetExtensionFunctionAddressForPlatform(cl_platform_id /* platform */,
                                          const char *   /* func_name */) CL_API_SUFFIX__VERSION_1_2;
     
 
-// Deprecated OpenCL 1.1 APIs
+/* Deprecated OpenCL 1.1 APIs */
 extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_1_1_DEPRECATED cl_mem CL_API_CALL
 clCreateImage2D(cl_context              /* context */,
                 cl_mem_flags            /* flags */,
@@ -1350,7 +1353,7 @@ clUnloadCompiler(void) CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED;
 extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_1_1_DEPRECATED void * CL_API_CALL
 clGetExtensionFunctionAddress(const char * /* func_name */) CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED;
     
-// Deprecated OpenCL 2.0 APIs
+/* Deprecated OpenCL 2.0 APIs */
 extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_2_0_DEPRECATED cl_command_queue CL_API_CALL
 clCreateCommandQueue(cl_context                     /* context */,
                      cl_device_id                   /* device */,
