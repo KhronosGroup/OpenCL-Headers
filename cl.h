@@ -1355,26 +1355,26 @@ extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_1_1_DEPRECATED void * CL_API_CALL
 clGetExtensionFunctionAddress(const char * /* func_name */) CL_EXT_SUFFIX__VERSION_1_1_DEPRECATED;
     
 /* Deprecated OpenCL 2.0 APIs */
-extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_2_0_DEPRECATED cl_command_queue CL_API_CALL
+extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_1_2_DEPRECATED cl_command_queue CL_API_CALL
 clCreateCommandQueue(cl_context                     /* context */,
                      cl_device_id                   /* device */,
                      cl_command_queue_properties    /* properties */,
-                     cl_int *                       /* errcode_ret */) CL_EXT_SUFFIX__VERSION_2_0_DEPRECATED;
+                     cl_int *                       /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2_DEPRECATED;
     
     
-extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_2_0_DEPRECATED cl_sampler CL_API_CALL
+extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_1_2_DEPRECATED cl_sampler CL_API_CALL
 clCreateSampler(cl_context          /* context */,
                 cl_bool             /* normalized_coords */,
                 cl_addressing_mode  /* addressing_mode */,
                 cl_filter_mode      /* filter_mode */,
-                cl_int *            /* errcode_ret */) CL_EXT_SUFFIX__VERSION_2_0_DEPRECATED;
+                cl_int *            /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2_DEPRECATED;
     
-extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_2_0_DEPRECATED cl_int CL_API_CALL
+extern CL_API_ENTRY CL_EXT_PREFIX__VERSION_1_2_DEPRECATED cl_int CL_API_CALL
 clEnqueueTask(cl_command_queue  /* command_queue */,
               cl_kernel         /* kernel */,
               cl_uint           /* num_events_in_wait_list */,
               const cl_event *  /* event_wait_list */,
-              cl_event *        /* event */) CL_EXT_SUFFIX__VERSION_2_0_DEPRECATED;
+              cl_event *        /* event */) CL_EXT_SUFFIX__VERSION_1_2_DEPRECATED;
     
 #ifdef __cplusplus
 }
