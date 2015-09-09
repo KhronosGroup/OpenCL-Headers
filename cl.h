@@ -89,6 +89,7 @@ typedef cl_uint             cl_kernel_arg_address_qualifier;
 typedef cl_uint             cl_kernel_arg_access_qualifier;
 typedef cl_bitfield         cl_kernel_arg_type_qualifier;
 typedef cl_uint             cl_kernel_work_group_info;
+typedef cl_uint             cl_kernel_sub_group_info;
 typedef cl_uint             cl_event_info;
 typedef cl_uint             cl_command_type;
 typedef cl_uint             cl_profiling_info;
@@ -311,6 +312,9 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT   0x1058
 #define CL_DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT     0x1059
 #define CL_DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT      0x105A
+#define CL_DEVICE_IL_VERSION                            0xFFFF // TODO: Need value
+#define CL_DEVICE_MAX_NUM_SUB_GROUPS                    0xFFFF // TODO: Need value
+#define CL_DEVICE_SUBGROUP_INDEPENDENT_FORWARD_PROGRESS 0xFFFF // TODO: Need value
 
 /* cl_device_fp_config - bitfield */
 #define CL_FP_DENORM                                (1 << 0)
@@ -377,6 +381,7 @@ typedef struct _cl_buffer_region {
 #define CL_QUEUE_REFERENCE_COUNT                    0x1092
 #define CL_QUEUE_PROPERTIES                         0x1093
 #define CL_QUEUE_SIZE                               0x1094
+#define CL_QUEUE_DEVICE_DEFAULT                     0xFFFF // TODO: Need value
 
 /* cl_mem_flags and cl_svm_mem_flags - bitfield */
 #define CL_MEM_READ_WRITE                           (1 << 0)
@@ -539,6 +544,8 @@ typedef struct _cl_buffer_region {
 #define CL_KERNEL_CONTEXT                           0x1193
 #define CL_KERNEL_PROGRAM                           0x1194
 #define CL_KERNEL_ATTRIBUTES                        0x1195
+#define CL_KERNEL_MAX_NUM_SUB_GROUPS                0xFFFF  // TODO: Need value
+#define CL_KERNEL_COMPILE_NUM_SUB_GROUPS            0xFFFF  // TODO: Need value
 
 /* cl_kernel_arg_info */
 #define CL_KERNEL_ARG_ADDRESS_QUALIFIER             0x1196
@@ -573,6 +580,11 @@ typedef struct _cl_buffer_region {
 #define CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE 0x11B3
 #define CL_KERNEL_PRIVATE_MEM_SIZE                  0x11B4
 #define CL_KERNEL_GLOBAL_WORK_SIZE                  0x11B5
+
+/* cl_kernel_sub_group_info */
+#define CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE    0xFFFF  // TODO: Need value
+#define CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE       0xFFFF  // TODO: Need value
+#define CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT    0xFFFF  // TODO: Need value
     
 /* cl_kernel_exec_info */
 #define CL_KERNEL_EXEC_INFO_SVM_PTRS                0x11B6
@@ -675,6 +687,21 @@ clRetainDevice(cl_device_id /* device */) CL_API_SUFFIX__VERSION_1_2;
     
 extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseDevice(cl_device_id /* device */) CL_API_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSetDefaultCommandQueue(cl_context /* context */,
+                         cl_device_id /* device */,
+                         cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_2_1;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetDeviceAndHostTimer(cl_device_id /* device */,
+                        cl_ulong* /* device_timestamp */,
+                        cl_ulong* /* host_timestamp */) CL_API_SUFFIX__VERSION_2_1;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetHostTimer(cl_device_id /* device */,
+               cl_ulong* /* host_timestamp */)  CL_API_SUFFIX__VERSION_2_1;
+
     
 /* Context APIs  */
 extern CL_API_ENTRY cl_context CL_API_CALL
@@ -851,6 +878,13 @@ clCreateProgramWithBuiltInKernels(cl_context            /* context */,
                                   const char *          /* kernel_names */,
                                   cl_int *              /* errcode_ret */) CL_API_SUFFIX__VERSION_1_2;
 
+extern CL_API_ENTRY cl_program CL_API_CALL
+clCreateProgramWithIL(cl_context /* context */,
+                     const void* /* il */,
+                     size_t /* length */,
+                     cl_int* /* errcode_ret */) CL_API_SUFFIX__VERSION_2_1;
+
+
 extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainProgram(cl_program /* program */) CL_API_SUFFIX__VERSION_1_0;
 
@@ -919,6 +953,10 @@ clCreateKernelsInProgram(cl_program     /* program */,
                          cl_uint *      /* num_kernels_ret */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
+clCloneKernel(cl_kernel /* source_kernel */,
+              cl_int* /* errcode_ret */) CL_API_SUFFIX__VERSION_2_1;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainKernel(cl_kernel    /* kernel */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -963,6 +1001,17 @@ clGetKernelWorkGroupInfo(cl_kernel                  /* kernel */,
                          size_t                     /* param_value_size */,
                          void *                     /* param_value */,
                          size_t *                   /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetKernelSubGroupInfo(cl_kernel /* kernel */,
+                        cl_device_id /* device */,
+                        cl_kernel_sub_group_info /* param_name */,
+                        size_t /* input_value_size */,
+                        const void* /*input_value */,
+                        size_t /* param_value_size */,
+                        void* /* param_value */,
+                        size_t* /* param_value_size_ret */ ) CL_API_SUFFIX__VERSION_2_1;
+
 
 /* Event Object APIs */
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -1299,7 +1348,17 @@ clEnqueueSVMUnmap(cl_command_queue  /* command_queue */,
                   cl_uint           /* num_events_in_wait_list */,
                   const cl_event *  /* event_wait_list */,
                   cl_event *        /* event */) CL_API_SUFFIX__VERSION_2_0;
-    
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueSVMMigrateMem(cl_command_queue /* command_queue */,
+                       cl_uint /* num_svm_pointers */,
+                       const void** /* svm_pointers */,
+                       const size_t* /* sizes */,
+                       cl_mem_migration_flags /* flags */,
+                       cl_uint /* num_events_in_wait_list */,
+                       const cl_event* /* event_wait_list */,
+                       cl_event* /* event */) CL_API_SUFFIX__VERSION_2_1;
+
 
 /* Extension function access
  *
