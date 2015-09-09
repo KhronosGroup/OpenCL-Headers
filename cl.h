@@ -312,9 +312,9 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_PREFERRED_PLATFORM_ATOMIC_ALIGNMENT   0x1058
 #define CL_DEVICE_PREFERRED_GLOBAL_ATOMIC_ALIGNMENT     0x1059
 #define CL_DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT      0x105A
-#define CL_DEVICE_IL_VERSION                            0xFFFF // TODO: Need value
-#define CL_DEVICE_MAX_NUM_SUB_GROUPS                    0xFFFF // TODO: Need value
-#define CL_DEVICE_SUBGROUP_INDEPENDENT_FORWARD_PROGRESS 0xFFFF // TODO: Need value
+#define CL_DEVICE_IL_VERSION                            0x105B
+#define CL_DEVICE_MAX_NUM_SUB_GROUPS                    0x105C
+#define CL_DEVICE_SUBGROUP_INDEPENDENT_FORWARD_PROGRESS 0x105D
 
 /* cl_device_fp_config - bitfield */
 #define CL_FP_DENORM                                (1 << 0)
@@ -381,7 +381,7 @@ typedef struct _cl_buffer_region {
 #define CL_QUEUE_REFERENCE_COUNT                    0x1092
 #define CL_QUEUE_PROPERTIES                         0x1093
 #define CL_QUEUE_SIZE                               0x1094
-#define CL_QUEUE_DEVICE_DEFAULT                     0xFFFF // TODO: Need value
+#define CL_QUEUE_DEVICE_DEFAULT                     0x1095
 
 /* cl_mem_flags and cl_svm_mem_flags - bitfield */
 #define CL_MEM_READ_WRITE                           (1 << 0)
@@ -544,8 +544,8 @@ typedef struct _cl_buffer_region {
 #define CL_KERNEL_CONTEXT                           0x1193
 #define CL_KERNEL_PROGRAM                           0x1194
 #define CL_KERNEL_ATTRIBUTES                        0x1195
-#define CL_KERNEL_MAX_NUM_SUB_GROUPS                0xFFFF  // TODO: Need value
-#define CL_KERNEL_COMPILE_NUM_SUB_GROUPS            0xFFFF  // TODO: Need value
+#define CL_KERNEL_MAX_NUM_SUB_GROUPS                0x11B9
+#define CL_KERNEL_COMPILE_NUM_SUB_GROUPS            0x11BA
 
 /* cl_kernel_arg_info */
 #define CL_KERNEL_ARG_ADDRESS_QUALIFIER             0x1196
@@ -582,9 +582,9 @@ typedef struct _cl_buffer_region {
 #define CL_KERNEL_GLOBAL_WORK_SIZE                  0x11B5
 
 /* cl_kernel_sub_group_info */
-#define CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE    0xFFFF  // TODO: Need value
-#define CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE       0xFFFF  // TODO: Need value
-#define CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT    0xFFFF  // TODO: Need value
+#define CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE    0x2033
+#define CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE       0x2034
+#define CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT    0x11B8
     
 /* cl_kernel_exec_info */
 #define CL_KERNEL_EXEC_INFO_SVM_PTRS                0x11B6
