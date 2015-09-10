@@ -517,6 +517,7 @@ typedef struct _cl_buffer_region {
 #define CL_PROGRAM_BINARIES                         0x1166
 #define CL_PROGRAM_NUM_KERNELS                      0x1167
 #define CL_PROGRAM_KERNEL_NAMES                     0x1168
+#define CL_PROGRAM_IL                               0x1169
 
 /* cl_program_build_info */
 #define CL_PROGRAM_BUILD_STATUS                     0x1181
