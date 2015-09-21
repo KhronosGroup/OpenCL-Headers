@@ -953,7 +953,7 @@ clCreateKernelsInProgram(cl_program     /* program */,
                          cl_kernel *    /* kernels */,
                          cl_uint *      /* num_kernels_ret */) CL_API_SUFFIX__VERSION_1_0;
 
-extern CL_API_ENTRY cl_int CL_API_CALL
+extern CL_API_ENTRY cl_kernel CL_API_CALL
 clCloneKernel(cl_kernel /* source_kernel */,
               cl_int* /* errcode_ret */) CL_API_SUFFIX__VERSION_2_1;
 
