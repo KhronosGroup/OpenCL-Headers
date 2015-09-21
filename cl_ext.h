@@ -337,7 +337,7 @@ typedef CL_API_ENTRY cl_int
 						      cl_kernel_sub_group_info /* param_name */,
 						      size_t /*input_value_size*/,
 						      const void * /*input_value*/,
-						      size_t * /*param_value_size*/,
+						      size_t /*param_value_size*/,
 						      void* /*param_value*/,
 						      size_t* /*param_value_size_ret*/ ) CL_EXT_SUFFIX__VERSION_2_0;
 #endif /* CL_VERSION_2_0 */
