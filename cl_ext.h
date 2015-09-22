@@ -351,7 +351,7 @@ typedef CL_API_ENTRY cl_int
 typedef cl_uint  cl_queue_priority_khr;
 
 /* cl_command_queue_properties */
-#define CL_QUEUE_PRIORITY_KHR
+#define CL_QUEUE_PRIORITY_KHR 0x1096
 
 /* cl_queue_priority_khr */
 #define CL_QUEUE_PRIORITY_HIGH_KHR (1<<0)
@@ -369,7 +369,7 @@ typedef cl_uint  cl_queue_priority_khr;
 typedef cl_uint  cl_queue_throttle_khr;
 
 /* cl_command_queue_properties */
-#define CL_QUEUE_THROTTLE_KHR
+#define CL_QUEUE_THROTTLE_KHR 0x1097
 
 /* cl_queue_throttle_khr */
 #define CL_QUEUE_THROTTLE_HIGH_KHR (1<<0)
