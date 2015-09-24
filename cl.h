@@ -210,6 +210,7 @@ typedef struct _cl_buffer_region {
 #define CL_PLATFORM_NAME                            0x0902
 #define CL_PLATFORM_VENDOR                          0x0903
 #define CL_PLATFORM_EXTENSIONS                      0x0904
+#define CL_PLATFORM_HOST_TIMER_RESOLUTION           0x0905
 
 /* cl_device_type - bitfield */
 #define CL_DEVICE_TYPE_DEFAULT                      (1 << 0)
