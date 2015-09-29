@@ -691,7 +691,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseDevice(cl_device_id /* device */) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
-clSetDefaultCommandQueue(cl_context /* context */,
+clSetDefaultDeviceCommandQueue(cl_context /* context */,
                          cl_device_id /* device */,
                          cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_2_1;
 
