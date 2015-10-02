@@ -691,18 +691,18 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseDevice(cl_device_id /* device */) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
-clSetDefaultDeviceCommandQueue(cl_context /* context */,
-                         cl_device_id /* device */,
-                         cl_command_queue /* command_queue */) CL_API_SUFFIX__VERSION_2_1;
+clSetDefaultDeviceCommandQueue(cl_context           /* context */,
+                               cl_device_id         /* device */,
+                               cl_command_queue     /* command_queue */) CL_API_SUFFIX__VERSION_2_1;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
-clGetDeviceAndHostTimer(cl_device_id /* device */,
-                        cl_ulong* /* device_timestamp */,
-                        cl_ulong* /* host_timestamp */) CL_API_SUFFIX__VERSION_2_1;
+clGetDeviceAndHostTimer(cl_device_id    /* device */,
+                        cl_ulong*       /* device_timestamp */,
+                        cl_ulong*       /* host_timestamp */) CL_API_SUFFIX__VERSION_2_1;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetHostTimer(cl_device_id /* device */,
-               cl_ulong* /* host_timestamp */)  CL_API_SUFFIX__VERSION_2_1;
+               cl_ulong *   /* host_timestamp */)  CL_API_SUFFIX__VERSION_2_1;
 
     
 /* Context APIs  */
@@ -881,10 +881,10 @@ clCreateProgramWithBuiltInKernels(cl_context            /* context */,
                                   cl_int *              /* errcode_ret */) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_program CL_API_CALL
-clCreateProgramWithIL(cl_context /* context */,
-                     const void* /* il */,
-                     size_t /* length */,
-                     cl_int* /* errcode_ret */) CL_API_SUFFIX__VERSION_2_1;
+clCreateProgramWithIL(cl_context    /* context */,
+                     const void*    /* il */,
+                     size_t         /* length */,
+                     cl_int*        /* errcode_ret */) CL_API_SUFFIX__VERSION_2_1;
 
 
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -955,8 +955,8 @@ clCreateKernelsInProgram(cl_program     /* program */,
                          cl_uint *      /* num_kernels_ret */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_kernel CL_API_CALL
-clCloneKernel(cl_kernel /* source_kernel */,
-              cl_int* /* errcode_ret */) CL_API_SUFFIX__VERSION_2_1;
+clCloneKernel(cl_kernel     /* source_kernel */,
+              cl_int*       /* errcode_ret */) CL_API_SUFFIX__VERSION_2_1;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainKernel(cl_kernel    /* kernel */) CL_API_SUFFIX__VERSION_1_0;
@@ -1005,14 +1005,14 @@ clGetKernelWorkGroupInfo(cl_kernel                  /* kernel */,
                          size_t *                   /* param_value_size_ret */) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
-clGetKernelSubGroupInfo(cl_kernel /* kernel */,
-                        cl_device_id /* device */,
-                        cl_kernel_sub_group_info /* param_name */,
-                        size_t /* input_value_size */,
-                        const void* /*input_value */,
-                        size_t /* param_value_size */,
-                        void* /* param_value */,
-                        size_t* /* param_value_size_ret */ ) CL_API_SUFFIX__VERSION_2_1;
+clGetKernelSubGroupInfo(cl_kernel                   /* kernel */,
+                        cl_device_id                /* device */,
+                        cl_kernel_sub_group_info    /* param_name */,
+                        size_t                      /* input_value_size */,
+                        const void*                 /*input_value */,
+                        size_t                      /* param_value_size */,
+                        void*                       /* param_value */,
+                        size_t*                     /* param_value_size_ret */ ) CL_API_SUFFIX__VERSION_2_1;
 
 
 /* Event Object APIs */
@@ -1352,14 +1352,14 @@ clEnqueueSVMUnmap(cl_command_queue  /* command_queue */,
                   cl_event *        /* event */) CL_API_SUFFIX__VERSION_2_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
-clEnqueueSVMMigrateMem(cl_command_queue /* command_queue */,
-                       cl_uint /* num_svm_pointers */,
-                       const void** /* svm_pointers */,
-                       const size_t* /* sizes */,
-                       cl_mem_migration_flags /* flags */,
-                       cl_uint /* num_events_in_wait_list */,
-                       const cl_event* /* event_wait_list */,
-                       cl_event* /* event */) CL_API_SUFFIX__VERSION_2_1;
+clEnqueueSVMMigrateMem(cl_command_queue         /* command_queue */,
+                       cl_uint                  /* num_svm_pointers */,
+                       const void **            /* svm_pointers */,
+                       const size_t *           /* sizes */,
+                       cl_mem_migration_flags   /* flags */,
+                       cl_uint                  /* num_events_in_wait_list */,
+                       const cl_event *         /* event_wait_list */,
+                       cl_event *               /* event */) CL_API_SUFFIX__VERSION_2_1;
 
 
 /* Extension function access
