@@ -43,7 +43,9 @@
  *         cl_ext_device_fission
  *         #define CL_HPP_USE_CL_DEVICE_FISSION
  *         cl_khr_d3d10_sharing
- *         #define USE_DX_INTEROP
+ *         #define CL_HPP_USE_DX_INTEROP
+ *         cl_khr_sub_groups
+ *         #define CL_HPP_USE_CL_SUB_GROUPS_KHR
  */
 
 /*! \mainpage
@@ -280,7 +282,7 @@
         // Default command queue, also passed in as a parameter
         cl::DeviceCommandQueue defaultDeviceQueue = cl::DeviceCommandQueue::makeDefault(
             cl::Context::getDefault(), cl::Device::getDefault());
-    
+
         auto vectorAddKernel =
             cl::KernelFunctor<
                 decltype(fooPointer)&,
@@ -295,6 +297,12 @@
         // Ensure that the additional SVM pointer is available to the kernel
         // This one was not passed as a parameter
         vectorAddKernel.setSVMPointers(anSVMInt);
+
+        // Hand control of coarse allocations to runtime
+        cl::enqueueUnmapSVM(anSVMInt);
+        cl::enqueueUnmapSVM(fooPointer);
+        cl::unmapSVM(inputB);
+        cl::unmapSVM(output2);
 
 	    cl_int error;
 	    vectorAddKernel(
@@ -312,6 +320,8 @@
             );
 
         cl::copy(outputBuffer, begin(output), end(output));
+        // Grab the SVM output vector using a map
+        cl::mapSVM(output2);
 
         cl::Device d = cl::Device::getDefault();
 
