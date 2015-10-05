@@ -36,16 +36,14 @@
  *       Tom Deakin and Simon McIntosh-Smith, July 2013
  *   
  *   \version 2.0.7
- *   \date 2015-10-02
+ *   \date 2015-10-05
  *
  *   Optional extension support
  *
  *         cl_ext_device_fission
  *         #define CL_HPP_USE_CL_DEVICE_FISSION
  *         cl_khr_d3d10_sharing
- *         #define CL_HPP_USE_DX_INTEROP
- *         cl_khr_sub_groups
- *         #define CL_HPP_USE_CL_SUB_GROUPS_KHR
+ *         #define USE_DX_INTEROP
  */
 
 /*! \mainpage
@@ -298,12 +296,6 @@
         // This one was not passed as a parameter
         vectorAddKernel.setSVMPointers(anSVMInt);
 
-        // Hand control of coarse allocations to runtime
-        cl::enqueueUnmapSVM(anSVMInt);
-        cl::enqueueUnmapSVM(fooPointer);
-        cl::unmapSVM(inputB);
-        cl::unmapSVM(output2);
-
 	    cl_int error;
 	    vectorAddKernel(
             cl::EnqueueArgs(
@@ -320,8 +312,6 @@
             );
 
         cl::copy(outputBuffer, begin(output), end(output));
-        // Grab the SVM output vector using a map
-        cl::mapSVM(output2);
 
         cl::Device d = cl::Device::getDefault();
 
@@ -3311,6 +3301,16 @@ public:
             Trait::getSVMMemFlags();
     }
 };
+
+// Pre-declare SVM map function
+template<typename T>
+inline cl_int enqueueMapSVM(
+    T* ptr,
+    cl_bool blocking,
+    cl_map_flags flags,
+    size_type size,
+    const vector<Event>* events = NULL,
+    Event* event = NULL);
 
 /**
  * STL-like allocator class for managing SVM objects provided for convenience.
@@ -6700,7 +6700,7 @@ public:
            }
 #else
            object_ = ::clCreateCommandQueue(
-               context(), device(), properties, &error);
+               context(), device(), static_cast<cl_command_queue_properties>(properties), &error);
 
            detail::errHandler(error, __CREATE_COMMAND_QUEUE_ERR);
            if (err != NULL) {
@@ -6795,7 +6795,7 @@ public:
         }
 #else
         object_ = ::clCreateCommandQueue(
-            context(), devices[0](), properties, &error);
+            context(), devices[0](), static_cast<cl_command_queue_properties>(properties), &error);
 
         detail::errHandler(error, __CREATE_COMMAND_QUEUE_ERR);
         if (err != NULL) {
@@ -6862,7 +6862,7 @@ public:
             }
 #else
             object_ = ::clCreateCommandQueue(
-                context(), device(), properties, &error);
+                context(), device(), static_cast<cl_command_queue_properties>(properties), &error);
 
             detail::errHandler(error, __CREATE_COMMAND_QUEUE_ERR);
             if (err != NULL) {
@@ -8509,8 +8509,8 @@ inline cl_int enqueueMapSVM(
     cl_bool blocking,
     cl_map_flags flags,
     size_type size,
-    const vector<Event>* events = NULL,
-    Event* event = NULL)
+    const vector<Event>* events,
+    Event* event)
 {
     cl_int error;
     CommandQueue queue = CommandQueue::getDefault(&error);
