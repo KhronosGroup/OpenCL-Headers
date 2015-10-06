@@ -33,8 +33,8 @@
  *       Bruce Merry, February 2013.
  *       Tom Deakin and Simon McIntosh-Smith, July 2013
  *   
- *   \version 1.2.7
- *   \date January 2015
+ *   \version 1.2.8
+ *   \date October 2015
  *
  *   Optional extension support
  *
@@ -1206,6 +1206,22 @@ inline cl_int getInfoHelper(Func f, cl_uint name, VECTOR_CLASS<char *>* param, i
 template <typename Func>
 inline cl_int getInfoHelper(Func f, cl_uint name, STRING_CLASS* param, long)
 {
+#if defined(__NO_STD_VECTOR) || defined(__NO_STD_STRING)
+    ::size_t required;
+    cl_int err = f(name, 0, NULL, &required);
+    if (err != CL_SUCCESS) {
+        return err;
+    }
+
+    char* value = (char*)alloca(required);
+    err = f(name, required, value, NULL);
+    if (err != CL_SUCCESS) {
+        return err;
+    }
+
+    *param = value;
+    return CL_SUCCESS;
+#else 
     ::size_t required;
     cl_int err = f(name, 0, NULL, &required);
     if (err != CL_SUCCESS) {
@@ -1222,6 +1238,7 @@ inline cl_int getInfoHelper(Func f, cl_uint name, STRING_CLASS* param, long)
     if (param) {
         param->assign(value.begin(), value.end());
     }
+#endif
     return CL_SUCCESS;
 }
 
@@ -1365,9 +1382,9 @@ inline cl_int getInfoHelper(Func f, cl_uint name, T* param, int, typename T::cl_
     \
     F(cl_sampler_info, CL_SAMPLER_REFERENCE_COUNT, cl_uint) \
     F(cl_sampler_info, CL_SAMPLER_CONTEXT, cl::Context) \
-    F(cl_sampler_info, CL_SAMPLER_NORMALIZED_COORDS, cl_addressing_mode) \
-    F(cl_sampler_info, CL_SAMPLER_ADDRESSING_MODE, cl_filter_mode) \
-    F(cl_sampler_info, CL_SAMPLER_FILTER_MODE, cl_bool) \
+    F(cl_sampler_info, CL_SAMPLER_NORMALIZED_COORDS, cl_bool) \
+    F(cl_sampler_info, CL_SAMPLER_ADDRESSING_MODE, cl_addressing_mode) \
+    F(cl_sampler_info, CL_SAMPLER_FILTER_MODE, cl_filter_mode) \
     \
     F(cl_program_info, CL_PROGRAM_REFERENCE_COUNT, cl_uint) \
     F(cl_program_info, CL_PROGRAM_CONTEXT, cl::Context) \
@@ -1437,6 +1454,7 @@ inline cl_int getInfoHelper(Func f, cl_uint name, T* param, int, typename T::cl_
     F(cl_kernel_arg_info, CL_KERNEL_ARG_ACCESS_QUALIFIER, cl_kernel_arg_access_qualifier) \
     F(cl_kernel_arg_info, CL_KERNEL_ARG_TYPE_NAME, STRING_CLASS) \
     F(cl_kernel_arg_info, CL_KERNEL_ARG_NAME, STRING_CLASS) \
+    F(cl_kernel_arg_info, CL_KERNEL_ARG_TYPE_QUALIFIER, cl_kernel_arg_type_qualifier) \
     \
     F(cl_device_info, CL_DEVICE_PARENT_DEVICE, cl_device_id) \
     F(cl_device_info, CL_DEVICE_PARTITION_PROPERTIES, VECTOR_CLASS<cl_device_partition_property>) \
@@ -2727,31 +2745,41 @@ public:
         VECTOR_CLASS<ImageFormat>* formats) const
     {
         cl_uint numEntries;
+
+        if (!formats) {
+            return CL_SUCCESS;
+        }
+
         cl_int err = ::clGetSupportedImageFormats(
-           object_, 
-           flags,
-           type, 
-           0, 
-           NULL, 
-           &numEntries);
+            object_,
+            flags,
+            type,
+            0,
+            NULL,
+            &numEntries);
         if (err != CL_SUCCESS) {
             return detail::errHandler(err, __GET_SUPPORTED_IMAGE_FORMATS_ERR);
         }
 
-        ImageFormat* value = (ImageFormat*)
-            alloca(numEntries * sizeof(ImageFormat));
-        err = ::clGetSupportedImageFormats(
-            object_, 
-            flags, 
-            type, 
-            numEntries,
-            (cl_image_format*) value, 
-            NULL);
-        if (err != CL_SUCCESS) {
-            return detail::errHandler(err, __GET_SUPPORTED_IMAGE_FORMATS_ERR);
-        }
+        if (numEntries > 0) {
+            ImageFormat* value = (ImageFormat*)
+                alloca(numEntries * sizeof(ImageFormat));
+            err = ::clGetSupportedImageFormats(
+                object_,
+                flags,
+                type,
+                numEntries,
+                (cl_image_format*)value,
+                NULL);
+            if (err != CL_SUCCESS) {
+                return detail::errHandler(err, __GET_SUPPORTED_IMAGE_FORMATS_ERR);
+            }
 
-        formats->assign(&value[0], &value[numEntries]);
+            formats->assign(&value[0], &value[numEntries]);
+        }
+        else {
+            formats->clear();
+        }
         return CL_SUCCESS;
     }
 };
