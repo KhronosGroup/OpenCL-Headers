@@ -197,6 +197,7 @@ typedef struct _cl_buffer_region {
 #define CL_VERSION_1_1                              1
 #define CL_VERSION_1_2                              1
 #define CL_VERSION_2_0                              1
+#define CL_VERSION_2_1                              1
 
 /* cl_bool */
 #define CL_FALSE                                    0
