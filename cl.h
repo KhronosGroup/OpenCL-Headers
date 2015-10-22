@@ -443,6 +443,7 @@ typedef struct _cl_buffer_region {
 #define CL_HALF_FLOAT                               0x10DD
 #define CL_FLOAT                                    0x10DE
 #define CL_UNORM_INT24                              0x10DF
+#define CL_UNORM_INT_101010_2                       0x10E0
 
 /* cl_mem_object_type */
 #define CL_MEM_OBJECT_BUFFER                        0x10F0
