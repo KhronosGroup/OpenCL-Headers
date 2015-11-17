@@ -34,9 +34,10 @@
  *       Matt Gruenke, April 2012.
  *       Bruce Merry, February 2013.
  *       Tom Deakin and Simon McIntosh-Smith, July 2013
- *   
- *   \version 2.0.7
- *   \date 2015-10-05
+ *       James Price, June-November 2015
+ *
+ *   \version 2.0.8
+ *   \date 2015-11-03
  *
  *   Optional extension support
  *
@@ -1139,9 +1140,6 @@ inline cl_int getInfoHelper(Func f, cl_uint name, T* param, int, typename T::cl_
     F(cl_image_info, CL_IMAGE_WIDTH, size_type) \
     F(cl_image_info, CL_IMAGE_HEIGHT, size_type) \
     F(cl_image_info, CL_IMAGE_DEPTH, size_type) \
-    F(cl_image_info, CL_IMAGE_ARRAY_SIZE, size_type) \
-    F(cl_image_info, CL_IMAGE_NUM_MIP_LEVELS, cl_uint) \
-    F(cl_image_info, CL_IMAGE_NUM_SAMPLES, cl_uint) \
     \
     F(cl_sampler_info, CL_SAMPLER_REFERENCE_COUNT, cl_uint) \
     F(cl_sampler_info, CL_SAMPLER_CONTEXT, cl::Context) \
@@ -1219,7 +1217,11 @@ inline cl_int getInfoHelper(Func f, cl_uint name, T* param, int, typename T::cl_
     F(cl_device_info, CL_DEVICE_REFERENCE_COUNT, cl_uint) \
     F(cl_device_info, CL_DEVICE_PREFERRED_INTEROP_USER_SYNC, size_type) \
     F(cl_device_info, CL_DEVICE_PARTITION_AFFINITY_DOMAIN, cl_device_affinity_domain) \
-    F(cl_device_info, CL_DEVICE_BUILT_IN_KERNELS, string)
+    F(cl_device_info, CL_DEVICE_BUILT_IN_KERNELS, string) \
+    \
+    F(cl_image_info, CL_IMAGE_ARRAY_SIZE, size_type) \
+    F(cl_image_info, CL_IMAGE_NUM_MIP_LEVELS, cl_uint) \
+    F(cl_image_info, CL_IMAGE_NUM_SAMPLES, cl_uint)
 
 #define CL_HPP_PARAM_NAME_INFO_2_0_(F) \
     F(cl_device_info, CL_DEVICE_QUEUE_ON_HOST_PROPERTIES, cl_command_queue_properties) \
@@ -6557,7 +6559,7 @@ enum class QueueProperties : cl_command_queue_properties
     OutOfOrder = CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE,
 };
 
-QueueProperties operator|(QueueProperties lhs, QueueProperties rhs)
+inline QueueProperties operator|(QueueProperties lhs, QueueProperties rhs)
 {
     return static_cast<QueueProperties>(static_cast<cl_command_queue_properties>(lhs) | static_cast<cl_command_queue_properties>(rhs));
 }
@@ -8080,7 +8082,7 @@ enum class DeviceQueueProperties : cl_command_queue_properties
     Profiling = CL_QUEUE_PROFILING_ENABLE,
 };
 
-DeviceQueueProperties  operator|(DeviceQueueProperties  lhs, DeviceQueueProperties  rhs)
+inline DeviceQueueProperties operator|(DeviceQueueProperties lhs, DeviceQueueProperties rhs)
 {
     return static_cast<DeviceQueueProperties>(static_cast<cl_command_queue_properties>(lhs) | static_cast<cl_command_queue_properties>(rhs));
 }
