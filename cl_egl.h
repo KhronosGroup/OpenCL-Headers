@@ -33,8 +33,6 @@
 
 #else
 #include <CL/cl.h>
-#include <EGL/egl.h>
-#include <EGL/eglext.h>
 #endif  
 
 #ifdef __cplusplus
