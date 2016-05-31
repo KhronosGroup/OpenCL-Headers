@@ -320,7 +320,9 @@ typedef struct _cl_mem_ion_host_ptr
 *********************************/
 #define cl_khr_sub_groups 1
 
+#ifndef CL_VERSION_2_1
 typedef cl_uint  cl_kernel_sub_group_info;
+#endif /* CL_VERSION_2_1 */
 
 /* cl_khr_sub_group_info */
 #define CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE_KHR	0x2033
