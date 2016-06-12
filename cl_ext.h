@@ -320,8 +320,6 @@ typedef struct _cl_mem_ion_host_ptr
 *********************************/
 #define cl_khr_sub_groups 1
 
-typedef cl_uint  cl_kernel_sub_group_info;
-
 /* cl_khr_sub_group_info */
 #define CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE_KHR	0x2033
 #define CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE_KHR		0x2034
