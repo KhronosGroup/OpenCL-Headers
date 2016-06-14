@@ -334,7 +334,7 @@ clGetKernelSubGroupInfoKHR(cl_kernel /* in_kernel */,
 						   const void * /*input_value*/,
 						   size_t /*param_value_size*/,
 						   void* /*param_value*/,
-						   size_t* /*param_value_size_ret*/ ) CL_EXT_SUFFIX__VERSION_2_0;
+						   size_t* /*param_value_size_ret*/ ) CL_EXT_SUFFIX__VERSION_2_0_DEPRECATED;
 						   
 typedef CL_API_ENTRY cl_int
      ( CL_API_CALL * clGetKernelSubGroupInfoKHR_fn)(cl_kernel /* in_kernel */,
@@ -344,7 +344,7 @@ typedef CL_API_ENTRY cl_int
 						      const void * /*input_value*/,
 						      size_t /*param_value_size*/,
 						      void* /*param_value*/,
-						      size_t* /*param_value_size_ret*/ ) CL_EXT_SUFFIX__VERSION_2_0;
+						      size_t* /*param_value_size_ret*/ ) CL_EXT_SUFFIX__VERSION_2_0_DEPRECATED;
 #endif /* CL_VERSION_2_0 */
 
 #ifdef CL_VERSION_2_1
