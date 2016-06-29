@@ -479,6 +479,115 @@ clImportMemoryARM( cl_context context,
 
 #endif /* CL_VERSION_1_0 */
 
+/******************************************
+ * cl_arm_shared_virtual_memory extension *
+ ******************************************/
+
+#ifdef CL_VERSION_1_2
+
+/* Used by clGetDeviceInfo */
+#define CL_DEVICE_SVM_CAPABILITIES_ARM                  0x40B6
+
+/* Used by clGetMemObjectInfo */
+#define CL_MEM_USES_SVM_POINTER_ARM                     0x40B7
+
+/* Used by clSetKernelExecInfoARM: */
+#define CL_KERNEL_EXEC_INFO_SVM_PTRS_ARM                0x40B8
+#define CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM_ARM   0x40B9
+
+/* To be used by clGetEventInfo: */
+#define CL_COMMAND_SVM_FREE_ARM                         0x40BA
+#define CL_COMMAND_SVM_MEMCPY_ARM                       0x40BB
+#define CL_COMMAND_SVM_MEMFILL_ARM                      0x40BC
+#define CL_COMMAND_SVM_MAP_ARM                          0x40BD
+#define CL_COMMAND_SVM_UNMAP_ARM                        0x40BE
+
+/* Flag values returned by clGetDeviceInfo with CL_DEVICE_SVM_CAPABILITIES_ARM as the param_name. */
+#define CL_DEVICE_SVM_COARSE_GRAIN_BUFFER_ARM           (1 << 0)
+#define CL_DEVICE_SVM_FINE_GRAIN_BUFFER_ARM             (1 << 1)
+#define CL_DEVICE_SVM_FINE_GRAIN_SYSTEM_ARM             (1 << 2)
+#define CL_DEVICE_SVM_ATOMICS_ARM                       (1 << 3)
+
+/* Flag values used by clSVMAllocARM: */
+#define CL_MEM_SVM_FINE_GRAIN_BUFFER_ARM                (1 << 10)
+#define CL_MEM_SVM_ATOMICS_ARM                          (1 << 11)
+
+typedef cl_bitfield cl_svm_mem_flags_arm;
+typedef cl_uint     cl_kernel_exec_info_arm;
+typedef cl_bitfield cl_device_svm_capabilities_arm;
+
+extern CL_API_ENTRY void * CL_API_CALL
+clSVMAllocARM(cl_context       /* context */,
+              cl_svm_mem_flags_arm /* flags */,
+              size_t           /* size */,
+              cl_uint          /* alignment */) CL_EXT_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY void CL_API_CALL
+clSVMFreeARM(cl_context        /* context */,
+             void *            /* svm_pointer */) CL_EXT_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueSVMFreeARM(cl_command_queue  /* command_queue */,
+                    cl_uint           /* num_svm_pointers */,
+                    void *[]          /* svm_pointers[] */,
+                    void (CL_CALLBACK * /*pfn_free_func*/)(cl_command_queue /* queue */,
+                                                           cl_uint          /* num_svm_pointers */,
+                                                           void *[]         /* svm_pointers[] */,
+                                                           void *           /* user_data */),
+                    void *            /* user_data */,
+                    cl_uint           /* num_events_in_wait_list */,
+                    const cl_event *  /* event_wait_list */,
+                    cl_event *        /* event */) CL_EXT_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueSVMMemcpyARM(cl_command_queue  /* command_queue */,
+                      cl_bool           /* blocking_copy */,
+                      void *            /* dst_ptr */,
+                      const void *      /* src_ptr */,
+                      size_t            /* size */,
+                      cl_uint           /* num_events_in_wait_list */,
+                      const cl_event *  /* event_wait_list */,
+                      cl_event *        /* event */) CL_EXT_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueSVMMemFillARM(cl_command_queue  /* command_queue */,
+                       void *            /* svm_ptr */,
+                       const void *      /* pattern */,
+                       size_t            /* pattern_size */,
+                       size_t            /* size */,
+                       cl_uint           /* num_events_in_wait_list */,
+                       const cl_event *  /* event_wait_list */,
+                       cl_event *        /* event */) CL_EXT_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueSVMMapARM(cl_command_queue  /* command_queue */,
+                   cl_bool           /* blocking_map */,
+                   cl_map_flags      /* flags */,
+                   void *            /* svm_ptr */,
+                   size_t            /* size */,
+                   cl_uint           /* num_events_in_wait_list */,
+                   const cl_event *  /* event_wait_list */,
+                   cl_event *        /* event */) CL_EXT_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueSVMUnmapARM(cl_command_queue  /* command_queue */,
+                     void *            /* svm_ptr */,
+                     cl_uint           /* num_events_in_wait_list */,
+                     const cl_event *  /* event_wait_list */,
+                     cl_event *        /* event */) CL_EXT_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSetKernelArgSVMPointerARM(cl_kernel    /* kernel */,
+                            cl_uint      /* arg_index */,
+                            const void * /* arg_value */) CL_EXT_SUFFIX__VERSION_1_2;
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSetKernelExecInfoARM(cl_kernel            /* kernel */,
+                       cl_kernel_exec_info_arm  /* param_name */,
+                       size_t               /* param_value_size */,
+                       const void *         /* param_value */) CL_EXT_SUFFIX__VERSION_1_2;
+
+#endif /* CL_VERSION_1_2 */
+
 #ifdef __cplusplus
 }
 #endif
