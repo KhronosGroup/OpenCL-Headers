@@ -216,6 +216,17 @@ typedef double                  cl_double;
 #define CL_FLT_MIN          1.175494350822287507969e-38f
 #define CL_FLT_EPSILON      0x1.0p-23f
 
+#define CL_HALF_DIG          3
+#define CL_HALF_MANT_DIG     11
+#define CL_HALF_MAX_10_EXP   +4
+#define CL_HALF_MAX_EXP      +16
+#define CL_HALF_MIN_10_EXP   -4
+#define CL_HALF_MIN_EXP      -13
+#define CL_HALF_RADIX        2
+#define CL_HALF_MAX          65504.0f
+#define CL_HALF_MIN          6.103515625e-05f
+#define CL_HALF_EPSILON      9.765625e-04f
+
 #define CL_DBL_DIG          15
 #define CL_DBL_MANT_DIG     53
 #define CL_DBL_MAX_10_EXP   +308
@@ -306,6 +317,17 @@ typedef double          cl_double   __attribute__((aligned(8)));
 #define CL_FLT_MAX          0x1.fffffep127f
 #define CL_FLT_MIN          0x1.0p-126f
 #define CL_FLT_EPSILON      0x1.0p-23f
+
+#define CL_HALF_DIG          3
+#define CL_HALF_MANT_DIG     11
+#define CL_HALF_MAX_10_EXP   +4
+#define CL_HALF_MAX_EXP      +16
+#define CL_HALF_MIN_10_EXP   -4
+#define CL_HALF_MIN_EXP      -13
+#define CL_HALF_RADIX        2
+#define CL_HALF_MAX          65504.0f
+#define CL_HALF_MIN          6.103515625e-05f
+#define CL_HALF_EPSILON      9.765625e-04f
 
 #define CL_DBL_DIG          15
 #define CL_DBL_MANT_DIG     53
