@@ -614,6 +614,53 @@ clSetKernelExecInfoARM(cl_kernel            /* kernel */,
 
 #endif /* CL_VERSION_1_2 */
 
+/**********************************
+ * cl_arm_import_memory extension *
+ **********************************/
+
+#ifdef CL_VERSION_1_0
+
+typedef intptr_t cl_import_properties_arm;
+
+/* Default and valid proporties name for cl_arm_import_memory */
+#define CL_IMPORT_TYPE_ARM                        0x40B2
+
+/* Host process memory type default value for CL_IMPORT_TYPE_ARM property */
+#define CL_IMPORT_TYPE_HOST_ARM                   0x40B3
+
+/* DMA BUF memory type value for CL_IMPORT_TYPE_ARM property */
+#define CL_IMPORT_TYPE_DMA_BUF_ARM                0x40B4
+
+/* Secure DMA BUF memory type value for CL_IMPORT_TYPE_ARM property */
+#define CL_IMPORT_TYPE_SECURE_ARM                 0x40B5
+
+/* This extension adds a new function that allows for direct memory import into
+ * OpenCL via the clImportMemoryARM function.
+ *
+ * Memory imported through this interface will be mapped into the device's page
+ * tables directly, providing zero copy access. It will never fall back to copy
+ * operations and aliased buffers.
+ *
+ * Types of memory supported for import are specified as additional extension
+ * strings.
+ *
+ * This extension produces cl_mem allocations which are compatible with all other
+ * users of cl_mem in the standard API.
+ *
+ * This extension maps pages with the same properties as the normal buffer creation
+ * function clCreateBuffer.
+ */
+extern CL_API_ENTRY cl_mem CL_API_CALL
+clImportMemoryARM( cl_context context,
+                   cl_mem_flags flags,
+                   const cl_import_properties_arm *properties,
+                   void *memory,
+                   size_t size,
+                   cl_int *errcode_ret) CL_EXT_SUFFIX__VERSION_1_0;
+
+
+#endif /* CL_VERSION_1_0 */
+
 #ifdef __cplusplus
 }
 #endif
