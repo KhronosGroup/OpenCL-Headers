@@ -276,7 +276,7 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_EXTENSIONS                            0x1030
 #define CL_DEVICE_PLATFORM                              0x1031
 #define CL_DEVICE_DOUBLE_FP_CONFIG                      0x1032
-/* 0x1033 reserved for CL_DEVICE_HALF_FP_CONFIG */
+#define CL_DEVICE_HALF_FP_CONFIG                        0x1033
 #define CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF           0x1034
 #define CL_DEVICE_HOST_UNIFIED_MEMORY                   0x1035   /* deprecated */
 #define CL_DEVICE_NATIVE_VECTOR_WIDTH_CHAR              0x1036
