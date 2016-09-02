@@ -847,6 +847,81 @@ typedef union
 #endif
 }cl_ushort16;
 
+
+/* ---- cl_halfn ---- */
+typedef union
+{
+    cl_half  CL_ALIGNED(4) s[2];
+#if __CL_HAS_ANON_STRUCT__
+    __CL_ANON_STRUCT__ struct{ cl_half  x, y; };
+    __CL_ANON_STRUCT__ struct{ cl_half  s0, s1; };
+    __CL_ANON_STRUCT__ struct{ cl_half  lo, hi; };
+#endif
+#if defined( __CL_HALF2__) 
+    __cl_half2     v2;
+#endif
+}cl_half2;
+
+typedef union
+{
+    cl_half  CL_ALIGNED(8) s[4];
+#if __CL_HAS_ANON_STRUCT__
+    __CL_ANON_STRUCT__ struct{ cl_half  x, y, z, w; };
+    __CL_ANON_STRUCT__ struct{ cl_half  s0, s1, s2, s3; };
+    __CL_ANON_STRUCT__ struct{ cl_half2 lo, hi; };
+#endif
+#if defined( __CL_HALF2__) 
+    __cl_half2     v2[2];
+#endif
+#if defined( __CL_HALF4__) 
+    __cl_half4     v4;
+#endif
+}cl_half4;
+
+/* cl_half3 is identical in size, alignment and behavior to cl_half4. See section 6.1.5. */
+typedef  cl_half4  cl_half3;
+
+typedef union
+{
+    cl_half   CL_ALIGNED(16) s[8];
+#if __CL_HAS_ANON_STRUCT__
+    __CL_ANON_STRUCT__ struct{ cl_half  x, y, z, w; };
+    __CL_ANON_STRUCT__ struct{ cl_half  s0, s1, s2, s3, s4, s5, s6, s7; };
+    __CL_ANON_STRUCT__ struct{ cl_half4 lo, hi; };
+#endif
+#if defined( __CL_HALF2__) 
+    __cl_half2     v2[4];
+#endif
+#if defined( __CL_HALF4__) 
+    __cl_half4     v4[2];
+#endif
+#if defined( __CL_HALF8__ )
+    __cl_half8     v8;
+#endif
+}cl_half8;
+
+typedef union
+{
+    cl_half  CL_ALIGNED(32) s[16];
+#if __CL_HAS_ANON_STRUCT__
+    __CL_ANON_STRUCT__ struct{ cl_half  x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb, sc, sd, se, sf; };
+    __CL_ANON_STRUCT__ struct{ cl_half  s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF; };
+    __CL_ANON_STRUCT__ struct{ cl_half8 lo, hi; };
+#endif
+#if defined( __CL_HALF2__) 
+    __cl_half2     v2[8];
+#endif
+#if defined( __CL_HALF4__) 
+    __cl_half4     v4[4];
+#endif
+#if defined( __CL_HALF8__ )
+    __cl_half8     v8[2];
+#endif
+#if defined( __CL_HALF16__ )
+    __cl_half16    v16;
+#endif
+}cl_half16;
+
 /* ---- cl_intn ---- */
 typedef union
 {
