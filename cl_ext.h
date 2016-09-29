@@ -35,7 +35,7 @@
 #define __CL_EXT_H
 
 #ifdef __cplusplus
-
+extern "C" {
 #endif
 
 #ifdef __APPLE__
