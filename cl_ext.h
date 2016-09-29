@@ -35,7 +35,7 @@
 #define __CL_EXT_H
 
 #ifdef __cplusplus
-extern "C" {
+
 #endif
 
 #ifdef __APPLE__
@@ -312,6 +312,56 @@ typedef struct _cl_mem_ion_host_ptr
 } cl_mem_ion_host_ptr;
 
 #endif /* CL_VERSION_1_1 */
+
+#if defined(CL_VERSION_1_2)
+
+/******************************************
+ * cl_img_yuv_image extension *
+ ******************************************/
+
+/* Image formats used in clCreateImage */
+#define CL_NV21_IMG                                 0x40D0
+#define CL_YV12_IMG                                 0x40D1
+
+/******************************************
+ * cl_img_cached_allocations extension *
+ ******************************************/
+
+/* Flag values used by clCreteBuffer */
+#define CL_MEM_USE_UNCACHED_CPU_MEMORY_IMG         	(1 << 26)
+#define CL_MEM_USE_CACHED_CPU_MEMORY_IMG           	(1 << 27)
+
+/******************************************
+ * cl_img_use_gralloc_ptr extension *
+ ******************************************/
+
+/* Flag values used by clCreteBuffer */
+#define CL_MEM_USE_GRALLOC_PTR_IMG                 	(1 << 28)
+
+/* To be used by clGetEventInfo: */
+#define CL_COMMAND_ACQUIRE_GRALLOC_OBJECTS_IMG      0x40D2
+#define CL_COMMAND_RELEASE_GRALLOC_OBJECTS_IMG      0x40D3
+
+/* Error code from clEnqueueReleaseGrallocObjectsIMG */
+#define CL_GRALLOC_RESOURCE_NOT_ACQUIRED_IMG        0x40D4
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueAcquireGrallocObjectsIMG(cl_command_queue      /* command_queue */,
+                                  cl_uint               /* num_objects */,
+                                  const cl_mem *        /* mem_objects */,
+                                  cl_uint               /* num_events_in_wait_list */,
+                                  const cl_event *      /* event_wait_list */,
+                                  cl_event *            /* event */) CL_EXT_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueReleaseGrallocObjectsIMG(cl_command_queue      /* command_queue */,
+                                  cl_uint               /* num_objects */,
+                                  const cl_mem *        /* mem_objects */,
+                                  cl_uint               /* num_events_in_wait_list */,
+                                  const cl_event *      /* event_wait_list */,
+                                  cl_event *            /* event */) CL_EXT_SUFFIX__VERSION_1_2;
+
+#endif /* CL_VERSION_1_2 */
 
 #ifdef __cplusplus
 }
