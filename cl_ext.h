@@ -432,6 +432,17 @@ typedef cl_uint  cl_queue_throttle_khr;
 
 #endif /* CL_VERSION_2_1 */
 
+#ifdef CL_VERSION_2_2
+/*********************************
+* cl_khr_sub_group_named_barrier
+*********************************/
+#define cl_khr_sub_group_named_barrier 1
+
+/* cl_device_info */
+#define CL_DEVICE_MAX_NAMED_BARRIER_COUNT_KHR       0x2035
+
+#endif /* CL_VERSION_2_2 */
+
 /**********************************
  * cl_arm_import_memory extension *
  **********************************/
