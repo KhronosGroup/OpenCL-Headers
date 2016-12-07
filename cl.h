@@ -196,6 +196,7 @@ typedef struct _cl_buffer_region {
 #define CL_INVALID_DEVICE_PARTITION_COUNT           -68
 #define CL_INVALID_PIPE_SIZE                        -69
 #define CL_INVALID_DEVICE_QUEUE                     -70
+#define CL_INVALID_SPEC_ID                          -71
 
 /* OpenCL Version */
 #define CL_VERSION_1_0                              1
@@ -934,10 +935,15 @@ clLinkProgram(cl_context           /* context */,
               cl_int *             /* errcode_ret */ ) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
+clSetProgramReleaseCallback(cl_program          /* program */,
+                            void (CL_CALLBACK * /* pfn_notify */)(cl_program /* program */, void * /* user_data */),
+                            void *              /* user_data */) CL_API_SUFFIX__VERSION_2_2;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
 clSetProgramSpecializationConstant(cl_program  /* program */,
                                    cl_uint     /* spec_id */,
                                    size_t      /* spec_size */,
-                                   const void* /* spec_value */ ) CL_API_SUFFIX__VERSION_2_2;
+                                   const void* /* spec_value */) CL_API_SUFFIX__VERSION_2_2;
 
 
 extern CL_API_ENTRY cl_int CL_API_CALL
