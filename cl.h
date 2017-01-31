@@ -197,6 +197,7 @@ typedef struct _cl_buffer_region {
 #define CL_INVALID_PIPE_SIZE                        -69
 #define CL_INVALID_DEVICE_QUEUE                     -70
 #define CL_INVALID_SPEC_ID                          -71
+#define CL_MAX_SIZE_RESTRICTION_EXCEEDED            -72
 
 /* OpenCL Version */
 #define CL_VERSION_1_0                              1
