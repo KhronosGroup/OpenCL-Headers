@@ -365,13 +365,13 @@ clEnqueueReleaseGrallocObjectsIMG(cl_command_queue      /* command_queue */,
 
 #ifdef CL_VERSION_2_0
 /*********************************
-* cl_khr_sub_groups extension
+* cl_khr_subgroups extension
 *********************************/
-#define cl_khr_sub_groups 1
+#define cl_khr_subgroups 1
 
 typedef cl_uint  cl_kernel_sub_group_info;
 
-/* cl_khr_sub_group_info */
+/* cl_kernel_sub_group_info */
 #define CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE_KHR	0x2033
 #define CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE_KHR		0x2034
 

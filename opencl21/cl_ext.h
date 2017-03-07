@@ -365,20 +365,20 @@ clEnqueueReleaseGrallocObjectsIMG(cl_command_queue      /* command_queue */,
 
 #ifdef CL_VERSION_2_0
 /*********************************
-* cl_khr_sub_groups extension
+* cl_khr_subgroups extension
 *********************************/
-#define cl_khr_sub_groups 1
+#define cl_khr_subgroups 1
 
-typedef cl_uint  cl_kernel_sub_group_info_khr;
+/* cl_kernel_sub_group_info is declared in CL.h. */
 
-/* cl_khr_sub_group_info */
+/* cl_kernel_sub_group_info */
 #define CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE_KHR	0x2033
 #define CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE_KHR		0x2034
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetKernelSubGroupInfoKHR(cl_kernel /* in_kernel */,
 						   cl_device_id /*in_device*/,
-						   cl_kernel_sub_group_info_khr /* param_name */,
+						   cl_kernel_sub_group_info /* param_name */,
 						   size_t /*input_value_size*/,
 						   const void * /*input_value*/,
 						   size_t /*param_value_size*/,
@@ -388,7 +388,7 @@ clGetKernelSubGroupInfoKHR(cl_kernel /* in_kernel */,
 typedef CL_API_ENTRY cl_int
      ( CL_API_CALL * clGetKernelSubGroupInfoKHR_fn)(cl_kernel /* in_kernel */,
 						      cl_device_id /*in_device*/,
-						      cl_kernel_sub_group_info_khr /* param_name */,
+						      cl_kernel_sub_group_info /* param_name */,
 						      size_t /*input_value_size*/,
 						      const void * /*input_value*/,
 						      size_t /*param_value_size*/,
