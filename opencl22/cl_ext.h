@@ -434,9 +434,9 @@ typedef cl_uint  cl_queue_throttle_khr;
 
 #ifdef CL_VERSION_2_2
 /*********************************
-* cl_khr_sub_group_named_barrier
+* cl_khr_subgroup_named_barrier
 *********************************/
-#define cl_khr_sub_group_named_barrier 1
+#define cl_khr_subgroup_named_barrier 1
 
 /* cl_device_info */
 #define CL_DEVICE_MAX_NAMED_BARRIER_COUNT_KHR       0x2035
