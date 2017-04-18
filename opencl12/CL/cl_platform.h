@@ -479,7 +479,10 @@ typedef unsigned int cl_GLenum;
 #endif
 
 /* Define capabilities for anonymous struct members. */
-#if defined( __GNUC__) && ! defined( __STRICT_ANSI__ )
+#if !defined(__cplusplus) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+#define  __CL_HAS_ANON_STRUCT__ 1
+#define  __CL_ANON_STRUCT__
+#elif defined( __GNUC__) && ! defined( __STRICT_ANSI__ )
 #define  __CL_HAS_ANON_STRUCT__ 1
 #define  __CL_ANON_STRUCT__ __extension__
 #elif defined( _WIN32) && defined(_MSC_VER)
