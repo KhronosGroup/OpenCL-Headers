@@ -575,7 +575,7 @@ typedef struct _cl_buffer_region {
 #define CL_KERNEL_ARG_ACCESS_READ_WRITE             0x11A2
 #define CL_KERNEL_ARG_ACCESS_NONE                   0x11A3
     
-/* cl_kernel_arg_type_qualifer */
+/* cl_kernel_arg_type_qualifier */
 #define CL_KERNEL_ARG_TYPE_NONE                     0
 #define CL_KERNEL_ARG_TYPE_CONST                    (1 << 0)
 #define CL_KERNEL_ARG_TYPE_RESTRICT                 (1 << 1)
