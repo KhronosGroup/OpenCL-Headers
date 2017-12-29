@@ -519,6 +519,40 @@ clSetKernelExecInfoARM(cl_kernel            /* kernel */,
 
 #endif /* CL_VERSION_1_2 */
 
+
+/*******************************
+ * cl_khr_il_program extension *
+ *******************************/
+
+#ifndef cl_khr_il_program
+#define cl_khr_il_program 1
+
+/* New property to clGetDeviceInfo for retrieving supported intermediate
+ * languages
+ */
+#define CL_DEVICE_IL_VERSION_KHR                    0x105B
+
+/* New property to clGetProgramInfo for retrieving for retrieving the IL of a
+ * program
+ */
+#define CL_PROGRAM_IL_KHR                           0x1169
+
+extern CL_API_ENTRY cl_program
+  CL_API_CALL clCreateProgramWithILKHR(
+      cl_context /* context */,
+      const void * /* il */,
+      size_t /* length */,
+      cl_int * /* errcode_ret */);
+
+typedef CL_API_ENTRY cl_program
+  (CL_API_CALL *clCreateProgramWithILKHR_fn)(
+      cl_context /* context */,
+      const void * /* il */,
+      size_t /* length */,
+      cl_int * /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2;
+
+#endif /* cl_khr_il_program */
+
 #ifdef __cplusplus
 }
 #endif
