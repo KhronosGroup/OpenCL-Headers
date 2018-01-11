@@ -165,6 +165,24 @@ typedef CL_API_ENTRY cl_int (CL_API_CALL *clTerminateContextKHR_fn)(cl_context /
 #define CL_DEVICE_SPIR_VERSIONS                     0x40E0
 #define CL_PROGRAM_BINARY_TYPE_INTERMEDIATE         0x40E1
 
+/*****************************************
+ * cl_khr_create_command_queue extension *
+ *****************************************/
+#define cl_khr_create_command_queue 1
+
+typedef cl_bitfield cl_queue_properties_khr;
+
+extern CL_API_ENTRY cl_command_queue CL_API_CALL
+clCreateCommandQueueWithPropertiesKHR( cl_context /* context */,
+                                       cl_device_id /* device */,
+                                       const cl_queue_properties_khr* /* properties */,
+                                       cl_int* /* errcode_ret */ ) CL_EXT_SUFFIX__VERSION_1_2;
+typedef CL_API_ENTRY cl_command_queue
+(CL_API_CALL *clCreateCommandQueueWithPropertiesKHR_fn)( cl_context /* context */,
+                                                         cl_device_id /* device */,
+                                                         const cl_queue_properties_khr* /* properties */,
+                                                         cl_int* /* errcode_ret */ ) CL_EXT_SUFFIX__VERSION_1_2;
+
 
 /******************************************
 * cl_nv_device_attribute_query extension *
