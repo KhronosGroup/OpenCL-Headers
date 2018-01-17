@@ -576,7 +576,7 @@ extern CL_API_ENTRY cl_program
       cl_context /* context */,
       const void * /* il */,
       size_t /* length */,
-      cl_int * /* errcode_ret */);
+      cl_int * /* errcode_ret */) CL_EXT_SUFFIX__VERSION_1_2;
 
 typedef CL_API_ENTRY cl_program
   (CL_API_CALL *clCreateProgramWithILKHR_fn)(
