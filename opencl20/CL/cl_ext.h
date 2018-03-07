@@ -304,11 +304,18 @@ typedef struct _cl_mem_ext_host_ptr
     /* Type of external memory allocation. */
     /* Legal values will be defined in layered extensions. */
     cl_uint  allocation_type;
-            
+
     /* Host cache policy for this external memory allocation. */
     cl_uint  host_cache_policy;
 
 } cl_mem_ext_host_ptr;
+
+/*******************************************
+* cl_qcom_ext_host_ptr_iocoherent extension
+********************************************/
+
+// Cache policy specifying io-coherence
+#define CL_MEM_HOST_IOCOHERENT_QCOM                      0x40A9
 
 /*********************************
 * cl_qcom_ion_host_ptr extension
@@ -324,11 +331,29 @@ typedef struct _cl_mem_ion_host_ptr
 
     /* ION file descriptor */
     int                  ion_filedesc;
-            
+
     /* Host pointer to the ION allocated memory */
     void*                ion_hostptr;
 
 } cl_mem_ion_host_ptr;
+
+/*********************************
+* cl_qcom_android_native_buffer_host_ptr extension
+*********************************/
+
+#define CL_MEM_ANDROID_NATIVE_BUFFER_HOST_PTR_QCOM                  0x40C6
+
+
+typedef struct _cl_mem_android_native_buffer_host_ptr
+{
+    // Type of external memory allocation.
+    // Must be CL_MEM_ANDROID_NATIVE_BUFFER_HOST_PTR_QCOM for Android native buffers.
+    cl_mem_ext_host_ptr  ext_host_ptr;
+
+    // Virtual pointer to the android native buffer
+    void*                anb_ptr;
+
+} cl_mem_android_native_buffer_host_ptr;
 
 #endif /* CL_VERSION_1_1 */
 
