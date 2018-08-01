@@ -581,8 +581,8 @@ typedef intptr_t cl_import_properties_arm;
 /* DMA BUF memory type value for CL_IMPORT_TYPE_ARM property */
 #define CL_IMPORT_TYPE_DMA_BUF_ARM                0x40B4
 
-/* Secure DMA BUF memory type value for CL_IMPORT_TYPE_ARM property */
-#define CL_IMPORT_TYPE_SECURE_ARM                 0x40B5
+/* Protected DMA BUF memory type value for CL_IMPORT_TYPE_ARM property */
+#define CL_IMPORT_TYPE_PROTECTED_ARM              0x40B5
 
 /* This extension adds a new function that allows for direct memory import into
  * OpenCL via the clImportMemoryARM function.
