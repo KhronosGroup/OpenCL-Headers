@@ -715,6 +715,19 @@ clSetKernelExecInfoARM(cl_kernel            /* kernel */,
                        size_t               /* param_value_size */,
                        const void *         /* param_value */) CL_EXT_SUFFIX__VERSION_1_2;
 
+/********************************
+ * cl_arm_get_core_id extension *
+ ********************************/
+
+#ifdef CL_VERSION_1_2
+
+#define cl_arm_get_core_id 1
+
+/* Device info property for bitfield of cores present */
+#define CL_DEVICE_COMPUTE_UNITS_BITFIELD_ARM      0x40BF
+
+#endif  /* CL_VERSION_1_2 */
+
 #ifdef __cplusplus
 }
 #endif
