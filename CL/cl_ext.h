@@ -36,12 +36,7 @@
 extern "C" {
 #endif
 
-#ifdef __APPLE__
-    #include <OpenCL/cl.h>
-    #include <AvailabilityMacros.h>
-#else
-    #include <CL/cl.h>
-#endif
+#include <CL/cl.h>
 
 /* cl_khr_fp64 extension - no extension #define since it has no functions  */
 /* CL_DEVICE_DOUBLE_FP_CONFIG is defined in CL.h for OpenCL >= 120 */

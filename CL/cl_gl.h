@@ -29,11 +29,7 @@
 #ifndef __OPENCL_CL_GL_H
 #define __OPENCL_CL_GL_H
 
-#ifdef __APPLE__
-#include <OpenCL/cl.h>
-#else
 #include <CL/cl.h>
-#endif	
 
 #ifdef __cplusplus
 extern "C" {
