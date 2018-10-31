@@ -140,10 +140,17 @@ typedef struct _cl_image_desc {
 #ifdef __GNUC__
     __extension__   /* Prevents warnings about anonymous union in -pedantic builds */
 #endif
+#ifdef _MSC_VER
+#pragma warning( push )  
+#pragma warning( disable : 4201 ) /* Prevents warning about nameless struct/union in /W4 /Za builds */
+#endif
     union {
       cl_mem                  buffer;
       cl_mem                  mem_object;
     };
+#ifdef _MSC_VER
+#pragma warning( pop )  
+#endif
 } cl_image_desc;
 
 #endif
