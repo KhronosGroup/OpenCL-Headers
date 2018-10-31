@@ -438,7 +438,7 @@ typedef struct _cl_mem_android_native_buffer_host_ptr
  * cl_img_cached_allocations extension *
  ******************************************/
 
-/* Flag values used by clCreteBuffer */
+/* Flag values used by clCreateBuffer */
 #define CL_MEM_USE_UNCACHED_CPU_MEMORY_IMG          (1 << 26)
 #define CL_MEM_USE_CACHED_CPU_MEMORY_IMG            (1 << 27)
 
@@ -448,7 +448,7 @@ typedef struct _cl_mem_android_native_buffer_host_ptr
  ******************************************/
 #define cl_img_use_gralloc_ptr 1
 
-/* Flag values used by clCreteBuffer */
+/* Flag values used by clCreateBuffer */
 #define CL_MEM_USE_GRALLOC_PTR_IMG                  (1 << 28)
 
 /* To be used by clGetEventInfo: */
@@ -511,6 +511,16 @@ typedef CL_API_ENTRY cl_int
                               size_t /*param_value_size*/,
                               void* /*param_value*/,
                               size_t* /*param_value_size_ret*/ ) CL_EXT_SUFFIX__VERSION_2_0_DEPRECATED;
+
+
+/*********************************
+* cl_khr_mipmap_image extension
+*********************************/
+
+/* cl_sampler_properties */
+#define CL_SAMPLER_MIP_FILTER_MODE_KHR              0x1155
+#define CL_SAMPLER_LOD_MIN_KHR                      0x1156
+#define CL_SAMPLER_LOD_MAX_KHR                      0x1157
 
 
 /*********************************

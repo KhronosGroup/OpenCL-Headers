@@ -619,6 +619,9 @@ typedef struct _cl_buffer_region {
 #define CL_SAMPLER_ADDRESSING_MODE                  0x1153
 #define CL_SAMPLER_FILTER_MODE                      0x1154
 #ifdef CL_VERSION_2_0
+/* These enumerants are for the cl_khr_mipmap_image extension.
+   They have since been added to cl_ext.h with an appropriate
+   KHR suffix, but are left here for backwards compatibility. */
 #define CL_SAMPLER_MIP_FILTER_MODE                  0x1155
 #define CL_SAMPLER_LOD_MIN                          0x1156
 #define CL_SAMPLER_LOD_MAX                          0x1157
@@ -1064,7 +1067,7 @@ clSVMFree(cl_context        /* context */,
 
 extern CL_API_ENTRY cl_sampler CL_API_CALL
 clCreateSamplerWithProperties(cl_context                     /* context */,
-                              const cl_sampler_properties *  /* normalized_coords */,
+                              const cl_sampler_properties *  /* sampler_properties */,
                               cl_int *                       /* errcode_ret */) CL_API_SUFFIX__VERSION_2_0;
 
 #endif
