@@ -271,16 +271,16 @@ typedef double                  cl_double;
 /* scalar types  */
 typedef int8_t          cl_char;
 typedef uint8_t         cl_uchar;
-typedef int16_t         cl_short    __attribute__((aligned(2)));
-typedef uint16_t        cl_ushort   __attribute__((aligned(2)));
-typedef int32_t         cl_int      __attribute__((aligned(4)));
-typedef uint32_t        cl_uint     __attribute__((aligned(4)));
-typedef int64_t         cl_long     __attribute__((aligned(8)));
-typedef uint64_t        cl_ulong    __attribute__((aligned(8)));
+typedef int16_t         cl_short;
+typedef uint16_t        cl_ushort;
+typedef int32_t         cl_int;
+typedef uint32_t        cl_uint;
+typedef int64_t         cl_long;
+typedef uint64_t        cl_ulong;
 
-typedef uint16_t        cl_half     __attribute__((aligned(2)));
-typedef float           cl_float    __attribute__((aligned(4)));
-typedef double          cl_double   __attribute__((aligned(8)));
+typedef uint16_t        cl_half;
+typedef float           cl_float;
+typedef double          cl_double;
 
 /* Macro names and corresponding values defined by OpenCL */
 #define CL_CHAR_BIT         8
