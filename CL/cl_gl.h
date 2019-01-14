@@ -64,7 +64,7 @@ extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateFromGLBuffer(cl_context     /* context */,
                      cl_mem_flags   /* flags */,
                      cl_GLuint      /* bufobj */,
-                     int *          /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
+                     cl_int *       /* errcode_ret */) CL_API_SUFFIX__VERSION_1_0;
 
 #ifdef CL_VERSION_1_2
 
