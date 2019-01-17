@@ -67,7 +67,7 @@ extern "C" {
  */
 #define cl_APPLE_SetMemObjectDestructor 1
 cl_int  CL_API_ENTRY clSetMemObjectDestructorAPPLE(  cl_mem memobj,
-                                        void (* pfn_notif)(cl_mem memobj, void * user_data),
+                                        void (* pfn_notify)(cl_mem memobj, void * user_data),
                                         void * user_data)             CL_EXT_SUFFIX__VERSION_1_0;
 
 
@@ -77,7 +77,7 @@ cl_int  CL_API_ENTRY clSetMemObjectDestructorAPPLE(  cl_mem memobj,
  * Please check for the "cl_APPLE_ContextLoggingFunctions" extension using clGetDeviceInfo(CL_DEVICE_EXTENSIONS)
  * before using.
  *
- * clLogMessagesToSystemLog fowards on all log messages to the Apple System Logger
+ * clLogMessagesToSystemLog forwards on all log messages to the Apple System Logger
  */
 #define cl_APPLE_ContextLoggingFunctions 1
 extern void CL_API_ENTRY clLogMessagesToSystemLogAPPLE(  const char * errstr,
