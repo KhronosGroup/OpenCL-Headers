@@ -147,20 +147,28 @@ typedef CL_API_ENTRY cl_program
                                            size_t       length,
                                            cl_int *     errcode_ret) CL_EXT_SUFFIX__VERSION_1_2;
 
-/* Extension: cl_khr_image2D_buffer
+/* Extension: cl_khr_image2d_from_buffer
  *
- * This extension allows a 2D image to be created from a cl_mem buffer without a copy.
- * The type associated with a 2D image created from a buffer in an OpenCL program is image2d_t.
- * Both the sampler and sampler-less read_image built-in functions are supported for 2D images
- * and 2D images created from a buffer.  Similarly, the write_image built-ins are also supported
- * for 2D images created from a buffer.
+ * This extension allows a 2D image to be created from a cl_mem buffer without
+ * a copy. The type associated with a 2D image created from a buffer in an
+ * OpenCL program is image2d_t. Both the sampler and sampler-less read_image
+ * built-in functions are supported for 2D images and 2D images created from
+ * a buffer.  Similarly, the write_image built-ins are also supported for 2D
+ * images created from a buffer.
  *
- * When the 2D image from buffer is created, the client must specify the width,
- * height, image format (i.e. channel order and channel data type) and optionally the row pitch
+ * When the 2D image from buffer is created, the client must specify the
+ * width, height, image format (i.e. channel order and channel data type)
+ * and optionally the row pitch.
  *
- * The pitch specified must be a multiple of CL_DEVICE_IMAGE_PITCH_ALIGNMENT pixels.
- * The base address of the buffer must be aligned to CL_DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT pixels.
+ * The pitch specified must be a multiple of
+ * CL_DEVICE_IMAGE_PITCH_ALIGNMENT_KHR pixels.
+ * The base address of the buffer must be aligned to
+ * CL_DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT_KHR pixels.
  */
+
+#define CL_DEVICE_IMAGE_PITCH_ALIGNMENT_KHR              0x104A
+#define CL_DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT_KHR       0x104B
+
 
 /**************************************
  * cl_khr_initialize_memory extension *
