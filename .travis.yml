@@ -1,0 +1,19 @@
+linux: &linux
+   os: linux
+   dist: xenial
+   language: python
+   python: "3.7"
+   services:
+     - docker
+matrix:
+   include:
+      - <<: *linux
+        env: CONAN_GCC_VERSIONS=4.9 CONAN_DOCKER_IMAGE=conanio/gcc49
+
+install:
+  - chmod +x .travis/install.sh
+  - ./.travis/install.sh
+
+script:
+  - chmod +x .travis/run.sh
+  - ./.travis/run.sh
