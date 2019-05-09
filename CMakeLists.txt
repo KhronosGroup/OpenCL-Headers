@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(OpenCLHeaders VERSION 2.2 LANGUAGES NONE)
 
 add_library(OpenCLHeaders INTERFACE)
+add_library(OpenCL::OpenCLHeaders ALIAS OpenCLHeaders)
 target_include_directories(OpenCLHeaders INTERFACE
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 	$<INSTALL_INTERFACE:include>
