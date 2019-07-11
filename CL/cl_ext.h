@@ -742,6 +742,18 @@ clSetKernelExecInfoARM(cl_kernel            kernel,
 
 #endif  /* CL_VERSION_1_2 */
 
+/*********************************
+* cl_arm_job_slot_selection
+*********************************/
+
+#define cl_arm_job_slot_selection 1
+
+/* cl_device_info */
+#define CL_DEVICE_JOB_SLOTS_ARM                   0x41E0
+
+/* cl_command_queue_properties */
+#define CL_QUEUE_JOB_SLOT_ARM                     0x41E1
+
 #ifdef __cplusplus
 }
 #endif
