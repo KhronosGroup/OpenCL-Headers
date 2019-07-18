@@ -294,8 +294,8 @@ typedef cl_uint cl_diagnostics_verbose_level;
 #define CL_DEVICE_AVC_ME_SUPPORTS_TEXTURE_SAMPLER_USE_INTEL 0x410C
 #define CL_DEVICE_AVC_ME_SUPPORTS_PREEMPTION_INTEL          0x410D
 
-#define CL_AVC_ME_VERSION_0_INTEL                           0x0;  // No support.
-#define CL_AVC_ME_VERSION_1_INTEL                           0x1;  // First supported version.
+#define CL_AVC_ME_VERSION_0_INTEL                           0x0  // No support.
+#define CL_AVC_ME_VERSION_1_INTEL                           0x1  // First supported version.
 
 #define CL_AVC_ME_MAJOR_16x16_INTEL                         0x0
 #define CL_AVC_ME_MAJOR_16x8_INTEL                          0x1
