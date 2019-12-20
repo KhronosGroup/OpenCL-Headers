@@ -578,6 +578,49 @@ typedef cl_uint  cl_queue_throttle_khr;
 #define CL_DEVICE_MAX_NAMED_BARRIER_COUNT_KHR       0x2035
 
 
+/*********************************
+* cl_khr_extended_versioning
+*********************************/
+
+#define CL_VERSION_MAJOR_BITS_KHR (10)
+#define CL_VERSION_MINOR_BITS_KHR (10)
+#define CL_VERSION_PATCH_BITS_KHR (12)
+
+#define CL_VERSION_MAJOR_MASK_KHR ((1 << CL_VERSION_MAJOR_BITS_KHR) - 1)
+#define CL_VERSION_MINOR_MASK_KHR ((1 << CL_VERSION_MINOR_BITS_KHR) - 1)
+#define CL_VERSION_PATCH_MASK_KHR ((1 << CL_VERSION_PATCH_BITS_KHR) - 1)
+
+#define CL_VERSION_MAJOR_KHR(version) ((version) >> (CL_VERSION_MAJOR_BITS_KHR + CL_VERSION_PATCH_BITS_KHR))
+#define CL_VERSION_MINOR_KHR(version) (((version) >> CL_VERSION_PATCH_BITS_KHR) & CL_VERSION_MINOR_MASK_KHR)
+#define CL_VERSION_PATCH_KHR(version) ((version) & CL_VERSION_PATCH_MASK_KHR)
+
+#define CL_MAKE_VERSION_KHR(major, minor, patch) \
+    ((((major) & CL_VERSION_MAJOR_MASK_KHR) << (CL_VERSION_MINOR_BITS_KHR + CL_VERSION_PATCH_BITS_KHR)) | \
+    (((minor) &  CL_VERSION_MINOR_MASK_KHR) << CL_VERSION_PATCH_BITS_KHR) | \
+    ((patch) & CL_VERSION_PATCH_MASK_KHR))
+
+typedef cl_uint cl_version_khr;
+
+#define CL_NAME_VERSION_MAX_NAME_SIZE_KHR 64
+
+typedef struct _cl_name_version_khr
+{
+    cl_version_khr version;
+    char name[CL_NAME_VERSION_MAX_NAME_SIZE_KHR];
+} cl_name_version_khr;
+
+/* cl_platform_info */
+#define CL_PLATFORM_NUMERIC_VERSION_KHR                  0x0906
+#define CL_PLATFORM_EXTENSIONS_WITH_VERSION_KHR          0x0907
+
+/* cl_device_info */
+#define CL_DEVICE_NUMERIC_VERSION_KHR                    0x105E
+#define CL_DEVICE_OPENCL_C_NUMERIC_VERSION_KHR           0x105F
+#define CL_DEVICE_EXTENSIONS_WITH_VERSION_KHR            0x1060
+#define CL_DEVICE_ILS_WITH_VERSION_KHR                   0x1061
+#define CL_DEVICE_BUILT_IN_KERNELS_WITH_VERSION_KHR      0x1062
+
+
 /**********************************
  * cl_arm_import_memory extension *
  **********************************/
