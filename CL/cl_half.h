@@ -59,6 +59,60 @@ typedef enum
   CL_HALF_RTN, // round towards negative infinity
 } cl_half_rounding_mode;
 
+
+/* Private utility macros. */
+#define CL_HALF_EXP_MASK 0x7C00
+#define CL_HALF_MAX_FINITE_MAG 0x7BFF
+
+
+/*
+ * Utility to deal with values that overflow when converting to half precision.
+ */
+static inline cl_half cl_half_handle_overflow(cl_half_rounding_mode rounding_mode,
+                                              uint16_t sign)
+{
+  if (rounding_mode == CL_HALF_RTZ)
+  {
+    // Round overflow towards zero -> largest finite number (preserving sign)
+    return (sign << 15) | CL_HALF_MAX_FINITE_MAG;
+  }
+  else if (rounding_mode == CL_HALF_RTP && sign)
+  {
+    // Round negative overflow towards positive infinity -> most negative finite number
+    return (1 << 15) | CL_HALF_MAX_FINITE_MAG;
+  }
+  else if (rounding_mode == CL_HALF_RTN && !sign)
+  {
+    // Round positive overflow towards negative infinity -> largest finite number
+    return CL_HALF_MAX_FINITE_MAG;
+  }
+
+  // Overflow to infinity
+  return (sign << 15) | CL_HALF_EXP_MASK;
+}
+
+/*
+ * Utility to deal with values that underflow when converting to half precision.
+ */
+static inline cl_half cl_half_handle_underflow(cl_half_rounding_mode rounding_mode,
+                                               uint16_t sign)
+{
+  if (rounding_mode == CL_HALF_RTP && !sign)
+  {
+    // Round underflow towards positive infinity -> smallest positive value
+    return (sign << 15) | 1;
+  }
+  else if (rounding_mode == CL_HALF_RTN && sign)
+  {
+    // Round underflow towards negative infinity -> largest negative value
+    return (sign << 15) | 1;
+  }
+
+  // Flush to zero
+  return (sign << 15);
+}
+
+
 /**
  * Convert a cl_float to a cl_half.
  */
@@ -93,58 +147,31 @@ static inline cl_half cl_float_to_half(cl_float f, cl_half_rounding_mode roundin
       // NaN -> propagate mantissa and silence it
       uint16_t h_mant = f_mant >> (CL_FLT_MANT_DIG - CL_HALF_MANT_DIG);
       h_mant |= 0x200;
-      return (sign << 15) | 0x7C00 | h_mant;
+      return (sign << 15) | CL_HALF_EXP_MASK | h_mant;
     }
     else
     {
       // Infinity -> zero mantissa
-      return (sign << 15) | 0x7C00;
+      return (sign << 15) | CL_HALF_EXP_MASK;
     }
+  }
+
+  // Check for zero
+  if (!f_exp && !f_mant)
+  {
+    return (sign << 15);
   }
 
   // Check for overflow
   if (exp >= CL_HALF_MAX_EXP)
   {
-    if (rounding_mode == CL_HALF_RTZ)
-    {
-      // Round overflow towards zero -> largest positive value
-      return (sign << 15) | 0x7BFF;
-    }
-    else if (rounding_mode == CL_HALF_RTP && sign)
-    {
-      // Round overflow towards positive infinity -> largest positive value
-      return (sign << 15) | 0x7BFF;
-    }
-    else if (rounding_mode == CL_HALF_RTN && !sign)
-    {
-      // Round overflow towards negative infinity -> smallest negative value
-      return (sign << 15) | 0x7BFF;
-    }
-    else
-    {
-      // Overflow to infinity
-      return (sign << 15) | 0x7C00;
-    }
+    return cl_half_handle_overflow(rounding_mode, sign);
   }
 
   // Check for underflow
   if (exp < (CL_HALF_MIN_EXP - CL_HALF_MANT_DIG - 1))
   {
-    if (rounding_mode == CL_HALF_RTP && !sign && (f_exp || f_mant))
-    {
-      // Round underflow towards positive infinity -> smallest positive value
-      return (sign << 15) | 1;
-    }
-    else if (rounding_mode == CL_HALF_RTN && sign && (f_exp || f_mant))
-    {
-      // Round underflow towards negative infinity -> largest negative value
-      return (sign << 15) | 1;
-    }
-    else
-    {
-      // Flush to zero
-      return (sign << 15);
-    }
+    return cl_half_handle_underflow(rounding_mode, sign);
   }
 
   // Position of the bit that will become the FP16 mantissa LSB
@@ -250,58 +277,31 @@ static inline cl_half cl_double_to_half(cl_double d, cl_half_rounding_mode round
       // NaN -> propagate mantissa and silence it
       uint16_t h_mant = d_mant >> (CL_DBL_MANT_DIG - CL_HALF_MANT_DIG);
       h_mant |= 0x200;
-      return (sign << 15) | 0x7C00 | h_mant;
+      return (sign << 15) | CL_HALF_EXP_MASK | h_mant;
     }
     else
     {
       // Infinity -> zero mantissa
-      return (sign << 15) | 0x7C00;
+      return (sign << 15) | CL_HALF_EXP_MASK;
     }
+  }
+
+  // Check for zero
+  if (!d_exp && !d_mant)
+  {
+    return (sign << 15);
   }
 
   // Check for overflow
   if (exp >= CL_HALF_MAX_EXP)
   {
-    if (rounding_mode == CL_HALF_RTZ)
-    {
-      // Round overflow towards zero -> largest positive value
-      return (sign << 15) | 0x7BFF;
-    }
-    else if (rounding_mode == CL_HALF_RTP && sign)
-    {
-      // Round overflow towards positive infinity -> largest positive value
-      return (sign << 15) | 0x7BFF;
-    }
-    else if (rounding_mode == CL_HALF_RTN && !sign)
-    {
-      // Round overflow towards negative infinity -> smallest negative value
-      return (sign << 15) | 0x7BFF;
-    }
-    else
-    {
-      // Overflow to infinity
-      return (sign << 15) | 0x7C00;
-    }
+    return cl_half_handle_overflow(rounding_mode, sign);
   }
 
   // Check for underflow
   if (exp < (CL_HALF_MIN_EXP - CL_HALF_MANT_DIG - 1))
   {
-    if (rounding_mode == CL_HALF_RTP && !sign && (d_exp || d_mant))
-    {
-      // Round underflow towards positive infinity -> smallest positive value
-      return (sign << 15) | 1;
-    }
-    else if (rounding_mode == CL_HALF_RTN && sign && (d_exp || d_mant))
-    {
-      // Round underflow towards negative infinity -> largest negative value
-      return (sign << 15) | 1;
-    }
-    else
-    {
-      // Flush to zero
-      return (sign << 15);
-    }
+    return cl_half_handle_underflow(rounding_mode, sign);
   }
 
   // Position of the bit that will become the FP16 mantissa LSB
@@ -444,6 +444,10 @@ static inline cl_float cl_half_to_float(cl_half h)
   f32.i = (sign << 31) | (f_exp << 23) | (h_mant << 13);
   return f32.f;
 }
+
+
+#undef CL_HALF_EXP_MASK
+#undef CL_HALF_MAX_FINITE_MAG
 
 
 #ifdef __cplusplus
