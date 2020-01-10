@@ -640,6 +640,12 @@ typedef intptr_t cl_import_properties_arm;
 /* Protected DMA BUF memory type value for CL_IMPORT_TYPE_ARM property */
 #define CL_IMPORT_TYPE_PROTECTED_ARM              0x40B5
 
+/* Android hardware buffer type value for CL_IMPORT_TYPE_ARM property */
+#define CL_IMPORT_TYPE_ANDROID_HARDWARE_BUFFER_ARM 0x41E2
+
+/* Import memory size value to indicate a size for the whole buffer */
+#define CL_IMPORT_MEMORY_WHOLE_ALLOCATION_ARM SIZE_MAX
+
 /* This extension adds a new function that allows for direct memory import into
  * OpenCL via the clImportMemoryARM function.
  *
