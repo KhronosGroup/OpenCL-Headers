@@ -141,13 +141,16 @@ static inline cl_half cl_half_from_float(cl_float f, cl_half_rounding_mode round
   // Add FP16 exponent bias
   uint16_t h_exp = exp + CL_HALF_MAX_EXP - 1;
 
+  // Position of the bit that will become the FP16 mantissa LSB
+  uint32_t lsb_pos = CL_FLT_MANT_DIG - CL_HALF_MANT_DIG;
+
   // Check for NaN / infinity
   if (f_exp == 0xFF)
   {
     if (f_mant)
     {
       // NaN -> propagate mantissa and silence it
-      uint16_t h_mant = f_mant >> (CL_FLT_MANT_DIG - CL_HALF_MANT_DIG);
+      uint16_t h_mant = f_mant >> lsb_pos;
       h_mant |= 0x200;
       return (sign << 15) | CL_HALF_EXP_MASK | h_mant;
     }
@@ -176,9 +179,7 @@ static inline cl_half cl_half_from_float(cl_float f, cl_half_rounding_mode round
     return cl_half_handle_underflow(rounding_mode, sign);
   }
 
-  // Position of the bit that will become the FP16 mantissa LSB
-  uint32_t lsb_pos;
-
+  // Check for value that will become denormal
   if (exp < -14)
   {
     // Denormal -> include the implicit 1 from the FP32 mantissa
@@ -187,11 +188,6 @@ static inline cl_half cl_half_from_float(cl_float f, cl_half_rounding_mode round
 
     // Mantissa shift amount depends on exponent
     lsb_pos = -exp + (CL_FLT_MANT_DIG - 25);
-  }
-  else
-  {
-    // Normal -> just truncate mantissa
-    lsb_pos = CL_FLT_MANT_DIG - CL_HALF_MANT_DIG;
   }
 
   // Generate FP16 mantissa by shifting FP32 mantissa
@@ -271,13 +267,16 @@ static inline cl_half cl_half_from_double(cl_double d, cl_half_rounding_mode rou
   // Add FP16 exponent bias
   uint16_t h_exp = (uint16_t)(exp + CL_HALF_MAX_EXP - 1);
 
+  // Position of the bit that will become the FP16 mantissa LSB
+  uint32_t lsb_pos = CL_DBL_MANT_DIG - CL_HALF_MANT_DIG;
+
   // Check for NaN / infinity
   if (d_exp == 0x7FF)
   {
     if (d_mant)
     {
       // NaN -> propagate mantissa and silence it
-      uint16_t h_mant = (uint16_t)(d_mant >> (CL_DBL_MANT_DIG - CL_HALF_MANT_DIG));
+      uint16_t h_mant = (uint16_t)(d_mant >> lsb_pos);
       h_mant |= 0x200;
       return (sign << 15) | CL_HALF_EXP_MASK | h_mant;
     }
@@ -306,22 +305,15 @@ static inline cl_half cl_half_from_double(cl_double d, cl_half_rounding_mode rou
     return cl_half_handle_underflow(rounding_mode, sign);
   }
 
-  // Position of the bit that will become the FP16 mantissa LSB
-  uint32_t lsb_pos;
-
+  // Check for value that will become denormal
   if (exp < -14)
   {
-    // Denormal -> include the implicit 1 from the FP64 mantissa
+    // Include the implicit 1 from the FP64 mantissa
     h_exp = 0;
     d_mant |= (uint64_t)1 << (CL_DBL_MANT_DIG - 1);
 
     // Mantissa shift amount depends on exponent
     lsb_pos = (uint32_t)(-exp + (CL_DBL_MANT_DIG - 25));
-  }
-  else
-  {
-    // Normal -> just truncate mantissa
-    lsb_pos = CL_DBL_MANT_DIG - CL_HALF_MANT_DIG;
   }
 
   // Generate FP16 mantissa by shifting FP64 mantissa
