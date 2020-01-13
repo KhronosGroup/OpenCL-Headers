@@ -38,8 +38,8 @@
  *    cl_float f = cl_half_to_float(h);
  */
 
-#ifndef __CL_HALF_H
-#define __CL_HALF_H
+#ifndef OPENCL_CL_HALF_H
+#define OPENCL_CL_HALF_H
 
 #include <CL/cl_platform.h>
 
@@ -449,4 +449,4 @@ static inline cl_float cl_half_to_float(cl_half h)
 #endif
 
 
-#endif  /* __CL_HALF_H */
+#endif  /* OPENCL_CL_HALF_H */
