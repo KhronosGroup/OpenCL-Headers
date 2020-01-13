@@ -263,13 +263,13 @@ static inline cl_half cl_half_from_double(cl_double d, cl_half_rounding_mode rou
 
   // Extract FP64 exponent and mantissa
   uint64_t d_exp = (f64.i >> (CL_DBL_MANT_DIG - 1)) & 0x7FF;
-  uint64_t d_mant = f64.i & ((1ul << (CL_DBL_MANT_DIG - 1)) - 1);
+  uint64_t d_mant = f64.i & (((uint64_t)1 << (CL_DBL_MANT_DIG - 1)) - 1);
 
   // Remove FP64 exponent bias
   int64_t exp = d_exp - CL_DBL_MAX_EXP + 1;
 
   // Add FP16 exponent bias
-  uint16_t h_exp = exp + CL_HALF_MAX_EXP - 1;
+  uint16_t h_exp = (uint16_t)(exp + CL_HALF_MAX_EXP - 1);
 
   // Check for NaN / infinity
   if (d_exp == 0x7FF)
@@ -277,7 +277,7 @@ static inline cl_half cl_half_from_double(cl_double d, cl_half_rounding_mode rou
     if (d_mant)
     {
       // NaN -> propagate mantissa and silence it
-      uint16_t h_mant = d_mant >> (CL_DBL_MANT_DIG - CL_HALF_MANT_DIG);
+      uint16_t h_mant = (uint16_t)(d_mant >> (CL_DBL_MANT_DIG - CL_HALF_MANT_DIG));
       h_mant |= 0x200;
       return (sign << 15) | CL_HALF_EXP_MASK | h_mant;
     }
@@ -313,10 +313,10 @@ static inline cl_half cl_half_from_double(cl_double d, cl_half_rounding_mode rou
   {
     // Denormal -> include the implicit 1 from the FP64 mantissa
     h_exp = 0;
-    d_mant |= 1ul << (CL_DBL_MANT_DIG - 1);
+    d_mant |= (uint64_t)1 << (CL_DBL_MANT_DIG - 1);
 
     // Mantissa shift amount depends on exponent
-    lsb_pos = -exp + (CL_DBL_MANT_DIG - 25);
+    lsb_pos = (uint32_t)(-exp + (CL_DBL_MANT_DIG - 25));
   }
   else
   {
@@ -325,10 +325,10 @@ static inline cl_half cl_half_from_double(cl_double d, cl_half_rounding_mode rou
   }
 
   // Generate FP16 mantissa by shifting FP64 mantissa
-  uint16_t h_mant = d_mant >> lsb_pos;
+  uint16_t h_mant = (uint16_t)(d_mant >> lsb_pos);
 
   // Check whether we need to round
-  uint64_t halfway = 1ul << (lsb_pos - 1);
+  uint64_t halfway = (uint64_t)1 << (lsb_pos - 1);
   uint64_t mask = (halfway << 1) - 1;
   switch (rounding_mode)
   {
