@@ -34,7 +34,7 @@
  *
  *    #include <CL/cl_half.h>
  *    ...
- *    cl_half h = cl_float_to_half(0.5f, CL_HALF_RTE);
+ *    cl_half h = cl_half_from_float(0.5f, CL_HALF_RTE);
  *    cl_float f = cl_half_to_float(h);
  */
 
@@ -118,7 +118,7 @@ static inline cl_half cl_half_handle_underflow(cl_half_rounding_mode rounding_mo
 /**
  * Convert a cl_float to a cl_half.
  */
-static inline cl_half cl_float_to_half(cl_float f, cl_half_rounding_mode rounding_mode)
+static inline cl_half cl_half_from_float(cl_float f, cl_half_rounding_mode rounding_mode)
 {
   // Type-punning to get direct access to underlying bits
   union
@@ -248,7 +248,7 @@ static inline cl_half cl_float_to_half(cl_float f, cl_half_rounding_mode roundin
 /**
  * Convert a cl_double to a cl_half.
  */
-static inline cl_half cl_double_to_half(cl_double d, cl_half_rounding_mode rounding_mode)
+static inline cl_half cl_half_from_double(cl_double d, cl_half_rounding_mode rounding_mode)
 {
   // Type-punning to get direct access to underlying bits
   union
