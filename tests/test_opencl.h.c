@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 
-#include <CL/opencl.h>
+#include "CL/opencl.h"
 
 int main( void )
 {

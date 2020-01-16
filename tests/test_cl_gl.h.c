@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 
-#include <CL/cl_gl.h>
+#include "CL/cl_gl.h"
 
 int main( void )
 {

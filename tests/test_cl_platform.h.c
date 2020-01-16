@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 
-#include <CL/cl_platform.h>
+#include "CL/cl_platform.h"
 
 int main( void )
 {
