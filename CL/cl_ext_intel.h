@@ -447,7 +447,6 @@ typedef cl_bitfield cl_mem_properties_intel;
 typedef cl_bitfield cl_mem_alloc_flags_intel;
 
 /* cl_mem_alloc_flags_intel - bitfield */
-#define CL_MEM_ALLOC_DEFAULT_INTEL                      0
 #define CL_MEM_ALLOC_WRITE_COMBINED_INTEL               (1 << 0)
 
 typedef cl_uint cl_mem_info_intel;
