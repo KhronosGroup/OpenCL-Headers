@@ -420,7 +420,7 @@ typedef cl_uint cl_diagnostics_verbose_level;
 * cl_intel_unified_shared_memory extension *
 ********************************************/
 
-/* These APIs are in sync with Revision M of the cl_intel_unified_shared_memory spec! */
+/* These APIs are in sync with Revision O of the cl_intel_unified_shared_memory spec! */
 
 #define cl_intel_unified_shared_memory 1
 
@@ -470,6 +470,12 @@ typedef cl_uint cl_mem_advice_intel;
 
 /* cl_mem_advice_intel */
 /* Enum values 0x4208-0x420F are reserved for future memory advices. */
+
+typedef cl_bitfield cl_mem_migration_flags_intel;
+
+/* cl_mem_migration_flags_intel - bitfield */
+#define CL_MIGRATE_MEM_OBJECT_HOST_INTEL              (1 << 0)
+#define CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED_INTEL (1 << 1)
 
 /* cl_kernel_exec_info */
 #define CL_KERNEL_EXEC_INFO_INDIRECT_HOST_ACCESS_INTEL      0x4200
@@ -644,7 +650,7 @@ clEnqueueMigrateMemINTEL(
             cl_command_queue command_queue,
             const void* ptr,
             size_t size,
-            cl_mem_migration_flags flags,
+            cl_mem_migration_flags_intel flags,
             cl_uint num_events_in_wait_list,
             const cl_event* event_wait_list,
             cl_event* event);
@@ -654,7 +660,7 @@ clEnqueueMigrateMemINTEL_fn)(
             cl_command_queue command_queue,
             const void* ptr,
             size_t size,
-            cl_mem_migration_flags flags,
+            cl_mem_migration_flags_intel flags,
             cl_uint num_events_in_wait_list,
             const cl_event* event_wait_list,
             cl_event* event);
