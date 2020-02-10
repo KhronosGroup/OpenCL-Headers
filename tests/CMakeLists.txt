@@ -18,6 +18,14 @@ function(add_header_test NAME SOURCE)
       PUBLIC -DCL_TARGET_OPENCL_VERSION=${VERSION}
     )
     add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
+    if(${VERSION} EQUAL 220)
+      set(TEST_EXE ${NAME}_${VERSION}_EXPERIMENTAL)
+      add_executable(${TEST_EXE} ${SOURCE})
+      target_compile_definitions(${TEST_EXE}
+        PUBLIC -DCL_TARGET_OPENCL_VERSION=${VERSION} -DCL_EXPERIMENTAL
+      )
+      add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
+    endif()
   endforeach(VERSION)
 endfunction(add_header_test)
 
