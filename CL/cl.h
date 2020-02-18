@@ -119,6 +119,9 @@ typedef cl_uint             cl_profiling_info;
 typedef cl_bitfield         cl_sampler_properties;
 typedef cl_uint             cl_kernel_exec_info;
 #endif
+#ifdef CL_EXPERIMENTAL
+typedef cl_bitfield         cl_device_atomic_capabilities;
+#endif
 
 typedef struct _cl_image_format {
     cl_channel_order        image_channel_order;
@@ -844,6 +847,28 @@ typedef struct _cl_buffer_region {
 #define CL_PROFILING_COMMAND_END                    0x1283
 #ifdef CL_VERSION_2_0
 #define CL_PROFILING_COMMAND_COMPLETE               0x1284
+#endif
+
+#ifdef CL_EXPERIMENTAL
+
+/* cl_device_atomic_capabilities - bitfield */
+#define CL_DEVICE_ATOMIC_ORDER_RELAXED          (1 << 0)
+#define CL_DEVICE_ATOMIC_ORDER_ACQ_REL          (1 << 1)
+#define CL_DEVICE_ATOMIC_ORDER_SEQ_CST          (1 << 2)
+#define CL_DEVICE_ATOMIC_SCOPE_WORK_ITEM        (1 << 3)
+#define CL_DEVICE_ATOMIC_SCOPE_WORK_GROUP       (1 << 4)
+#define CL_DEVICE_ATOMIC_SCOPE_DEVICE           (1 << 5)
+#define CL_DEVICE_ATOMIC_SCOPE_ALL_SVM_DEVICES  (1 << 6)
+
+/* cl_device_info */
+#define CL_DEVICE_ATOMIC_MEMORY_CAPABILITIES                0x1063
+#define CL_DEVICE_ATOMIC_FENCE_CAPABILITIES                 0x1064
+#define CL_DEVICE_NON_UNIFORM_WORK_GROUP_SUPPORT            0x1065
+#define CL_DEVICE_PROGRAM_SCOPE_GLOBAL_CTOR_DTOR_SUPPORT    0x1066
+#define CL_DEVICE_MAX_WRITE_IMAGE3D_ARGS                    0x1067
+#define CL_DEVICE_WORK_GROUP_COLLECTIVE_FUNCTIONS_SUPPORT   0x1068
+#define CL_DEVICE_GENERIC_ADDRESS_SPACE_SUPPORT             0x1069
+
 #endif
 
 /********************************************************************************************************/
