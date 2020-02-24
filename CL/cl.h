@@ -862,10 +862,12 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_ATOMIC_MEMORY_CAPABILITIES                0x1063
 #define CL_DEVICE_ATOMIC_FENCE_CAPABILITIES                 0x1064
 #define CL_DEVICE_NON_UNIFORM_WORK_GROUP_SUPPORT            0x1065
-#define CL_DEVICE_PROGRAM_SCOPE_GLOBAL_CTOR_DTOR_SUPPORT    0x1066
+#define CL_DEVICE_OPENCL_C_VERSIONS                         0x1066
 #define CL_DEVICE_MAX_WRITE_IMAGE3D_ARGS                    0x1067
 #define CL_DEVICE_WORK_GROUP_COLLECTIVE_FUNCTIONS_SUPPORT   0x1068
 #define CL_DEVICE_GENERIC_ADDRESS_SPACE_SUPPORT             0x1069
+/* 0x106A to 0x106E - Reserved for upcoming KHR extension */
+#define CL_DEVICE_OPENCL_C_FEATURES                         0x106F
 
 /* cl_command_type */
 #define CL_COMMAND_SVM_MIGRATE_MEM                  0x120E
