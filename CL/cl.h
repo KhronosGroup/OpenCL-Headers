@@ -869,6 +869,9 @@ typedef struct _cl_buffer_region {
 #define CL_DEVICE_WORK_GROUP_COLLECTIVE_FUNCTIONS_SUPPORT   0x1068
 #define CL_DEVICE_GENERIC_ADDRESS_SPACE_SUPPORT             0x1069
 
+/* cl_command_type */
+#define CL_COMMAND_SVM_MIGRATE_MEM                  0x120E
+
 #endif
 
 /********************************************************************************************************/
