@@ -121,6 +121,7 @@ typedef cl_uint             cl_kernel_exec_info;
 #endif
 #ifdef CL_EXPERIMENTAL
 typedef cl_bitfield         cl_device_atomic_capabilities;
+typedef cl_uint             cl_khronos_vendor_id;
 #endif
 
 typedef struct _cl_image_format {
