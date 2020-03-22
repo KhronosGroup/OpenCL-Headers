@@ -169,6 +169,8 @@ typedef CL_API_ENTRY cl_program
  * cl_khr_terminate_context extension *
  **************************************/
 
+#define CL_CONTEXT_TERMINATED_KHR                   -1121
+
 #define CL_DEVICE_TERMINATE_CAPABILITY_KHR          0x2031
 #define CL_CONTEXT_TERMINATE_KHR                    0x2032
 
