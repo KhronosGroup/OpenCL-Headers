@@ -875,6 +875,9 @@ typedef struct _cl_buffer_region {
 
 #endif
 
+/* cl_khronos_vendor_id */
+#define CL_KHRONOS_VENDOR_ID_CODEPLAY               0x10004
+
 /********************************************************************************************************/
 
 /* Platform API */
