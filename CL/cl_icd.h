@@ -22,6 +22,12 @@
 #include <CL/cl_ext.h>
 #include <CL/cl_gl.h>
 
+#if defined(_WIN32)
+#include <CL/cl_d3d11.h>
+#include <CL/cl_d3d10.h>
+#include <CL/cl_dx9_media_sharing.h>
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
