@@ -7,7 +7,9 @@ enable_testing()
 include_directories(${PROJECT_SOURCE_DIR}/..)
 
 # Make sure headers do not produce warnings
+if (NOT MSVC)
 add_compile_options(-Wall -Wextra -Werror -pedantic -Wno-format)
+endif ()
 
 # Add a test for a given source file for each version of OpenCL
 function(add_header_test NAME SOURCE)

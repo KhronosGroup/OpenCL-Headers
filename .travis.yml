@@ -8,9 +8,13 @@ os:
   - linux
   - osx
 
+jobs:
+  include:
+  - os: windows
+
 script:
   - mkdir -p build
   - cd build
   - cmake ../tests
-  - make
-  - make test
+  - cmake --build .
+  - ctest -C Debug
