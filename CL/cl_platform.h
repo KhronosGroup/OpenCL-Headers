@@ -54,6 +54,8 @@ extern "C" {
 #define CL_EXT_SUFFIX__VERSION_2_1
 #define CL_API_SUFFIX__VERSION_2_2
 #define CL_EXT_SUFFIX__VERSION_2_2
+#define CL_API_SUFFIX__EXPERIMENTAL
+#define CL_EXT_SUFFIX__EXPERIMENTAL
 
 
 #ifdef __GNUC__

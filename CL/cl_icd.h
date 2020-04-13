@@ -151,6 +151,25 @@ typedef void *cl_api_clCreateImage;
 
 #endif
 
+#ifdef CL_EXPERIMENTAL
+
+typedef CL_API_ENTRY cl_mem(CL_API_CALL *cl_api_clCreateBufferWithProperties)(
+    cl_context context, const cl_mem_properties *properties, cl_mem_flags flags,
+    size_t size, void *host_ptr,
+    cl_int *errcode_ret) CL_API_SUFFIX__EXPERIMENTAL;
+
+typedef CL_API_ENTRY cl_mem(CL_API_CALL *cl_api_clCreateImageWithProperties)(
+    cl_context context, const cl_mem_properties *properties, cl_mem_flags flags,
+    const cl_image_format *image_format, const cl_image_desc *image_desc,
+    void *host_ptr, cl_int *errcode_ret) CL_API_SUFFIX__EXPERIMENTAL;
+
+#else
+
+typedef void *cl_api_clCreateBufferWithProperties;
+typedef void *cl_api_clCreateImageWithProperties;
+
+#endif
+
 typedef CL_API_ENTRY cl_int(CL_API_CALL *cl_api_clRetainMemObject)(
     cl_mem memobj) CL_API_SUFFIX__VERSION_1_0;
 
@@ -1254,6 +1273,17 @@ typedef struct _cl_icd_dispatch {
   /* OpenCL 2.2 */
   cl_api_clSetProgramReleaseCallback clSetProgramReleaseCallback;
   cl_api_clSetProgramSpecializationConstant clSetProgramSpecializationConstant;
+
+#ifdef CL_EXPERIMENTAL
+  /* Entries in the ICD struct should not normally be ifdef'ed because it is
+   * important that it be identical for all configurations.  However, as these
+   * entry points are experimental they should not be in normal ICD builds. */
+
+  /* Experimental */
+  cl_api_clCreateBufferWithProperties clCreateBufferWithProperties;
+  cl_api_clCreateImageWithProperties clCreateImageWithProperties;
+
+#endif
 } cl_icd_dispatch;
 
 #ifdef __cplusplus
