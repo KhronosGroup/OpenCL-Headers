@@ -572,6 +572,8 @@ typedef cl_uint  cl_queue_throttle_khr;
 * cl_khr_extended_versioning
 *********************************/
 
+#define cl_khr_extended_versioning 1
+
 #define CL_VERSION_MAJOR_BITS_KHR (10)
 #define CL_VERSION_MINOR_BITS_KHR (10)
 #define CL_VERSION_PATCH_BITS_KHR (12)
