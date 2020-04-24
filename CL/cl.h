@@ -888,13 +888,13 @@ typedef struct _cl_name_version {
 #ifdef CL_EXPERIMENTAL
 
 /* cl_device_atomic_capabilities - bitfield */
-#define CL_DEVICE_ATOMIC_ORDER_RELAXED          (1 << 0)
-#define CL_DEVICE_ATOMIC_ORDER_ACQ_REL          (1 << 1)
-#define CL_DEVICE_ATOMIC_ORDER_SEQ_CST          (1 << 2)
-#define CL_DEVICE_ATOMIC_SCOPE_WORK_ITEM        (1 << 3)
-#define CL_DEVICE_ATOMIC_SCOPE_WORK_GROUP       (1 << 4)
-#define CL_DEVICE_ATOMIC_SCOPE_DEVICE           (1 << 5)
-#define CL_DEVICE_ATOMIC_SCOPE_ALL_SVM_DEVICES  (1 << 6)
+#define CL_DEVICE_ATOMIC_ORDER_RELAXED              (1 << 0)
+#define CL_DEVICE_ATOMIC_ORDER_ACQ_REL              (1 << 1)
+#define CL_DEVICE_ATOMIC_ORDER_SEQ_CST              (1 << 2)
+#define CL_DEVICE_ATOMIC_SCOPE_WORK_ITEM            (1 << 3)
+#define CL_DEVICE_ATOMIC_SCOPE_WORK_GROUP           (1 << 4)
+#define CL_DEVICE_ATOMIC_SCOPE_DEVICE               (1 << 5)
+#define CL_DEVICE_ATOMIC_SCOPE_ALL_DEVICES          (1 << 6)
 
 #endif
 
