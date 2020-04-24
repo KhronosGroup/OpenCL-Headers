@@ -107,10 +107,10 @@ typedef cl_uint             cl_profiling_info;
 typedef cl_bitfield         cl_sampler_properties;
 typedef cl_uint             cl_kernel_exec_info;
 #endif
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 typedef cl_bitfield         cl_device_atomic_capabilities;
-typedef cl_bitfield         cl_mem_properties;
 typedef cl_uint             cl_khronos_vendor_id;
+typedef cl_bitfield         cl_mem_properties;
 typedef cl_uint             cl_version;
 #endif
 
@@ -162,7 +162,7 @@ typedef struct _cl_buffer_region {
 
 #endif
 
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 
 #define CL_NAME_VERSION_MAX_NAME_SIZE 64
 
@@ -271,7 +271,7 @@ typedef struct _cl_name_version {
 #ifdef CL_VERSION_2_1
 #define CL_PLATFORM_HOST_TIMER_RESOLUTION           0x0905
 #endif
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 #define CL_PLATFORM_NUMERIC_VERSION                 0x0906
 #define CL_PLATFORM_EXTENSIONS_WITH_VERSION         0x0907
 #endif
@@ -394,7 +394,7 @@ typedef struct _cl_name_version {
 #define CL_DEVICE_MAX_NUM_SUB_GROUPS                     0x105C
 #define CL_DEVICE_SUB_GROUP_INDEPENDENT_FORWARD_PROGRESS 0x105D
 #endif
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 #define CL_DEVICE_NUMERIC_VERSION                        0x105E
 #define CL_DEVICE_EXTENSIONS_WITH_VERSION                0x1060
 #define CL_DEVICE_ILS_WITH_VERSION                       0x1061
@@ -504,7 +504,7 @@ typedef struct _cl_name_version {
 #ifdef CL_VERSION_2_1
 #define CL_QUEUE_DEVICE_DEFAULT                     0x1095
 #endif
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 #define CL_QUEUE_PROPERTIES_ARRAY                   0x1098
 #endif
 
@@ -615,7 +615,7 @@ typedef struct _cl_name_version {
 #ifdef CL_VERSION_2_0
 #define CL_MEM_USES_SVM_POINTER                     0x1109
 #endif
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 #define CL_MEM_PROPERTIES                           0x110A
 #endif
 
@@ -634,14 +634,13 @@ typedef struct _cl_name_version {
 #define CL_IMAGE_NUM_SAMPLES                        0x111A
 #endif
 
-#ifdef CL_VERSION_2_0
 
 /* cl_pipe_info */
+#ifdef CL_VERSION_2_0
 #define CL_PIPE_PACKET_SIZE                         0x1120
 #define CL_PIPE_MAX_PACKETS                         0x1121
-
 #endif
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 #define CL_PIPE_PROPERTIES                          0x1122
 #endif
 
@@ -672,7 +671,7 @@ typedef struct _cl_name_version {
 #define CL_SAMPLER_LOD_MIN                          0x1156
 #define CL_SAMPLER_LOD_MAX                          0x1157
 #endif
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 #define CL_SAMPLER_PROPERTIES                       0x1158
 #endif
 
@@ -859,7 +858,7 @@ typedef struct _cl_name_version {
 #define CL_COMMAND_SVM_MAP                          0x120C
 #define CL_COMMAND_SVM_UNMAP                        0x120D
 #endif
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 #define CL_COMMAND_SVM_MIGRATE_MEM                  0x120E
 #endif
 
@@ -869,11 +868,9 @@ typedef struct _cl_name_version {
 #define CL_SUBMITTED                                0x2
 #define CL_QUEUED                                   0x3
 
-#ifdef CL_VERSION_1_1
-
 /* cl_buffer_create_type */
+#ifdef CL_VERSION_1_1
 #define CL_BUFFER_CREATE_TYPE_REGION                0x1220
-
 #endif
 
 /* cl_profiling_info */
@@ -885,23 +882,21 @@ typedef struct _cl_name_version {
 #define CL_PROFILING_COMMAND_COMPLETE               0x1284
 #endif
 
-#ifdef CL_EXPERIMENTAL
-
 /* cl_device_atomic_capabilities - bitfield */
+#ifdef CL_VERSION_3_0
 #define CL_DEVICE_ATOMIC_ORDER_RELAXED          (1 << 0)
 #define CL_DEVICE_ATOMIC_ORDER_ACQ_REL          (1 << 1)
 #define CL_DEVICE_ATOMIC_ORDER_SEQ_CST          (1 << 2)
 #define CL_DEVICE_ATOMIC_SCOPE_WORK_ITEM        (1 << 3)
 #define CL_DEVICE_ATOMIC_SCOPE_WORK_GROUP       (1 << 4)
 #define CL_DEVICE_ATOMIC_SCOPE_DEVICE           (1 << 5)
-#define CL_DEVICE_ATOMIC_SCOPE_ALL_SVM_DEVICES  (1 << 6)
-
+#define CL_DEVICE_ATOMIC_SCOPE_ALL_DEVICES      (1 << 6)
 #endif
 
 /* cl_khronos_vendor_id */
 #define CL_KHRONOS_VENDOR_ID_CODEPLAY               0x10004
 
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 
 /* cl_version */
 #define CL_VERSION_MAJOR_BITS (10)
@@ -1096,7 +1091,7 @@ clCreatePipe(cl_context                 context,
 
 #endif
 
-#ifdef CL_EXPERIMENTAL
+#ifdef CL_VERSION_3_0
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateBufferWithProperties(cl_context                context,
@@ -1104,7 +1099,7 @@ clCreateBufferWithProperties(cl_context                context,
                              cl_mem_flags              flags,
                              size_t                    size,
                              void *                    host_ptr,
-                             cl_int *                  errcode_ret) CL_API_SUFFIX__EXPERIMENTAL;
+                             cl_int *                  errcode_ret) CL_API_SUFFIX__VERSION_3_0;
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateImageWithProperties(cl_context                context,
@@ -1113,7 +1108,7 @@ clCreateImageWithProperties(cl_context                context,
                             const cl_image_format *   image_format,
                             const cl_image_desc *     image_desc,
                             void *                    host_ptr,
-                            cl_int *                  errcode_ret) CL_API_SUFFIX__EXPERIMENTAL;
+                            cl_int *                  errcode_ret) CL_API_SUFFIX__VERSION_3_0;
 
 #endif
 
