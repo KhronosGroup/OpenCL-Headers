@@ -11,21 +11,13 @@ add_compile_options(-Wall -Wextra -Werror -pedantic -Wno-format)
 
 # Add a test for a given source file for each version of OpenCL
 function(add_header_test NAME SOURCE)
-  foreach(VERSION 100 110 120 200 210 220)
+  foreach(VERSION 100 110 120 200 210 220 300)
     set(TEST_EXE ${NAME}_${VERSION})
     add_executable(${TEST_EXE} ${SOURCE})
     target_compile_definitions(${TEST_EXE}
       PUBLIC -DCL_TARGET_OPENCL_VERSION=${VERSION}
     )
     add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
-    if(${VERSION} EQUAL 220)
-      set(TEST_EXE ${NAME}_${VERSION}_EXPERIMENTAL)
-      add_executable(${TEST_EXE} ${SOURCE})
-      target_compile_definitions(${TEST_EXE}
-        PUBLIC -DCL_TARGET_OPENCL_VERSION=${VERSION} -DCL_EXPERIMENTAL
-      )
-      add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
-    endif()
   endforeach(VERSION)
 endfunction(add_header_test)
 
