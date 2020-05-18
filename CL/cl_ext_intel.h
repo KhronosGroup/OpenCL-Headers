@@ -471,12 +471,6 @@ typedef cl_uint cl_mem_advice_intel;
 /* cl_mem_advice_intel */
 /* Enum values 0x4208-0x420F are reserved for future memory advices. */
 
-typedef cl_bitfield cl_mem_migration_flags_intel;
-
-/* cl_mem_migration_flags_intel - bitfield */
-#define CL_MIGRATE_MEM_OBJECT_HOST_INTEL              (1 << 0)
-#define CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED_INTEL (1 << 1)
-
 /* cl_kernel_exec_info */
 #define CL_KERNEL_EXEC_INFO_INDIRECT_HOST_ACCESS_INTEL      0x4200
 #define CL_KERNEL_EXEC_INFO_INDIRECT_DEVICE_ACCESS_INTEL    0x4201
@@ -645,12 +639,17 @@ clEnqueueMemcpyINTEL_fn)(
             const cl_event* event_wait_list,
             cl_event* event);
 
+#ifdef CL_VERSION_1_2
+
+/* Because these APIs use cl_mem_migration_flags, they require
+   OpenCL 1.2: */
+
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueMigrateMemINTEL(
             cl_command_queue command_queue,
             const void* ptr,
             size_t size,
-            cl_mem_migration_flags_intel flags,
+            cl_mem_migration_flags flags,
             cl_uint num_events_in_wait_list,
             const cl_event* event_wait_list,
             cl_event* event);
@@ -660,10 +659,12 @@ clEnqueueMigrateMemINTEL_fn)(
             cl_command_queue command_queue,
             const void* ptr,
             size_t size,
-            cl_mem_migration_flags_intel flags,
+            cl_mem_migration_flags flags,
             cl_uint num_events_in_wait_list,
             const cl_event* event_wait_list,
             cl_event* event);
+
+#endif
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueMemAdviseINTEL(
