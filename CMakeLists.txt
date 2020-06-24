@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(OpenCLHeaders
   VERSION 2.2
-  LANGUAGES NONE
+  LANGUAGES C # Ideally should be NONE, but GNUInstallDirs detects platform arch using try_compile
+  # https://stackoverflow.com/questions/43379311/why-does-project-affect-cmakes-opinion-on-cmake-sizeof-void-p
 )
 
 add_library(OpenCLHeaders INTERFACE)
