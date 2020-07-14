@@ -109,6 +109,7 @@ typedef cl_uint             cl_kernel_exec_info;
 #endif
 #ifdef CL_VERSION_3_0
 typedef cl_bitfield         cl_device_atomic_capabilities;
+typedef cl_bitfield         cl_device_device_enqueue_capabilities;
 typedef cl_uint             cl_khronos_vendor_id;
 typedef cl_bitfield         cl_mem_properties;
 typedef cl_uint             cl_version;
@@ -408,7 +409,7 @@ typedef struct _cl_name_version {
 #define CL_DEVICE_GENERIC_ADDRESS_SPACE_SUPPORT          0x1069
 /* 0x106A to 0x106E - Reserved for upcoming KHR extension */
 #define CL_DEVICE_OPENCL_C_FEATURES                      0x106F
-#define CL_DEVICE_DEVICE_ENQUEUE_SUPPORT                 0x1070
+#define CL_DEVICE_DEVICE_ENQUEUE_CAPABILITIES            0x1070
 #define CL_DEVICE_PIPE_SUPPORT                           0x1071
 #endif
 
@@ -891,6 +892,12 @@ typedef struct _cl_name_version {
 #define CL_DEVICE_ATOMIC_SCOPE_WORK_GROUP       (1 << 4)
 #define CL_DEVICE_ATOMIC_SCOPE_DEVICE           (1 << 5)
 #define CL_DEVICE_ATOMIC_SCOPE_ALL_DEVICES      (1 << 6)
+#endif
+
+/* cl_device_device_enqueue_capabilities - bitfield */
+#ifdef CL_VERSION_3_0
+#define CL_DEVICE_QUEUE_SUPPORTED               (1 << 0)
+#define CL_DEVICE_QUEUE_REPLACEABLE_DEFAULT     (1 << 1)
 #endif
 
 /* cl_khronos_vendor_id */
