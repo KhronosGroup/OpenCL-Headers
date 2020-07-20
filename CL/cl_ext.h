@@ -198,7 +198,7 @@ typedef CL_API_ENTRY cl_int
  *****************************************/
 #define cl_khr_create_command_queue 1
 
-typedef cl_bitfield cl_queue_properties_khr;
+typedef cl_properties cl_queue_properties_khr;
 
 extern CL_API_ENTRY cl_command_queue CL_API_CALL
 clCreateCommandQueueWithPropertiesKHR(cl_context context,

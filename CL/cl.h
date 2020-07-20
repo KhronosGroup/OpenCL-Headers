@@ -38,6 +38,7 @@ typedef struct _cl_sampler *        cl_sampler;
 
 typedef cl_uint             cl_bool;                     /* WARNING!  Unlike cl_ types in cl_platform.h, cl_bool is not guaranteed to be the same size as the bool in kernels. */
 typedef cl_ulong            cl_bitfield;
+typedef cl_ulong            cl_properties;
 typedef cl_bitfield         cl_device_type;
 typedef cl_uint             cl_platform_info;
 typedef cl_uint             cl_device_info;
@@ -57,7 +58,7 @@ typedef cl_bitfield         cl_device_affinity_domain;
 typedef intptr_t            cl_context_properties;
 typedef cl_uint             cl_context_info;
 #ifdef CL_VERSION_2_0
-typedef cl_bitfield         cl_queue_properties;
+typedef cl_properties       cl_queue_properties;
 #endif
 typedef cl_uint             cl_command_queue_info;
 typedef cl_uint             cl_channel_order;
@@ -104,14 +105,14 @@ typedef cl_uint             cl_event_info;
 typedef cl_uint             cl_command_type;
 typedef cl_uint             cl_profiling_info;
 #ifdef CL_VERSION_2_0
-typedef cl_bitfield         cl_sampler_properties;
+typedef cl_properties       cl_sampler_properties;
 typedef cl_uint             cl_kernel_exec_info;
 #endif
 #ifdef CL_VERSION_3_0
 typedef cl_bitfield         cl_device_atomic_capabilities;
 typedef cl_bitfield         cl_device_device_enqueue_capabilities;
 typedef cl_uint             cl_khronos_vendor_id;
-typedef cl_bitfield         cl_mem_properties;
+typedef cl_properties       cl_mem_properties;
 typedef cl_uint             cl_version;
 #endif
 
