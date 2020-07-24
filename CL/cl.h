@@ -1031,6 +1031,16 @@ clGetContextInfo(cl_context         context,
                  void *             param_value,
                  size_t *           param_value_size_ret) CL_API_SUFFIX__VERSION_1_0;
 
+#ifdef CL_VERSION_3_0
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSetContextDestructorCallback(cl_context         context,
+                               void (CL_CALLBACK* pfn_notify)(cl_context context,
+                                                              void* user_data),
+                               void*              user_data) CL_API_SUFFIX__VERSION_3_0;
+
+#endif
+
 /* Command Queue APIs */
 
 #ifdef CL_VERSION_2_0
