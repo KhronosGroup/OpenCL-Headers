@@ -412,6 +412,7 @@ typedef struct _cl_name_version {
 #define CL_DEVICE_OPENCL_C_FEATURES                      0x106F
 #define CL_DEVICE_DEVICE_ENQUEUE_CAPABILITIES            0x1070
 #define CL_DEVICE_PIPE_SUPPORT                           0x1071
+#define CL_DEVICE_LATEST_CONFORMANCE_VERSION_PASSED      0x1072
 #endif
 
 /* cl_device_fp_config - bitfield */
