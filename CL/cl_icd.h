@@ -163,7 +163,7 @@ typedef CL_API_ENTRY cl_mem(CL_API_CALL *cl_api_clCreateImageWithProperties)(
     const cl_image_format *image_format, const cl_image_desc *image_desc,
     void *host_ptr, cl_int *errcode_ret) CL_API_SUFFIX__VERSION_3_0;
 
-typedef CL_API_ENTRY cl_int(CL_API_CALL* clSetContextDestructorCallback)(
+typedef CL_API_ENTRY cl_int(CL_API_CALL* cl_api_clSetContextDestructorCallback)(
     cl_context context,
     void(CL_CALLBACK* pfn_notify)(cl_context context, void* user_data),
     void* user_data) CL_API_SUFFIX__VERSION_3_0;
