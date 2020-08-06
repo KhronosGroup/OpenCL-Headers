@@ -628,6 +628,24 @@ clEnqueueMemcpyINTEL_fn)(
             const cl_event* event_wait_list,
             cl_event* event);
 
+extern CL_API_ENTRY cl_mem CL_API_CALL
+clCreateBufferWithPropertiesINTEL(
+    cl_context   context,
+    const cl_mem_properties_intel* properties,
+    cl_mem_flags flags,
+    size_t       size,
+    void *       host_ptr,
+    cl_int *     errcode_ret) CL_EXT_SUFFIX__VERSION_1_0;
+
+typedef CL_API_ENTRY cl_mem (CL_API_CALL *
+clCreateBufferWithPropertiesINTEL_fn)(
+    cl_context   context,
+    const cl_mem_properties_intel* properties,
+    cl_mem_flags flags,
+    size_t       size,
+    void *       host_ptr,
+    cl_int *     errcode_ret) CL_EXT_SUFFIX__VERSION_1_0;
+
 #ifdef CL_VERSION_1_2
 
 /* Because these APIs use cl_mem_migration_flags, they require
