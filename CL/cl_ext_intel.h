@@ -699,6 +699,12 @@ clCreateBufferWithPropertiesINTEL_fn)(
     void *       host_ptr,
     cl_int *     errcode_ret) CL_EXT_SUFFIX__VERSION_1_0;
 
+/******************************************
+* cl_intel_mem_channel_property extension *
+*******************************************/
+
+#define CL_MEM_CHANNEL_INTEL            0x4213
+
 #ifdef __cplusplus
 }
 #endif
