@@ -432,6 +432,7 @@ typedef cl_properties cl_mem_properties_intel;
 
 /* cl_mem_properties_intel */
 #define CL_MEM_ALLOC_FLAGS_INTEL        0x4195
+#define CL_MEM_CHANNEL_INTEL            0x4213
 
 typedef cl_bitfield cl_mem_alloc_flags_intel;
 
