@@ -675,6 +675,36 @@ clEnqueueMemAdviseINTEL_fn)(
             const cl_event* event_wait_list,
             cl_event* event);
 
+/***************************************************
+* cl_intel_create_buffer_with_properties extension *
+****************************************************/
+
+#define cl_intel_create_buffer_with_properties 1
+
+extern CL_API_ENTRY cl_mem CL_API_CALL
+clCreateBufferWithPropertiesINTEL(
+    cl_context   context,
+    const cl_mem_properties_intel* properties,
+    cl_mem_flags flags,
+    size_t       size,
+    void *       host_ptr,
+    cl_int *     errcode_ret) CL_EXT_SUFFIX__VERSION_1_0;
+
+typedef CL_API_ENTRY cl_mem (CL_API_CALL *
+clCreateBufferWithPropertiesINTEL_fn)(
+    cl_context   context,
+    const cl_mem_properties_intel* properties,
+    cl_mem_flags flags,
+    size_t       size,
+    void *       host_ptr,
+    cl_int *     errcode_ret) CL_EXT_SUFFIX__VERSION_1_0;
+
+/******************************************
+* cl_intel_mem_channel_property extension *
+*******************************************/
+
+#define CL_MEM_CHANNEL_INTEL            0x4213
+
 #ifdef __cplusplus
 }
 #endif
