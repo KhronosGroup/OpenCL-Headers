@@ -409,7 +409,7 @@ typedef cl_uint cl_diagnostics_verbose_level;
 * cl_intel_unified_shared_memory extension *
 ********************************************/
 
-/* These APIs are in sync with Revision O of the cl_intel_unified_shared_memory spec! */
+/* These APIs are in sync with Revision Q of the cl_intel_unified_shared_memory spec! */
 
 #define cl_intel_unified_shared_memory 1
 
@@ -531,6 +531,16 @@ clMemFreeINTEL(
 
 typedef CL_API_ENTRY cl_int (CL_API_CALL *
 clMemFreeINTEL_fn)(
+            cl_context context,
+            void* ptr);
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clMemBlockingFreeINTEL(
+            cl_context context,
+            void* ptr);
+
+typedef CL_API_ENTRY cl_int (CL_API_CALL *
+clMemBlockingFreeINTEL_fn)(
             cl_context context,
             void* ptr);
 
