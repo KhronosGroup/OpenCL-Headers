@@ -833,6 +833,26 @@ clSetKernelExecInfoARM(cl_kernel            kernel,
 /* cl_command_queue_properties */
 #define CL_QUEUE_JOB_SLOT_ARM                     0x41E1
 
+/*********************************
+* cl_arm_scheduling_controls
+*********************************/
+
+#define cl_arm_scheduling_controls 1
+
+/* cl_device_info */
+#define CL_DEVICE_SCHEDULING_CONTROLS_CAPABILITIES_ARM          0x41E4
+
+#define CL_DEVICE_SCHEDULING_KERNEL_BATCHING_ARM               (1 << 0)
+#define CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_ARM          (1 << 1)
+#define CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM (1 << 2)
+
+/* cl_kernel_info */
+#define CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_ARM            0x41E5
+#define CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_MODIFIER_ARM   0x41E6
+
+/* cl_queue_properties */
+#define CL_QUEUE_KERNEL_BATCHING_ARM                            0x41E7
+
 #ifdef __cplusplus
 }
 #endif
