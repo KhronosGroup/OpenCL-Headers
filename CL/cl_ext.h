@@ -357,6 +357,13 @@ typedef CL_API_ENTRY cl_int
 
 
 /*********************************
+* cl_ext_cxx_for_opencl extension
+*********************************/
+#define cl_ext_cxx_for_opencl 1
+
+#define CL_DEVICE_CXX_FOR_OPENCL_NUMERIC_VERSION_EXT 0x4230
+
+/*********************************
 * cl_qcom_ext_host_ptr extension
 *********************************/
 #define cl_qcom_ext_host_ptr 1
