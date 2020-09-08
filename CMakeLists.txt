@@ -6,18 +6,15 @@ project(OpenCLHeaders
   # https://stackoverflow.com/questions/43379311/why-does-project-affect-cmakes-opinion-on-cmake-sizeof-void-p
 )
 
-add_library(OpenCLHeaders INTERFACE)
-add_library(OpenCL::OpenCLHeaders
-  ALIAS OpenCLHeaders
-)
-target_include_directories(OpenCLHeaders
+add_library(Headers INTERFACE)
+target_include_directories(Headers
   INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE:include>
 )
 
 install(
-  TARGETS OpenCLHeaders
+  TARGETS Headers
   EXPORT OpenCLHeadersTargets
 )
 
