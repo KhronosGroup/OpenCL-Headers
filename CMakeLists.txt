@@ -8,6 +8,8 @@ project(OpenCLHeaders
 
 add_library(Headers INTERFACE)
 target_include_directories(Headers
+  SYSTEM
+  BEFORE
   INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<INSTALL_INTERFACE:include>
