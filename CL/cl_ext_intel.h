@@ -705,6 +705,15 @@ clCreateBufferWithPropertiesINTEL_fn)(
 
 #define CL_MEM_CHANNEL_INTEL            0x4213
 
+/*********************************
+* cl_intel_mem_force_host_memory *
+**********************************/
+
+#define cl_intel_mem_force_host_memory 1
+
+/* cl_mem_flags */
+#define CL_MEM_FORCE_HOST_MEMORY_INTEL                      (1 << 20)
+
 #ifdef __cplusplus
 }
 #endif
