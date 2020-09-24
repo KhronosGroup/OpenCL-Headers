@@ -225,8 +225,6 @@ typedef CL_API_ENTRY cl_command_queue
 #define CL_DEVICE_GPU_OVERLAP_NV                    0x4004
 #define CL_DEVICE_KERNEL_EXEC_TIMEOUT_NV            0x4005
 #define CL_DEVICE_INTEGRATED_MEMORY_NV              0x4006
-#define CL_DEVICE_PCI_BUS_ID_NV                     0x4008
-#define CL_DEVICE_PCI_SLOT_ID_NV                    0x4009
 
 
 /*********************************
