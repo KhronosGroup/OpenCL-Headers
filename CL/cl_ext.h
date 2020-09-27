@@ -245,6 +245,10 @@ clCreateBufferNV(cl_context     context,
                  cl_int           *errcode_ret) CL_EXT_SUFFIX__VERSION_1_2;
 
 
+#define CL_MEM_LOCATION_HOST_NV                     (1 << 0)
+#define CL_MEM_PINNED_NV                            (1 << 1)
+
+
 /*********************************
 * cl_amd_device_memory_flags *
 *********************************/
