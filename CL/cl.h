@@ -133,7 +133,8 @@ typedef struct _cl_image_desc {
     size_t                  image_slice_pitch;
     cl_uint                 num_mip_levels;
     cl_uint                 num_samples;
-#ifdef CL_VERSION_2_0 && __CL_HAS_ANON_STRUCT__
+#ifdef CL_VERSION_2_0
+#if __CL_HAS_ANON_STRUCT__
 #ifdef _MSC_VER
 #if _MSC_VER >= 1500
 #pragma warning( push )
@@ -143,13 +144,16 @@ typedef struct _cl_image_desc {
     __CL_ANON_STRUCT__
     union {
 #endif
+#endif
       cl_mem                  buffer;
-#ifdef CL_VERSION_2_0 && __CL_HAS_ANON_STRUCT__
+#ifdef CL_VERSION_2_0
+#if __CL_HAS_ANON_STRUCT__
       cl_mem                  mem_object;
     };
 #ifdef _MSC_VER
 #if _MSC_VER >= 1500
 #pragma warning( pop )
+#endif
 #endif
 #endif
 #endif
