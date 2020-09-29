@@ -1375,8 +1375,6 @@ typedef union
 }
 #endif
 
-#undef __CL_HAS_ANON_STRUCT__
-#undef __CL_ANON_STRUCT__
 #if defined( _WIN32) && defined(_MSC_VER) && ! defined(__STDC__)
     #if _MSC_VER >=1500
     #pragma warning( pop )
