@@ -17,7 +17,18 @@
 #ifndef __OPENCL_CL_D3D10_H
 #define __OPENCL_CL_D3D10_H
 
+#if defined(_MSC_VER)
+#if _MSC_VER >=1500
+#pragma warning( push )
+#pragma warning( disable : 4201 )
+#endif
+#endif
 #include <d3d10.h>
+#if defined(_MSC_VER)
+#if _MSC_VER >=1500
+#pragma warning( pop )
+#endif
+#endif
 #include <CL/cl.h>
 #include <CL/cl_platform.h>
 

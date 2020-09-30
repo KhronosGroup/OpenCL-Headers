@@ -6,18 +6,26 @@ enable_testing()
 
 include_directories(${PROJECT_SOURCE_DIR}/..)
 
-# Make sure headers do not produce warnings
-if (NOT MSVC)
-add_compile_options(-Wall -Wextra -Werror -pedantic -Wno-format)
-endif ()
-
 # Add a test for a given source file for each version of OpenCL
 function(add_header_test NAME SOURCE)
   foreach(VERSION 100 110 120 200 210 220 300)
     set(TEST_EXE ${NAME}_${VERSION})
     add_executable(${TEST_EXE} ${SOURCE})
     target_compile_definitions(${TEST_EXE}
-      PUBLIC -DCL_TARGET_OPENCL_VERSION=${VERSION}
+      PUBLIC
+        -DCL_TARGET_OPENCL_VERSION=${VERSION}
+    )
+    # ICD on Windows uses system headers, which aren't strictly ANSI conformant
+    # and trigger warnings 
+    if(${NAME} STREQUAL cl_icd_h)
+      set(MSVC_COMPILE_DEFS /W4 /WX)
+    else()
+      set(MSVC_COMPILE_DEFS /W4 /WX /Za)
+    endif()
+    target_compile_options(${TEST_EXE}
+      PUBLIC
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Werror -pedantic -Wno-format>
+        $<$<CXX_COMPILER_ID:MSVC>:${MSVC_COMPILE_DEFS}>
     )
     add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
   endforeach(VERSION)

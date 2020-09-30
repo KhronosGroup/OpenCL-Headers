@@ -30,7 +30,7 @@ extern "C" {
 
 extern CL_API_ENTRY cl_event CL_API_CALL
 clCreateEventFromGLsyncKHR(cl_context context,
-                           cl_GLsync  cl_GLsync,
+                           cl_GLsync  sync,
                            cl_int *   errcode_ret) CL_EXT_SUFFIX__VERSION_1_1;
 
 #ifdef __cplusplus
