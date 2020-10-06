@@ -236,7 +236,7 @@ typedef CL_API_ENTRY cl_command_queue
 ******************************************/
 typedef cl_bitfield         cl_mem_flags_NV;
 
-CL_API_ENTRY cl_mem CL_API_CALL
+extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateBufferNV(cl_context     context,
                  cl_mem_flags     flags,
                  cl_mem_flags_NV  flags_NV,
@@ -244,6 +244,13 @@ clCreateBufferNV(cl_context     context,
                  void             *host_ptr,
                  cl_int           *errcode_ret) CL_EXT_SUFFIX__VERSION_1_2;
 
+typedef CL_API_ENTRY cl_mem
+(CL_API_CALL *clCreateBufferNV_fn)(cl_context,
+                                   cl_mem_flags,
+                                   cl_mem_flags_NV,
+                                   size_t,
+                                   void*,
+                                   cl_int*) CL_EXT_SUFFIX__VERSION_1_2;
 
 #define CL_MEM_LOCATION_HOST_NV                     (1 << 0)
 #define CL_MEM_PINNED_NV                            (1 << 1)
