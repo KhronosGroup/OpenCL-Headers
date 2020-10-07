@@ -134,27 +134,29 @@ typedef struct _cl_image_desc {
     cl_uint                 num_mip_levels;
     cl_uint                 num_samples;
 #ifdef CL_VERSION_2_0
-#if __CL_HAS_ANON_STRUCT__
-#ifdef _MSC_VER
-#if _MSC_VER >= 1500
+#if defined(__GNUC__)
+    __extension__                   /* Prevents warnings about anonymous union in -pedantic builds */
+#endif
+#if defined(_MSC_VER) && !defined(__STDC__)
 #pragma warning( push )
-#pragma warning( disable : 4201 ) /* Prevents warning about nameless struct/union in /W4 /Za builds */
+#pragma warning( disable : 4201 )   /* Prevents warning about nameless struct/union in /W4 builds */
 #endif
-#endif
-    __CL_ANON_STRUCT__
+#if defined(_MSC_VER) && defined(__STDC__)
+    /* Anonymous unions are not supported in /Za builds */
+#else
     union {
 #endif
 #endif
       cl_mem                  buffer;
 #ifdef CL_VERSION_2_0
-#if __CL_HAS_ANON_STRUCT__
+#if defined(_MSC_VER) && defined(__STDC__)
+    /* Anonymous unions are not supported in /Za builds */
+#else
       cl_mem                  mem_object;
     };
-#ifdef _MSC_VER
-#if _MSC_VER >= 1500
+#endif
+#if defined(_MSC_VER) && !defined(__STDC__)
 #pragma warning( pop )
-#endif
-#endif
 #endif
 #endif
 } cl_image_desc;
