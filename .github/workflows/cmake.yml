@@ -16,8 +16,8 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Create Build Environment
-      run: cmake -E make_directory $GITHUB_WORKSPACE/OpenCL-Headers/build;
-        cmake -E make_directory $GITHUB_WORKSPACE/OpenCL-Headers/install;
+      run: cmake -E make_directory $GITHUB_WORKSPACE/build;
+        cmake -E make_directory $GITHUB_WORKSPACE/install;
         if [[ "${{matrix.GEN}}" == "Ninja" && ! `which ninja` ]]; then sudo apt install -y ninja-build; fi
       # Install Ninja only if it's the selected generator and it's not available.
     
@@ -28,13 +28,13 @@ jobs:
         -D CMAKE_BUILD_TYPE=${{matrix.VAR}}
         -D CMAKE_CXX_COMPILER=g++-${{matrix.VER}}
         -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}}
-        -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/OpenCL-Headers/install
+        -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
         -D CMAKE_VERBOSE_MAKEFILE=ON
-        -S $GITHUB_WORKSPACE/OpenCL-Headers
-        -B $GITHUB_WORKSPACE/OpenCL-Headers/build
+        -S $GITHUB_WORKSPACE
+        -B $GITHUB_WORKSPACE/build
 
     - name: Build
-      working-directory: $GITHUB_WORKSPACE/OpenCL-Headers/build
+      working-directory: $GITHUB_WORKSPACE/build
       shell: bash
       run: cmake
         --build .
@@ -42,12 +42,12 @@ jobs:
         -j`nproc`
 
     - name: Test
-      working-directory: $GITHUB_WORKSPACE/OpenCL-Headers/build
+      working-directory: $GITHUB_WORKSPACE/build
       shell: bash
       run: ctest --parallel `nproc`
 
     - name: Install
-      working-directory: $GITHUB_WORKSPACE/OpenCL-Headers/build
+      working-directory: $GITHUB_WORKSPACE/build
       shell: bash
       run: cmake
         --build .
@@ -70,15 +70,15 @@ jobs:
     - name: Create Build Environment
       shell: cmd
       run: |
-        cmake -E make_directory $GITHUB_WORKSPACE/OpenCL-Headers/build;
-        cmake -E make_directory $GITHUB_WORKSPACE/OpenCL-Headers/install;
+        cmake -E make_directory $GITHUB_WORKSPACE/build;
+        cmake -E make_directory $GITHUB_WORKSPACE/install;
 
     - name: Configure (MSBuild)
       if: matrix.GEN == 'Visual Studio 16 2019'
       shell: cmd
       run: |
         if /I "${{matrix.BIN}}"=="x86" (set BIN=Win32) else (set BIN=x64)
-        cmake -G "${{matrix.GEN}}" -A %BIN% -T ${{matrix.VER}} -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/OpenCL-Headers/install -S %GITHUB_WORKSPACE%/OpenCL-Headers -B %GITHUB_WORKSPACE%/OpenCL-Headers/build
+        cmake -G "${{matrix.GEN}}" -A %BIN% -T ${{matrix.VER}} -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
 
     - name: Configure (Ninja)
       if: matrix.GEN == 'Ninja Multi-Config'
@@ -88,14 +88,14 @@ jobs:
         if /I "${{matrix.VER}}"=="v141" set VER=14.1
         if /I "${{matrix.VER}}"=="v142" set VER=14.2
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
-        cmake -G "${{matrix.GEN}}" -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/OpenCL-Headers/install -S %GITHUB_WORKSPACE%/OpenCL-Headers -B %GITHUB_WORKSPACE%/OpenCL-Headers/build
+        cmake -G "${{matrix.GEN}}" -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
 
     - name: Build (MSBuild)
       if: matrix.GEN == 'Visual Studio 16 2019'
       shell: cmd
       run: |
-        cmake --build ${{runner.workspace}}/build --config Release -- /verbosity:minimal /maxCpuCount /noLogo
-        cmake --build ${{runner.workspace}}/build --config Debug -- /verbosity:minimal /maxCpuCount /noLogo
+        cmake --build %GITHUB_WORKSPACE%/build --config Release -- /verbosity:minimal /maxCpuCount /noLogo
+        cmake --build %GITHUB_WORKSPACE%/build --config Debug -- /verbosity:minimal /maxCpuCount /noLogo
 
     - name: Build (Ninja)
       if: matrix.GEN == 'Ninja Multi-Config'
@@ -105,11 +105,11 @@ jobs:
         if /I "${{matrix.VER}}"=="v141" set VER=14.1
         if /I "${{matrix.VER}}"=="v142" set VER=14.2
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
-        cmake --build ${{runner.workspace}}/build --config Release
-        cmake --build ${{runner.workspace}}/build --config Debug
+        cmake --build %GITHUB_WORKSPACE%/build --config Release
+        cmake --build %GITHUB_WORKSPACE%/build --config Debug
 
     - name: Test
-      working-directory: $GITHUB_WORKSPACE/OpenCL-Headers/build
+      working-directory: $GITHUB_WORKSPACE/build
       shell: cmd
       run: |
         ctest -C Release --parallel %NUMBER_OF_PROCESSORS%
@@ -117,7 +117,7 @@ jobs:
     - name: Install
       shell: cmd
       run: |
-        cmake --build $GITHUB_WORKSPACE/OpenCL-Headers/build --target install
+        cmake --build %GITHUB_WORKSPACE%/build --target install
 #  mac:
 #    runs-on: macos-latest
 #    strategy:
