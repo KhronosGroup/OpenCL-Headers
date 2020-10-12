@@ -1,0 +1,124 @@
+name: Build
+
+on: [push]
+
+jobs:
+  linux-gcc:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        VER: [7, 8, 9]
+        EXT: [ON, OFF]
+        GEN: [Unix Makefiles, Ninja]
+        VAR: [Debug, Release]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Create Build Environment
+      run: cmake -E make_directory $GITHUB_WORKSPACE/OpenCL-Headers/build;
+        cmake -E make_directory $GITHUB_WORKSPACE/OpenCL-Headers/install;
+        if [[ "${{matrix.GEN}}" == "Ninja" && ! `which ninja` ]]; then sudo apt install -y ninja-build; fi
+      # Install Ninja only if it's the selected generator and it's not available.
+    
+    - name: Configure CMake
+      shell: bash
+      run: cmake
+        -G "${{matrix.GEN}}"
+        -D CMAKE_BUILD_TYPE=${{matrix.VAR}}
+        -D CMAKE_CXX_COMPILER=g++-${{matrix.VER}}
+        -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}}
+        -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/OpenCL-Headers/install
+        -D CMAKE_VERBOSE_MAKEFILE=ON
+        -S $GITHUB_WORKSPACE/OpenCL-Headers
+        -B $GITHUB_WORKSPACE/OpenCL-Headers/build
+
+    - name: Build
+      working-directory: $GITHUB_WORKSPACE/OpenCL-Headers/build
+      shell: bash
+      run: cmake
+        --build .
+        --
+        -j`nproc`
+
+    - name: Test
+      working-directory: $GITHUB_WORKSPACE/OpenCL-Headers/build
+      shell: bash
+      run: ctest --parallel `nproc`
+
+    - name: Install
+      working-directory: $GITHUB_WORKSPACE/OpenCL-Headers/build
+      shell: bash
+      run: cmake
+        --build .
+        --target install
+        --
+        -j`nproc`
+
+  windows-msvc:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        VER: [v140, v141, v142]
+        EXT: [ON, OFF]
+        GEN: [Visual Studio 16 2019, Ninja Multi-Config]
+        BIN: [x64, x86]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Create Build Environment
+      shell: cmd
+      run: |
+        cmake -E make_directory $GITHUB_WORKSPACE/OpenCL-Headers/build;
+        cmake -E make_directory $GITHUB_WORKSPACE/OpenCL-Headers/install;
+
+    - name: Configure (MSBuild)
+      if: matrix.GEN == 'Visual Studio 16 2019'
+      shell: cmd
+      run: |
+        if /I "${{matrix.BIN}}"=="x86" (set BIN=Win32) else (set BIN=x64)
+        cmake -G "${{matrix.GEN}}" -A %BIN% -T ${{matrix.VER}} -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/OpenCL-Headers/install -S %GITHUB_WORKSPACE%/OpenCL-Headers -B %GITHUB_WORKSPACE%/OpenCL-Headers/build
+
+    - name: Configure (Ninja)
+      if: matrix.GEN == 'Ninja Multi-Config'
+      shell: cmd
+      run: |
+        if /I "${{matrix.VER}}"=="v140" set VER=14.0
+        if /I "${{matrix.VER}}"=="v141" set VER=14.1
+        if /I "${{matrix.VER}}"=="v142" set VER=14.2
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
+        cmake -G "${{matrix.GEN}}" -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/OpenCL-Headers/install -S %GITHUB_WORKSPACE%/OpenCL-Headers -B %GITHUB_WORKSPACE%/OpenCL-Headers/build
+
+    - name: Build (MSBuild)
+      if: matrix.GEN == 'Visual Studio 16 2019'
+      shell: cmd
+      run: |
+        cmake --build ${{runner.workspace}}/build --config Release -- /verbosity:minimal /maxCpuCount /noLogo
+        cmake --build ${{runner.workspace}}/build --config Debug -- /verbosity:minimal /maxCpuCount /noLogo
+
+    - name: Build (Ninja)
+      if: matrix.GEN == 'Ninja Multi-Config'
+      shell: cmd
+      run: |
+        if /I "${{matrix.VER}}"=="v140" set VER=14.0
+        if /I "${{matrix.VER}}"=="v141" set VER=14.1
+        if /I "${{matrix.VER}}"=="v142" set VER=14.2
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
+        cmake --build ${{runner.workspace}}/build --config Release
+        cmake --build ${{runner.workspace}}/build --config Debug
+
+    - name: Test
+      working-directory: $GITHUB_WORKSPACE/OpenCL-Headers/build
+      shell: cmd
+      run: |
+        ctest -C Release --parallel %NUMBER_OF_PROCESSORS%
+
+    - name: Install
+      shell: cmd
+      run: |
+        cmake --build $GITHUB_WORKSPACE/OpenCL-Headers/build --target install
+#  mac:
+#    runs-on: macos-latest
+#    strategy:
+#      matrix:
