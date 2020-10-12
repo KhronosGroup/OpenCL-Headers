@@ -34,10 +34,9 @@ jobs:
         -B $GITHUB_WORKSPACE/build
 
     - name: Build
-      working-directory: $GITHUB_WORKSPACE/build
       shell: bash
       run: cmake
-        --build .
+        --build $GITHUB_WORKSPACE/build
         --
         -j`nproc`
 
@@ -47,10 +46,9 @@ jobs:
       run: ctest --parallel `nproc`
 
     - name: Install
-      working-directory: $GITHUB_WORKSPACE/build
       shell: bash
       run: cmake
-        --build .
+        --build $GITHUB_WORKSPACE/build
         --target install
         --
         -j`nproc`
