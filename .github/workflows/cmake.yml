@@ -41,7 +41,7 @@ jobs:
         -j`nproc`
 
     - name: Test
-      working-directory: ${{env.GITHUB_WORKSPACE}}/build
+      working-directory: OpenCL-Headers/build
       shell: bash
       run: ctest --parallel `nproc`
 
@@ -111,7 +111,7 @@ jobs:
         cmake --build %GITHUB_WORKSPACE%/build --config Debug
 
     - name: Test
-      working-directory: ${{env.GITHUB_WORKSPACE}}/build
+      working-directory: OpenCL-Headers/build
       shell: cmd
       run: |
         ctest -C Release --parallel %NUMBER_OF_PROCESSORS%
