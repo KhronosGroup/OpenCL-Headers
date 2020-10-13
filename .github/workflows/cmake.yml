@@ -25,9 +25,11 @@ jobs:
       shell: bash
       run: cmake
         -G "${{matrix.GEN}}"
+        -D BUILD_TESTING=ON
         -D CMAKE_BUILD_TYPE=${{matrix.VAR}}
-        -D CMAKE_CXX_COMPILER=g++-${{matrix.VER}}
-        -D CMAKE_CXX_EXTENSIONS=${{matrix.EXT}}
+        -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format"
+        -D CMAKE_C_COMPILER=gcc-${{matrix.VER}}
+        -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
         -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
         -D CMAKE_VERBOSE_MAKEFILE=ON
         -S $GITHUB_WORKSPACE
