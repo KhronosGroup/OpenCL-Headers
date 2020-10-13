@@ -11,6 +11,7 @@ jobs:
         EXT: [ON, OFF]
         GEN: [Unix Makefiles, Ninja]
         VAR: [Debug, Release]
+        STD: [90, 11]
 
     steps:
     - uses: actions/checkout@v2
@@ -29,6 +30,7 @@ jobs:
         -D CMAKE_BUILD_TYPE=${{matrix.VAR}}
         -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format"
         -D CMAKE_C_COMPILER=gcc-${{matrix.VER}}
+        -D CMAKE_C_STANDARD=${{matrix.STD}}
         -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
         -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
         -D CMAKE_VERBOSE_MAKEFILE=ON
