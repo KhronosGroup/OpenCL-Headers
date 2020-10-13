@@ -4,15 +4,16 @@ include_directories(${PROJECT_SOURCE_DIR})
 function(add_header_test NAME SOURCE)
   foreach(VERSION 100 110 120 200 210 220 300)
     set(TEST_EXE ${NAME}_${VERSION})
-    add_executable(${TEST_EXE} ${SOURCE})
-    target_compile_definitions(${TEST_EXE}
-      PUBLIC
-        -DCL_TARGET_OPENCL_VERSION=${VERSION}
-    )
     # ICD on Windows uses system headers, which aren't strictly ANSI conformant
     # and trigger warnings 
-    #if(${NAME} STREQUAL cl_icd_h)
-    add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
+    if(NOT NAME STREQUAL cl_icd_h AND CMAKE_C_COMPILER_ID MATCHES MSVC AND CMAKE_C_FLAGS MATCHES "/Za")
+      add_executable(${TEST_EXE} ${SOURCE})
+      target_compile_definitions(${TEST_EXE}
+        PUBLIC
+          -DCL_TARGET_OPENCL_VERSION=${VERSION}
+      )
+      add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
+    endif()
   endforeach(VERSION)
 endfunction(add_header_test)
 
