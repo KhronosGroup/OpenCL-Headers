@@ -77,7 +77,7 @@ jobs:
       run: |
         if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za")
         if /I "${{matrix.BIN}}"=="x86" (set BIN=Win32) else (set BIN=x64)
-        cmake -G "${{matrix.GEN}}" -A %BIN% -T ${{matrix.VER}} -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
+        cmake -G "${{matrix.GEN}}" -A %BIN% -T ${{matrix.VER}} -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
 
     - name: Configure (Ninja)
       if: matrix.GEN == 'Ninja Multi-Config'
@@ -88,7 +88,7 @@ jobs:
         if /I "${{matrix.VER}}"=="v142" (set VER=14.2)
         if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za")
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
-        cmake -G "${{matrix.GEN}}" -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
+        cmake -G "${{matrix.GEN}}" -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
 
     - name: Build (MSBuild)
       if: matrix.GEN == 'Visual Studio 16 2019'
