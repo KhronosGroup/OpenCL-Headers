@@ -59,3 +59,8 @@ install(
   FILES ${CMAKE_CURRENT_BINARY_DIR}/OpenCLHeaders/OpenCLHeadersConfigVersion.cmake
   DESTINATION ${config_package_location}
 )
+
+if(BUILD_TESTING)
+  include(CTest)
+  add_subdirectory(tests)
+endif()

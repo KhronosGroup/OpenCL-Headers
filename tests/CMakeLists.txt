@@ -1,10 +1,4 @@
-cmake_minimum_required (VERSION 2.8.11)
-
-project(OpenCL_Headers_Tests)
-
-enable_testing()
-
-include_directories(${PROJECT_SOURCE_DIR}/..)
+include_directories(${PROJECT_SOURCE_DIR})
 
 # Add a test for a given source file for each version of OpenCL
 function(add_header_test NAME SOURCE)
