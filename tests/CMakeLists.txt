@@ -11,16 +11,7 @@ function(add_header_test NAME SOURCE)
     )
     # ICD on Windows uses system headers, which aren't strictly ANSI conformant
     # and trigger warnings 
-    if(${NAME} STREQUAL cl_icd_h)
-      set(MSVC_COMPILE_DEFS /W4 /WX)
-    else()
-      set(MSVC_COMPILE_DEFS /W4 /WX /Za)
-    endif()
-    target_compile_options(${TEST_EXE}
-      PUBLIC
-        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Werror -pedantic -Wno-format>
-        $<$<CXX_COMPILER_ID:MSVC>:${MSVC_COMPILE_DEFS}>
-    )
+    #if(${NAME} STREQUAL cl_icd_h)
     add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
   endforeach(VERSION)
 endfunction(add_header_test)
