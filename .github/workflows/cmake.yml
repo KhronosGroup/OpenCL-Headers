@@ -41,7 +41,7 @@ jobs:
         -j`nproc`
 
     - name: Test
-      working-directory: $GITHUB_WORKSPACE/build
+      working-directory: ${{env.GITHUB_WORKSPACE}}/build
       shell: bash
       run: ctest --parallel `nproc`
 
@@ -111,7 +111,7 @@ jobs:
         cmake --build %GITHUB_WORKSPACE%/build --config Debug
 
     - name: Test
-      working-directory: $GITHUB_WORKSPACE/build
+      working-directory: ${{env.GITHUB_WORKSPACE}}/build
       shell: cmd
       run: |
         ctest -C Release --parallel %NUMBER_OF_PROCESSORS%
