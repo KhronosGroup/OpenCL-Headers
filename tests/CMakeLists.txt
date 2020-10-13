@@ -6,7 +6,7 @@ function(add_header_test NAME SOURCE)
     set(TEST_EXE ${NAME}_${VERSION})
     # ICD on Windows uses system headers, which aren't strictly ANSI conformant
     # and trigger warnings 
-    if(NOT NAME STREQUAL cl_icd_h AND CMAKE_C_COMPILER_ID MATCHES MSVC AND CMAKE_C_FLAGS MATCHES "/Za")
+    if(NOT (NAME STREQUAL cl_icd_h AND MSVC AND CMAKE_C_FLAGS MATCHES "/Za"))
       add_executable(${TEST_EXE} ${SOURCE})
       target_compile_definitions(${TEST_EXE}
         PUBLIC
