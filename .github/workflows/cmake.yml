@@ -77,7 +77,7 @@ jobs:
       if: matrix.GEN == 'Visual Studio 16 2019'
       shell: cmd
       run: |
-        if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za")
+        if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za /wd4001")
         if /I "${{matrix.BIN}}"=="x86" (set BIN=Win32) else (set BIN=x64)
         cmake -G "${{matrix.GEN}}" -A %BIN% -T ${{matrix.VER}} -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
 
