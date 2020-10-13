@@ -20,7 +20,8 @@ jobs:
     - name: Create Build Environment
       run: cmake -E make_directory $GITHUB_WORKSPACE/build;
         cmake -E make_directory $GITHUB_WORKSPACE/install;
-        if [[ "${{matrix.GEN}}" == "Ninja" && ! `which ninja` ]]; then sudo apt install -y ninja-build; fi
+        if [[ "${{matrix.GEN}}" == "Ninja" && ! `which ninja` ]]; then sudo apt install -y ninja-build; fi;
+        sudo apt install -y gcc-multilib
       # Install Ninja only if it's the selected generator and it's not available.
     
     - name: Configure CMake
@@ -29,7 +30,7 @@ jobs:
         -G "${{matrix.GEN}}"
         -D BUILD_TESTING=ON
         -D CMAKE_BUILD_TYPE=${{matrix.VAR}}
-        -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format --host=x86_64 -m${{matrix.BIN}}"
+        -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format -m${{matrix.BIN}}"
         -D CMAKE_C_COMPILER=gcc-${{matrix.VER}}
         -D CMAKE_C_STANDARD=${{matrix.STD}}
         -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
