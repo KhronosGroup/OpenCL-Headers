@@ -95,7 +95,7 @@ jobs:
         if /I "${{matrix.VER}}"=="v142" (set VER=14.2)
         if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za /wd4001")
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
-        cmake -G "${{matrix.GEN}}" -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
+        cmake -G "${{matrix.GEN}}" -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_EXE_LINKER_FLAGS=/INCREMENTAL -D CMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE% -B %GITHUB_WORKSPACE%/build
 
     - name: Build (MSBuild)
       if: matrix.GEN == 'Visual Studio 16 2019'
