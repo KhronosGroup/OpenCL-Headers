@@ -67,6 +67,7 @@ jobs:
         EXT: [ON, OFF]
         GEN: [Visual Studio 16 2019, Ninja Multi-Config]
         BIN: [x64, x86]
+        #STD Proper 11, 17 incoming: https://devblogs.microsoft.com/cppblog/c11-and-c17-standard-support-arriving-in-msvc/
 
     steps:
     - uses: actions/checkout@v2
