@@ -167,12 +167,12 @@ jobs:
       run: cmake
         --build $GITHUB_WORKSPACE/build
         --
-        -j$(nproc)
+        -j`sysctl -n hw.logicalcpu`
 
     - name: Test
       working-directory: ${{runner.workspace}}/OpenCL-Headers/build
       shell: bash
-      run: ctest --parallel `nproc`
+      run: ctest --parallel `sysctl -n hw.logicalcpu`
 
     - name: Install
       shell: bash
@@ -180,4 +180,4 @@ jobs:
         --build $GITHUB_WORKSPACE/build
         --target install
         --
-        -j`nproc`
+        -j`sysctl -n hw.logicalcpu`
