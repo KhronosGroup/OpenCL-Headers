@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   linux-gcc:
+    if: false
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -23,7 +24,7 @@ jobs:
         if [[ "${{matrix.GEN}}" == "Ninja" && ! `which ninja` ]]; then sudo apt install -y ninja-build; fi;
         if [[ "${{matrix.BIN}}" == "32" ]]; then sudo apt install -y gcc-multilib gcc-8-multilib gcc-9-multilib; fi
       # Install Ninja only if it's the selected generator and it's not available.
-    
+
     - name: Configure CMake
       shell: bash
       run: cmake
