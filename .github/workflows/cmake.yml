@@ -146,6 +146,7 @@ jobs:
         cmake -E make_directory $GITHUB_WORKSPACE/install;
         if [[ "${{matrix.GEN}}" == "Ninja Multi-Config" && ! `which ninja` ]]; then brew install ninja; fi;
         # Install Ninja only if it's the selected generator and it's not available.
+        which gcc-9
 
     - name: Configure CMake
       shell: bash
