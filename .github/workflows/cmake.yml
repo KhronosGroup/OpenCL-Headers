@@ -134,17 +134,17 @@ jobs:
       matrix:
         VER: [8, 9]
         EXT: [ON, OFF]
-        GEN: [Unix Makefiles, Ninja]
-        VAR: [Debug, Release]
+        GEN: [Xcode, Ninja Multi-Config]
         STD: [11] # 90 results in errors
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Create Build Environment
-      run: cmake -E make_directory $GITHUB_WORKSPACE/build;
+      run: |
+        cmake -E make_directory $GITHUB_WORKSPACE/build;
         cmake -E make_directory $GITHUB_WORKSPACE/install;
-        if [[ "${{matrix.GEN}}" == "Ninja" && ! `which ninja` ]]; then brew install ninja; fi;
+        if [[ "${{matrix.GEN}}" == "Ninja Multi-Config" && ! `which ninja` ]]; then brew install ninja; fi;
         # Install Ninja only if it's the selected generator and it's not available.
 
     - name: Configure CMake
@@ -152,7 +152,6 @@ jobs:
       run: cmake
         -G "${{matrix.GEN}}"
         -D BUILD_TESTING=ON
-        -D CMAKE_BUILD_TYPE=${{matrix.VAR}}
         -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format"
         -D CMAKE_C_COMPILER=gcc-${{matrix.VER}}
         -D CMAKE_C_STANDARD=${{matrix.STD}}
@@ -162,22 +161,33 @@ jobs:
         -S $GITHUB_WORKSPACE
         -B $GITHUB_WORKSPACE/build
 
-    - name: Build
-      shell: bash
-      run: cmake
-        --build $GITHUB_WORKSPACE/build
-        --
-        -j`sysctl -n hw.logicalcpu`
+    - name: Build (Xcode)
+      if: matrix.GEN == 'Xcode'
+      shell: cmd
+      run: |
+        cmake --build $GITHUB_WORKSPACE/build --config Release
+        cmake --build $GITHUB_WORKSPACE/build --config Debug
+
+    - name: Build (Ninja)
+      if: matrix.GEN == 'Ninja Multi-Config'
+      shell: cmd
+      run: |
+        cmake --build $GITHUB_WORKSPACE/build --config Release
+        cmake --build $GITHUB_WORKSPACE/build --config Debug
 
     - name: Test
       working-directory: ${{runner.workspace}}/OpenCL-Headers/build
       shell: bash
-      run: ctest --parallel `sysctl -n hw.logicalcpu`
+      run: ctest -C Release --parallel `sysctl -n hw.logicalcpu`
 
-    - name: Install
-      shell: bash
-      run: cmake
-        --build $GITHUB_WORKSPACE/build
-        --target install
-        --
-        -j`sysctl -n hw.logicalcpu`
+    - name: Install (Xcode)
+      if: matrix.GEN == 'Xcode'
+      shell: cmd
+      run: |
+        cmake --build $GITHUB_WORKSPACE/build --config Release
+
+    - name: Install (Ninja)
+      if: matrix.GEN == 'Ninja Multi-Config'
+      shell: cmd
+      run: |
+        cmake --build $GITHUB_WORKSPACE/build --config Release
