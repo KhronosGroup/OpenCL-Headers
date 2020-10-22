@@ -167,7 +167,7 @@ jobs:
       run: cmake
         --build $GITHUB_WORKSPACE/build
         --
-        -j`nproc`
+        -j$(nproc)
 
     - name: Test
       working-directory: ${{runner.workspace}}/OpenCL-Headers/build
