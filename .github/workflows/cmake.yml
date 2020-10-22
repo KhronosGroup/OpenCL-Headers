@@ -163,14 +163,14 @@ jobs:
 
     - name: Build (Xcode)
       if: matrix.GEN == 'Xcode'
-      shell: cmd
+      shell: bash
       run: |
         cmake --build $GITHUB_WORKSPACE/build --config Release
         cmake --build $GITHUB_WORKSPACE/build --config Debug
 
     - name: Build (Ninja)
       if: matrix.GEN == 'Ninja Multi-Config'
-      shell: cmd
+      shell: bash
       run: |
         cmake --build $GITHUB_WORKSPACE/build --config Release
         cmake --build $GITHUB_WORKSPACE/build --config Debug
@@ -182,12 +182,12 @@ jobs:
 
     - name: Install (Xcode)
       if: matrix.GEN == 'Xcode'
-      shell: cmd
+      shell: bash
       run: |
         cmake --build $GITHUB_WORKSPACE/build --config Release
 
     - name: Install (Ninja)
       if: matrix.GEN == 'Ninja Multi-Config'
-      shell: cmd
+      shell: bash
       run: |
         cmake --build $GITHUB_WORKSPACE/build --config Release
