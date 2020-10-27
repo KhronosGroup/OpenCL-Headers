@@ -36,7 +36,6 @@ jobs:
         -D CMAKE_C_STANDARD=${{matrix.STD}}
         -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
         -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
-        -D CMAKE_VERBOSE_MAKEFILE=ON
         -S $GITHUB_WORKSPACE
         -B $GITHUB_WORKSPACE/build
 
@@ -146,8 +145,6 @@ jobs:
         cmake -E make_directory $GITHUB_WORKSPACE/install;
         if [[ "${{matrix.GEN}}" == "Ninja Multi-Config" && ! `which ninja` ]]; then brew install ninja; fi;
         # Install Ninja only if it's the selected generator and it's not available.
-        ls -al /usr/local/bin/gcc-${{matrix.VER}};
-        env
 
     - name: Configure CMake
       shell: bash
@@ -159,7 +156,6 @@ jobs:
         -D CMAKE_C_STANDARD=${{matrix.STD}}
         -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
         -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
-        -D CMAKE_VERBOSE_MAKEFILE=ON
         -S $GITHUB_WORKSPACE
         -B $GITHUB_WORKSPACE/build
 
