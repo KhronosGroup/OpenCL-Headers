@@ -6,6 +6,7 @@ project(PkgConfigTest
 
 find_package(OpenCL
   REQUIRED
+  CONFIG
   COMPONENTS Headers
 )
 
