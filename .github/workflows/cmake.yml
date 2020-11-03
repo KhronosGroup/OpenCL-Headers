@@ -84,7 +84,7 @@ jobs:
     - name: Consume (Emulate SDK presence)
       shell: bash
       run: cmake -E make_directory $GITHUB_WORKSPACE/install/share/cmake/OpenCL;
-      echo 'include("${CMAKE_CURRENT_LIST_DIR}/../OpenCLHeaders/OpenCLHeadersTargets.cmake")' > $GITHUB_WORKSPACE/install/share/cmake/OpenCL/OpenCLConfig.cmake
+        echo 'include("${CMAKE_CURRENT_LIST_DIR}/../OpenCLHeaders/OpenCLHeadersTargets.cmake")' > $GITHUB_WORKSPACE/install/share/cmake/OpenCL/OpenCLConfig.cmake
 
     - name: Consume (Configure PkgConfig - SDK)
       shell: bash
