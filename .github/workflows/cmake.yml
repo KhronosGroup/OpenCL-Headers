@@ -310,13 +310,13 @@ jobs:
       if: matrix.GEN == 'Xcode'
       shell: bash
       run: |
-        cmake --build $GITHUB_WORKSPACE/build --config Release
+        cmake --build $GITHUB_WORKSPACE/build --config Release --target install
 
     - name: Install (Ninja)
       if: matrix.GEN == 'Ninja Multi-Config'
       shell: bash
       run: |
-        cmake --build $GITHUB_WORKSPACE/build --config Release
+        cmake --build $GITHUB_WORKSPACE/build --config Release --target install
 
     - name: Consume (Configure PkgConfig - bare)
       shell: bash
