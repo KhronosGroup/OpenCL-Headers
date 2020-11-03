@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   linux-gcc:
+    if: false
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -108,7 +109,6 @@ jobs:
         -j`nproc`
 
   windows-msvc:
-    if: false
     runs-on: windows-latest
     strategy:
       matrix:
@@ -150,8 +150,8 @@ jobs:
       if: matrix.GEN == 'Visual Studio 16 2019'
       shell: cmd
       run: |
-        cmake --build %GITHUB_WORKSPACE%/build --config Release -- /verbosity:minimal /maxCpuCount /noLogo
-        cmake --build %GITHUB_WORKSPACE%/build --config Debug -- /verbosity:minimal /maxCpuCount /noLogo
+        cmake --build %GITHUB_WORKSPACE%\build --config Release -- /verbosity:minimal /maxCpuCount /noLogo
+        cmake --build %GITHUB_WORKSPACE%\build --config Debug -- /verbosity:minimal /maxCpuCount /noLogo
 
     - name: Build (Ninja)
       if: matrix.GEN == 'Ninja Multi-Config'
@@ -161,8 +161,8 @@ jobs:
         if /I "${{matrix.VER}}"=="v141" set VER=14.1
         if /I "${{matrix.VER}}"=="v142" set VER=14.2
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
-        cmake --build %GITHUB_WORKSPACE%/build --config Release
-        cmake --build %GITHUB_WORKSPACE%/build --config Debug
+        cmake --build %GITHUB_WORKSPACE%\build --config Release
+        cmake --build %GITHUB_WORKSPACE%\build --config Debug
 
     - name: Test
       working-directory: ${{runner.workspace}}/OpenCL-Headers/build
@@ -174,6 +174,85 @@ jobs:
       shell: cmd
       run: |
         cmake --build %GITHUB_WORKSPACE%/build --target install
+
+    - name: Consume (Configure PkgConfig - bare MSBuild)
+      if: matrix.GEN == 'Visual Studio 16 2019'
+      shell: cmd
+      run: |
+        if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za /wd4001")
+        if /I "${{matrix.BIN}}"=="x86" (set BIN=Win32) else (set BIN=x64)
+        cmake -G "${{matrix.GEN}}" -A %BIN% -T ${{matrix.VER}} -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_PREFIX_PATH=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE%\tests\pkgconfig\bare -B %GITHUB_WORKSPACE%\downstream\pkgconfig\bare
+
+    - name: Consume (Configure PkgConfig - bare Ninja)
+      if: matrix.GEN == 'Ninja Multi-Config'
+      shell: cmd
+      run: |
+        if /I "${{matrix.VER}}"=="v140" (set VER=14.0)
+        if /I "${{matrix.VER}}"=="v141" (set VER=14.1)
+        if /I "${{matrix.VER}}"=="v142" (set VER=14.2)
+        if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za /wd4001")
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
+        cmake -G "${{matrix.GEN}}" -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_EXE_LINKER_FLAGS=/INCREMENTAL -D CMAKE_PREFIX_PATH=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE%\tests\pkgconfig\bare -B %GITHUB_WORKSPACE%\downstream\pkgconfig\bare
+
+    - name: Consume (Build PkgConfig - bare MSBuild)
+      if: matrix.GEN == 'Visual Studio 16 2019'
+      shell: cmd
+      run: |
+        cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\bare --config Release -- /verbosity:minimal /maxCpuCount /noLogo
+        cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\bare --config Debug -- /verbosity:minimal /maxCpuCount /noLogo
+
+    - name: Consume (Build PkgConfig - bare Ninja)
+      if: matrix.GEN == 'Ninja Multi-Config'
+      shell: cmd
+      run: |
+        if /I "${{matrix.VER}}"=="v140" set VER=14.0
+        if /I "${{matrix.VER}}"=="v141" set VER=14.1
+        if /I "${{matrix.VER}}"=="v142" set VER=14.2
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
+        cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\bare --config Release
+        cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\bare --config Debug
+
+    - name: Consume (Emulate SDK presence)
+      shell: bash
+      run: cmake -E make_directory $GITHUB_WORKSPACE/install/share/cmake/OpenCL;
+        echo 'include("${CMAKE_CURRENT_LIST_DIR}/../OpenCLHeaders/OpenCLHeadersTargets.cmake")' > $GITHUB_WORKSPACE/install/share/cmake/OpenCL/OpenCLConfig.cmake
+
+    - name: Consume (Configure PkgConfig - SDK MSBuild)
+      if: matrix.GEN == 'Visual Studio 16 2019'
+      shell: cmd
+      run: |
+        if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za /wd4001")
+        if /I "${{matrix.BIN}}"=="x86" (set BIN=Win32) else (set BIN=x64)
+        cmake -G "${{matrix.GEN}}" -A %BIN% -T ${{matrix.VER}} -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_PREFIX_PATH=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE%\tests\pkgconfig\sdk -B %GITHUB_WORKSPACE%\downstream\pkgconfig\sdk
+
+    - name: Consume (Configure PkgConfig - SDK Ninja)
+      if: matrix.GEN == 'Ninja Multi-Config'
+      shell: cmd
+      run: |
+        if /I "${{matrix.VER}}"=="v140" (set VER=14.0)
+        if /I "${{matrix.VER}}"=="v141" (set VER=14.1)
+        if /I "${{matrix.VER}}"=="v142" (set VER=14.2)
+        if /I "${{matrix.EXT}}"=="ON" (set C_FLAGS="/W4 /WX") else (set C_FLAGS="/W4 /WX /Za /wd4001")
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
+        cmake -G "${{matrix.GEN}}" -D BUILD_TESTING=ON -D CMAKE_C_FLAGS=%C_FLAGS% -D CMAKE_C_EXTENSIONS=${{matrix.EXT}} -D CMAKE_EXE_LINKER_FLAGS=/INCREMENTAL -D CMAKE_PREFIX_PATH=%GITHUB_WORKSPACE%/install -S %GITHUB_WORKSPACE%\tests\pkgconfig\sdk -B %GITHUB_WORKSPACE%\downstream\pkgconfig\sdk
+
+    - name: Consume (Build PkgConfig - SDK MSBuild)
+      if: matrix.GEN == 'Visual Studio 16 2019'
+      shell: cmd
+      run: |
+        cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\sdk --config Release -- /verbosity:minimal /maxCpuCount /noLogo
+        cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\sdk --config Debug -- /verbosity:minimal /maxCpuCount /noLogo
+
+    - name: Consume (Build PkgConfig - SDK Ninja)
+      if: matrix.GEN == 'Ninja Multi-Config'
+      shell: cmd
+      run: |
+        if /I "${{matrix.VER}}"=="v140" set VER=14.0
+        if /I "${{matrix.VER}}"=="v141" set VER=14.1
+        if /I "${{matrix.VER}}"=="v142" set VER=14.2
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" ${{matrix.BIN}} /vcvars_ver=%VER%
+        cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\sdk --config Release
+        cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\sdk --config Debug
 
   macos-gcc:
     if: false
