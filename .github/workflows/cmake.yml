@@ -322,15 +322,15 @@ jobs:
     - name: Consume (Configure PkgConfig - bare)
       shell: bash
       run: cmake
-      -G "${{matrix.GEN}}"
-      -D BUILD_TESTING=ON
-      -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format"
-      -D CMAKE_C_COMPILER=/usr/local/bin/gcc-${{matrix.VER}}
-      -D CMAKE_C_STANDARD=${{matrix.STD}}
-      -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
-      -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
-      -S $GITHUB_WORKSPACE/tests/pkgconfig/bare
-      -B $GITHUB_WORKSPACE/downstream/pkgconfig/bare
+        -G "${{matrix.GEN}}"
+        -D BUILD_TESTING=ON
+        -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format"
+        -D CMAKE_C_COMPILER=/usr/local/bin/gcc-${{matrix.VER}}
+        -D CMAKE_C_STANDARD=${{matrix.STD}}
+        -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
+        -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
+        -S $GITHUB_WORKSPACE/tests/pkgconfig/bare
+        -B $GITHUB_WORKSPACE/downstream/pkgconfig/bare
 
     - name: Consume (Build PkgConfig - bare)
       shell: bash
@@ -346,15 +346,15 @@ jobs:
     - name: Consume (Configure PkgConfig - SDK)
       shell: bash
       run: cmake
-      -G "${{matrix.GEN}}"
-      -D BUILD_TESTING=ON
-      -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format"
-      -D CMAKE_C_COMPILER=/usr/local/bin/gcc-${{matrix.VER}}
-      -D CMAKE_C_STANDARD=${{matrix.STD}}
-      -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
-      -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
-      -S $GITHUB_WORKSPACE/tests/pkgconfig/sdk
-      -B $GITHUB_WORKSPACE/downstream/pkgconfig/sdk
+        -G "${{matrix.GEN}}"
+        -D BUILD_TESTING=ON
+        -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format"
+        -D CMAKE_C_COMPILER=/usr/local/bin/gcc-${{matrix.VER}}
+        -D CMAKE_C_STANDARD=${{matrix.STD}}
+        -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
+        -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
+        -S $GITHUB_WORKSPACE/tests/pkgconfig/sdk
+        -B $GITHUB_WORKSPACE/downstream/pkgconfig/sdk
 
     - name: Consume (Build PkgConfig - SDK)
       shell: bash
