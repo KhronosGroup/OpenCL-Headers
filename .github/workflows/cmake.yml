@@ -174,7 +174,7 @@ jobs:
     - name: Install
       shell: cmd
       run: |
-        cmake --build %GITHUB_WORKSPACE%/build --target install
+        cmake --build %GITHUB_WORKSPACE%/build --config Release --target install
 
     - name: Consume (Configure PkgConfig - bare MSBuild)
       if: matrix.GEN == 'Visual Studio 16 2019'
