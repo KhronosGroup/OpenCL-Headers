@@ -103,7 +103,7 @@ jobs:
     - name: Consume (Build PkgConfig - SDK)
       shell: bash
       run: cmake
-        --build $GITHUB_WORKSPACE/downstream/sdk
+        --build $GITHUB_WORKSPACE/downstream/pkgconfig/sdk
         --
         -j`nproc`
 
