@@ -256,7 +256,6 @@ jobs:
         cmake --build %GITHUB_WORKSPACE%\downstream\pkgconfig\sdk --config Debug
 
   macos-gcc:
-    if: false
     runs-on: macos-latest
     strategy:
       matrix:
