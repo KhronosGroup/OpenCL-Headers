@@ -20,7 +20,8 @@ jobs:
     - name: Create Build Environment
       run: cmake -E make_directory $GITHUB_WORKSPACE/build;
         cmake -E make_directory $GITHUB_WORKSPACE/install;
-        cmake -E make_directory $GITHUB_WORKSPACE/downstream/pkgconfig;
+        cmake -E make_directory $GITHUB_WORKSPACE/downstream/pkgconfig/bare;
+        cmake -E make_directory $GITHUB_WORKSPACE/downstream/pkgconfig/sdk;
         if [[ "${{matrix.GEN}}" == "Ninja" && ! `which ninja` ]]; then sudo apt install -y ninja-build; fi;
         if [[ "${{matrix.BIN}}" == "32" ]]; then sudo apt install -y gcc-multilib gcc-8-multilib gcc-9-multilib; fi
       # Install Ninja only if it's the selected generator and it's not available.
@@ -59,7 +60,7 @@ jobs:
         --
         -j`nproc`
 
-    - name: Consume (Configure PkgConfig)
+    - name: Consume (Configure PkgConfig - bare)
       shell: bash
       run: cmake
         -G "${{matrix.GEN}}"
@@ -70,13 +71,41 @@ jobs:
         -D CMAKE_C_STANDARD=${{matrix.STD}}
         -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
         -D CMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/install
-        -S $GITHUB_WORKSPACE/tests/pkgconfig
-        -B $GITHUB_WORKSPACE/downstream/pkgconfig
+        -S $GITHUB_WORKSPACE/tests/pkgconfig/bare
+        -B $GITHUB_WORKSPACE/downstream/pkgconfig/bare
 
-    - name: Consume (Build PkgConfig)
+    - name: Consume (Build PkgConfig - bare)
       shell: bash
       run: cmake
-        --build $GITHUB_WORKSPACE/downstream/pkgconfig
+        --build $GITHUB_WORKSPACE/downstream/pkgconfig/bare
+        --
+        -j`nproc`
+
+    - name: Consume (Emulate SDK presence)
+      shell: bash
+      run: cmake -E make_directory $GITHUB_WORKSPACE/install/share/cmake/OpenCL;
+        cmake -E create_symlink $GITHUB_WORKSPACE/install/share/cmake/OpenCLHeaders/OpenCLHeadersConfig.cmake $GITHUB_WORKSPACE/install/share/cmake/OpenCL/OpenCLConfig.cmake
+        cmake -E create_symlink $GITHUB_WORKSPACE/install/share/cmake/OpenCLHeaders/OpenCLHeadersConfigVersion.cmake $GITHUB_WORKSPACE/install/share/cmake/OpenCL/OpenCLConfigVersion.cmake
+        cmake -E create_symlink $GITHUB_WORKSPACE/install/share/cmake/OpenCLHeaders/OpenCLHeadersTargets.cmake $GITHUB_WORKSPACE/install/share/cmake/OpenCL/OpenCLTargets.cmake
+
+    - name: Consume (Configure PkgConfig - SDK)
+      shell: bash
+      run: cmake
+        -G "${{matrix.GEN}}"
+        -D BUILD_TESTING=ON
+        -D CMAKE_BUILD_TYPE=${{matrix.VAR}}
+        -D CMAKE_C_FLAGS="-Wall -Wextra -Werror -pedantic -Wno-format -m${{matrix.BIN}}"
+        -D CMAKE_C_COMPILER=gcc-${{matrix.VER}}
+        -D CMAKE_C_STANDARD=${{matrix.STD}}
+        -D CMAKE_C_EXTENSIONS=${{matrix.EXT}}
+        -D CMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/install
+        -S $GITHUB_WORKSPACE/tests/pkgconfig/sdk
+        -B $GITHUB_WORKSPACE/downstream/pkgconfig/sdk
+
+    - name: Consume (Build PkgConfig - SDK)
+      shell: bash
+      run: cmake
+        --build $GITHUB_WORKSPACE/downstream/sdk
         --
         -j`nproc`
 
