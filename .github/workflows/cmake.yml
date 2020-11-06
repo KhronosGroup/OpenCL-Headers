@@ -11,7 +11,7 @@ jobs:
         EXT: [ON, OFF]
         GEN: [Unix Makefiles, Ninja]
         VAR: [Debug, Release]
-        STD: [11] # 90 results in errors
+        STD: [99, 11] # 90 results in errors
         BIN: [32, 64]
 
     steps:
@@ -260,7 +260,7 @@ jobs:
         VER: [8, 9]
         EXT: [ON, OFF]
         GEN: [Xcode, Ninja Multi-Config]
-        STD: [11] # 90 results in errors
+        STD: [99, 11] # 90 results in errors
 
     steps:
     - uses: actions/checkout@v2
