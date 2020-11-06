@@ -11,7 +11,7 @@ find_package(OpenCL
 )
 
 add_executable(${PROJECT_NAME}
-  pkgconfig.c
+  ../pkgconfig.c
 )
 
 target_link_libraries(${PROJECT_NAME}
