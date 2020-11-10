@@ -480,8 +480,9 @@ typedef struct _cl_mem_android_native_buffer_host_ptr
 #define CL_COMMAND_ACQUIRE_GRALLOC_OBJECTS_IMG      0x40D2
 #define CL_COMMAND_RELEASE_GRALLOC_OBJECTS_IMG      0x40D3
 
-/* Error code from clEnqueueReleaseGrallocObjectsIMG */
+/* Error codes from clEnqueueAcquireGrallocObjectsIMG and clEnqueueReleaseGrallocObjectsIMG */
 #define CL_GRALLOC_RESOURCE_NOT_ACQUIRED_IMG        0x40D4
+#define CL_INVALID_GRALLOC_OBJECT_IMG               0x40D5
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueAcquireGrallocObjectsIMG(cl_command_queue      command_queue,
