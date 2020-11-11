@@ -499,6 +499,19 @@ clEnqueueReleaseGrallocObjectsIMG(cl_command_queue      command_queue,
                                   const cl_event *      event_wait_list,
                                   cl_event *            event) CL_EXT_SUFFIX__VERSION_1_2;
 
+/******************************************
+ * cl_img_mem_properties extension *
+ ******************************************/
+#define cl_img_mem_properties 1
+
+/* To be used by clCreateBufferWithProperties */
+#define CL_MEM_ALLOC_FLAGS_IMG 0x40D7
+
+/* To be used wiith the CL_MEM_ALLOC_FLAGS_IMG property */
+typedef cl_bitfield cl_mem_alloc_flags_img;
+
+/* To be used with cl_mem_alloc_flags_img */
+#define CL_MEM_ALLOC_RELAX_REQUIREMENTS_IMG (1 << 0)
 
 /*********************************
 * cl_khr_subgroups extension
