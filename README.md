@@ -27,7 +27,7 @@ cmake path/to/opencl/app -DOpenCLHeaders_ROOT=/chosen/install/prefix
 ```cmake
 add_executable(app main.cpp)
 find_package(OpenCLHeaders REQUIRED)
-target_link_libraries(app PRIVATE OpenCL::OpenCLHeaders)
+target_link_libraries(app PRIVATE OpenCL::Headers)
 ```
 
 ## Branch Structure
