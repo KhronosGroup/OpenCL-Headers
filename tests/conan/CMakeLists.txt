@@ -7,4 +7,4 @@ conan_basic_setup()
 find_package(OpenCLHeaders REQUIRED)
 
 add_executable(example example.c)
-target_link_libraries(example OpenCL::OpenCLHeaders)
+target_link_libraries(example OpenCL::Headers)
