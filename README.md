@@ -25,6 +25,8 @@ cmake path/to/opencl/app -DOpenCLHeaders_ROOT=/chosen/install/prefix
 ```
 
 ```cmake
+cmake_minimum_required(VERSION 3.0)
+cmake_policy(VERSION 3.0...)
 add_executable(app main.cpp)
 find_package(OpenCLHeaders REQUIRED)
 target_link_libraries(app PRIVATE OpenCL::Headers)
