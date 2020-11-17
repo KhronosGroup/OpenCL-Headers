@@ -14,7 +14,7 @@ While the headers may just be copied as-is, this repository also contains a
 CMake script with an install rule to allow for packaging the headers.
 
 ```bash
-cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/path/to/desired/prefix
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/chosen/install/prefix
 cmake --build build --target install
 ```
  
