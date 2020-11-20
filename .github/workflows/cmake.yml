@@ -1,0 +1,35 @@
+name: CMake
+
+on: [push]
+
+env:
+  BUILD_TYPE: Debug
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{matrix.os}}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Create Build Directory
+      run: cmake -E make_directory ${{runner.workspace}}/build
+
+    - name: Run CMake
+      shell: bash
+      working-directory: ${{runner.workspace}}/build
+      run: cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE $GITHUB_WORKSPACE/tests
+
+    - name: Build
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      run: cmake --build . --config $BUILD_TYPE
+
+    - name: Test
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      run: ctest -C $BUILD_TYPE
