@@ -501,6 +501,31 @@ clEnqueueReleaseGrallocObjectsIMG(cl_command_queue      command_queue,
                                   cl_event *            event) CL_EXT_SUFFIX__VERSION_1_2;
 
 /******************************************
+ * cl_img_generate_mipmap extension *
+ ******************************************/
+#define cl_img_generate_mipmap 1
+
+typedef cl_uint cl_mipmap_filter_mode_img;
+
+/* To be used by clEnqueueGenerateMipmapIMG */
+#define CL_MIPMAP_FILTER_ANY_IMG 0x0
+#define CL_MIPMAP_FILTER_BOX_IMG 0x1
+
+/* To be used by clGetEventInfo */
+#define CL_COMMAND_GENERATE_MIPMAP_IMG 0x40D6
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueGenerateMipmapIMG(cl_command_queue          command_queue,
+                           cl_mem                    src_image,
+                           cl_mem                    dst_image,
+                           cl_mipmap_filter_mode_img mipmap_filter_mode,
+                           const size_t              *array_region,
+                           const size_t              *mip_region,
+                           cl_uint                   num_events_in_wait_list,
+                           const cl_event            *event_wait_list,
+                           cl_event *event) CL_EXT_SUFFIX__VERSION_1_2;
+  
+/******************************************
  * cl_img_mem_properties extension *
  ******************************************/
 #define cl_img_mem_properties 1
