@@ -14,6 +14,7 @@
 // limitations under the License.
 //
 
+#include <inttypes.h>
 #include <stdio.h>
 
 #include "CL/cl.h"
@@ -396,39 +397,39 @@ int test_long()
     cl_long16  b16 = a16;
 
     printf("\nVerifying assignment:\n" );
-    printf("b:   %ld\n", b );
-    printf("b2:  %ld %ld \n", b2.s[0], b2.s[1] );
-    printf("b4:  %ld %ld %ld %ld\n", b4.s[0], b4.s[1], b4.s[2], b4.s[3] );
-    printf("b8:  %ld %ld %ld %ld %ld %ld %ld %ld\n", b8.s[0], b8.s[1], b8.s[2], b8.s[3], b8.s[4], b8.s[5], b8.s[6], b8.s[7] );
-    printf("b16: %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld\n", b16.s[0], b16.s[1], b16.s[2], b16.s[3], b16.s[4], b16.s[5], b16.s[6], b16.s[7],
+    printf("b:   %" PRId64 "\n", b );
+    printf("b2:  %" PRId64 " %" PRId64 " \n", b2.s[0], b2.s[1] );
+    printf("b4:  %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 "\n", b4.s[0], b4.s[1], b4.s[2], b4.s[3] );
+    printf("b8:  %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 "\n", b8.s[0], b8.s[1], b8.s[2], b8.s[3], b8.s[4], b8.s[5], b8.s[6], b8.s[7] );
+    printf("b16: %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 "\n", b16.s[0], b16.s[1], b16.s[2], b16.s[3], b16.s[4], b16.s[5], b16.s[6], b16.s[7],
                                                                      b16.s[8], b16.s[9], b16.s[10], b16.s[11], b16.s[12], b16.s[13], b16.s[14], b16.s[15]);
 
     /* vector access */
     printf("\nVerifying vector access:\n" );
 #if defined( __CL_LONG2__ )
     __cl_long2 v2 = b2.v2;
-    printf("__cl_long2:  %ld %ld \n", ((cl_long*)&v2)[0], ((cl_long*)&v2)[1] );
+    printf("__cl_long2:  %" PRId64 " %" PRId64 " \n", ((cl_long*)&v2)[0], ((cl_long*)&v2)[1] );
 #else
     printf( "__cl_long2 SIMD vectors not supported on this architecture.\n" );
 #endif
 
 #if defined( __CL_LONG4__ )
     __cl_long4 v4 = b4.v4;
-    printf("__cl_long4:  %ld %ld %ld %ld \n", ((cl_long*)&v4)[0], ((cl_long*)&v4)[1], ((cl_long*)&v4)[2], ((cl_long*)&v4)[3] );
+    printf("__cl_long4:  %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " \n", ((cl_long*)&v4)[0], ((cl_long*)&v4)[1], ((cl_long*)&v4)[2], ((cl_long*)&v4)[3] );
 #else
     printf( "__cl_long4 SIMD vectors not supported on this architecture.\n" );
 #endif
 
 #if defined( __CL_LONG8__ )
     __cl_long8 v8 = b8.v8;
-    printf("__cl_long8:  %ld %ld %ld %ld %ld %ld %ld %ld \n", ((cl_long*)&v8)[0], ((cl_long*)&v8)[1], ((cl_long*)&v8)[2], ((cl_long*)&v8)[3], ((cl_long*)&v8)[4], ((cl_long*)&v8)[5], ((cl_long*)&v8)[6], ((cl_long*)&v8)[7] );
+    printf("__cl_long8:  %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " \n", ((cl_long*)&v8)[0], ((cl_long*)&v8)[1], ((cl_long*)&v8)[2], ((cl_long*)&v8)[3], ((cl_long*)&v8)[4], ((cl_long*)&v8)[5], ((cl_long*)&v8)[6], ((cl_long*)&v8)[7] );
 #else
     printf( "__cl_long8 SIMD vectors not supported on this architecture.\n" );
 #endif
 
 #if defined( __CL_LONG16__ )
     __cl_long16 v16 = b16.v16;
-    printf("__cl_long16: %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld %ld \n", ((cl_long*)&v16)[0], ((cl_long*)&v16)[1], ((cl_long*)&v16)[2], ((cl_long*)&v16)[3], ((cl_long*)&v16)[4], ((cl_long*)&v16)[5], ((cl_long*)&v16)[6], ((cl_long*)&v16)[7],
+    printf("__cl_long16: %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " %" PRId64 " \n", ((cl_long*)&v16)[0], ((cl_long*)&v16)[1], ((cl_long*)&v16)[2], ((cl_long*)&v16)[3], ((cl_long*)&v16)[4], ((cl_long*)&v16)[5], ((cl_long*)&v16)[6], ((cl_long*)&v16)[7],
                                                                       ((cl_long*)&v16)[8], ((cl_long*)&v16)[9], ((cl_long*)&v16)[10], ((cl_long*)&v16)[11], ((cl_long*)&v16)[12], ((cl_long*)&v16)[13], ((cl_long*)&v16)[14], ((cl_long*)&v16)[15]);
 #else
     printf( "__cl_long16 SIMD vectors not supported on this architecture.\n" );
@@ -456,39 +457,39 @@ int test_ulong()
     cl_ulong16  b16 = a16;
 
     printf("\nVerifying assignment:\n" );
-    printf("b:   %lu\n", b );
-    printf("b2:  %lu %lu \n", b2.s[0], b2.s[1] );
-    printf("b4:  %lu %lu %lu %lu\n", b4.s[0], b4.s[1], b4.s[2], b4.s[3] );
-    printf("b8:  %lu %lu %lu %lu %lu %lu %lu %lu\n", b8.s[0], b8.s[1], b8.s[2], b8.s[3], b8.s[4], b8.s[5], b8.s[6], b8.s[7] );
-    printf("b16: %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu\n", b16.s[0], b16.s[1], b16.s[2], b16.s[3], b16.s[4], b16.s[5], b16.s[6], b16.s[7],
+    printf("b:   %" PRIu64 "\n", b );
+    printf("b2:  %" PRIu64 " %" PRIu64 " \n", b2.s[0], b2.s[1] );
+    printf("b4:  %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 "\n", b4.s[0], b4.s[1], b4.s[2], b4.s[3] );
+    printf("b8:  %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 "\n", b8.s[0], b8.s[1], b8.s[2], b8.s[3], b8.s[4], b8.s[5], b8.s[6], b8.s[7] );
+    printf("b16: %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 "\n", b16.s[0], b16.s[1], b16.s[2], b16.s[3], b16.s[4], b16.s[5], b16.s[6], b16.s[7],
                                                                      b16.s[8], b16.s[9], b16.s[10], b16.s[11], b16.s[12], b16.s[13], b16.s[14], b16.s[15]);
 
     /* vector access */
     printf("\nVerifying vector access:\n" );
 #if defined( __CL_ULONG2__ )
     __cl_ulong2 v2 = b2.v2;
-    printf("__cl_ulong2:  %lu %lu \n", ((cl_ulong*)&v2)[0], ((cl_ulong*)&v2)[1] );
+    printf("__cl_ulong2:  %" PRIu64 " %" PRIu64 " \n", ((cl_ulong*)&v2)[0], ((cl_ulong*)&v2)[1] );
 #else
     printf( "__cl_ulong2 SIMD vectors not supported on this architecture.\n" );
 #endif
 
 #if defined( __CL_ULONG4__ )
     __cl_ulong4 v4 = b4.v4;
-    printf("__cl_ulong4:  %lu %lu %lu %lu \n", ((cl_ulong*)&v4)[0], ((cl_ulong*)&v4)[1], ((cl_ulong*)&v4)[2], ((cl_ulong*)&v4)[3] );
+    printf("__cl_ulong4:  %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " \n", ((cl_ulong*)&v4)[0], ((cl_ulong*)&v4)[1], ((cl_ulong*)&v4)[2], ((cl_ulong*)&v4)[3] );
 #else
     printf( "__cl_ulong4 SIMD vectors not supported on this architecture.\n" );
 #endif
 
 #if defined( __CL_ULONG8__ )
     __cl_ulong8 v8 = b8.v8;
-    printf("__cl_ulong8:  %lu %lu %lu %lu %lu %lu %lu %lu \n", ((cl_ulong*)&v8)[0], ((cl_ulong*)&v8)[1], ((cl_ulong*)&v8)[2], ((cl_ulong*)&v8)[3], ((cl_ulong*)&v8)[4], ((cl_ulong*)&v8)[5], ((cl_ulong*)&v8)[6], ((cl_ulong*)&v8)[7] );
+    printf("__cl_ulong8:  %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " \n", ((cl_ulong*)&v8)[0], ((cl_ulong*)&v8)[1], ((cl_ulong*)&v8)[2], ((cl_ulong*)&v8)[3], ((cl_ulong*)&v8)[4], ((cl_ulong*)&v8)[5], ((cl_ulong*)&v8)[6], ((cl_ulong*)&v8)[7] );
 #else
     printf( "__cl_ulong8 SIMD vectors not supported on this architecture.\n" );
 #endif
 
 #if defined( __CL_ULONG16__ )
     __cl_ulong16 v16 = b16.v16;
-    printf("__cl_ulong16: %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu %lu \n", ((cl_ulong*)&v16)[0], ((cl_ulong*)&v16)[1], ((cl_ulong*)&v16)[2], ((cl_ulong*)&v16)[3], ((cl_ulong*)&v16)[4], ((cl_ulong*)&v16)[5], ((cl_ulong*)&v16)[6], ((cl_ulong*)&v16)[7],
+    printf("__cl_ulong16: %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " %" PRIu64 " \n", ((cl_ulong*)&v16)[0], ((cl_ulong*)&v16)[1], ((cl_ulong*)&v16)[2], ((cl_ulong*)&v16)[3], ((cl_ulong*)&v16)[4], ((cl_ulong*)&v16)[5], ((cl_ulong*)&v16)[6], ((cl_ulong*)&v16)[7],
                                                                       ((cl_ulong*)&v16)[8], ((cl_ulong*)&v16)[9], ((cl_ulong*)&v16)[10], ((cl_ulong*)&v16)[11], ((cl_ulong*)&v16)[12], ((cl_ulong*)&v16)[13], ((cl_ulong*)&v16)[14], ((cl_ulong*)&v16)[15]);
 #else
     printf( "__cl_ulong16 SIMD vectors not supported on this architecture.\n" );
