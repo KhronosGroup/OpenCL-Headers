@@ -18,7 +18,8 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Create Build Environment
-      run: cmake -E make_directory $GITHUB_WORKSPACE/build;
+      run: sudo apt-get update -q;
+        cmake -E make_directory $GITHUB_WORKSPACE/build;
         cmake -E make_directory $GITHUB_WORKSPACE/install;
         cmake -E make_directory $GITHUB_WORKSPACE/downstream/pkgconfig/bare;
         cmake -E make_directory $GITHUB_WORKSPACE/downstream/pkgconfig/sdk;
