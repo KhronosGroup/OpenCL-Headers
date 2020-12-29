@@ -1,6 +1,6 @@
 <%
 # Extensions to skip - they are in dedicated headers.
-skipExtension = {
+skipExtensions = {
     'cl_khr_d3d10_sharing',
     'cl_khr_d3d11_sharing',
     'cl_khr_dx9_media_sharing',
@@ -13,10 +13,20 @@ skipExtension = {
     'cl_intel_dx9_media_sharing',
     }
 
+# Extensions to include in this header:
+def shouldGenerate(extension):
+    if extension in genExtensions:
+        return True
+    elif not genExtensions and not extension in skipExtensions:
+        return True;
+    return False
+
 # XML blocks to include in the headers:
 def shouldEmit(block):
     for type in block.findall('type'):
         if type.get('name') in typedefs:
+            return True
+        elif type.get('name') in macros:
             return True
         elif type.get('name') in structs:
             return True
@@ -53,17 +63,20 @@ def getSortKey(item):
  * limitations under the License.
  ******************************************************************************/
 
-#ifndef __CL_EXT_H
-#define __CL_EXT_H
+#ifndef ${guard}
+#define ${guard}
+
+%if includes:
+${includes}
+%endif
+#include <CL/cl.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <CL/cl.h>
-
 %for extension in sorted(spec.findall('extensions/extension'), key=getSortKey):
-%  if not extension.get('name') in skipExtension:
+%  if shouldGenerate(extension.get('name')):
 <%
     name = extension.get('name')
 %>/***************************************************************
@@ -83,6 +96,8 @@ extern "C" {
 %    for type in block.findall('type'):
 %      if type.get('name') in typedefs:
 ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
+%      elif type.get('name') in macros:
+#define ${type.get('name')}${macros[type.get('name')].Macro}
 %      elif type.get('name') in structs:
 <%
     struct = structs[type.get('name')]
@@ -92,7 +107,7 @@ ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 %        endfor
 } ${struct.Name};
 %      else:
-// ${type.get('name')} not found!
+// type ${type.get('name')} not found!
 %      endif
 %    endfor
 %    for enum in block.findall('enum'):
@@ -102,10 +117,10 @@ ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 %        elif enums[enum.get('name')].Bitpos:
 #define ${enum.get('name').ljust(51)} (1 << ${enums[enum.get('name')].Bitpos})
 %        else:
-// ${enum.get('name')} is unassigned!
+// enum ${enum.get('name')} is unassigned!
 %        endif
 %      else:
-// ${enum.get('name')} not found!
+// enum ${enum.get('name')} not found!
 %      endif
 %    endfor
 %    for func in block.findall('command'):
@@ -144,4 +159,4 @@ ${api.Name}_fn)(
 }
 #endif
 
-#endif /* __CL_EXT_H */
+#endif /* ${guard} */
