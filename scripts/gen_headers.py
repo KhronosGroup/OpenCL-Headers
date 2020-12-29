@@ -45,6 +45,31 @@ def noneStr(s):
         return s
     return ""
 
+def getDisableWarningIncludeString(include):
+    warningPush = """#if defined(_MSC_VER)
+#if _MSC_VER >=1500
+#pragma warning( push )
+#pragma warning( disable : 4201 )
+#endif
+#endif
+"""
+    warningPop = """
+#if defined(_MSC_VER)
+#if _MSC_VER >=1500
+#pragma warning( pop )
+#endif
+#endif
+"""
+    return warningPush + include + warningPop
+
+def getWin32OnlyIncludeString(include):
+    return """#if defined(_WIN32)
+""" + include + """
+#endif
+"""
+
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
@@ -68,25 +93,39 @@ if __name__ == "__main__":
     # Generate the API typedef and struct dictionaries:
     typedefs = OrderedDict()
     Typedef = namedtuple('Typedef', 'Typedef Name')
+    macros = OrderedDict()
+    Macro = namedtuple('Macro', 'Define Name Macro')
     structs = OrderedDict()
     Struct = namedtuple('Struct', 'Name Members')
     StructMember = namedtuple('StructMember', 'Type TypeEnd Name')
     print('Generating API typedef dictionary...')
     for type in spec.findall('types/type'):
         if type.get('category') == 'define':
-            typedef = noneStr(type.text)
-            name = ""
-            for elem in type:
-                if elem.tag == 'name':
-                    name = noneStr(elem.text)
-                else:
-                    typedef = typedef + noneStr(elem.text) + noneStr(elem.tail)
-            typedef = typedef.strip()
-            name = name.strip()
-            typedefs[name] = Typedef(typedef, name)
+            if noneStr(type.text).startswith("typedef"):
+                typedef = noneStr(type.text)
+                name = ""
+                for elem in type:
+                    if elem.tag == 'name':
+                        name = noneStr(elem.text)
+                    else:
+                        typedef = typedef + noneStr(elem.text) + noneStr(elem.tail)
+                typedef = typedef.strip()
+                name = name.strip()
+                typedefs[name] = Typedef(typedef, name)
+            if noneStr(type.text).startswith("#define"):
+                define = noneStr(type.text)
+                name = ""
+                macro = ""
+                for elem in type:
+                    if elem.tag == 'name':
+                        name = noneStr(elem.text)
+                        macro = macro + noneStr(elem.tail)
+                define = define.strip()
+                name = name.strip()
+                macro = macro.rstrip() # keep spaces on the left!
+                macros[name] = Macro(define, name, macro)
         if type.get('category') == 'struct':
             name = type.get('name')
-
             mlist = []
             for member in type.findall('member'):
                 mtype = noneStr(member.text)
@@ -199,13 +238,115 @@ if __name__ == "__main__":
         extapis[extension] = alist
 
     try:
-        # Create the loader cpp file from the API dictionary:
-        test = open(args.directory + '/cl_ext.h', 'wb')
         cl_ext_h_template = Template(filename='cl_ext.h.mako')
-        test.write(
+
+        gen = open(args.directory + '/cl_dx9_media_sharing.h', 'wb')
+        gen.write(
           cl_ext_h_template.render_unicode(
+              genExtensions={'cl_khr_dx9_media_sharing', 'cl_intel_dx9_media_sharing'},
+              guard="OPENCL_CL_DX9_MEDIA_SHARING_H_",
+              includes=getWin32OnlyIncludeString("#include <d3d9.h>"),
               spec=spec,
               typedefs=typedefs,
+              macros=macros,
+              structs=structs,
+              enums=enums,
+              apisigs=apisigs,
+              coreapis=coreapis,
+              extapis=extapis).
+          encode('utf-8', 'replace'))
+
+        gen = open(args.directory + '/cl_d3d10.h', 'wb')
+        gen.write(
+          cl_ext_h_template.render_unicode(
+              genExtensions={'cl_khr_d3d10_sharing'},
+              guard="OPENCL_CL_D3D10_H_",
+              includes=getDisableWarningIncludeString("#include <d3d10.h>"),
+              spec=spec,
+              typedefs=typedefs,
+              macros=macros,
+              structs=structs,
+              enums=enums,
+              apisigs=apisigs,
+              coreapis=coreapis,
+              extapis=extapis).
+          encode('utf-8', 'replace'))
+
+        gen = open(args.directory + '/cl_d3d11.h', 'wb')
+        gen.write(
+          cl_ext_h_template.render_unicode(
+              genExtensions={'cl_khr_d3d11_sharing'},
+              guard="OPENCL_CL_D3D11_H_",
+              includes=getDisableWarningIncludeString("#include <d3d11.h>"),
+              spec=spec,
+              typedefs=typedefs,
+              macros=macros,
+              structs=structs,
+              enums=enums,
+              apisigs=apisigs,
+              coreapis=coreapis,
+              extapis=extapis).
+          encode('utf-8', 'replace'))
+
+        gen = open(args.directory + '/cl_egl.h', 'wb')
+        gen.write(
+          cl_ext_h_template.render_unicode(
+              genExtensions={'cl_khr_egl_event', 'cl_khr_egl_image'},
+              guard="OPENCL_CL_EGL_H_",
+              spec=spec,
+              typedefs=typedefs,
+              macros=macros,
+              structs=structs,
+              enums=enums,
+              apisigs=apisigs,
+              coreapis=coreapis,
+              extapis=extapis).
+          encode('utf-8', 'replace'))
+
+        gen = open(args.directory + '/cl_gl.h', 'wb')
+        gen.write(
+          cl_ext_h_template.render_unicode(
+              genExtensions={
+                  'cl_khr_gl_depth_images',
+                  'cl_khr_gl_event',
+                  'cl_khr_gl_msaa_sharing',
+                  'cl_khr_gl_sharing',
+              },
+              guard="OPENCL_CL_GL_H_",
+              spec=spec,
+              typedefs=typedefs,
+              macros=macros,
+              structs=structs,
+              enums=enums,
+              apisigs=apisigs,
+              coreapis=coreapis,
+              extapis=extapis).
+          encode('utf-8', 'replace'))
+
+        gen = open(args.directory + '/cl_va_api_media_sharing_intel.h', 'wb')
+        gen.write(
+          cl_ext_h_template.render_unicode(
+              genExtensions={'cl_intel_va_api_media_sharing'},
+              guard="OPENCL_CL_VA_API_MEDIA_SHARING_INTEL_H_",
+              includes='#include <va/va.h>',
+              spec=spec,
+              typedefs=typedefs,
+              macros=macros,
+              structs=structs,
+              enums=enums,
+              apisigs=apisigs,
+              coreapis=coreapis,
+              extapis=extapis).
+          encode('utf-8', 'replace'))
+
+        gen = open(args.directory + '/cl_ext.h', 'wb')
+        gen.write(
+          cl_ext_h_template.render_unicode(
+              genExtensions={},
+              guard="OPENCL_CL_EXT_H_",
+              spec=spec,
+              typedefs=typedefs,
+              macros=macros,
               structs=structs,
               enums=enums,
               apisigs=apisigs,
