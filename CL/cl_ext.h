@@ -901,6 +901,34 @@ clSetKernelExecInfoARM(cl_kernel            kernel,
 #define CL_QUEUE_KERNEL_BATCHING_ARM                            0x41E7
 #define CL_QUEUE_DEFERRED_FLUSH_ARM                             0x41EC
 
+/**************************************
+* cl_arm_controlled_kernel_termination
+***************************************/
+
+#define cl_arm_controlled_kernel_termination 1
+
+/* Error code to indicate kernel terminated with failure */
+#define CL_COMMAND_TERMINATED_ITSELF_WITH_FAILURE_ARM -1108
+
+/* cl_device_info */
+#define CL_DEVICE_CONTROLLED_TERMINATION_CAPABILITIES_ARM 0x41EE
+
+/* Bit fields for controlled termination feature query */
+#define CL_DEVICE_CONTROLLED_TERMINATION_SUCCESS_ARM (1 << 0)
+#define CL_DEVICE_CONTROLLED_TERMINATION_FAILURE_ARM (1 << 1)
+#define CL_DEVICE_CONTROLLED_TERMINATION_QUERY_ARM (1 << 2)
+
+/* cl_event_info */
+#define CL_EVENT_COMMAND_TERMINATION_REASON_ARM 0x41ED
+
+/* Values returned for event termination reason query */
+typedef enum {
+    CL_COMMAND_TERMINATION_COMPLETION_ARM = 0,
+    CL_COMMAND_TERMINATION_CONTROLLED_SUCCESS_ARM = 1,
+    CL_COMMAND_TERMINATION_CONTROLLED_FAILURE_ARM = 2,
+    CL_COMMAND_TERMINATION_ERROR_ARM = 3
+} cl_command_termination_reason_arm;
+
 /***************************************
 * cl_intel_thread_local_exec extension *
 ****************************************/
