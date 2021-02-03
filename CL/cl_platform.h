@@ -41,7 +41,6 @@ extern "C" {
  * deprecation but is deprecated in versions later than 1.1.
  */
 
-#define CL_EXTENSION_WEAK_LINK
 #define CL_API_SUFFIX__VERSION_1_0
 #define CL_EXT_SUFFIX__VERSION_1_0
 #define CL_API_SUFFIX__VERSION_1_1
