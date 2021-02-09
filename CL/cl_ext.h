@@ -885,6 +885,8 @@ clSetKernelExecInfoARM(cl_kernel            kernel,
 
 #define cl_arm_scheduling_controls 1
 
+typedef cl_bitfield cl_device_scheduling_controls_capabilities_arm;
+
 /* cl_device_info */
 #define CL_DEVICE_SCHEDULING_CONTROLS_CAPABILITIES_ARM          0x41E4
 
@@ -892,6 +894,9 @@ clSetKernelExecInfoARM(cl_kernel            kernel,
 #define CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_ARM          (1 << 1)
 #define CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM (1 << 2)
 #define CL_DEVICE_SCHEDULING_DEFERRED_FLUSH_ARM                (1 << 3)
+#define CL_DEVICE_SCHEDULING_REGISTER_ALLOCATION_ARM           (1 << 4)
+
+#define CL_DEVICE_SUPPORTED_REGISTER_ALLOCATIONS_ARM            0x41EB
 
 /* cl_kernel_info */
 #define CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_ARM            0x41E5
