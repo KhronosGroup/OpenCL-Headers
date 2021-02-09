@@ -16,8 +16,8 @@
  * OpenCL is a trademark of Apple Inc. used under license by Khronos.
  */
 
-#ifndef __ICD_LAYER_H
-#define __ICD_LAYER_H
+#ifndef OPENCL_CL_ICD_LAYER_H
+#define OPENCL_CL_ICD_LAYER_H
 
 #include <CL/cl_icd.h>
 
@@ -58,4 +58,4 @@ CL_API_ENTRY typedef cl_int
 }
 #endif
 
-#endif /* __ICD_LAYER_H */
+#endif /* OPENCL_CL_ICD_LAYER_H */
