@@ -922,12 +922,12 @@ clSetKernelExecInfoARM(cl_kernel            kernel,
 #define CL_EVENT_COMMAND_TERMINATION_REASON_ARM 0x41ED
 
 /* Values returned for event termination reason query */
-typedef enum {
-    CL_COMMAND_TERMINATION_COMPLETION_ARM = 0,
-    CL_COMMAND_TERMINATION_CONTROLLED_SUCCESS_ARM = 1,
-    CL_COMMAND_TERMINATION_CONTROLLED_FAILURE_ARM = 2,
-    CL_COMMAND_TERMINATION_ERROR_ARM = 3
-} cl_command_termination_reason_arm;
+typedef cl_uint cl_command_termination_reason_arm;
+
+#define CL_COMMAND_TERMINATION_COMPLETION_ARM  0
+#define CL_COMMAND_TERMINATION_CONTROLLED_SUCCESS_ARM 1
+#define CL_COMMAND_TERMINATION_CONTROLLED_FAILURE_ARM 2
+#define CL_COMMAND_TERMINATION_ERROR_ARM 3
 
 /***************************************
 * cl_intel_thread_local_exec extension *
