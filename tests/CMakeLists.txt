@@ -4,7 +4,7 @@ function(add_header_test NAME SOURCE)
     set(TEST_EXE ${NAME}_${VERSION})
     # ICD on Windows uses system headers, which aren't strictly ANSI conformant
     # and trigger warnings 
-    if(NOT (((NAME STREQUAL cl_icd_h) OR (NAME STREQUAL cl_icd_layer_h)) AND MSVC AND CMAKE_C_FLAGS MATCHES "/Za"))
+    if(NOT (((NAME STREQUAL cl_icd_h) OR (NAME STREQUAL cl_layer_h)) AND MSVC AND CMAKE_C_FLAGS MATCHES "/Za"))
       add_executable(${TEST_EXE} ${SOURCE})
       target_compile_definitions(${TEST_EXE}
         PUBLIC -DCL_TARGET_OPENCL_VERSION=${VERSION}
@@ -26,7 +26,7 @@ add_header_test(cl_gl_h test_cl_gl.h.c)
 add_header_test(cl_gl_ext_h test_cl_gl_ext.h.c)
 add_header_test(cl_half_h test_cl_half.h.c)
 add_header_test(cl_icd_h test_cl_icd.h.c)
-add_header_test(cl_icd_layer_h test_cl_icd_layer.h.c)
+add_header_test(cl_layer_h test_cl_layer.h.c)
 add_header_test(cl_platform_h test_cl_platform.h.c)
 add_header_test(cl_opencl_h test_opencl.h.c)
 add_header_test(cl_version_h test_cl_version.h.c)
