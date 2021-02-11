@@ -914,6 +914,8 @@ clSetKernelExecInfoARM(cl_kernel            kernel,
 #define CL_DEVICE_CONTROLLED_TERMINATION_CAPABILITIES_ARM 0x41EE
 
 /* Bit fields for controlled termination feature query */
+typedef cl_bitfield cl_device_controlled_termination_capabilities_arm;
+
 #define CL_DEVICE_CONTROLLED_TERMINATION_SUCCESS_ARM (1 << 0)
 #define CL_DEVICE_CONTROLLED_TERMINATION_FAILURE_ARM (1 << 1)
 #define CL_DEVICE_CONTROLLED_TERMINATION_QUERY_ARM (1 << 2)
