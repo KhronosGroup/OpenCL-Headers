@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008-2020 The Khronos Group Inc.
+ * Copyright (c) 2008-2021 The Khronos Group Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -151,6 +151,16 @@ typedef CL_API_ENTRY cl_int (CL_API_CALL *clGetGLContextInfoKHR_fn)(
     size_t                        param_value_size,
     void *                        param_value,
     size_t *                      param_value_size_ret);
+
+/* 
+ *  cl_khr_gl_event extension
+ */
+#define CL_COMMAND_GL_FENCE_SYNC_OBJECT_KHR     0x200D
+
+extern CL_API_ENTRY cl_event CL_API_CALL
+clCreateEventFromGLsyncKHR(cl_context context,
+                           cl_GLsync  sync,
+                           cl_int *   errcode_ret) CL_EXT_SUFFIX__VERSION_1_1;
 
 #ifdef __cplusplus
 }
