@@ -719,6 +719,12 @@ typedef intptr_t cl_import_properties_arm;
 /* Data consistency with host property */
 #define CL_IMPORT_DMA_BUF_DATA_CONSISTENCY_WITH_HOST_ARM 0x41E3
 
+/* Index of plane in a multiplanar hardware buffer */
+#define CL_IMPORT_ANDROID_HARDWARE_BUFFER_PLANE_INDEX_ARM 0x41EF
+
+/* Index of layer in a multilayer hardware buffer */
+#define CL_IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM 0x41F0
+
 /* Import memory size value to indicate a size for the whole buffer */
 #define CL_IMPORT_MEMORY_WHOLE_ALLOCATION_ARM SIZE_MAX
 
