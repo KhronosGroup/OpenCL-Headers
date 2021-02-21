@@ -43,7 +43,7 @@ branches, or in separate folders in a branch.
 ## Compiling for a Specific OpenCL Version
 
 By default, the OpenCL API headers in this repository are for the latest
-OpenCL version (currently OpenCL 2.2).  To use these API headers to target
+OpenCL version (currently OpenCL 3.0).  To use these API headers to target
 a different OpenCL version, an application may `#define` the preprocessor
 value `CL_TARGET_OPENCL_VERSION` before including the OpenCL API headers.
 The `CL_TARGET_OPENCL_VERSION` is a three digit decimal value representing
