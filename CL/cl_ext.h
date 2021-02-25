@@ -576,6 +576,20 @@ typedef cl_int
                                               void *       param_value,
                                               size_t *     param_value_size_ret) CL_API_SUFFIX__VERSION_2_0_DEPRECATED;
 
+/********************************************
+ * cl_khr_suggested_local_work_size extension
+ *********************************************/
+
+extern CL_API_ENTRY cl_int CL_API_CALL clGetKernelSuggestedLocalWorkSizeKHR(
+    cl_command_queue command_queue, cl_kernel kernel, cl_uint work_dim,
+    const size_t *global_work_offset, const size_t *global_work_size,
+    size_t *suggested_local_work_size) CL_API_SUFFIX__VERSION_3_0;
+
+typedef CL_API_ENTRY
+cl_int(CL_API_CALL *clGetKernelSuggestedLocalWorkSizeKHR_fn)(
+    cl_command_queue command_queue, cl_kernel kernel, cl_uint work_dim,
+    const size_t *global_work_offset, const size_t *global_work_size,
+    size_t *suggested_local_work_size) CL_API_SUFFIX__VERSION_3_0;
 
 /*********************************
 * cl_khr_mipmap_image extension
