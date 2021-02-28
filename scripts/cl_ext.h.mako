@@ -10,7 +10,9 @@ skipExtensions = {
     'cl_khr_gl_event',
     'cl_khr_gl_msaa_sharing',
     'cl_khr_gl_sharing',
+    'cl_loader_layers',
     'cl_intel_dx9_media_sharing',
+    'cl_intel_va_api_media_sharing',
     }
 
 # Extensions to include in this header:
@@ -18,7 +20,7 @@ def shouldGenerate(extension):
     if extension in genExtensions:
         return True
     elif not genExtensions and not extension in skipExtensions:
-        return True;
+        return True
     return False
 
 # XML blocks to include in the headers:
@@ -34,7 +36,7 @@ def shouldEmit(block):
         #if enum.get('name') in enums:
             return True
     for func in block.findall('command'):
-        return True;
+        return True
     return False
 
 # Order the extensions should be emitted in the headers.
@@ -47,8 +49,18 @@ def getSortKey(item):
         return 1, name
     return 99, name
 
+# Names that have been generated already, since some may be shared by multiple
+# extensions:
+generatedNames = set()
+
+def isDuplicateName(name):
+    if name in generatedNames:
+        return True
+    generatedNames.add(name)
+    return False
+
 %>/*******************************************************************************
- * Copyright (c) 2008-2020 The Khronos Group Inc.
+ * Copyright (c) 2008-2021 The Khronos Group Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,20 +106,24 @@ extern "C" {
 /* ${block.get('comment')} */
 %    endif
 %    for type in block.findall('type'):
-%      if type.get('name') in typedefs:
+%      if isDuplicateName(type.get('name')):
+/* type ${type.get('name')} */
+%      else:
+%        if type.get('name') in typedefs:
 ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
-%      elif type.get('name') in macros:
+%        elif type.get('name') in macros:
 #define ${type.get('name')}${macros[type.get('name')].Macro}
-%      elif type.get('name') in structs:
+%        elif type.get('name') in structs:
 <%
     struct = structs[type.get('name')]
 %>typedef struct _${struct.Name} {
-%        for i, member in enumerate(struct.Members):
+%          for i, member in enumerate(struct.Members):
     ${member.Type} ${member.Name}${member.TypeEnd};
-%        endfor
+%          endfor
 } ${struct.Name};
-%      else:
+%        else:
 // type ${type.get('name')} not found!
+%        endif
 %      endif
 %    endfor
 %    for enum in block.findall('enum'):
