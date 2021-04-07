@@ -43,7 +43,7 @@ clCreateEventFromEGLSyncKHR(
     CLeglDisplayKHR display,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_event (CL_API_CALL *
+typedef cl_event (CL_API_CALL *
 clCreateEventFromEGLSyncKHR_fn)(
     cl_context context,
     CLeglSyncKHR sync,
@@ -84,7 +84,7 @@ clCreateFromEGLImageKHR(
     const cl_egl_image_properties_khr* properties,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_mem (CL_API_CALL *
+typedef cl_mem (CL_API_CALL *
 clCreateFromEGLImageKHR_fn)(
     cl_context context,
     CLeglDisplayKHR egldisplay,
@@ -102,7 +102,7 @@ clEnqueueAcquireEGLObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueAcquireEGLObjectsKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_objects,
@@ -120,7 +120,7 @@ clEnqueueReleaseEGLObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueReleaseEGLObjectsKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_objects,

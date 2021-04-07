@@ -86,7 +86,7 @@ clGetDeviceIDsFromDX9MediaAdapterKHR(
     cl_device_id* devices,
     cl_uint* num_devices) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clGetDeviceIDsFromDX9MediaAdapterKHR_fn)(
     cl_platform_id platform,
     cl_uint num_media_adapters,
@@ -106,7 +106,7 @@ clCreateFromDX9MediaSurfaceKHR(
     cl_uint plane,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_mem (CL_API_CALL *
+typedef cl_mem (CL_API_CALL *
 clCreateFromDX9MediaSurfaceKHR_fn)(
     cl_context context,
     cl_mem_flags flags,
@@ -124,7 +124,7 @@ clEnqueueAcquireDX9MediaSurfacesKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueAcquireDX9MediaSurfacesKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_objects,
@@ -142,7 +142,7 @@ clEnqueueReleaseDX9MediaSurfacesKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueReleaseDX9MediaSurfacesKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_objects,
@@ -202,7 +202,7 @@ clGetDeviceIDsFromDX9INTEL(
     cl_device_id* devices,
     cl_uint* num_devices) CL_API_SUFFIX__VERSION_1_1;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clGetDeviceIDsFromDX9INTEL_fn)(
     cl_platform_id platform,
     cl_dx9_device_source_intel dx9_device_source,
@@ -221,7 +221,7 @@ clCreateFromDX9MediaSurfaceINTEL(
     UINT plane,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
 
-typedef CL_API_ENTRY cl_mem (CL_API_CALL *
+typedef cl_mem (CL_API_CALL *
 clCreateFromDX9MediaSurfaceINTEL_fn)(
     cl_context context,
     cl_mem_flags flags,
@@ -239,7 +239,7 @@ clEnqueueAcquireDX9ObjectsINTEL(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_1;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueAcquireDX9ObjectsINTEL_fn)(
     cl_command_queue command_queue,
     cl_uint num_objects,
@@ -257,7 +257,7 @@ clEnqueueReleaseDX9ObjectsINTEL(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_1;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueReleaseDX9ObjectsINTEL_fn)(
     cl_command_queue command_queue,
     cl_uint num_objects,

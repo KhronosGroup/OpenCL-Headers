@@ -85,7 +85,7 @@ clGetDeviceIDsFromD3D10KHR(
     cl_device_id* devices,
     cl_uint* num_devices) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clGetDeviceIDsFromD3D10KHR_fn)(
     cl_platform_id platform,
     cl_d3d10_device_source_khr d3d_device_source,
@@ -102,7 +102,7 @@ clCreateFromD3D10BufferKHR(
     ID3D10Buffer* resource,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_mem (CL_API_CALL *
+typedef cl_mem (CL_API_CALL *
 clCreateFromD3D10BufferKHR_fn)(
     cl_context context,
     cl_mem_flags flags,
@@ -117,7 +117,7 @@ clCreateFromD3D10Texture2DKHR(
     UINT subresource,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_mem (CL_API_CALL *
+typedef cl_mem (CL_API_CALL *
 clCreateFromD3D10Texture2DKHR_fn)(
     cl_context context,
     cl_mem_flags flags,
@@ -133,7 +133,7 @@ clCreateFromD3D10Texture3DKHR(
     UINT subresource,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_mem (CL_API_CALL *
+typedef cl_mem (CL_API_CALL *
 clCreateFromD3D10Texture3DKHR_fn)(
     cl_context context,
     cl_mem_flags flags,
@@ -150,7 +150,7 @@ clEnqueueAcquireD3D10ObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueAcquireD3D10ObjectsKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_objects,
@@ -168,7 +168,7 @@ clEnqueueReleaseD3D10ObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueReleaseD3D10ObjectsKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_objects,

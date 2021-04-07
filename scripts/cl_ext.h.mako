@@ -153,7 +153,7 @@ ${api.Name}(
 %        endif
 %    endfor
 
-typedef CL_API_ENTRY ${api.RetType} (CL_API_CALL *
+typedef ${api.RetType} (CL_API_CALL *
 ${api.Name}_fn)(
 %      for i, param in enumerate(api.Params):
 %        if i < len(api.Params)-1:
