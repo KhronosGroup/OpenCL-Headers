@@ -47,7 +47,7 @@ clGetLayerInfo(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clGetLayerInfo_fn)(
     size_t param_value_size,
     cl_layer_info param_name,
@@ -61,7 +61,7 @@ clInitLayer(
     cl_uint* num_entries_ret,
     const cl_icd_dispatch** layer_dispatch) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clInitLayer_fn)(
     cl_uint num_entries,
     const cl_icd_dispatch* target_dispatch,
