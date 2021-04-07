@@ -24,13 +24,25 @@ extern "C" {
 #endif
 
 #if defined(_WIN32)
-    #define CL_API_ENTRY
-    #define CL_API_CALL     __stdcall
-    #define CL_CALLBACK     __stdcall
+    #if !defined(CL_API_ENTRY)
+        #define CL_API_ENTRY
+    #endif
+    #if !defined(CL_API_CALL)
+        #define CL_API_CALL     __stdcall
+    #endif
+    #if !defined(CL_CALLBACK)
+        #define CL_CALLBACK     __stdcall
+    #endif
 #else
-    #define CL_API_ENTRY
-    #define CL_API_CALL
-    #define CL_CALLBACK
+    #if !defined(CL_API_ENTRY)
+        #define CL_API_ENTRY
+    #endif
+    #if !defined(CL_API_CALL)
+        #define CL_API_CALL
+    #endif
+    #if !defined(CL_CALLBACK)
+        #define CL_CALLBACK
+    #endif
 #endif
 
 /*
