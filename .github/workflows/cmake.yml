@@ -260,7 +260,8 @@ jobs:
       matrix:
         VER: [8, 9]
         EXT: [ON, OFF]
-        GEN: [Xcode, Ninja Multi-Config]
+        #GEN: [Xcode, Ninja Multi-Config]
+        GEN: [Xcode] # Disabling Ninja - need to investigate setup-ninja?
         STD: [99, 11] # 90 results in errors
 
     steps:
