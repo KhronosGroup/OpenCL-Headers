@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   linux-gcc:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         VER: [7, 8, 9]
