@@ -19,6 +19,9 @@
 
 #include <CL/cl_version.h>
 
+/* Always required to support intptr_t in cl.h */
+#include <stdint.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -234,8 +237,6 @@ typedef double                  cl_double;
 #define CL_INFINITY         CL_HUGE_VALF
 
 #else
-
-#include <stdint.h>
 
 /* scalar types  */
 typedef int8_t          cl_char;

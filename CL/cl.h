@@ -20,8 +20,6 @@
 #include <CL/cl_version.h>
 #include <CL/cl_platform.h>
 
-#include <stdint.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
