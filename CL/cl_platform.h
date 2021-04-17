@@ -135,6 +135,12 @@ extern "C" {
 
 #if (defined (_WIN32) && defined(_MSC_VER))
 
+/* intptr_t is used in cl.h and provided by stddef.h in Visual C++, but not in clang */
+/* stdint.h was missing before Visual Studio 2010, include it for later versions and for clang */
+#if defined(__clang__) || _MSC_VER >= 1600
+    #include <stdint.h>
+#endif
+
 /* scalar types  */
 typedef signed   __int8         cl_char;
 typedef unsigned __int8         cl_uchar;
