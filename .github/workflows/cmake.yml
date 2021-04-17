@@ -4,10 +4,11 @@ on: [push, pull_request]
 
 jobs:
   linux-gcc:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
-        VER: [7, 8, 9]
+        #VER: [7, 8, 9]
+        VER: [7, 9] # gcc-8 is not installed on the Ubuntu 18.04 image
         EXT: [ON, OFF]
         GEN: [Unix Makefiles, Ninja]
         VAR: [Debug, Release]
@@ -260,7 +261,8 @@ jobs:
       matrix:
         VER: [8, 9]
         EXT: [ON, OFF]
-        GEN: [Xcode, Ninja Multi-Config]
+        #GEN: [Xcode, Ninja Multi-Config]
+        GEN: [Xcode] # Disabling Ninja - need to investigate setup-ninja?
         STD: [99, 11] # 90 results in errors
 
     steps:
