@@ -49,6 +49,17 @@ def getSortKey(item):
         return 1, name
     return 99, name
 
+# Gets C function parameter strings for the specified API params:
+def getCParameterStrings(params):
+    strings = []
+    if len(params) == 0:
+        strings.append("void")
+    else:
+        for param in params:
+            paramstr = param.Type + ' ' + param.Name + param.TypeEnd
+            strings.append(paramstr)
+    return strings
+
 # Names that have been generated already, since some may be shared by multiple
 # extensions:
 generatedNames = set()
@@ -145,21 +156,21 @@ ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 %>
 extern CL_API_ENTRY ${api.RetType} CL_API_CALL
 ${api.Name}(
-%      for i, param in enumerate(api.Params):
+%      for i, paramStr in enumerate(getCParameterStrings(api.Params)):
 %        if i < len(api.Params)-1:
-    ${param.Type} ${param.Name}${param.TypeEnd},
+    ${paramStr},
 %        else:
-    ${param.Type} ${param.Name}${param.TypeEnd}) ${api.Suffix};
+    ${paramStr}) ${api.Suffix};
 %        endif
 %    endfor
 
 typedef ${api.RetType} (CL_API_CALL *
 ${api.Name}_fn)(
-%      for i, param in enumerate(api.Params):
+%      for i, paramStr in enumerate(getCParameterStrings(api.Params)):
 %        if i < len(api.Params)-1:
-    ${param.Type} ${param.Name}${param.TypeEnd},
+    ${paramStr},
 %        else:
-    ${param.Type} ${param.Name}${param.TypeEnd}) ${api.Suffix};
+    ${paramStr}) ${api.Suffix};
 %        endif
 %      endfor
 %    endfor

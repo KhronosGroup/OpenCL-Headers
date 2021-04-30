@@ -317,7 +317,9 @@ if __name__ == "__main__":
               extapis=extapis).
           encode('utf-8', 'replace'))
 
-        gen = open(args.directory + '/cl_layer.h', 'wb')
+        # cl_layer.h is currently generated but unused because the ICD loader
+        # uses a different naming convention for function pointers.
+        gen = open(args.directory + '/cl_layer-unused.h', 'wb')
         gen.write(
           cl_ext_h_template.render_unicode(
               genExtensions={'cl_loader_layers'},
