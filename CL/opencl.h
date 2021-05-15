@@ -21,10 +21,13 @@
 extern "C" {
 #endif
 
+#ifdef OPENCL_LOAD
+#include<CL/opencl_load.h>
+#else
 #include <CL/cl.h>
-#include <CL/cl_load.h>
 #include <CL/cl_gl.h>
 #include <CL/cl_ext.h>
+#endif
 
 #ifdef __cplusplus
 }
