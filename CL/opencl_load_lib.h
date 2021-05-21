@@ -40,11 +40,7 @@ opencl_load_dispatch opencl_lib_dispatch;
 #ifdef _WIN32
 static void extOpenOpenCL_impl(PINIT_ONCE InitOnce, PVOID Parameter, PVOID *lpContext) {
     (void)InitOnce; (void)Parameter; (void)lpContext;
-    opencl_lib_handle = LoadLibraryExA(libraryName, NULL, LOAD_WITH_ALTERED_SEARCH_PATH);
-    if (!opencl_lib_handle && GetLastError() == ERROR_INVALID_PARAMETER)
-    {
-        opencl_lib_handle = LoadLibraryExA("OpencL", NULL, 0);
-    }
+    opencl_lib_handle = LoadLibraryA("OpenCL");
 }
 #else
 static void extOpenOpenCL_impl() {
