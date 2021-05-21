@@ -40,7 +40,7 @@ extern HMODULE opencl_lib_handle;
 extern void * opencl_lib_handle;
 #endif
 
-typedef struct _clopencl_load_dispatch {
+typedef struct _opencl_load_dispatch {
   /* OpenCL 1.0 */
   cl_api_clGetPlatformIDs clGetPlatformIDs;
   cl_api_clGetPlatformInfo clGetPlatformInfo;
