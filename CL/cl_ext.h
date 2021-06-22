@@ -734,6 +734,21 @@ clGetKernelSuggestedLocalWorkSizeKHR_fn)(
     size_t* suggested_local_work_size) CL_API_SUFFIX__VERSION_3_0;
 
 
+/***************************************************************
+* cl_khr_integer_dot_product
+***************************************************************/
+#define cl_khr_integer_dot_product 1
+
+typedef cl_bitfield         cl_device_integer_dot_product_capabilities_khr;
+
+/* cl_device_integer_dot_product_capabilities_khr */
+#define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR (1 << 0)
+#define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR      (1 << 1)
+
+/* cl_device_info */
+#define CL_DEVICE_INTEGER_DOT_PRODUCT_CAPABILITIES_KHR      0x1073
+
+
 /**********************************
  * cl_arm_import_memory extension *
  **********************************/
