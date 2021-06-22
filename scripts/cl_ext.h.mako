@@ -41,13 +41,24 @@ def shouldEmit(block):
 
 # Order the extensions should be emitted in the headers.
 # KHR -> EXT -> Vendor Extensions
-def getSortKey(item):
+def getExtensionSortKey(item):
     name = item.get('name')
     if name.startswith('cl_khr'):
         return 0, name
     if name.startswith('cl_ext'):
         return 1, name
     return 99, name
+
+# Order enums should be emitted in the haders.
+# Enums Without Bits -> Ordered Bit Enums
+def getEnumSortKey(item):
+    name = item.get('name')
+    if name in enums:
+        if enums[name].Value:
+            return -1
+        if enums[name].Bitpos:
+            return int(enums[name].Bitpos)
+    return 99
 
 # Gets C function parameter strings for the specified API params:
 def getCParameterStrings(params):
@@ -98,7 +109,7 @@ ${includes}
 extern "C" {
 #endif
 
-%for extension in sorted(spec.findall('extensions/extension'), key=getSortKey):
+%for extension in sorted(spec.findall('extensions/extension'), key=getExtensionSortKey):
 %  if shouldGenerate(extension.get('name')):
 <%
     name = extension.get('name')
@@ -137,7 +148,7 @@ ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 %        endif
 %      endif
 %    endfor
-%    for enum in block.findall('enum'):
+%    for enum in sorted(block.findall('enum'), key=getEnumSortKey):
 %      if enum.get('name') in enums:
 %        if enums[enum.get('name')].Value:
 #define ${enum.get('name').ljust(51)} ${enums[enum.get('name')].Value}
