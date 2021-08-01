@@ -84,7 +84,7 @@ clCreateCommandBufferKHR(
     const cl_command_buffer_properties_khr* properties,
     cl_int* errcode_ret) ;
 
-typedef CL_API_ENTRY cl_command_buffer_khr (CL_API_CALL *
+typedef cl_command_buffer_khr (CL_API_CALL *
 clCreateCommandBufferKHR_fn)(
     cl_uint num_queues,
     const cl_command_queue* queues,
@@ -95,7 +95,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clFinalizeCommandBufferKHR(
     cl_command_buffer_khr command_buffer) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clFinalizeCommandBufferKHR_fn)(
     cl_command_buffer_khr command_buffer) ;
 
@@ -103,7 +103,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainCommandBufferKHR(
     cl_command_buffer_khr command_buffer) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clRetainCommandBufferKHR_fn)(
     cl_command_buffer_khr command_buffer) ;
 
@@ -111,7 +111,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseCommandBufferKHR(
     cl_command_buffer_khr command_buffer) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clReleaseCommandBufferKHR_fn)(
     cl_command_buffer_khr command_buffer) ;
 
@@ -124,7 +124,7 @@ clEnqueueCommandBufferKHR(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueCommandBufferKHR_fn)(
     cl_uint num_queues,
     cl_command_queue* queues,
@@ -142,7 +142,7 @@ clCommandBarrierWithWaitListKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandBarrierWithWaitListKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -165,7 +165,7 @@ clCommandCopyBufferKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandCopyBufferKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -197,7 +197,7 @@ clCommandCopyBufferRectKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandCopyBufferRectKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -229,7 +229,7 @@ clCommandCopyBufferToImageKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandCopyBufferToImageKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -257,7 +257,7 @@ clCommandCopyImageKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandCopyImageKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -285,7 +285,7 @@ clCommandCopyImageToBufferKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandCopyImageToBufferKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -313,7 +313,7 @@ clCommandFillBufferKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandFillBufferKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -340,7 +340,7 @@ clCommandFillImageKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandFillImageKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -368,7 +368,7 @@ clCommandNDRangeKernelKHR(
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clCommandNDRangeKernelKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
@@ -391,7 +391,7 @@ clGetCommandBufferInfoKHR(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clGetCommandBufferInfoKHR_fn)(
     cl_command_buffer_khr command_buffer,
     cl_command_buffer_info_khr param_name,
@@ -524,7 +524,7 @@ clEnqueueAcquireExternalMemObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_3_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueAcquireExternalMemObjectsKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_mem_objects,
@@ -542,7 +542,7 @@ clEnqueueReleaseExternalMemObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_3_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueReleaseExternalMemObjectsKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_mem_objects,
@@ -622,7 +622,7 @@ clGetSemaphoreHandleForTypeKHR(
     void* handle_ptr,
     size_t* handle_size_ret) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clGetSemaphoreHandleForTypeKHR_fn)(
     cl_semaphore_khr sema_object,
     cl_device_id device,
@@ -776,8 +776,8 @@ typedef struct _cl_device_integer_dot_product_acceleration_properties_khr {
 } cl_device_integer_dot_product_acceleration_properties_khr;
 
 /* cl_device_integer_dot_product_capabilities_khr */
-#define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR      (1 << 1)
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR (1 << 0)
+#define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR      (1 << 1)
 
 /* cl_device_info */
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_CAPABILITIES_KHR      0x1073
@@ -874,7 +874,7 @@ clCreateSemaphoreWithPropertiesKHR(
     const cl_semaphore_properties_khr* sema_props,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_semaphore_khr (CL_API_CALL *
+typedef cl_semaphore_khr (CL_API_CALL *
 clCreateSemaphoreWithPropertiesKHR_fn)(
     cl_context context,
     const cl_semaphore_properties_khr* sema_props,
@@ -890,7 +890,7 @@ clEnqueueWaitSemaphoresKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueWaitSemaphoresKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_sema_objects,
@@ -910,7 +910,7 @@ clEnqueueSignalSemaphoresKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clEnqueueSignalSemaphoresKHR_fn)(
     cl_command_queue command_queue,
     cl_uint num_sema_objects,
@@ -928,7 +928,7 @@ clGetSemaphoreInfoKHR(
     void* param_value,
     size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clGetSemaphoreInfoKHR_fn)(
     cl_semaphore_khr sema_object,
     cl_semaphore_info_khr param_name,
@@ -940,7 +940,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseSemaphoreKHR(
     cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clReleaseSemaphoreKHR_fn)(
     cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
@@ -948,7 +948,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainSemaphoreKHR(
     cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clRetainSemaphoreKHR_fn)(
     cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
@@ -1027,7 +1027,7 @@ clGetKernelSuggestedLocalWorkSizeKHR(
     const size_t* global_work_size,
     size_t* suggested_local_work_size) CL_API_SUFFIX__VERSION_3_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clGetKernelSuggestedLocalWorkSizeKHR_fn)(
     cl_command_queue command_queue,
     cl_kernel kernel,
@@ -2282,142 +2282,6 @@ typedef struct _cl_motion_estimation_desc_intel {
 #define CL_INTEL_SHARING_FORMAT_QUERY "cl_intel_sharing_format_query"
 
 /***************************************************************
-* cl_intel_sharing_format_query_d3d10
-***************************************************************/
-#define cl_intel_sharing_format_query_d3d10 1
-#define CL_INTEL_SHARING_FORMAT_QUERY_D3D10 "cl_intel_sharing_format_query_d3d10"
-
-/* when cl_khr_d3d10_sharing is supported */
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetSupportedD3D10TextureFormatsINTEL(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint num_entries,
-    DXGI_FORMAT* d3d10_formats,
-    cl_uint* num_texture_formats) ;
-
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
-clGetSupportedD3D10TextureFormatsINTEL_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint num_entries,
-    DXGI_FORMAT* d3d10_formats,
-    cl_uint* num_texture_formats) ;
-
-/***************************************************************
-* cl_intel_sharing_format_query_d3d11
-***************************************************************/
-#define cl_intel_sharing_format_query_d3d11 1
-#define CL_INTEL_SHARING_FORMAT_QUERY_D3D11 "cl_intel_sharing_format_query_d3d11"
-
-/* when cl_khr_d3d11_sharing is supported */
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetSupportedD3D11TextureFormatsINTEL(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint plane,
-    cl_uint num_entries,
-    DXGI_FORMAT* d3d11_formats,
-    cl_uint* num_texture_formats) ;
-
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
-clGetSupportedD3D11TextureFormatsINTEL_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint plane,
-    cl_uint num_entries,
-    DXGI_FORMAT* d3d11_formats,
-    cl_uint* num_texture_formats) ;
-
-/***************************************************************
-* cl_intel_sharing_format_query_dx9
-***************************************************************/
-#define cl_intel_sharing_format_query_dx9 1
-#define CL_INTEL_SHARING_FORMAT_QUERY_DX9 "cl_intel_sharing_format_query_dx9"
-
-/* when cl_khr_dx9_media_sharing or cl_intel_dx9_media_sharing is supported */
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetSupportedDX9MediaSurfaceFormatsINTEL(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint plane,
-    cl_uint num_entries,
-    D3DFORMAT* dx9_formats,
-    cl_uint* num_surface_formats) ;
-
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
-clGetSupportedDX9MediaSurfaceFormatsINTEL_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint plane,
-    cl_uint num_entries,
-    D3DFORMAT* dx9_formats,
-    cl_uint* num_surface_formats) ;
-
-/***************************************************************
-* cl_intel_sharing_format_query_gl
-***************************************************************/
-#define cl_intel_sharing_format_query_gl 1
-#define CL_INTEL_SHARING_FORMAT_QUERY_GL "cl_intel_sharing_format_query_gl"
-
-/* when cl_khr_gl_sharing is supported */
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetSupportedGLTextureFormatsINTEL(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint num_entries,
-    cl_GLenum* gl_formats,
-    cl_uint* num_texture_formats) ;
-
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
-clGetSupportedGLTextureFormatsINTEL_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint num_entries,
-    cl_GLenum* gl_formats,
-    cl_uint* num_texture_formats) ;
-
-/***************************************************************
-* cl_intel_sharing_format_query_va_api
-***************************************************************/
-#define cl_intel_sharing_format_query_va_api 1
-#define CL_INTEL_SHARING_FORMAT_QUERY_VA_API "cl_intel_sharing_format_query_va_api"
-
-/* when cl_intel_va_api_media_sharing is supported */
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetSupportedVA_APIMediaSurfaceFormatsINTEL(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint plane,
-    cl_uint num_entries,
-    VAImageFormat* va_api_formats,
-    cl_uint* num_surface_formats) ;
-
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
-clGetSupportedVA_APIMediaSurfaceFormatsINTEL_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint plane,
-    cl_uint num_entries,
-    VAImageFormat* va_api_formats,
-    cl_uint* num_surface_formats) ;
-
-/***************************************************************
 * cl_intel_simultaneous_sharing
 ***************************************************************/
 #define cl_intel_simultaneous_sharing 1
@@ -2725,7 +2589,7 @@ clSetContentSizeBufferPoCL(
     cl_mem buffer,
     cl_mem content_size_buffer) CL_API_SUFFIX__VERSION_1_0;
 
-typedef CL_API_ENTRY cl_int (CL_API_CALL *
+typedef cl_int (CL_API_CALL *
 clSetContentSizeBufferPoCL_fn)(
     cl_mem buffer,
     cl_mem content_size_buffer) CL_API_SUFFIX__VERSION_1_0;

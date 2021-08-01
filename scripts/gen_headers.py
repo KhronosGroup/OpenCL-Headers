@@ -68,6 +68,7 @@ if __name__ == "__main__":
               genExtensions={
                   'cl_khr_dx9_media_sharing',
                   'cl_intel_dx9_media_sharing',
+                  'cl_intel_sharing_format_query_dx9',
               },
               guard="OPENCL_CL_DX9_MEDIA_SHARING_H_",
               includes=getWin32OnlyIncludeString("#include <d3d9.h>"),
@@ -85,7 +86,10 @@ if __name__ == "__main__":
         gen = open(args.directory + '/cl_d3d10.h', 'wb')
         gen.write(
           cl_ext_h_template.render_unicode(
-              genExtensions={'cl_khr_d3d10_sharing'},
+              genExtensions={
+                  'cl_khr_d3d10_sharing',
+                  'cl_intel_sharing_format_query_d3d10',
+              },
               guard="OPENCL_CL_D3D10_H_",
               includes=getDisableWarningIncludeString("#include <d3d10.h>"),
               spec=spec,
@@ -102,7 +106,10 @@ if __name__ == "__main__":
         gen = open(args.directory + '/cl_d3d11.h', 'wb')
         gen.write(
           cl_ext_h_template.render_unicode(
-              genExtensions={'cl_khr_d3d11_sharing'},
+              genExtensions={
+                  'cl_khr_d3d11_sharing',
+                  'cl_intel_sharing_format_query_d3d11'
+              },
               guard="OPENCL_CL_D3D11_H_",
               includes=getDisableWarningIncludeString("#include <d3d11.h>"),
               spec=spec,
@@ -120,7 +127,6 @@ if __name__ == "__main__":
         gen.write(
           cl_ext_h_template.render_unicode(
               genExtensions={'cl_khr_egl_event', 'cl_khr_egl_image'},
-              skipFunctions={},
               guard="OPENCL_CL_EGL_H_",
               spec=spec,
               typedefs=typedefs,
@@ -141,6 +147,7 @@ if __name__ == "__main__":
                   'cl_khr_gl_event',
                   'cl_khr_gl_msaa_sharing',
                   'cl_khr_gl_sharing',
+                  'cl_intel_sharing_format_query_gl',
               },
               guard="OPENCL_CL_GL_H_",
               spec=spec,
@@ -160,7 +167,6 @@ if __name__ == "__main__":
         gen.write(
           cl_ext_h_template.render_unicode(
               genExtensions={'cl_loader_layers'},
-              skipFunctions={},
               guard="OPENCL_CL_LAYER_H_",
               includes='#include <CL/cl_icd.h>',
               spec=spec,
@@ -177,7 +183,10 @@ if __name__ == "__main__":
         gen = open(args.directory + '/cl_va_api_media_sharing_intel.h', 'wb')
         gen.write(
           cl_ext_h_template.render_unicode(
-              genExtensions={'cl_intel_va_api_media_sharing'},
+              genExtensions={
+                  'cl_intel_va_api_media_sharing',
+                  'cl_intel_sharing_format_query_va_api',
+              },
               guard="OPENCL_CL_VA_API_MEDIA_SHARING_INTEL_H_",
               includes='#include <va/va.h>',
               spec=spec,
@@ -195,7 +204,6 @@ if __name__ == "__main__":
         gen.write(
           cl_ext_h_template.render_unicode(
               genExtensions={},
-              skipFunctions={},
               guard="OPENCL_CL_EXT_H_",
               spec=spec,
               typedefs=typedefs,

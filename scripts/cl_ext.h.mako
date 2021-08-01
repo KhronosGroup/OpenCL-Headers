@@ -13,6 +13,11 @@ skipExtensions = {
     'cl_loader_layers',
     'cl_intel_dx9_media_sharing',
     'cl_intel_va_api_media_sharing',
+    'cl_intel_sharing_format_query_d3d10',
+    'cl_intel_sharing_format_query_d3d11',
+    'cl_intel_sharing_format_query_dx9',
+    'cl_intel_sharing_format_query_gl',
+    'cl_intel_sharing_format_query_va_api',
     }
 
 # Extensions to include in this header:

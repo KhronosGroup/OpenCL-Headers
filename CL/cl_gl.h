@@ -285,6 +285,32 @@ clCreateFromGLTexture3D_fn)(
     cl_GLuint texture,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
 
+/***************************************************************
+* cl_intel_sharing_format_query_gl
+***************************************************************/
+#define cl_intel_sharing_format_query_gl 1
+#define CL_INTEL_SHARING_FORMAT_QUERY_GL "cl_intel_sharing_format_query_gl"
+
+/* when cl_khr_gl_sharing is supported */
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetSupportedGLTextureFormatsINTEL(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint num_entries,
+    cl_GLenum* gl_formats,
+    cl_uint* num_texture_formats) ;
+
+typedef cl_int (CL_API_CALL *
+clGetSupportedGLTextureFormatsINTEL_fn)(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint num_entries,
+    cl_GLenum* gl_formats,
+    cl_uint* num_texture_formats) ;
+
 #ifdef __cplusplus
 }
 #endif
