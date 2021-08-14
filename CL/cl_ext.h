@@ -1005,6 +1005,27 @@ typedef cl_uint cl_command_termination_reason_arm;
 
 #define CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL      (((cl_bitfield)1) << 31)
 
+/***************************************************************
+* cl_intel_device_attribute_query
+***************************************************************/
+
+#define cl_intel_device_attribute_query 1
+
+typedef cl_bitfield         cl_device_feature_capabilities_intel;
+
+/* cl_device_feature_capabilities_intel */
+#define CL_DEVICE_FEATURE_FLAG_DP4A_INTEL                   (1 << 0)
+#define CL_DEVICE_FEATURE_FLAG_DPAS_INTEL                   (1 << 1)
+
+/* cl_device_info */
+#define CL_DEVICE_IP_VERSION_INTEL                          0x4250
+#define CL_DEVICE_ID_INTEL                                  0x4251
+#define CL_DEVICE_NUM_SLICES_INTEL                          0x4252
+#define CL_DEVICE_NUM_SUB_SLICES_PER_SLICE_INTEL            0x4253
+#define CL_DEVICE_NUM_EUS_PER_SUB_SLICE_INTEL               0x4254
+#define CL_DEVICE_NUM_THREADS_PER_EU_INTEL                  0x4255
+#define CL_DEVICE_FEATURE_CAPABILITIES_INTEL                0x4256
+
 /***********************************************
 * cl_intel_device_partition_by_names extension *
 ************************************************/
