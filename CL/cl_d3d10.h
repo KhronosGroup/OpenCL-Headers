@@ -120,6 +120,31 @@ typedef cl_int (CL_API_CALL *clEnqueueReleaseD3D10ObjectsKHR_fn)(
     const cl_event * event_wait_list,
     cl_event *       event) CL_API_SUFFIX__VERSION_1_0;
 
+/***************************************************************
+* cl_intel_sharing_format_query_d3d10
+***************************************************************/
+#define cl_intel_sharing_format_query_d3d10 1
+
+/* when cl_khr_d3d10_sharing is supported */
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetSupportedD3D10TextureFormatsINTEL(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint num_entries,
+    DXGI_FORMAT* d3d10_formats,
+    cl_uint* num_texture_formats) ;
+
+typedef cl_int (CL_API_CALL *
+clGetSupportedD3D10TextureFormatsINTEL_fn)(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint num_entries,
+    DXGI_FORMAT* d3d10_formats,
+    cl_uint* num_texture_formats) ;
+
 #ifdef __cplusplus
 }
 #endif

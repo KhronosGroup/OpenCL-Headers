@@ -221,6 +221,33 @@ typedef cl_int (CL_API_CALL *clEnqueueReleaseDX9ObjectsINTEL_fn)(
     const cl_event*             event_wait_list,
     cl_event*                   event) CL_API_SUFFIX__VERSION_1_1;
 
+/***************************************************************
+* cl_intel_sharing_format_query_dx9
+***************************************************************/
+#define cl_intel_sharing_format_query_dx9 1
+
+/* when cl_khr_dx9_media_sharing or cl_intel_dx9_media_sharing is supported */
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetSupportedDX9MediaSurfaceFormatsINTEL(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint plane,
+    cl_uint num_entries,
+    D3DFORMAT* dx9_formats,
+    cl_uint* num_surface_formats) ;
+
+typedef cl_int (CL_API_CALL *
+clGetSupportedDX9MediaSurfaceFormatsINTEL_fn)(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint plane,
+    cl_uint num_entries,
+    D3DFORMAT* dx9_formats,
+    cl_uint* num_surface_formats) ;
+
 #ifdef __cplusplus
 }
 #endif
