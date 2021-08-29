@@ -105,6 +105,10 @@ def isDuplicateName(name):
 #ifndef ${guard}
 #define ${guard}
 
+/*
+** This header is generated from the Khronos OpenCL XML API Registry.
+*/
+
 %if includes:
 ${includes}
 %endif
@@ -122,7 +126,8 @@ extern "C" {
 * ${name}
 ***************************************************************/
 #define ${name} 1
-#define ${name.upper()} "${name}"
+#define ${name.upper()}_EXTENSION_NAME ${"\\"}
+    "${name}"
 
 %for block in extension.findall('require'):
 %  if shouldEmit(block):
@@ -166,32 +171,43 @@ ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 // enum ${enum.get('name')} not found!
 %      endif
 %    endfor
-%    for func in block.findall('command'):
+%    if block.findall('command'):
+%      for func in block.findall('command'):
+<%
+    api = apisigs[func.get('name')]
+%>
+typedef ${api.RetType} (CL_API_CALL *
+${api.Name}_fn)(
+%        for i, paramStr in enumerate(getCParameterStrings(api.Params)):
+%          if i < len(api.Params)-1:
+    ${paramStr},
+%          else:
+    ${paramStr}) ${api.Suffix};
+%          endif
+%        endfor
+%      endfor
+
+#ifndef CL_NO_PROTOTYPES
+%      for func in block.findall('command'):
 <%
     api = apisigs[func.get('name')]
 %>
 extern CL_API_ENTRY ${api.RetType} CL_API_CALL
 ${api.Name}(
-%      for i, paramStr in enumerate(getCParameterStrings(api.Params)):
-%        if i < len(api.Params)-1:
+%        for i, paramStr in enumerate(getCParameterStrings(api.Params)):
+%          if i < len(api.Params)-1:
     ${paramStr},
-%        else:
+%          else:
     ${paramStr}) ${api.Suffix};
-%        endif
-%    endfor
-
-typedef ${api.RetType} (CL_API_CALL *
-${api.Name}_fn)(
-%      for i, paramStr in enumerate(getCParameterStrings(api.Params)):
-%        if i < len(api.Params)-1:
-    ${paramStr},
-%        else:
-    ${paramStr}) ${api.Suffix};
-%        endif
+%          endif
+%        endfor
 %      endfor
-%    endfor
+
+#endif /* CL_NO_PROTOTYPES */
+%    endif
 %    if block.get('condition'):
-#endif
+
+#endif /* ${block.get('condition')} */
 %    endif
 
 %  endif
