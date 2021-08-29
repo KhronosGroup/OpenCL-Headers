@@ -17,6 +17,10 @@
 #ifndef OPENCL_CL_GL_H_
 #define OPENCL_CL_GL_H_
 
+/*
+** This header is generated from the Khronos OpenCL XML API Registry.
+*/
+
 #include <CL/cl.h>
 
 #ifdef __cplusplus
@@ -27,23 +31,27 @@ extern "C" {
 * cl_khr_gl_depth_images
 ***************************************************************/
 #define cl_khr_gl_depth_images 1
-#define CL_KHR_GL_DEPTH_IMAGES "cl_khr_gl_depth_images"
+#define CL_KHR_GL_DEPTH_IMAGES_EXTENSION_NAME \
+    "cl_khr_gl_depth_images"
 
 #if !defined(CL_VERSION_1_2)
 /* cl_channel_order - defined in CL.h for OpenCL 1.2 and newer */
 #define CL_DEPTH_STENCIL                                    0x10BE
-#endif
+
+#endif /* !defined(CL_VERSION_1_2) */
 
 #if !defined(CL_VERSION_1_2)
 /* cl_channel_type - defined in CL.h for OpenCL 1.2 and newer */
 #define CL_UNORM_INT24                                      0x10DF
-#endif
+
+#endif /* !defined(CL_VERSION_1_2) */
 
 /***************************************************************
 * cl_khr_gl_event
 ***************************************************************/
 #define cl_khr_gl_event 1
-#define CL_KHR_GL_EVENT "cl_khr_gl_event"
+#define CL_KHR_GL_EVENT_EXTENSION_NAME \
+    "cl_khr_gl_event"
 
 typedef struct __GLsync *   cl_GLsync;
 
@@ -51,23 +59,28 @@ typedef struct __GLsync *   cl_GLsync;
 #define CL_COMMAND_GL_FENCE_SYNC_OBJECT_KHR                 0x200D
 
 
-extern CL_API_ENTRY cl_event CL_API_CALL
-clCreateEventFromGLsyncKHR(
-    cl_context context,
-    cl_GLsync sync,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
-
 typedef cl_event (CL_API_CALL *
 clCreateEventFromGLsyncKHR_fn)(
     cl_context context,
     cl_GLsync sync,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
 
+#ifndef CL_NO_PROTOTYPES
+
+extern CL_API_ENTRY cl_event CL_API_CALL
+clCreateEventFromGLsyncKHR(
+    cl_context context,
+    cl_GLsync sync,
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
+
+#endif /* CL_NO_PROTOTYPES */
+
 /***************************************************************
 * cl_khr_gl_msaa_sharing
 ***************************************************************/
 #define cl_khr_gl_msaa_sharing 1
-#define CL_KHR_GL_MSAA_SHARING "cl_khr_gl_msaa_sharing"
+#define CL_KHR_GL_MSAA_SHARING_EXTENSION_NAME \
+    "cl_khr_gl_msaa_sharing"
 
 /* cl_gl_texture_info */
 #define CL_GL_NUM_SAMPLES                                   0x2012
@@ -76,7 +89,8 @@ clCreateEventFromGLsyncKHR_fn)(
 * cl_khr_gl_sharing
 ***************************************************************/
 #define cl_khr_gl_sharing 1
-#define CL_KHR_GL_SHARING "cl_khr_gl_sharing"
+#define CL_KHR_GL_SHARING_EXTENSION_NAME \
+    "cl_khr_gl_sharing"
 
 typedef cl_uint             cl_gl_context_info;
 
@@ -110,23 +124,33 @@ typedef cl_uint             cl_gl_platform_info;
 #define CL_GL_OBJECT_TEXTURE1D                              0x200F
 #define CL_GL_OBJECT_TEXTURE1D_ARRAY                        0x2010
 #define CL_GL_OBJECT_TEXTURE_BUFFER                         0x2011
-#endif
+
+#endif /* defined(CL_VERSION_1_2) */
 
 /* cl_gl_texture_info */
 #define CL_GL_TEXTURE_TARGET                                0x2004
 #define CL_GL_MIPMAP_LEVEL                                  0x2005
 
 
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetGLContextInfoKHR(
+typedef cl_int (CL_API_CALL *
+clGetGLContextInfoKHR_fn)(
     const cl_context_properties* properties,
     cl_gl_context_info param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_0;
 
-typedef cl_int (CL_API_CALL *
-clGetGLContextInfoKHR_fn)(
+typedef cl_mem (CL_API_CALL *
+clCreateFromGLBuffer_fn)(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_GLuint bufobj,
+    int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+
+#ifndef CL_NO_PROTOTYPES
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetGLContextInfoKHR(
     const cl_context_properties* properties,
     cl_gl_context_info param_name,
     size_t param_value_size,
@@ -140,14 +164,20 @@ clCreateFromGLBuffer(
     cl_GLuint bufobj,
     int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-typedef cl_mem (CL_API_CALL *
-clCreateFromGLBuffer_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_GLuint bufobj,
-    int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+#endif /* CL_NO_PROTOTYPES */
 
 #if defined(CL_VERSION_1_2)
+
+typedef cl_mem (CL_API_CALL *
+clCreateFromGLTexture_fn)(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_GLenum target,
+    cl_GLint miplevel,
+    cl_GLuint texture,
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
+
+#ifndef CL_NO_PROTOTYPES
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateFromGLTexture(
@@ -158,23 +188,10 @@ clCreateFromGLTexture(
     cl_GLuint texture,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-typedef cl_mem (CL_API_CALL *
-clCreateFromGLTexture_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_GLenum target,
-    cl_GLint miplevel,
-    cl_GLuint texture,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
-#endif
+#endif /* CL_NO_PROTOTYPES */
 
+#endif /* defined(CL_VERSION_1_2) */
 
-extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateFromGLRenderbuffer(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_GLuint renderbuffer,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_mem (CL_API_CALL *
 clCreateFromGLRenderbuffer_fn)(
@@ -183,25 +200,11 @@ clCreateFromGLRenderbuffer_fn)(
     cl_GLuint renderbuffer,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetGLObjectInfo(
-    cl_mem memobj,
-    cl_gl_object_type* gl_object_type,
-    cl_GLuint* gl_object_name) CL_API_SUFFIX__VERSION_1_0;
-
 typedef cl_int (CL_API_CALL *
 clGetGLObjectInfo_fn)(
     cl_mem memobj,
     cl_gl_object_type* gl_object_type,
     cl_GLuint* gl_object_name) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clGetGLTextureInfo(
-    cl_mem memobj,
-    cl_gl_texture_info param_name,
-    size_t param_value_size,
-    void* param_value,
-    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int (CL_API_CALL *
 clGetGLTextureInfo_fn)(
@@ -211,26 +214,8 @@ clGetGLTextureInfo_fn)(
     void* param_value,
     size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_0;
 
-extern CL_API_ENTRY cl_int CL_API_CALL
-clEnqueueAcquireGLObjects(
-    cl_command_queue command_queue,
-    cl_uint num_objects,
-    const cl_mem* mem_objects,
-    cl_uint num_events_in_wait_list,
-    const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
-
 typedef cl_int (CL_API_CALL *
 clEnqueueAcquireGLObjects_fn)(
-    cl_command_queue command_queue,
-    cl_uint num_objects,
-    const cl_mem* mem_objects,
-    cl_uint num_events_in_wait_list,
-    const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
-
-extern CL_API_ENTRY cl_int CL_API_CALL
-clEnqueueReleaseGLObjects(
     cl_command_queue command_queue,
     cl_uint num_objects,
     const cl_mem* mem_objects,
@@ -247,28 +232,53 @@ clEnqueueReleaseGLObjects_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-/* OpenCL 1.0 APIs that were deprecated in OpenCL 1.2 */
+#ifndef CL_NO_PROTOTYPES
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateFromGLTexture2D(
+clCreateFromGLRenderbuffer(
     cl_context context,
     cl_mem_flags flags,
-    cl_GLenum target,
-    cl_GLint miplevel,
-    cl_GLuint texture,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
+    cl_GLuint renderbuffer,
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetGLObjectInfo(
+    cl_mem memobj,
+    cl_gl_object_type* gl_object_type,
+    cl_GLuint* gl_object_name) CL_API_SUFFIX__VERSION_1_0;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetGLTextureInfo(
+    cl_mem memobj,
+    cl_gl_texture_info param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_0;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueAcquireGLObjects(
+    cl_command_queue command_queue,
+    cl_uint num_objects,
+    const cl_mem* mem_objects,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueReleaseGLObjects(
+    cl_command_queue command_queue,
+    cl_uint num_objects,
+    const cl_mem* mem_objects,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
+
+#endif /* CL_NO_PROTOTYPES */
+
+/* OpenCL 1.0 APIs that were deprecated in OpenCL 1.2 */
 
 typedef cl_mem (CL_API_CALL *
 clCreateFromGLTexture2D_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_GLenum target,
-    cl_GLint miplevel,
-    cl_GLuint texture,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
-
-extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateFromGLTexture3D(
     cl_context context,
     cl_mem_flags flags,
     cl_GLenum target,
@@ -285,13 +295,47 @@ clCreateFromGLTexture3D_fn)(
     cl_GLuint texture,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
 
+#ifndef CL_NO_PROTOTYPES
+
+extern CL_API_ENTRY cl_mem CL_API_CALL
+clCreateFromGLTexture2D(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_GLenum target,
+    cl_GLint miplevel,
+    cl_GLuint texture,
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
+
+extern CL_API_ENTRY cl_mem CL_API_CALL
+clCreateFromGLTexture3D(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_GLenum target,
+    cl_GLint miplevel,
+    cl_GLuint texture,
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
+
+#endif /* CL_NO_PROTOTYPES */
+
 /***************************************************************
 * cl_intel_sharing_format_query_gl
 ***************************************************************/
 #define cl_intel_sharing_format_query_gl 1
-#define CL_INTEL_SHARING_FORMAT_QUERY_GL "cl_intel_sharing_format_query_gl"
+#define CL_INTEL_SHARING_FORMAT_QUERY_GL_EXTENSION_NAME \
+    "cl_intel_sharing_format_query_gl"
 
 /* when cl_khr_gl_sharing is supported */
+
+typedef cl_int (CL_API_CALL *
+clGetSupportedGLTextureFormatsINTEL_fn)(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint num_entries,
+    cl_GLenum* gl_formats,
+    cl_uint* num_texture_formats) ;
+
+#ifndef CL_NO_PROTOTYPES
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSupportedGLTextureFormatsINTEL(
@@ -302,14 +346,7 @@ clGetSupportedGLTextureFormatsINTEL(
     cl_GLenum* gl_formats,
     cl_uint* num_texture_formats) ;
 
-typedef cl_int (CL_API_CALL *
-clGetSupportedGLTextureFormatsINTEL_fn)(
-    cl_context context,
-    cl_mem_flags flags,
-    cl_mem_object_type image_type,
-    cl_uint num_entries,
-    cl_GLenum* gl_formats,
-    cl_uint* num_texture_formats) ;
+#endif /* CL_NO_PROTOTYPES */
 
 #ifdef __cplusplus
 }
