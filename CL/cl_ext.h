@@ -745,8 +745,19 @@ typedef cl_bitfield         cl_device_integer_dot_product_capabilities_khr;
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR (1 << 0)
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR      (1 << 1)
 
+typedef struct _cl_device_integer_dot_product_acceleration_properties_khr {
+    cl_bool signed_accelerated;
+    cl_bool unsigned_accelerated;
+    cl_bool mixed_signedness_accelerated;
+    cl_bool accumulating_saturating_signed_accelerated;
+    cl_bool accumulating_saturating_unsigned_accelerated;
+    cl_bool accumulating_saturating_mixed_signedness_accelerated;
+} cl_device_integer_dot_product_acceleration_properties_khr;
+
 /* cl_device_info */
-#define CL_DEVICE_INTEGER_DOT_PRODUCT_CAPABILITIES_KHR      0x1073
+#define CL_DEVICE_INTEGER_DOT_PRODUCT_CAPABILITIES_KHR                          0x1073
+#define CL_DEVICE_INTEGER_DOT_PRODUCT_ACCELERATION_PROPERTIES_8BIT_KHR          0x1074
+#define CL_DEVICE_INTEGER_DOT_PRODUCT_ACCELERATION_PROPERTIES_4x8BIT_PACKED_KHR 0x1075
 
 
 /**********************************
