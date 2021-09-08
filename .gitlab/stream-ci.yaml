@@ -50,6 +50,7 @@ build:cmake-minimum:
   script:
     - cmake
       -G Ninja
+      -D CMAKE_CXX_COMPILER=$COMPILER
       -D CMAKE_BUILD_TYPE=Release
       -D BUILD_TESTING=ON
       -D CMAKE_INSTALL_PREFIX=$INSTALL_DIR
@@ -72,6 +73,7 @@ build:cmake-latest:
   script:
     - cmake
       -G "Ninja Multi-Config"
+      -D CMAKE_CXX_COMPILER=$COMPILER
       -D BUILD_TESTING=ON
       -D CMAKE_INSTALL_PREFIX=$INSTALL_DIR
       -B $BUILD_DIR
@@ -141,6 +143,7 @@ consume:cmake-minimum:
   script:
     - cmake
       -G Ninja
+      -D CMAKE_CXX_COMPILER=$COMPILER
       -D CMAKE_BUILD_TYPE=Release
       -D CMAKE_PREFIX_PATH=$INSTALL_DIR
       -B$CI_PROJECT_DIR/downstream/bare
@@ -167,6 +170,7 @@ consume:cmake-latest:
   script:
     - cmake
       -G Ninja
+      -D CMAKE_CXX_COMPILER=$COMPILER
       -D CMAKE_BUILD_TYPE=Release
       -D CMAKE_PREFIX_PATH=$CI_PROJECT_DIR/install
       -B $CI_PROJECT_DIR/downstream/bare
