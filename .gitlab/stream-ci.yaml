@@ -4,9 +4,11 @@ stages:
   - consume # Test if downstream can depend on installs (CMake)
 
 variables:
-  DEPS_DIR: "$CI_PROJECT_DIR/__dependencies"
-  CMAKE_MINIMUM_URL: "https://cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz"
-  CMAKE_LATEST_URL: "https://cmake.org/files/v3.21/cmake-3.21.2-linux-x86_64.tar.gz"
+  DEPS_DIR:      "$CI_PROJECT_DIR/dependencies"
+  BUILD_DIR:     "$CI_PROJECT_DIR/build"
+  INSTALL_DIR:   "$CI_PROJECT_DIR/install"
+  CMAKE_MINIMUM: "3.0.2"
+  CMAKE_LATEST:  "3.21.2"
 
 ########################
 ##                    ##
@@ -14,45 +16,24 @@ variables:
 ##                    ##
 ########################
 
-## ROCm
-
-.rocm-cmake-minimum:
-  tags:
-    - rocm
-  image: rocm/rocm-terminal:latest
+.toolchain-matrix-minimum:
+  image: streamhpc/opencl-sdk-base:ubuntu-18.04-20210908
+  parallel:
+    matrix:
+  # NOTE: Old CMake versions will likely not use cutting-edge compilers
+      - COMPILER: [g++-7, g++-8, clang-8, clang-9, clang-10]
   before_script:
-    - $SUDO_CMD apt-get update -qq
-    - $SUDO_CMD apt-get install -y -qq wget git tar xz-utils bzip2 build-essential pkg-config ninja-build ca-certificates
-    - hipconfig
-    - mkdir -p $DEPS_DIR/cmake-minimum
-    - wget --no-check-certificate --quiet -O - $CMAKE_MINIMUM_URL | tar --strip-components=1 -xz -C $DEPS_DIR/cmake-minimum
-    - export PATH=$DEPS_DIR/cmake-minimum/bin:$PATH
+    - export PATH=/opt/Kitware/CMake/$CMAKE_MINIMUM/bin:$PATH
 
-.rocm-cmake-latest:
-  tags:
-    - rocm
-  image: rocm/rocm-terminal:latest
+.toolchain-matrix-latest:
+  image: streamhpc/opencl-sdk-base:ubuntu-18.04-20210908
+  parallel:
+    matrix:
+  # NOTE: Cutting edge CMake versions will likely not use old compilers
+      - COMPILER: [g++-9, g++-10, clang-11, clang-12, clang-13]
   before_script:
-    - $SUDO_CMD apt-get update -qq
-    - $SUDO_CMD apt-get install -y -qq wget git tar xz-utils bzip2 build-essential pkg-config ninja-build ca-certificates
-    - hipconfig
-    - mkdir -p $DEPS_DIR/cmake-latest
-    - wget --no-check-certificate --quiet -O - $CMAKE_LATEST_URL | tar --strip-components=1 -xz -C $DEPS_DIR/cmake-latest
-    - export PATH=$DEPS_DIR/cmake-latest/bin:$PATH
+    - export PATH=/opt/Kitware/CMake/$CMAKE_LATEST/bin:$PATH
 
-## CUDA
-
-.cuda-cmake-minimum:
-  tags:
-    - nvcc
-  image: nvidia/cuda:11.3.1-devel-ubuntu18.04
-  before_script:
-    - apt-get update -qq
-    - apt-get install -y -qq libnuma-dev libunwind-dev git wget tar xz-utils bzip2 build-essential pkg-config ninja-build gcc-8 ca-certificates
-    - mkdir -p $DEPS_DIR/cmake-minimum
-    - wget --no-check-certificate --quiet -O - $CMAKE_MINIMUM_URL | tar --strip-components=1 -xz -C $DEPS_DIR/cmake-minimum
-    - export PATH=$DEPS_DIR/cmake-minimum/bin:$PATH
-    - nvidia-smi
 
 #################
 ##             ##
@@ -60,24 +41,22 @@ variables:
 ##             ##
 #################
 
-## ROCm
-
-build:rocm-cmake-minimum:
-  extends: .rocm-cmake-minimum
+build:cmake-minimum:
+  extends: .toolchain-matrix-minimum
   stage: build
+  # NOTE 1: CMake creates build and install folders as needed.
+  # NOTE 2: Lack of space in -H<folder> -B<folder> is important!
+  #         https://stackoverflow.com/a/20611964/1476661
   script:
-    - mkdir install
-    - mkdir build && cd build
     - cmake
       -G Ninja
       -D CMAKE_BUILD_TYPE=Release
       -D BUILD_TESTING=ON
-      -D CMAKE_INSTALL_PREFIX=../install
-      ../
+      -D CMAKE_INSTALL_PREFIX=$INSTALL_DIR
+      -B$BUILD_DIR
+      -H$CI_PROJECT_DIR
     - cmake
-      --build ./
-    - cmake
-      --build ./
+      --build $BUILD_DIR
       --target install
   artifacts:
     paths:
@@ -87,28 +66,22 @@ build:rocm-cmake-minimum:
       - build/**/CMakeFiles/
     expire_in: 2 weeks
 
-build:rocm-cmake-latest:
-  extends: .rocm-cmake-latest
+build:cmake-latest:
+  extends: .toolchain-matrix-latest
   stage: build
   script:
     - cmake
       -G "Ninja Multi-Config"
       -D BUILD_TESTING=ON
-      -D CMAKE_INSTALL_PREFIX=./install
-      -B ./build
-      -S ./
+      -D CMAKE_INSTALL_PREFIX=$INSTALL_DIR
+      -B $BUILD_DIR
+      -S $CI_PROJECT_DIR
     - cmake
-      --build ./
-      --config Debug
-    - cmake
-      --build ./
-      --config Release
-    - cmake
-      --build ./
+      --build $BUILD_DIR
       --config Debug
       --target install
     - cmake
-      --build ./
+      --build $BUILD_DIR
       --config Release
       --target install
   artifacts:
@@ -119,64 +92,6 @@ build:rocm-cmake-latest:
       - build/**/CMakeFiles/
     expire_in: 2 weeks
 
-## CUDA
-
-build:cuda-cmake-minimum:
-  extends: .cuda-cmake-minimum
-  stage: build
-  script:
-    - mkdir install
-    - mkdir build && cd build
-    - cmake
-      -G Ninja
-      -D CMAKE_BUILD_TYPE=Release
-      -D BUILD_TESTING=ON
-      -D CMAKE_INSTALL_PREFIX=../install
-      ../
-    - cmake
-      --build ./
-    - cmake
-      --build ./
-      --target install
-  artifacts:
-    paths:
-      - build/
-      - install/
-    exclude:
-      - build/**/CMakeFiles/
-    expire_in: 2 weeks
-
-build:cuda-cmake-latest:
-  extends: .cuda-cmake-latest
-  stage: build
-  script:
-    - cmake
-      -G "Ninja Multi-Config"
-      -D BUILD_TESTING=ON
-      -D CMAKE_INSTALL_PREFIX=./install
-      -B ./build
-      -S ./
-    - cmake
-      --build ./
-      --config Debug
-    - cmake
-      --build ./
-      --config Release
-    - cmake
-      --build ./
-      --config Debug
-      --target install
-    - cmake
-      --build ./
-      --config Release
-      --target install
-  artifacts:
-    paths:
-      - build/
-      - install/
-    exclude:
-      - build/**/CMakeFiles/
-    expire_in: 2 weeks
 
 ################
 ##            ##
@@ -186,34 +101,26 @@ build:cuda-cmake-latest:
 
 ## ROCm
 
-test:rocm-cmake-minimum:
-  extends: .rocm-cmake-minimum
+test:cmake-minimum:
+  extends: .toolchain-matrix-minimum
   stage: test
   needs:
-    - build:rocm-cmake-minimum
-  tags:
-    - vega20
-    - rocm
+    - build:cmake-minimum
+  # NOTE: CTest has to be invoked from the build folder.
   script:
-    - cd build
+    - cd $BUILD_DIR
     - ctest --output-on-failure
 
-test:rocm-cmake-latest:
-  extends: .rocm-cmake-latest
+test:cmake-latest:
+  extends: .toolchain-matrix-minimum
   stage: test
   needs:
-    - build:rocm-cmake-latest
-  tags:
-    - vega20
-    - rocm
+    - build:cmake-latest
+  # NOTE: CTest has to be invoked from the build folder.
   script:
-    - cd build
-    - ctest
-      -C Debug
-      --output-on-failure
-    - ctest
-      -C Release
-      --output-on-failure
+    - cd $BUILD_DIR
+    - ctest --output-on-failure -C Debug
+    - ctest --output-on-failure -C Release 
 
 ###################
 ##               ##
@@ -223,49 +130,47 @@ test:rocm-cmake-latest:
 
 ## ROCm
 
-consume:rocm-cmake-minimum:
-  extends: .rocm-cmake-minimum
+consume:cmake-minimum:
+  extends: .toolchain-matrix-minimum
   stage: consume
   needs:
-    - test:rocm-cmake-minimum
-  tags:
-    - rocm
+    - test:cmake-minimum
+  # NOTE 1: CMake creates build and install folders as needed.
+  # NOTE 2: Lack of space in -H<folder> -B<folder> is important!
+  #         https://stackoverflow.com/a/20611964/1476661
   script:
-    - mkdir -P $CI_PROJECT_DIR/downstream/bare && cd $CI_PROJECT_DIR/downstream/bare
     - cmake
       -G Ninja
       -D CMAKE_BUILD_TYPE=Release
-      -D CMAKE_PREFIX_PATH=$CI_PROJECT_DIR/install
-      ../tests/pkgconfig/bare
+      -D CMAKE_PREFIX_PATH=$INSTALL_DIR
+      -B$CI_PROJECT_DIR/downstream/bare
+      -H$CI_PROJECT_DIR/tests/pkgconfig/bare
     - cmake
-      --build ./
+      --build $CI_PROJECT_DIR/downstream/bare
     # Emulate the presence of the SDK
-    - cmake -E
-      make_directory $CI_PROJECT_DIR/install/share/cmake/OpenCL
+    - cmake -E make_directory $CI_PROJECT_DIR/install/share/cmake/OpenCL
     - echo 'include("${CMAKE_CURRENT_LIST_DIR}/../OpenCLHeaders/OpenCLHeadersTargets.cmake")' > $CI_PROJECT_DIR/install/share/cmake/OpenCL/OpenCLConfig.cmake
-    - mkdir -P $CI_PROJECT_DIR/downstream/sdk && cd $CI_PROJECT_DIR/downstream/sdk
     - cmake
       -G Ninja
       -D CMAKE_BUILD_TYPE=Release
-      -D CMAKE_PREFIX_PATH=$CI_PROJECT_DIR/install
-      ../tests/pkgconfig/sdk
+      -D CMAKE_PREFIX_PATH=$INSTALL_DIR
+      -B$CI_PROJECT_DIR/downstream/sdk
+      -H$CI_PROJECT_DIR/tests/pkgconfig/sdk
     - cmake
-      --build ./
+      --build $CI_PROJECT_DIR/downstream/sdk
 
-consume:rocm-cmake-latest:
-  extends: .rocm-cmake-latest
+consume:cmake-latest:
+  extends: .toolchain-matrix-latest
   stage: consume
   needs:
-    - test:rocm-cmake-latest
-  tags:
-    - rocm
+    - test:cmake-latest
   script:
     - cmake
       -G Ninja
       -D CMAKE_BUILD_TYPE=Release
       -D CMAKE_PREFIX_PATH=$CI_PROJECT_DIR/install
-      -B ./downstream/bare
-      -S ./tests/pkgconfig/bare
+      -B $CI_PROJECT_DIR/downstream/bare
+      -S $CI_PROJECT_DIR/tests/pkgconfig/bare
     - cmake
       --build downstream/bare
     # Emulate the presence of the SDK
