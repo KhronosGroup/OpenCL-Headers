@@ -8,7 +8,13 @@ variables:
   CMAKE_MINIMUM_URL: "https://cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz"
   CMAKE_LATEST_URL: "https://cmake.org/files/v3.21/cmake-3.21.2-linux-x86_64.tar.gz"
 
+########################
+##                    ##
 ## Setup environments ##
+##                    ##
+########################
+
+## ROCm
 
 .rocm-cmake-minimum:
   tags:
@@ -33,6 +39,20 @@ variables:
     - mkdir -p $DEPS_DIR/cmake-latest
     - wget --no-check-certificate --quiet -O - $CMAKE_LATEST_URL | tar --strip-components=1 -xz -C $DEPS_DIR/cmake-latest
     - export PATH=$DEPS_DIR/cmake-latest/bin:$PATH
+
+## CUDA
+
+.cuda-cmake-minimum:
+  tags:
+    - nvcc
+  image: nvidia/cuda:11.3.1-devel-ubuntu18.04
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq libnuma-dev libunwind-dev git wget tar xz-utils bzip2 build-essential pkg-config ninja-build gcc-8 ca-certificates
+    - mkdir -p $DEPS_DIR/cmake-minimum
+    - wget --no-check-certificate --quiet -O - $CMAKE_MINIMUM_URL | tar --strip-components=1 -xz -C $DEPS_DIR/cmake-minimum
+    - export PATH=$DEPS_DIR/cmake-minimum/bin:$PATH
+    - nvidia-smi
 
 #################
 ##             ##
@@ -69,6 +89,65 @@ build:rocm-cmake-minimum:
 
 build:rocm-cmake-latest:
   extends: .rocm-cmake-latest
+  stage: build
+  script:
+    - cmake
+      -G "Ninja Multi-Config"
+      -D BUILD_TESTING=ON
+      -D CMAKE_INSTALL_PREFIX=./install
+      -B ./build
+      -S ./
+    - cmake
+      --build ./
+      --config Debug
+    - cmake
+      --build ./
+      --config Release
+    - cmake
+      --build ./
+      --config Debug
+      --target install
+    - cmake
+      --build ./
+      --config Release
+      --target install
+  artifacts:
+    paths:
+      - build/
+      - install/
+    exclude:
+      - build/**/CMakeFiles/
+    expire_in: 2 weeks
+
+## CUDA
+
+build:cuda-cmake-minimum:
+  extends: .cuda-cmake-minimum
+  stage: build
+  script:
+    - mkdir install
+    - mkdir build && cd build
+    - cmake
+      -G Ninja
+      -D CMAKE_BUILD_TYPE=Release
+      -D BUILD_TESTING=ON
+      -D CMAKE_INSTALL_PREFIX=../install
+      ../
+    - cmake
+      --build ./
+    - cmake
+      --build ./
+      --target install
+  artifacts:
+    paths:
+      - build/
+      - install/
+    exclude:
+      - build/**/CMakeFiles/
+    expire_in: 2 weeks
+
+build:cuda-cmake-latest:
+  extends: .cuda-cmake-latest
   stage: build
   script:
     - cmake
