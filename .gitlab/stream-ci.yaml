@@ -136,6 +136,7 @@ consume:cmake-minimum:
   extends: .toolchain-matrix-minimum
   stage: consume
   needs:
+    - build:cmake-minimum
     - test:cmake-minimum
   # NOTE 1: CMake creates build and install folders as needed.
   # NOTE 2: Lack of space in -H<folder> -B<folder> is important!
@@ -166,6 +167,7 @@ consume:cmake-latest:
   extends: .toolchain-matrix-latest
   stage: consume
   needs:
+    - build:cmake-latest
     - test:cmake-latest
   script:
     - cmake
