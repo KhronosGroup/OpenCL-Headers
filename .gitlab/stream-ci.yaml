@@ -169,23 +169,29 @@ consume:cmake-latest:
     - test:cmake-latest
   script:
     - cmake
-      -G Ninja
+      -G "Ninja Multi-Config"
       -D CMAKE_CXX_COMPILER=$COMPILER
-      -D CMAKE_BUILD_TYPE=Release
       -D CMAKE_PREFIX_PATH=$CI_PROJECT_DIR/install
       -B $CI_PROJECT_DIR/downstream/bare
       -S $CI_PROJECT_DIR/tests/pkgconfig/bare
     - cmake
       --build downstream/bare
+      --config Debug
+    - cmake
+      --build downstream/bare
+      --config Release
     # Emulate the presence of the SDK
     - cmake -E
       make_directory $CI_PROJECT_DIR/install/share/cmake/OpenCL
     - echo 'include("${CMAKE_CURRENT_LIST_DIR}/../OpenCLHeaders/OpenCLHeadersTargets.cmake")' > $CI_PROJECT_DIR/install/share/cmake/OpenCL/OpenCLConfig.cmake
     - cmake
-      -G Ninja
-      -D CMAKE_BUILD_TYPE=Release
+      -G "Ninja Multi-Config"
       -D CMAKE_PREFIX_PATH=$CI_PROJECT_DIR/install
       -B ./downstream/sdk
       -S ./tests/pkgconfig/sdk
     - cmake
       --build downstream/sdk
+      --config Debug
+    - cmake
+      --build downstream/sdk
+      --config Release
