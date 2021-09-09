@@ -21,7 +21,7 @@ variables:
   parallel:
     matrix:
   # NOTE: Old CMake versions will likely not use cutting-edge compilers
-      - COMPILER: [g++-7, g++-8, clang-8, clang-9, clang-10]
+      - COMPILER: [gcc-7, gcc-8, clang-8, clang-9, clang-10]
   before_script:
     - export PATH=/opt/Kitware/CMake/$CMAKE_MINIMUM/bin:$PATH
 
@@ -30,7 +30,7 @@ variables:
   parallel:
     matrix:
   # NOTE: Cutting edge CMake versions will likely not use old compilers
-      - COMPILER: [g++-9, g++-10, clang-11, clang-12, clang-13]
+      - COMPILER: [gcc-9, gcc-10, clang-11, clang-12, clang-13]
   before_script:
     - export PATH=/opt/Kitware/CMake/$CMAKE_LATEST/bin:$PATH
 
@@ -48,10 +48,9 @@ build:cmake-minimum:
   # NOTE 2: Lack of space in -H<folder> -B<folder> is important!
   #         https://stackoverflow.com/a/20611964/1476661
   script:
-    - echo $COMPILER
     - cmake
       -G Ninja
-      -D CMAKE_CXX_COMPILER=$COMPILER
+      -D CMAKE_C_COMPILER=$COMPILER
       -D CMAKE_BUILD_TYPE=Release
       -D BUILD_TESTING=ON
       -D CMAKE_INSTALL_PREFIX=$INSTALL_DIR
@@ -74,7 +73,7 @@ build:cmake-latest:
   script:
     - cmake
       -G "Ninja Multi-Config"
-      -D CMAKE_CXX_COMPILER=$COMPILER
+      -D CMAKE_C_COMPILER=$COMPILER
       -D BUILD_TESTING=ON
       -D CMAKE_INSTALL_PREFIX=$INSTALL_DIR
       -B $BUILD_DIR
@@ -145,7 +144,7 @@ consume:cmake-minimum:
   script:
     - cmake
       -G Ninja
-      -D CMAKE_CXX_COMPILER=$COMPILER
+      -D CMAKE_C_COMPILER=$COMPILER
       -D CMAKE_BUILD_TYPE=Release
       -D CMAKE_PREFIX_PATH=$INSTALL_DIR
       -B$CI_PROJECT_DIR/downstream/bare
@@ -173,7 +172,7 @@ consume:cmake-latest:
   script:
     - cmake
       -G "Ninja Multi-Config"
-      -D CMAKE_CXX_COMPILER=$COMPILER
+      -D CMAKE_C_COMPILER=$COMPILER
       -D CMAKE_PREFIX_PATH=$CI_PROJECT_DIR/install
       -B $CI_PROJECT_DIR/downstream/bare
       -S $CI_PROJECT_DIR/tests/pkgconfig/bare
