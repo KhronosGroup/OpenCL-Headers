@@ -13,7 +13,8 @@ RUN set -ex; \
     apt-add-repository -y 'deb [arch=amd64] https://apt.llvm.org/bionic/ llvm-toolchain-bionic-12 main' ; \
     apt-add-repository -y 'deb [arch=amd64] https://apt.llvm.org/bionic/ llvm-toolchain-bionic-13 main' ; \
 #   install ninja, GCC 7-10, LLVM 8-13 and build-essential to get linkers, etc.
-    apt install -y -qq build-essential g++-7 g++-8 g++-9 g++-10 clang-8 clang-9 clang-10 clang-11 clang-12 clang-13 ninja-build ; \
+#   install git to download dependencies
+    apt install -y -qq build-essential g++-7 g++-8 g++-9 g++-10 clang-8 clang-9 clang-10 clang-11 clang-12 clang-13 ninja-build git ; \
 #   install CMake minimum (3.0.2) and latest (3.21.2)
     mkdir -p /opt/Kitware/CMake ; \
     wget -c https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Linux-i386.tar.gz -O - | tar -xz --directory /opt/Kitware/CMake ; \
