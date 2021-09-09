@@ -48,6 +48,7 @@ build:cmake-minimum:
   # NOTE 2: Lack of space in -H<folder> -B<folder> is important!
   #         https://stackoverflow.com/a/20611964/1476661
   script:
+    - echo $COMPILER
     - cmake
       -G Ninja
       -D CMAKE_CXX_COMPILER=$COMPILER
