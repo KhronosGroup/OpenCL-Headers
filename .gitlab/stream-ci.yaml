@@ -17,7 +17,7 @@ variables:
 ########################
 
 .toolchain-matrix-minimum:
-  image: streamhpc/opencl-sdk-base:ubuntu-18.04-20210908
+  image: streamhpc/opencl-sdk-base:ubuntu-18.04-20210909
   parallel:
     matrix:
   # NOTE: Old CMake versions will likely not use cutting-edge compilers
@@ -26,7 +26,7 @@ variables:
     - export PATH=/opt/Kitware/CMake/$CMAKE_MINIMUM/bin:$PATH
 
 .toolchain-matrix-latest:
-  image: streamhpc/opencl-sdk-base:ubuntu-18.04-20210908
+  image: streamhpc/opencl-sdk-base:ubuntu-18.04-20210909
   parallel:
     matrix:
   # NOTE: Cutting edge CMake versions will likely not use old compilers
