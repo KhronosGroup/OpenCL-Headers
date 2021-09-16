@@ -25,6 +25,33 @@
 extern "C" {
 #endif
 
+/***************************************************************
+* cl_intel_sharing_format_query_va_api
+***************************************************************/
+#define cl_intel_sharing_format_query_va_api 1
+
+/* when cl_intel_va_api_media_sharing is supported */
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetSupportedVA_APIMediaSurfaceFormatsINTEL(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint plane,
+    cl_uint num_entries,
+    VAImageFormat* va_api_formats,
+    cl_uint* num_surface_formats) ;
+
+typedef cl_int (CL_API_CALL *
+clGetSupportedVA_APIMediaSurfaceFormatsINTEL_fn)(
+    cl_context context,
+    cl_mem_flags flags,
+    cl_mem_object_type image_type,
+    cl_uint plane,
+    cl_uint num_entries,
+    VAImageFormat* va_api_formats,
+    cl_uint* num_surface_formats) ;
+
 /******************************************
 * cl_intel_va_api_media_sharing extension *
 *******************************************/
