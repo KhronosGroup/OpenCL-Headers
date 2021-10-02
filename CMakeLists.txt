@@ -6,21 +6,21 @@ project(OpenCLHeaders
   # https://stackoverflow.com/questions/43379311/why-does-project-affect-cmakes-opinion-on-cmake-sizeof-void-p
 )
 
+include(GNUInstallDirs)
+
 add_library(Headers INTERFACE)
 target_include_directories(Headers
   SYSTEM
   BEFORE
   INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-    $<INSTALL_INTERFACE:include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
 install(
   TARGETS Headers
   EXPORT OpenCLHeadersTargets
 )
-
-include(GNUInstallDirs)
 
 install(
   DIRECTORY CL
