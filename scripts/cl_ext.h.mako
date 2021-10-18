@@ -159,16 +159,20 @@ ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 %      endif
 %    endfor
 %    for enum in sorted(block.findall('enum'), key=getEnumSortKey):
-%      if enum.get('name') in enums:
-%        if enums[enum.get('name')].Value:
-#define ${enum.get('name').ljust(51)} ${enums[enum.get('name')].Value}
-%        elif enums[enum.get('name')].Bitpos:
-#define ${enum.get('name').ljust(51)} (1 << ${enums[enum.get('name')].Bitpos})
-%        else:
-// enum ${enum.get('name')} is unassigned!
-%        endif
+%      if isDuplicateName(enum.get('name')):
+/* enum ${enum.get('name')} */
 %      else:
+%        if enum.get('name') in enums:
+%          if enums[enum.get('name')].Value:
+#define ${enum.get('name').ljust(51)} ${enums[enum.get('name')].Value}
+%          elif enums[enum.get('name')].Bitpos:
+#define ${enum.get('name').ljust(51)} (1 << ${enums[enum.get('name')].Bitpos})
+%          else:
+// enum ${enum.get('name')} is unassigned!
+%          endif
+%        else:
 // enum ${enum.get('name')} not found!
+%        endif
 %      endif
 %    endfor
 %    if block.findall('command'):
