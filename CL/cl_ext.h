@@ -954,8 +954,8 @@ typedef cl_ulong            cl_semaphore_payload_khr;
 
 /* cl_semaphore_info_khr or cl_semaphore_properties_khr */
 #define CL_SEMAPHORE_TYPE_KHR                               0x203D
-#define CL_DEVICE_HANDLE_LIST_KHR                           0x2051
-#define CL_DEVICE_HANDLE_LIST_END_KHR                       0
+/* enum CL_DEVICE_HANDLE_LIST_KHR */
+/* enum CL_DEVICE_HANDLE_LIST_END_KHR */
 
 /* cl_command_type */
 #define CL_COMMAND_SEMAPHORE_WAIT_KHR                       0x2042
