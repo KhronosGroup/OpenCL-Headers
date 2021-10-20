@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
 
+# Include gudard for including this project multiple times
+if(TARGET Headers)
+  return()
+endif()
+
 project(OpenCLHeaders
   VERSION 2.2
   LANGUAGES C # Ideally should be NONE, but GNUInstallDirs detects platform arch using try_compile
@@ -7,6 +12,7 @@ project(OpenCLHeaders
 )
 
 add_library(Headers INTERFACE)
+add_library(OpenCL::Headers ALIAS Headers)
 target_include_directories(Headers
   SYSTEM
   BEFORE
