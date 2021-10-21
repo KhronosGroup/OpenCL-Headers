@@ -882,7 +882,7 @@ clGetSemaphoreHandleForTypeKHR_fn)(
     cl_external_semaphore_handle_type_khr handle_type,
     size_t handle_size,
     void* handle_ptr,
-    size_t* handle_size_ret) CL_API_SUFFIX__VERSION_3_0;
+    size_t* handle_size_ret) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSemaphoreHandleForTypeKHR(
@@ -891,7 +891,7 @@ clGetSemaphoreHandleForTypeKHR(
     cl_external_semaphore_handle_type_khr handle_type,
     size_t handle_size,
     void* handle_ptr,
-    size_t* handle_size_ret) CL_API_SUFFIX__VERSION_3_0;
+    size_t* handle_size_ret) CL_API_SUFFIX__VERSION_1_2;
 
 /***************************************************************
 * cl_khr_external_semaphore_dx_fence
@@ -969,7 +969,7 @@ typedef cl_semaphore_khr (CL_API_CALL *
 clCreateSemaphoreWithPropertiesKHR_fn)(
     cl_context context,
     const cl_semaphore_properties_khr* sema_props,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_3_0;
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int (CL_API_CALL *
 clEnqueueWaitSemaphoresKHR_fn)(
@@ -979,7 +979,7 @@ clEnqueueWaitSemaphoresKHR_fn)(
     const cl_semaphore_payload_khr* sema_payload_list,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_3_0;
+    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int (CL_API_CALL *
 clEnqueueSignalSemaphoresKHR_fn)(
@@ -989,7 +989,7 @@ clEnqueueSignalSemaphoresKHR_fn)(
     const cl_semaphore_payload_khr* sema_payload_list,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_3_0;
+    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int (CL_API_CALL *
 clGetSemaphoreInfoKHR_fn)(
@@ -997,21 +997,21 @@ clGetSemaphoreInfoKHR_fn)(
     cl_semaphore_info_khr param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
+    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int (CL_API_CALL *
 clReleaseSemaphoreKHR_fn)(
-    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_3_0;
+    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int (CL_API_CALL *
 clRetainSemaphoreKHR_fn)(
-    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_3_0;
+    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_semaphore_khr CL_API_CALL
 clCreateSemaphoreWithPropertiesKHR(
     cl_context context,
     const cl_semaphore_properties_khr* sema_props,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_3_0;
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueWaitSemaphoresKHR(
@@ -1021,7 +1021,7 @@ clEnqueueWaitSemaphoresKHR(
     const cl_semaphore_payload_khr* sema_payload_list,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_3_0;
+    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueSignalSemaphoresKHR(
@@ -1031,7 +1031,7 @@ clEnqueueSignalSemaphoresKHR(
     const cl_semaphore_payload_khr* sema_payload_list,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_3_0;
+    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSemaphoreInfoKHR(
@@ -1039,15 +1039,15 @@ clGetSemaphoreInfoKHR(
     cl_semaphore_info_khr param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
+    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseSemaphoreKHR(
-    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_3_0;
+    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainSemaphoreKHR(
-    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_3_0;
+    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
 /**********************************
  * cl_arm_import_memory extension *
