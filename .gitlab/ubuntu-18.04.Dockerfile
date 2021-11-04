@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:18.04 AS apt-installs
 RUN set -ex; \
     export DEBIAN_FRONTEND=noninteractive ; \
     apt update -qq; \
@@ -17,12 +17,26 @@ RUN set -ex; \
 #   install ruby to run CMock
 #   install libidn11 which CMake 3.1.3 only depends on
 #   install ca-certificates to `git clone` via HTTPS
-    apt install -y -qq build-essential g++-7 g++-8 g++-9 g++-10 clang-8 clang-9 clang-10 clang-11 clang-12 clang-13 ninja-build git ruby libidn11 ca-certificates ; \
+#   install SFML dependencies
+#           libx11-dev libxrandr-dev libxi-dev
+#           mesa-common-dev for gl.h
+#           libgl1-mesa-dev for libGL.so
+#           libudev-dev
+#   install Vcpkg dependencies
+#           curl zip unzip tar
+    apt install -y -qq build-essential g++-7 g++-8 g++-9 g++-10 clang-8 clang-9 clang-10 clang-11 clang-12 clang-13 ninja-build git ruby libidn11 ca-certificates libx11-dev libxrandr-dev libxi-dev mesa-common-dev libgl1-mesa-dev libudev-dev curl zip unzip tar
+
 #   install CMake minimum (3.0.2, 3.1.3) and latest (3.21.2)
-    mkdir -p /opt/Kitware/CMake ; \
+RUN mkdir -p /opt/Kitware/CMake ; \
     wget -c https://github.com/Kitware/CMake/releases/download/v3.0.2/cmake-3.0.2-Linux-i386.tar.gz -O - | tar -xz --directory /opt/Kitware/CMake ; \
     mv /opt/Kitware/CMake/cmake-3.0.2-Linux-i386 /opt/Kitware/CMake/3.0.2 ; \
     wget -c https://github.com/Kitware/CMake/releases/download/v3.1.3/cmake-3.1.3-Linux-x86_64.tar.gz -O - | tar -xz --directory /opt/Kitware/CMake ; \
     mv /opt/Kitware/CMake/cmake-3.1.3-Linux-x86_64 /opt/Kitware/CMake/3.1.3 ; \
     wget -c https://github.com/Kitware/CMake/releases/download/v3.21.2/cmake-3.21.2-linux-x86_64.tar.gz -O - | tar -xz --directory /opt/Kitware/CMake ; \
     mv /opt/Kitware/CMake/cmake-3.21.2-linux-x86_64 /opt/Kitware/CMake/3.21.2
+
+#   install Vcpkg
+RUN git clone --depth 1 https://github.com/Microsoft/vcpkg.git /opt/Microsoft/vcpkg ; \
+    /opt/Microsoft/vcpkg/bootstrap-vcpkg.sh ; \
+#   install SFML, TCLAP, GLM
+    /opt/Microsoft/vcpkg/vcpkg install sfml tclap glm
