@@ -1297,11 +1297,11 @@ typedef cl_uint cl_command_termination_reason_arm;
 #define CL_COMMAND_TERMINATION_CONTROLLED_FAILURE_ARM 2
 #define CL_COMMAND_TERMINATION_ERROR_ARM 3
 
-/***************************************
-* cl_intel_thread_local_exec extension *
-****************************************/
+/******************************************
+* cl_intel_exec_by_local_thread extension *
+******************************************/
 
-#define cl_intel_thread_local_exec 1
+#define cl_intel_exec_by_local_thread 1
 
 #define CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL      (((cl_bitfield)1) << 31)
 
