@@ -9,7 +9,16 @@ https://github.com/KhronosGroup/OpenCL-Headers
 Issues, proposed fixes for issues, and other suggested changes should be
 created using Github.
 
-## CMake Package
+## Build instructions
+
+> While the OpenCL Headers can be built and installed in isolation, it is part of the [OpenCL SDK](https://github.com/KhronosGroup/OpenCL-SDK). If looking for streamlined build experience and a complete development package, refer to the SDK build instructions instead of the following guide.
+
+### Dependencies
+
+- The OpenCL Headers CMake package support uses CMake for its build system.
+If CMake is not provided by your build system or OS package manager, please consult the [CMake website](https://cmake.org).
+
+### Example Build
 While the headers may just be copied as-is, this repository also contains a
 CMake script with an install rule to allow for packaging the headers.
 
@@ -18,11 +27,15 @@ cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/chosen/install/prefix
 cmake --build build --target install
 ```
  
-To consume the package:
+### Example Use
+
+Example CMake invocation
 
 ```bash
-cmake path/to/opencl/app -DOpenCLHeaders_ROOT=/chosen/install/prefix
+cmake -D CMAKE_PREFIX_PATH=/chosen/install/prefix /path/to/opencl/app 
 ```
+
+and sample `CMakeLists.txt`
 
 ```cmake
 cmake_minimum_required(VERSION 3.0)
@@ -36,7 +49,7 @@ target_link_libraries(app PRIVATE OpenCL::Headers)
 ## Branch Structure
 
 The OpenCL API headers in this repository are Unified headers and are designed
-to work with all released OpenCL versions.  This differs from previous OpenCL
+to work with all released OpenCL versions. This differs from previous OpenCL
 API headers, where version-specific API headers either existed in separate
 branches, or in separate folders in a branch.
 
