@@ -62,11 +62,11 @@ typedef struct _cl_mutable_command_khr* cl_mutable_command_khr;
 #define CL_INCOMPATIBLE_COMMAND_QUEUE_KHR                   -1140
 
 /* cl_command_buffer_info_khr */
-#define CL_COMMAND_BUFFER_INFO_QUEUES_KHR                   0x1294
-#define CL_COMMAND_BUFFER_INFO_NUM_QUEUES_KHR               0x1295
-#define CL_COMMAND_BUFFER_INFO_REFERENCE_COUNT_KHR          0x1296
-#define CL_COMMAND_BUFFER_INFO_STATE_KHR                    0x1297
-#define CL_COMMAND_BUFFER_INFO_PROPERTIES_ARRAY_KHR         0x1298
+#define CL_COMMAND_BUFFER_QUEUES_KHR                        0x1294
+#define CL_COMMAND_BUFFER_NUM_QUEUES_KHR                    0x1295
+#define CL_COMMAND_BUFFER_REFERENCE_COUNT_KHR               0x1296
+#define CL_COMMAND_BUFFER_STATE_KHR                         0x1297
+#define CL_COMMAND_BUFFER_PROPERTIES_ARRAY_KHR              0x1298
 
 /* cl_command_buffer_state_khr */
 #define CL_COMMAND_BUFFER_STATE_RECORDING_KHR               0
