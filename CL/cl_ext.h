@@ -38,8 +38,9 @@ typedef struct _cl_command_buffer_khr* cl_command_buffer_khr;
 typedef cl_uint             cl_sync_point_khr;
 typedef cl_uint             cl_command_buffer_info_khr;
 typedef cl_uint             cl_command_buffer_state_khr;
-typedef cl_bitfield         cl_command_buffer_properties_khr;
-typedef cl_bitfield         cl_ndrange_kernel_command_properties_khr;
+typedef cl_properties       cl_command_buffer_properties_khr;
+typedef cl_bitfield         cl_command_buffer_flags_khr;
+typedef cl_properties       cl_ndrange_kernel_command_properties_khr;
 typedef struct _cl_mutable_command_khr* cl_mutable_command_khr;
 
 /* cl_device_info */
@@ -53,7 +54,9 @@ typedef struct _cl_mutable_command_khr* cl_mutable_command_khr;
 #define CL_COMMAND_BUFFER_CAPABILITY_OUT_OF_ORDER_KHR       (1 << 3)
 
 /* cl_command_buffer_properties_khr */
-#define CL_COMMAND_BUFFER_PROPERTIES_KHR                    0x1293
+#define CL_COMMAND_BUFFER_FLAGS_KHR                         0x1293
+
+/* cl_command_buffer_flags_khr */
 #define CL_COMMAND_BUFFER_SIMULTANEOUS_USE_KHR              (1 << 0)
 
 /* Error codes */
