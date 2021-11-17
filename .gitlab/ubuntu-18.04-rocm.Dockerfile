@@ -1,10 +1,10 @@
-FROM streamhpc/opencl-sdk-base:ubuntu-18.04-20211103
+FROM streamhpc/opencl-sdk-base:ubuntu-18.04-20211117
 RUN set -ex; \
     export DEBIAN_FRONTEND=noninteractive ; \
-    apt update -qq; \
 #   Register ROCm APT repo
-    wget -q -O - https://repo.radeon.com/rocm/rocm.gpg.key | apt-key add - ; \
-    apt-add-repository 'deb [arch=amd64] https://repo.radeon.com/rocm/apt/debian/ ubuntu main' ; \
+    wget --quiet --recursive --no-directories --no-parent "https://repo.radeon.com/amdgpu-install/latest/ubuntu/bionic/" --accept "amdgpu-install-*_all.deb" ; \
+    apt install -y -qq ./amdgpu-install-*_all.deb libnuma-dev ; \
+    apt update -qq; \
+    rm ./amdgpu-install-*_all.deb ; \
 #   Install OpenCL package only (and dependency)
-    apt install -y -qq rocm-opencl-dev libnuma-dev ; \
-    ln -s /opt/rocm-4.5.0 /opt/rocm
+    amdgpu-install -y --usecase=opencl
