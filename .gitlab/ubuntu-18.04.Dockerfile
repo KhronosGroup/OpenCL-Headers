@@ -39,4 +39,4 @@ RUN mkdir -p /opt/Kitware/CMake ; \
 RUN git clone --depth 1 https://github.com/Microsoft/vcpkg.git /opt/Microsoft/vcpkg ; \
     /opt/Microsoft/vcpkg/bootstrap-vcpkg.sh ; \
 #   install SFML, TCLAP, GLM
-    /opt/Microsoft/vcpkg/vcpkg install sfml tclap glm
+    /opt/Microsoft/vcpkg/vcpkg install sfml tclap glm glew
