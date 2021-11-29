@@ -21,10 +21,11 @@ RUN set -ex; \
 #           libx11-dev libxrandr-dev libxi-dev
 #           mesa-common-dev for gl.h
 #           libgl1-mesa-dev for libGL.so
+#           libglu1-mesa-dev for glu.h
 #           libudev-dev
 #   install Vcpkg dependencies
 #           curl zip unzip tar
-    apt install -y -qq build-essential g++-7 g++-8 g++-9 g++-10 clang-8 clang-9 clang-10 clang-11 clang-12 clang-13 ninja-build git ruby libidn11 ca-certificates libx11-dev libxrandr-dev libxi-dev mesa-common-dev libgl1-mesa-dev libudev-dev curl zip unzip tar
+    apt install -y -qq build-essential g++-7 g++-8 g++-9 g++-10 clang-8 clang-9 clang-10 clang-11 clang-12 clang-13 ninja-build git ruby libidn11 ca-certificates libx11-dev libxrandr-dev libxi-dev mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev libudev-dev curl zip unzip tar
 
 #   install CMake minimum (3.0.2 (Headers, ICD Loader), 3.1.3 (CLHPP), 3.3.2 (SDK)) and latest (3.21.2)
 RUN mkdir -p /opt/Kitware/CMake ; \
