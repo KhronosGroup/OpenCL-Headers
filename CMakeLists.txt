@@ -91,3 +91,41 @@ endif()
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR OPENCL_HEADERS_BUILD_TESTING) AND BUILD_TESTING)
   add_subdirectory(tests)
 endif()
+
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    find_package(Python3 COMPONENTS Interpreter)
+    set(OPENCL_HEADERS_XML_PATH CACHE FILEPATH "Path to cl.xml for OpenCL Extension Loader genereration")
+    set(OPENCL_HEADERS_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated)
+    add_custom_target(headers_generate
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${OPENCL_HEADERS_OUTPUT_DIRECTORY}
+        COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_CURRENT_SOURCE_DIR}/scripts
+            ${Python3_EXECUTABLE} gen_headers.py
+            -registry ${OPENCL_HEADERS_XML_PATH}
+            -o ${OPENCL_HEADERS_OUTPUT_DIRECTORY}
+    )
+    add_custom_target(headers_copy
+        COMMAND ${CMAKE_COMMAND} -E copy
+            ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_d3d10.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/CL
+        COMMAND ${CMAKE_COMMAND} -E copy
+            ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_d3d11.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/CL
+        COMMAND ${CMAKE_COMMAND} -E copy
+            ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_dx9_media_sharing.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/CL
+        COMMAND ${CMAKE_COMMAND} -E copy
+            ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_egl.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/CL
+        COMMAND ${CMAKE_COMMAND} -E copy
+            ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_ext.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/CL
+        COMMAND ${CMAKE_COMMAND} -E copy
+            ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_gl.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/CL
+        COMMAND ${CMAKE_COMMAND} -E copy
+            ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_va_api_media_sharing_intel.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/CL
+    )
+    set_target_properties(headers_generate PROPERTIES FOLDER "Generation")
+    set_target_properties(headers_copy PROPERTIES FOLDER "Generation")
+endif()
