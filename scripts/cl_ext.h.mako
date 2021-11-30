@@ -76,6 +76,15 @@ def getCParameterStrings(params):
             strings.append(paramstr)
     return strings
 
+# Gets a bit string for the specified bit position:
+def getBitPosString(bitpos):
+    ret = '(1'
+    ret += 'ULL' if int(bitpos) > 31 else ''
+    ret += ' << '
+    ret += bitpos
+    ret += ')'
+    return ret
+
 # Names that have been generated already, since some may be shared by multiple
 # extensions:
 generatedNames = set()
@@ -166,7 +175,7 @@ ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 %          if enums[enum.get('name')].Value:
 #define ${enum.get('name').ljust(51)} ${enums[enum.get('name')].Value}
 %          elif enums[enum.get('name')].Bitpos:
-#define ${enum.get('name').ljust(51)} (1 << ${enums[enum.get('name')].Bitpos})
+#define ${enum.get('name').ljust(51)} ${getBitPosString(enums[enum.get('name')].Bitpos)}
 %          else:
 // enum ${enum.get('name')} is unassigned!
 %          endif
