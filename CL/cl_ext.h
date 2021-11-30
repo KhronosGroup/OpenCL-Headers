@@ -1684,7 +1684,7 @@ typedef cl_uint cl_command_termination_reason_arm;
 
 #define cl_arm_protected_memory_allocation 1
 
-#define CL_MEM_PROTECTED_ALLOC_ARM (1 << 36)
+#define CL_MEM_PROTECTED_ALLOC_ARM (1ULL << 36)
 
 /******************************************
 * cl_intel_exec_by_local_thread extension *
