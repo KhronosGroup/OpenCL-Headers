@@ -18,6 +18,7 @@ add_library(OpenCL::Headers ALIAS Headers)
 
 if(CMAKE_SYSTEM_NAME MATCHES Darwin)
   execute_process(
+    COMMAND ln -shf ${CMAKE_CURRENT_SOURCE_DIR}/CL ${CMAKE_CURRENT_BINARY_DIR}/CL
     COMMAND ln -shf ${CMAKE_CURRENT_SOURCE_DIR}/CL ${CMAKE_CURRENT_BINARY_DIR}/OpenCL
   )
   target_include_directories(Headers
