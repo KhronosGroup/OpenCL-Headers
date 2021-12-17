@@ -101,8 +101,6 @@ build:cmake-latest:
 ##            ##
 ################
 
-## ROCm
-
 test:cmake-minimum:
   extends: .toolchain-matrix-minimum
   stage: test
@@ -129,8 +127,6 @@ test:cmake-latest:
 ## Consume stage ##
 ##               ##
 ###################
-
-## ROCm
 
 consume:cmake-minimum:
   extends: .toolchain-matrix-minimum
