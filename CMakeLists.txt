@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-# Include gudard for including this project multiple times
+# Include guard for including this project multiple times
 if(TARGET Headers)
   return()
 endif()
