@@ -2347,6 +2347,19 @@ clEnqueueMemsetINTEL(
 
 #endif /* CL_NO_PROTOTYPES */
 
+/***************************************************************
+* cl_intel_mem_alloc_buffer_location
+***************************************************************/
+#define cl_intel_mem_alloc_buffer_location 1
+#define CL_INTEL_MEM_ALLOC_BUFFER_LOCATION_EXTENSION_NAME \
+    "cl_intel_mem_alloc_buffer_location"
+
+/* cl_mem_properties_intel */
+#define CL_MEM_ALLOC_BUFFER_LOCATION_INTEL                  0x419E
+
+/* cl_mem_alloc_info_intel */
+/* enum CL_MEM_ALLOC_BUFFER_LOCATION_INTEL */
+
 /***************************************************
 * cl_intel_create_buffer_with_properties extension *
 ****************************************************/
