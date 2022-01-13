@@ -17,6 +17,10 @@
 #ifndef OPENCL_CL_LAYER_H_
 #define OPENCL_CL_LAYER_H_
 
+/*
+** This header is generated from the Khronos OpenCL XML API Registry.
+*/
+
 #include <CL/cl_icd.h>
 #include <CL/cl.h>
 
@@ -42,11 +46,25 @@ typedef cl_uint             cl_layer_api_version;
 
 
 typedef cl_int (CL_API_CALL *
+clGetLayerInfo_fn)(
+    size_t param_value_size,
+    cl_layer_info param_name,
+    void* param_value,
+    size_t* param_value_size_ret) ;
+
+typedef cl_int (CL_API_CALL *
 pfn_clGetLayerInfo)(
     size_t param_value_size,
     cl_layer_info param_name,
     void* param_value,
     size_t* param_value_size_ret) ;
+
+typedef cl_int (CL_API_CALL *
+clInitLayer_fn)(
+    cl_uint num_entries,
+    const cl_icd_dispatch* target_dispatch,
+    cl_uint* num_entries_ret,
+    const cl_icd_dispatch** layer_dispatch) ;
 
 typedef cl_int (CL_API_CALL *
 pfn_clInitLayer)(

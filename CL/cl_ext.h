@@ -1514,7 +1514,7 @@ clImportMemoryARM(
 #define CL_ARM_PROTECTED_MEMORY_ALLOCATION_EXTENSION_NAME \
     "cl_arm_protected_memory_allocation"
 
-#define CL_MEM_PROTECTED_ALLOC_ARM                          (1 << 36)
+#define CL_MEM_PROTECTED_ALLOC_ARM                          (1ULL << 36)
 
 /***************************************************************
 * cl_arm_scheduling_controls
