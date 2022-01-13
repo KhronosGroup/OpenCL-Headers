@@ -198,6 +198,18 @@ ${api.Name}_fn)(
     ${paramStr}) ${api.Suffix};
 %          endif
 %        endfor
+%        if prefix_pointer_gen:
+
+typedef ${api.RetType} (CL_API_CALL *
+pfn_${api.Name})(
+%          for i, paramStr in enumerate(getCParameterStrings(api.Params)):
+%            if i < len(api.Params)-1:
+    ${paramStr},
+%            else:
+    ${paramStr}) ${api.Suffix};
+%            endif
+%          endfor
+%        endif
 %      endfor
 
 #ifndef CL_NO_PROTOTYPES
