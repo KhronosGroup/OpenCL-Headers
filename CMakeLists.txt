@@ -125,6 +125,9 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
         COMMAND ${CMAKE_COMMAND} -E copy
             ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_va_api_media_sharing_intel.h
             ${CMAKE_CURRENT_SOURCE_DIR}/CL
+        COMMAND ${CMAKE_COMMAND} -E copy
+            ${OPENCL_HEADERS_OUTPUT_DIRECTORY}/cl_layer.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/CL
     )
     set_target_properties(headers_generate PROPERTIES FOLDER "Generation")
     set_target_properties(headers_copy PROPERTIES FOLDER "Generation")

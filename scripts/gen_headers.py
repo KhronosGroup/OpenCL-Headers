@@ -79,7 +79,8 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis).
+              extapis=extapis,
+              prefix_pointer_gen=False).
           encode('utf-8', 'replace'))
 
         print('Generating cl_d3d10.h...')
@@ -99,7 +100,8 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis).
+              extapis=extapis,
+              prefix_pointer_gen=False).
           encode('utf-8', 'replace'))
 
         print('Generating cl_d3d11.h...')
@@ -119,7 +121,8 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis).
+              extapis=extapis,
+              prefix_pointer_gen=False).
           encode('utf-8', 'replace'))
 
         print('Generating cl_egl.h...')
@@ -135,7 +138,8 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis).
+              extapis=extapis,
+              prefix_pointer_gen=False).
           encode('utf-8', 'replace'))
 
         print('Generating cl_gl.h...')
@@ -157,13 +161,12 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis).
+              extapis=extapis,
+              prefix_pointer_gen=False).
           encode('utf-8', 'replace'))
 
-        # cl_layer.h is currently generated but unused because the ICD loader
-        # uses a different naming convention for function pointers.
-        print('Generating cl_layer.h (note: unused)...')
-        gen = open(args.directory + '/cl_layer-unused.h', 'wb')
+        print('Generating cl_layer.h...')
+        gen = open(args.directory + '/cl_layer.h', 'wb')
         gen.write(
           cl_ext_h_template.render_unicode(
               genExtensions={'cl_loader_layers'},
@@ -176,7 +179,8 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis).
+              extapis=extapis,
+              prefix_pointer_gen=True).
           encode('utf-8', 'replace'))
 
         print('Generating cl_va_api_media_sharing_intel.h...')
@@ -196,7 +200,8 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis).
+              extapis=extapis,
+              prefix_pointer_gen=False).
           encode('utf-8', 'replace'))
 
         print('Generating cl_ext.h...')
@@ -212,7 +217,8 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis).
+              extapis=extapis,
+              prefix_pointer_gen=False).
           encode('utf-8', 'replace'))
     except:
         traceback = RichTraceback()
