@@ -53,18 +53,25 @@ clGetLayerInfo_fn)(
     size_t* param_value_size_ret) ;
 
 typedef cl_int (CL_API_CALL *
-pfn_clGetLayerInfo)(
-    size_t param_value_size,
-    cl_layer_info param_name,
-    void* param_value,
-    size_t* param_value_size_ret) ;
-
-typedef cl_int (CL_API_CALL *
 clInitLayer_fn)(
     cl_uint num_entries,
     const cl_icd_dispatch* target_dispatch,
     cl_uint* num_entries_ret,
     const cl_icd_dispatch** layer_dispatch) ;
+
+/*
+** The function pointer typedefs prefixed with "pfn_" are provided for
+** compatibility with earlier versions of the headers.  New code is
+** encouraged to use the function pointer typedefs that are suffixed with
+** "_fn" instead, for consistency.
+*/
+
+typedef cl_int (CL_API_CALL *
+pfn_clGetLayerInfo)(
+    size_t param_value_size,
+    cl_layer_info param_name,
+    void* param_value,
+    size_t* param_value_size_ret) ;
 
 typedef cl_int (CL_API_CALL *
 pfn_clInitLayer)(

@@ -72,6 +72,7 @@ if __name__ == "__main__":
               },
               guard="OPENCL_CL_DX9_MEDIA_SHARING_H_",
               includes=getWin32OnlyIncludeString("#include <d3d9.h>"),
+              generate_pfn_typedefs=False,
               spec=spec,
               typedefs=typedefs,
               macros=macros,
@@ -79,8 +80,7 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis,
-              prefix_pointer_gen=False).
+              extapis=extapis).
           encode('utf-8', 'replace'))
 
         print('Generating cl_d3d10.h...')
@@ -93,6 +93,7 @@ if __name__ == "__main__":
               },
               guard="OPENCL_CL_D3D10_H_",
               includes=getDisableWarningIncludeString("#include <d3d10.h>"),
+              generate_pfn_typedefs=False,
               spec=spec,
               typedefs=typedefs,
               macros=macros,
@@ -100,8 +101,7 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis,
-              prefix_pointer_gen=False).
+              extapis=extapis).
           encode('utf-8', 'replace'))
 
         print('Generating cl_d3d11.h...')
@@ -114,6 +114,7 @@ if __name__ == "__main__":
               },
               guard="OPENCL_CL_D3D11_H_",
               includes=getDisableWarningIncludeString("#include <d3d11.h>"),
+              generate_pfn_typedefs=False,
               spec=spec,
               typedefs=typedefs,
               macros=macros,
@@ -121,8 +122,7 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis,
-              prefix_pointer_gen=False).
+              extapis=extapis).
           encode('utf-8', 'replace'))
 
         print('Generating cl_egl.h...')
@@ -131,6 +131,7 @@ if __name__ == "__main__":
           cl_ext_h_template.render_unicode(
               genExtensions={'cl_khr_egl_event', 'cl_khr_egl_image'},
               guard="OPENCL_CL_EGL_H_",
+              generate_pfn_typedefs=False,
               spec=spec,
               typedefs=typedefs,
               macros=macros,
@@ -138,8 +139,7 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis,
-              prefix_pointer_gen=False).
+              extapis=extapis).
           encode('utf-8', 'replace'))
 
         print('Generating cl_gl.h...')
@@ -154,6 +154,7 @@ if __name__ == "__main__":
                   'cl_intel_sharing_format_query_gl',
               },
               guard="OPENCL_CL_GL_H_",
+              generate_pfn_typedefs=False,
               spec=spec,
               typedefs=typedefs,
               macros=macros,
@@ -161,8 +162,7 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis,
-              prefix_pointer_gen=False).
+              extapis=extapis).
           encode('utf-8', 'replace'))
 
         print('Generating cl_layer.h...')
@@ -172,6 +172,7 @@ if __name__ == "__main__":
               genExtensions={'cl_loader_layers'},
               guard="OPENCL_CL_LAYER_H_",
               includes='#include <CL/cl_icd.h>',
+              generate_pfn_typedefs=True,
               spec=spec,
               typedefs=typedefs,
               macros=macros,
@@ -179,8 +180,7 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis,
-              prefix_pointer_gen=True).
+              extapis=extapis).
           encode('utf-8', 'replace'))
 
         print('Generating cl_va_api_media_sharing_intel.h...')
@@ -193,6 +193,7 @@ if __name__ == "__main__":
               },
               guard="OPENCL_CL_VA_API_MEDIA_SHARING_INTEL_H_",
               includes='#include <va/va.h>',
+              generate_pfn_typedefs=False,
               spec=spec,
               typedefs=typedefs,
               macros=macros,
@@ -200,8 +201,7 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis,
-              prefix_pointer_gen=False).
+              extapis=extapis).
           encode('utf-8', 'replace'))
 
         print('Generating cl_ext.h...')
@@ -210,6 +210,7 @@ if __name__ == "__main__":
           cl_ext_h_template.render_unicode(
               genExtensions={},
               guard="OPENCL_CL_EXT_H_",
+              generate_pfn_typedefs=False,
               spec=spec,
               typedefs=typedefs,
               macros=macros,
@@ -217,8 +218,7 @@ if __name__ == "__main__":
               enums=enums,
               apisigs=apisigs,
               coreapis=coreapis,
-              extapis=extapis,
-              prefix_pointer_gen=False).
+              extapis=extapis).
           encode('utf-8', 'replace'))
     except:
         traceback = RichTraceback()
