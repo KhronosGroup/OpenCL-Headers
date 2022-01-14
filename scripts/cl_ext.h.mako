@@ -198,8 +198,19 @@ ${api.Name}_fn)(
     ${paramStr}) ${api.Suffix};
 %          endif
 %        endfor
-%        if prefix_pointer_gen:
+%      endfor
+%      if generate_pfn_typedefs:
 
+/*
+** The function pointer typedefs prefixed with "pfn_" are provided for
+** compatibility with earlier versions of the headers.  New code is
+** encouraged to use the function pointer typedefs that are suffixed with
+** "_fn" instead, for consistency.
+*/
+%        for func in block.findall('command'):
+<%
+    api = apisigs[func.get('name')]
+%>
 typedef ${api.RetType} (CL_API_CALL *
 pfn_${api.Name})(
 %          for i, paramStr in enumerate(getCParameterStrings(api.Params)):
@@ -209,8 +220,8 @@ pfn_${api.Name})(
     ${paramStr}) ${api.Suffix};
 %            endif
 %          endfor
-%        endif
-%      endfor
+%        endfor
+%      endif
 
 #ifndef CL_NO_PROTOTYPES
 %      for func in block.findall('command'):
