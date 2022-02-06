@@ -11,6 +11,8 @@ project(OpenCLHeaders
   # https://stackoverflow.com/questions/43379311/why-does-project-affect-cmakes-opinion-on-cmake-sizeof-void-p
 )
 
+option(OPENCL_HEADERS_BUILD_TESTING "Enable support for OpenCL C headers testing." OFF)
+
 include(GNUInstallDirs)
 
 add_library(Headers INTERFACE)
@@ -83,7 +85,9 @@ install(
   DESTINATION ${config_package_location}
 )
 
-if(BUILD_TESTING)
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR OPENCL_HEADERS_BUILD_TESTING)
   include(CTest)
+endif()
+if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR OPENCL_HEADERS_BUILD_TESTING) AND BUILD_TESTING)
   add_subdirectory(tests)
 endif()
