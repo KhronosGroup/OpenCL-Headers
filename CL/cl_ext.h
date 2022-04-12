@@ -2446,6 +2446,18 @@ typedef struct _cl_queue_family_properties_intel {
 ***************************************************************/
 #define cl_intel_sharing_format_query 1
 
+/***************************************************************
+* cl_ext_image_from_buffer
+***************************************************************/
+
+#ifdef CL_VERSION_3_0
+
+#define cl_ext_image_from_buffer 1
+
+#define CL_IMAGE_REQUIREMENTS_SLICE_PITCH_ALIGNMENT_EXT  0x1291
+
+#endif
+
 #ifdef __cplusplus
 }
 #endif
