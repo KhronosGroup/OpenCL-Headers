@@ -501,20 +501,15 @@ typedef unsigned int cl_GLenum;
 #if !defined(__cplusplus) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
 #define  __CL_HAS_ANON_STRUCT__ 1
 #define  __CL_ANON_STRUCT__
-#elif defined( __GNUC__) && ! defined( __STRICT_ANSI__ )
-#define  __CL_HAS_ANON_STRUCT__ 1
-#define  __CL_ANON_STRUCT__ __extension__
-#elif defined( _WIN32) && defined(_MSC_VER) && ! defined(__STDC__)
-    #if _MSC_VER >= 1500
-   /* Microsoft Developer Studio 2008 supports anonymous structs, but
-    * complains by default. */
-    #define  __CL_HAS_ANON_STRUCT__ 1
-    #define  __CL_ANON_STRUCT__
+#if defined( _WIN32) && defined(_MSC_VER)
    /* Disable warning C4201: nonstandard extension used : nameless
     * struct/union */
     #pragma warning( push )
     #pragma warning( disable : 4201 )
-    #endif
+#endif
+#elif defined( __GNUC__) && ! defined( __STRICT_ANSI__ )
+#define  __CL_HAS_ANON_STRUCT__ 1
+#define  __CL_ANON_STRUCT__ __extension__
 #else
 #define  __CL_HAS_ANON_STRUCT__ 0
 #define  __CL_ANON_STRUCT__
@@ -1396,11 +1391,9 @@ typedef union
 #endif
 
 #if !defined(__cplusplus) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
-#elif defined( __GNUC__) && ! defined( __STRICT_ANSI__ )
-#elif defined( _WIN32) && defined(_MSC_VER) && ! defined(__STDC__)
-    #if _MSC_VER >=1500
-    #pragma warning( pop )
-    #endif
+#if defined( _WIN32) && defined(_MSC_VER)
+#pragma warning( pop )
+#endif
 #endif
 
 #endif  /* __CL_PLATFORM_H  */
