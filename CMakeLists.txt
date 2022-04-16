@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
+cmake_policy(VERSION 3.0...3.22)
 
 # Include guard for including this project multiple times
 if(TARGET Headers)
