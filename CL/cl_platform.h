@@ -506,22 +506,29 @@ typedef unsigned int cl_GLenum;
     #define __CL_DOUBLE4__  1
 #endif
 
+// with line number
+#define STRING2(x) #x
+#define STRING(x) STRING2(x)
+
 /* Define capabilities for anonymous struct members. */
 #if !defined(__cplusplus) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
 #define  __CL_HAS_ANON_STRUCT__ 1
 #define  __CL_ANON_STRUCT__
-#if defined( _WIN32) && defined(_MSC_VER)
-   /* Disable warning C4201: nonstandard extension used : nameless
-    * struct/union */
-    #pragma warning( push )
-    #pragma warning( disable : 4201 )
-#endif
-#elif defined( __GNUC__) && ! defined( __STRICT_ANSI__ )
+#elif defined(_WIN32) && defined(_MSC_VER) && !defined(__STDC__)
+#define  __CL_HAS_ANON_STRUCT__ 1
+#define  __CL_ANON_STRUCT__
+#elif defined(__GNUC__) && ! defined(__STRICT_ANSI__)
 #define  __CL_HAS_ANON_STRUCT__ 1
 #define  __CL_ANON_STRUCT__ __extension__
 #else
 #define  __CL_HAS_ANON_STRUCT__ 0
 #define  __CL_ANON_STRUCT__
+#endif
+
+#if defined(_WIN32) && defined(_MSC_VER) && __CL_HAS_ANON_STRUCT__
+   /* Disable warning C4201: nonstandard extension used : nameless struct/union */
+    #pragma warning( push )
+    #pragma warning( disable : 4201 )
 #endif
 
 /* Define alignment keys */
@@ -1399,10 +1406,8 @@ typedef union
 }
 #endif
 
-#if !defined(__cplusplus) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
-#if defined( _WIN32) && defined(_MSC_VER)
-#pragma warning( pop )
-#endif
+#if defined(_WIN32) && defined(_MSC_VER) && __CL_HAS_ANON_STRUCT__
+    #pragma warning( pop )
 #endif
 
 #endif  /* __CL_PLATFORM_H  */
