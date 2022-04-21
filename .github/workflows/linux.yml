@@ -192,7 +192,7 @@ jobs:
 
     - name: Test
       shell: bash
-      working-directory: ${{runner.workspace}}/OpenCL-Layers/build
+      working-directory: ${{runner.workspace}}/OpenCL-Headers/build
       run: if [[ "${{matrix.GEN}}" == "Unix Makefiles" ]];
         then
           $CTEST_EXE --output-on-failure --parallel `nproc`;
