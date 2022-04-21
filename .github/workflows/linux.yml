@@ -5,10 +5,10 @@ on: [push, pull_request]
 jobs:
   compatibility:
     runs-on: ubuntu-18.04
-    container: streamhpc/opencl-sdk-intelcpu:ubuntu-18.04-20220127
+    container: streamhpc/opencl-sdk-base:ubuntu-18.04-20220127
     strategy:
       matrix:
-        # TODO: CMake 3.0.2 is SDK minimum (and ubuntu 18.04 canonical apt repo ver), not this repo's min
+        # TODO: CMake 3.0.2 is Headers minimum (and ubuntu 18.04 canonical apt repo ver), not this repo's min
         # Replace once backport to C++14 happened
         include:
           # Unix Makefiles
