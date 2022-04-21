@@ -1,4 +1,9 @@
-compatibility:
+name: MacOS
+
+on: [push, pull_request]
+
+jobs:
+  compatibility:
     runs-on: macos-latest
     strategy:
       matrix:
