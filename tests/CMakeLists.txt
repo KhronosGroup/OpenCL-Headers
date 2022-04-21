@@ -29,7 +29,8 @@ function(add_header_test NAME SOURCE)
   endforeach(VERSION)
 endfunction(add_header_test)
 
-enable_language(CXX)
-
 add_subdirectory(lang_c)
-add_subdirectory(lang_cpp)
+if(OPENCL_HEADERS_BUILD_CXX_TESTS)
+  enable_language(CXX)
+  add_subdirectory(lang_cpp)
+endif()

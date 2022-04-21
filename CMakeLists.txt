@@ -13,6 +13,7 @@ project(OpenCLHeaders
 )
 
 option(OPENCL_HEADERS_BUILD_TESTING "Enable support for OpenCL C headers testing." OFF)
+option(OPENCL_HEADERS_BUILD_CXX_TESTS "Enable support for OpenCL C headers testing in C++ mode." ON)
 
 include(GNUInstallDirs)
 
