@@ -134,8 +134,11 @@ extern "C" {
 #endif
 
 #if (defined (_WIN32) && defined(_MSC_VER))
+
+#if defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wlanguage-extension-token"
+#endif
 
 /* intptr_t is used in cl.h and provided by stddef.h in Visual C++, but not in clang */
 /* stdint.h was missing before Visual Studio 2010, include it for later versions and for clang */
@@ -157,7 +160,9 @@ typedef unsigned __int16        cl_half;
 typedef float                   cl_float;
 typedef double                  cl_double;
 
+#if defined(__clang__)
 #pragma clang diagnostic pop
+#endif
 
 /* Macro names and corresponding values defined by OpenCL */
 #define CL_CHAR_BIT         8
