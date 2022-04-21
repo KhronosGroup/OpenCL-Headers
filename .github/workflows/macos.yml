@@ -46,7 +46,7 @@ jobs:
         cmake --build $GITHUB_WORKSPACE/build --config Debug   --parallel `sysctl -n hw.logicalcpu` `if [[ "${{matrix.GEN}}" == "Xcode" ]]; then echo "-- -quiet"; fi;`
 
     - name: Test
-      working-directory: ${{runner.workspace}}/OpenCL-Layers/build
+      working-directory: ${{runner.workspace}}/OpenCL-Headers/build
       shell: bash
       run: |
         ctest -C Release --output-on-failure --parallel `sysctl -n hw.logicalcpu`
