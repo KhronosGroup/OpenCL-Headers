@@ -506,10 +506,6 @@ typedef unsigned int cl_GLenum;
     #define __CL_DOUBLE4__  1
 #endif
 
-// with line number
-#define STRING2(x) #x
-#define STRING(x) STRING2(x)
-
 /* Define capabilities for anonymous struct members. */
 #if !defined(__cplusplus) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
 #define  __CL_HAS_ANON_STRUCT__ 1
