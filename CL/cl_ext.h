@@ -2490,6 +2490,18 @@ clGetImageRequirementsInfoEXT_fn)(
 
 #endif
 
+/***************************************************************
+* cl_ext_image_from_buffer
+***************************************************************/
+
+#ifdef CL_VERSION_3_0
+
+#define cl_ext_image_from_buffer 1
+
+#define CL_IMAGE_REQUIREMENTS_SLICE_PITCH_ALIGNMENT_EXT  0x1291
+
+#endif
+
 #ifdef __cplusplus
 }
 #endif
