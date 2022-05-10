@@ -1,0 +1,53 @@
+name: MacOS
+
+on: [push, pull_request]
+
+jobs:
+  compatibility:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        VER: [9, 11]
+        GEN: [Xcode, Ninja Multi-Config]
+        STD: [11, 17]
+
+    steps:
+    - name: Checkout OpenCL-Headers
+      uses: actions/checkout@v2
+
+    - name: Create Build Environment
+      shell: bash
+      run: |
+        cmake -E make_directory $GITHUB_WORKSPACE/build;
+        cmake -E make_directory $GITHUB_WORKSPACE/install;
+        if [[ "${{matrix.GEN}}" == "Ninja Multi-Config" && ! `which ninja` ]]; then brew install ninja; fi;
+        # Install Ninja only if it's the selected generator and it's not available.
+        cmake --version
+
+    - name: Configure CMake
+      shell: bash
+      run: cmake
+        -G "${{matrix.GEN}}"
+        -D BUILD_TESTING=ON
+        -D CMAKE_C_FLAGS="-Wall -Wextra -pedantic -Werror"
+        -D CMAKE_C_COMPILER=/usr/local/bin/gcc-${{matrix.VER}}
+        -D CMAKE_C_EXTENSIONS=OFF
+        -D CMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror"
+        -D CMAKE_CXX_COMPILER=/usr/local/bin/g++-${{matrix.VER}}
+        -D CMAKE_CXX_EXTENSIONS=OFF
+        -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
+        -S $GITHUB_WORKSPACE
+        -B $GITHUB_WORKSPACE/build
+
+    - name: Build
+      shell: bash
+      run: |
+        cmake --build $GITHUB_WORKSPACE/build --config Release --parallel `sysctl -n hw.logicalcpu` `if [[ "${{matrix.GEN}}" == "Xcode" ]]; then echo "-- -quiet"; fi;`
+        cmake --build $GITHUB_WORKSPACE/build --config Debug   --parallel `sysctl -n hw.logicalcpu` `if [[ "${{matrix.GEN}}" == "Xcode" ]]; then echo "-- -quiet"; fi;`
+
+    - name: Test
+      working-directory: ${{runner.workspace}}/OpenCL-Headers/build
+      shell: bash
+      run: |
+        ctest -C Release --output-on-failure --parallel `sysctl -n hw.logicalcpu`
+        ctest -C Debug   --output-on-failure --parallel `sysctl -n hw.logicalcpu`

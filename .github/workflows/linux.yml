@@ -1,0 +1,202 @@
+name: Linux
+
+on: [push, pull_request]
+
+jobs:
+  compatibility:
+    runs-on: ubuntu-18.04
+    container: streamhpc/opencl-sdk-base:ubuntu-18.04-20220127
+    strategy:
+      matrix:
+        # TODO: CMake 3.0.2 is Headers minimum (and ubuntu 18.04 canonical apt repo ver), not this repo's min
+        # Replace once backport to C++14 happened
+        include:
+          # Unix Makefiles
+            # One CMake version
+            # For all compilers
+              # For all configurations
+                # For all target architectures
+          - C_COMPILER: gcc-7
+            CXX_COMPILER: g++-7
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Debug
+            BIN: 64
+          - C_COMPILER: gcc-7
+            CXX_COMPILER: g++-7
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Release
+            BIN: 64
+          - C_COMPILER: gcc-7
+            CXX_COMPILER: g++-7
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Debug
+            BIN: 32
+          - C_COMPILER: gcc-7
+            CXX_COMPILER: g++-7
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Release
+            BIN: 32
+          - C_COMPILER: gcc-11
+            CXX_COMPILER: g++-11
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Debug
+            BIN: 64
+          - C_COMPILER: gcc-11
+            CXX_COMPILER: g++-11
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Release
+            BIN: 64
+          - C_COMPILER: gcc-11
+            CXX_COMPILER: g++-11
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Debug
+            BIN: 32
+          - C_COMPILER: gcc-11
+            CXX_COMPILER: g++-11
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Release
+            BIN: 32
+          - C_COMPILER: clang-8
+            CXX_COMPILER: clang++-8
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Debug
+            BIN: 64
+          - C_COMPILER: clang-8
+            CXX_COMPILER: clang++-8
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Release
+            BIN: 64
+          - C_COMPILER: clang-8
+            CXX_COMPILER: clang++-8
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Debug
+            BIN: 32
+          - C_COMPILER: clang-8
+            CXX_COMPILER: clang++-8
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Release
+            BIN: 32
+          - C_COMPILER: clang-13
+            CXX_COMPILER: clang++-13
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Debug
+            BIN: 64
+          - C_COMPILER: clang-13
+            CXX_COMPILER: clang++-13
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Release
+            BIN: 64
+          - C_COMPILER: clang-13
+            CXX_COMPILER: clang++-13
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Debug
+            BIN: 32
+          - C_COMPILER: clang-13
+            CXX_COMPILER: clang++-13
+            CMAKE: 3.0.2
+            GEN: Unix Makefiles
+            CONFIG: Release
+            BIN: 32
+          # Multi-config generators
+            # One CMake version
+            # For all compilers
+              # For all architectures
+          - C_COMPILER: gcc-7
+            CXX_COMPILER: g++-7
+            CMAKE: 3.22.1
+            GEN: Ninja Multi-Config
+            BIN: 64
+          - C_COMPILER: gcc-7
+            CXX_COMPILER: g++-7
+            CMAKE: 3.22.1
+            GEN: Ninja Multi-Config
+            BIN: 32
+          - C_COMPILER: gcc-11
+            CXX_COMPILER: g++-11
+            CMAKE: 3.22.1
+            GEN: Ninja Multi-Config
+            BIN: 64
+          - C_COMPILER: gcc-11
+            CXX_COMPILER: g++-11
+            CMAKE: 3.22.1
+            GEN: Ninja Multi-Config
+            BIN: 32
+          - C_COMPILER: clang-8
+            CXX_COMPILER: clang++-8
+            CMAKE: 3.22.1
+            GEN: Ninja Multi-Config
+            BIN: 64
+          - C_COMPILER: clang-8
+            CXX_COMPILER: clang++-8
+            CMAKE: 3.22.1
+            GEN: Ninja Multi-Config
+            BIN: 32
+          - C_COMPILER: clang-13
+            CXX_COMPILER: clang++-13
+            CMAKE: 3.22.1
+            GEN: Ninja Multi-Config
+            BIN: 64
+          - C_COMPILER: clang-13
+            CXX_COMPILER: clang++-13
+            CMAKE: 3.22.1
+            GEN: Ninja Multi-Config
+            BIN: 32
+    env:
+      CMAKE_EXE: /opt/Kitware/CMake/${{ matrix.CMAKE }}/bin/cmake
+      CTEST_EXE: /opt/Kitware/CMake/${{ matrix.CMAKE }}/bin/ctest
+
+    steps:
+    - name: Checkout OpenCL-Headers
+      uses: actions/checkout@v2
+      
+    - name: Configure
+      shell: bash
+      run: $CMAKE_EXE
+        -G "${{matrix.GEN}}"
+        -D BUILD_TESTING=ON
+        `if [[ "${{matrix.GEN}}" == "Unix Makefiles" ]]; then echo -D CMAKE_BUILD_TYPE=${{matrix.CONFIG}}; fi;`
+        -D CMAKE_C_FLAGS="-Wall -Wextra -pedantic -Werror -m${{matrix.BIN}}"
+        -D CMAKE_C_COMPILER=${{matrix.C_COMPILER}}
+        -D CMAKE_C_EXTENSIONS=OFF
+        -D CMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror -m${{matrix.BIN}}"
+        -D CMAKE_CXX_COMPILER=${{matrix.CXX_COMPILER}}
+        -D CMAKE_CXX_EXTENSIONS=OFF
+        -D CMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install
+        -B$GITHUB_WORKSPACE/build
+        -H$GITHUB_WORKSPACE
+
+    - name: Build
+      shell: bash
+      run: if [[ "${{matrix.GEN}}" == "Unix Makefiles" ]];
+        then
+          $CMAKE_EXE --build $GITHUB_WORKSPACE/build -- -j`nproc`;
+        else
+          $CMAKE_EXE --build $GITHUB_WORKSPACE/build --config Debug   -- -j`nproc`;
+          $CMAKE_EXE --build $GITHUB_WORKSPACE/build --config Release -- -j`nproc`;
+        fi;
+
+    - name: Test
+      shell: bash
+      working-directory: ${{runner.workspace}}/OpenCL-Headers/build
+      run: if [[ "${{matrix.GEN}}" == "Unix Makefiles" ]];
+        then
+          $CTEST_EXE --output-on-failure --parallel `nproc`;
+        else
+          $CTEST_EXE --output-on-failure -C Debug   --parallel `nproc`;
+          $CTEST_EXE --output-on-failure -C Release --parallel `nproc`;
+        fi;

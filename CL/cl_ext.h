@@ -2447,6 +2447,50 @@ typedef struct _cl_queue_family_properties_intel {
 #define cl_intel_sharing_format_query 1
 
 /***************************************************************
+* cl_ext_image_requirements_info
+***************************************************************/
+
+#ifdef CL_VERSION_3_0
+
+#define cl_ext_image_requirements_info 1
+
+typedef cl_uint cl_image_requirements_info_ext;
+
+#define CL_IMAGE_REQUIREMENTS_ROW_PITCH_ALIGNMENT_EXT    0x1290
+#define CL_IMAGE_REQUIREMENTS_BASE_ADDRESS_ALIGNMENT_EXT 0x1292
+#define CL_IMAGE_REQUIREMENTS_SIZE_EXT                   0x12B2
+#define CL_IMAGE_REQUIREMENTS_MAX_WIDTH_EXT              0x12B3
+#define CL_IMAGE_REQUIREMENTS_MAX_HEIGHT_EXT             0x12B4
+#define CL_IMAGE_REQUIREMENTS_MAX_DEPTH_EXT              0x12B5
+#define CL_IMAGE_REQUIREMENTS_MAX_ARRAY_SIZE_EXT         0x12B6
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetImageRequirementsInfoEXT(
+    cl_context                     context,
+    const cl_mem_properties*       properties,
+    cl_mem_flags                   flags,
+    const cl_image_format*         image_format,
+    const cl_image_desc*           image_desc,
+    cl_image_requirements_info_ext param_name,
+    size_t  param_value_size,
+    void*   param_value,
+    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
+
+typedef cl_int (CL_API_CALL *
+clGetImageRequirementsInfoEXT_fn)(
+    cl_context                     context,
+    const cl_mem_properties*       properties,
+    cl_mem_flags                   flags,
+    const cl_image_format*         image_format,
+    const cl_image_desc*           image_desc,
+    cl_image_requirements_info_ext param_name,
+    size_t  param_value_size,
+    void*   param_value,
+    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
+
+#endif
+
+/***************************************************************
 * cl_ext_image_from_buffer
 ***************************************************************/
 
