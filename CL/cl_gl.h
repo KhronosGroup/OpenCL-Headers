@@ -48,6 +48,7 @@ typedef struct __GLsync *cl_GLsync;
 #endif
 
 
+#ifndef OPENCL_LOAD
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateFromGLBuffer(cl_context     context,
                      cl_mem_flags   flags,
@@ -117,6 +118,7 @@ clCreateFromGLTexture3D(cl_context      context,
                         cl_GLint        miplevel,
                         cl_GLuint       texture,
                         cl_int *        errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
+#endif /* OPENCL_LOAD */
 
 /* cl_khr_gl_sharing extension  */
 
@@ -138,12 +140,14 @@ typedef cl_uint     cl_gl_context_info;
 #define CL_WGL_HDC_KHR                          0x200B
 #define CL_CGL_SHAREGROUP_KHR                   0x200C
 
+#ifndef OPENCL_LOAD
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetGLContextInfoKHR(const cl_context_properties * properties,
                       cl_gl_context_info            param_name,
                       size_t                        param_value_size,
                       void *                        param_value,
                       size_t *                      param_value_size_ret) CL_API_SUFFIX__VERSION_1_0;
+#endif
 
 typedef cl_int (CL_API_CALL *clGetGLContextInfoKHR_fn)(
     const cl_context_properties * properties,
@@ -157,10 +161,12 @@ typedef cl_int (CL_API_CALL *clGetGLContextInfoKHR_fn)(
  */
 #define CL_COMMAND_GL_FENCE_SYNC_OBJECT_KHR     0x200D
 
+#ifndef OPENCL_LOAD
 extern CL_API_ENTRY cl_event CL_API_CALL
 clCreateEventFromGLsyncKHR(cl_context context,
                            cl_GLsync  sync,
                            cl_int *   errcode_ret) CL_API_SUFFIX__VERSION_1_1;
+#endif
 
 /***************************************************************
 * cl_intel_sharing_format_query_gl

@@ -648,25 +648,31 @@ typedef cl_command_queue
 ***********************************/
 #define cl_ext_device_fission   1
 
+#ifndef OPENCL_LOAD
 extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseDeviceEXT(cl_device_id device) CL_API_SUFFIX__VERSION_1_1;
+#endif
 
 typedef cl_int
 (CL_API_CALL *clReleaseDeviceEXT_fn)(cl_device_id device) CL_API_SUFFIX__VERSION_1_1;
 
+#ifndef OPENCL_LOAD
 extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainDeviceEXT(cl_device_id device) CL_API_SUFFIX__VERSION_1_1;
+#endif
 
 typedef cl_int
 (CL_API_CALL *clRetainDeviceEXT_fn)(cl_device_id device) CL_API_SUFFIX__VERSION_1_1;
 
 typedef cl_ulong  cl_device_partition_property_ext;
+#ifndef OPENCL_LOAD
 extern CL_API_ENTRY cl_int CL_API_CALL
 clCreateSubDevicesEXT(cl_device_id   in_device,
                       const cl_device_partition_property_ext * properties,
                       cl_uint        num_entries,
                       cl_device_id * out_devices,
                       cl_uint *      num_devices) CL_API_SUFFIX__VERSION_1_1;
+#endif
 
 typedef cl_int
 (CL_API_CALL * clCreateSubDevicesEXT_fn)(cl_device_id   in_device,
@@ -937,6 +943,7 @@ typedef cl_uint             cl_kernel_sub_group_info;
 #define CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE_KHR    0x2033
 #define CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE_KHR       0x2034
 
+#ifndef OPENCL_LOAD
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetKernelSubGroupInfoKHR(cl_kernel    in_kernel,
                            cl_device_id in_device,
@@ -946,6 +953,7 @@ clGetKernelSubGroupInfoKHR(cl_kernel    in_kernel,
                            size_t       param_value_size,
                            void *       param_value,
                            size_t *     param_value_size_ret) CL_API_SUFFIX__VERSION_2_0_DEPRECATED;
+#endif
 
 typedef cl_int
 (CL_API_CALL * clGetKernelSubGroupInfoKHR_fn)(cl_kernel    in_kernel,
