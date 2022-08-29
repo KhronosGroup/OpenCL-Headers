@@ -2441,6 +2441,11 @@ typedef struct _cl_queue_family_properties_intel {
 #define CL_QUEUE_CAPABILITY_BARRIER_INTEL                   (1 << 25)
 #define CL_QUEUE_CAPABILITY_KERNEL_INTEL                    (1 << 26)
 
+/* cl_intel_queue_no_sync_operations */
+#define cl_intel_queue_no_sync_operations 1
+
+#define CL_QUEUE_NO_SYNC_OPERATIONS_INTEL                   (1 << 4)    
+    
 /***************************************************************
 * cl_intel_sharing_format_query
 ***************************************************************/
