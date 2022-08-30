@@ -2448,7 +2448,7 @@ typedef struct _cl_queue_family_properties_intel {
 #define cl_intel_queue_no_sync_operations 1
 
 /* addition to cl_command_queue_properties */
-#define CL_QUEUE_NO_SYNC_OPERATIONS_INTEL                   (1 << 27)    
+#define CL_QUEUE_NO_SYNC_OPERATIONS_INTEL                   (1 << 29)    
     
 /***************************************************************
 * cl_intel_sharing_format_query
