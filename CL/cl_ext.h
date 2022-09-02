@@ -407,6 +407,113 @@ clGetCommandBufferInfoKHR(
 
 #endif /* CL_NO_PROTOTYPES */
 
+/***************************************************************
+* cl_khr_command_buffer_mutable_dispatch
+***************************************************************/
+#define cl_khr_command_buffer_mutable_dispatch 1
+#define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_NAME \
+    "cl_khr_command_buffer_mutable_dispatch"
+
+typedef cl_uint             cl_command_buffer_structure_type_khr;
+typedef cl_bitfield         cl_mutable_dispatch_fields_khr;
+typedef cl_uint             cl_mutable_command_info_khr;
+typedef struct _cl_mutable_dispatch_arg_khr {
+    cl_uint arg_index;
+    size_t arg_size;
+    const void* arg_value;
+} cl_mutable_dispatch_arg_khr;
+typedef struct _cl_mutable_dispatch_exec_info_khr {
+    cl_uint param_name;
+    size_t param_value_size;
+    const void* param_value;
+} cl_mutable_dispatch_exec_info_khr;
+typedef struct _cl_mutable_dispatch_config_khr {
+    cl_command_buffer_structure_type_khr type;
+    const void* next;
+    cl_mutable_command_khr command;
+    cl_uint num_args;
+    cl_uint num_svm_args;
+    cl_uint num_exec_infos;
+    cl_uint work_dim;
+    const cl_mutable_dispatch_arg_khr* arg_list;
+    const cl_mutable_dispatch_arg_khr* arg_svm_list;
+    const cl_mutable_dispatch_exec_info_khr* exec_info_list;
+    const size_t* global_work_offset;
+    const size_t* global_work_size;
+    const size_t* local_work_size;
+} cl_mutable_dispatch_config_khr;
+typedef struct _cl_mutable_base_config_khr {
+    cl_command_buffer_structure_type_khr type;
+    const void* next;
+    cl_uint num_mutable_dispatch;
+    const cl_mutable_dispatch_config_khr* mutable_dispatch_list;
+} cl_mutable_base_config_khr;
+
+/* cl_command_buffer_flags_khr - bitfield */
+#define CL_COMMAND_BUFFER_MUTABLE_KHR                       (1 << 1)
+
+/* Error codes */
+#define CL_INVALID_MUTABLE_COMMAND_KHR                      -1141
+
+/* cl_device_info */
+#define CL_DEVICE_MUTABLE_DISPATCH_CAPABILITIES_KHR         0x12B0
+
+/* cl_ndrange_kernel_command_properties_khr */
+#define CL_MUTABLE_DISPATCH_UPDATABLE_FIELDS_KHR            0x12B1
+
+/* cl_mutable_dispatch_fields_khr - bitfield */
+#define CL_MUTABLE_DISPATCH_GLOBAL_OFFSET_KHR               (1 << 0)
+#define CL_MUTABLE_DISPATCH_GLOBAL_SIZE_KHR                 (1 << 1)
+#define CL_MUTABLE_DISPATCH_LOCAL_SIZE_KHR                  (1 << 2)
+#define CL_MUTABLE_DISPATCH_ARGUMENTS_KHR                   (1 << 3)
+#define CL_MUTABLE_DISPATCH_EXEC_INFO_KHR                   (1 << 4)
+
+/* cl_mutable_command_info_khr */
+#define CL_MUTABLE_COMMAND_COMMAND_QUEUE_KHR                0x12A0
+#define CL_MUTABLE_COMMAND_COMMAND_BUFFER_KHR               0x12A1
+#define CL_MUTABLE_COMMAND_COMMAND_TYPE_KHR                 0x12AD
+#define CL_MUTABLE_DISPATCH_PROPERTIES_ARRAY_KHR            0x12A2
+#define CL_MUTABLE_DISPATCH_KERNEL_KHR                      0x12A3
+#define CL_MUTABLE_DISPATCH_DIMENSIONS_KHR                  0x12A4
+#define CL_MUTABLE_DISPATCH_GLOBAL_WORK_OFFSET_KHR          0x12A5
+#define CL_MUTABLE_DISPATCH_GLOBAL_WORK_SIZE_KHR            0x12A6
+#define CL_MUTABLE_DISPATCH_LOCAL_WORK_SIZE_KHR             0x12A7
+
+/* cl_command_buffer_structure_type_khr */
+#define CL_STRUCTURE_TYPE_MUTABLE_BASE_CONFIG_KHR           0
+#define CL_STRUCTURE_TYPE_MUTABLE_DISPATCH_CONFIG_KHR       1
+
+
+typedef cl_int (CL_API_CALL *
+clUpdateMutableCommandsKHR_fn)(
+    cl_command_buffer_khr command_buffer,
+    const cl_mutable_base_config_khr* mutable_config) ;
+
+typedef cl_int (CL_API_CALL *
+clGetMutableCommandInfoKHR_fn)(
+    cl_mutable_command_khr command,
+    cl_mutable_command_info_khr param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret) ;
+
+#ifndef CL_NO_PROTOTYPES
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clUpdateMutableCommandsKHR(
+    cl_command_buffer_khr command_buffer,
+    const cl_mutable_base_config_khr* mutable_config) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetMutableCommandInfoKHR(
+    cl_mutable_command_khr command,
+    cl_mutable_command_info_khr param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret) ;
+
+#endif /* CL_NO_PROTOTYPES */
+
 /* cl_khr_fp64 extension - no extension #define since it has no functions  */
 /* CL_DEVICE_DOUBLE_FP_CONFIG is defined in CL.h for OpenCL >= 120 */
 
