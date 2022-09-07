@@ -22,7 +22,19 @@
 */
 
 #if defined(_WIN32)
+#if defined(_MSC_VER)
+#if _MSC_VER >=1500
+#pragma warning( push )
+#pragma warning( disable : 4201 )
+#pragma warning( disable : 5105 )
+#endif
+#endif
 #include <d3d9.h>
+#if defined(_MSC_VER)
+#if _MSC_VER >=1500
+#pragma warning( pop )
+#endif
+#endif
 #endif
 
 #include <CL/cl.h>

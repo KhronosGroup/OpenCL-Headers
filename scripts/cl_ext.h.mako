@@ -120,6 +120,7 @@ def isDuplicateName(name):
 
 %if includes:
 ${includes}
+
 %endif
 #include <CL/cl.h>
 

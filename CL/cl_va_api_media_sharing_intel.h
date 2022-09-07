@@ -22,6 +22,7 @@
 */
 
 #include <va/va.h>
+
 #include <CL/cl.h>
 
 #ifdef __cplusplus

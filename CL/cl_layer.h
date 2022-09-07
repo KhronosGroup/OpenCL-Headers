@@ -22,6 +22,7 @@
 */
 
 #include <CL/cl_icd.h>
+
 #include <CL/cl.h>
 
 #ifdef __cplusplus

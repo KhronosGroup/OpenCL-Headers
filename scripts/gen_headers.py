@@ -36,15 +36,13 @@ def getDisableWarningIncludeString(include):
 #if _MSC_VER >=1500
 #pragma warning( pop )
 #endif
-#endif
-"""
+#endif"""
     return warningPush + include + warningPop
 
 def getWin32OnlyIncludeString(include):
     return """#if defined(_WIN32)
 """ + include + """
-#endif
-"""
+#endif"""
 
 if __name__ == "__main__":
     args = gen.parse_args()
@@ -72,7 +70,7 @@ if __name__ == "__main__":
                   'cl_intel_sharing_format_query_dx9',
               },
               guard="OPENCL_CL_DX9_MEDIA_SHARING_H_",
-              includes=getWin32OnlyIncludeString("#include <d3d9.h>"),
+              includes=getWin32OnlyIncludeString(getDisableWarningIncludeString("#include <d3d9.h>")),
               generate_pfn_typedefs=False,
               spec=spec,
               typedefs=typedefs,
