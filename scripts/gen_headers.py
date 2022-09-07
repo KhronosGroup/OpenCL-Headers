@@ -27,6 +27,7 @@ def getDisableWarningIncludeString(include):
 #if _MSC_VER >=1500
 #pragma warning( push )
 #pragma warning( disable : 4201 )
+#pragma warning( disable : 5105 )
 #endif
 #endif
 """

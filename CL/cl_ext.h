@@ -410,6 +410,113 @@ clGetCommandBufferInfoKHR(
 #endif /* CL_NO_PROTOTYPES */
 
 /***************************************************************
+* cl_khr_command_buffer_mutable_dispatch
+***************************************************************/
+#define cl_khr_command_buffer_mutable_dispatch 1
+#define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_NAME \
+    "cl_khr_command_buffer_mutable_dispatch"
+
+typedef cl_uint             cl_command_buffer_structure_type_khr;
+typedef cl_bitfield         cl_mutable_dispatch_fields_khr;
+typedef cl_uint             cl_mutable_command_info_khr;
+typedef struct _cl_mutable_dispatch_arg_khr {
+    cl_uint arg_index;
+    size_t arg_size;
+    const void* arg_value;
+} cl_mutable_dispatch_arg_khr;
+typedef struct _cl_mutable_dispatch_exec_info_khr {
+    cl_uint param_name;
+    size_t param_value_size;
+    const void* param_value;
+} cl_mutable_dispatch_exec_info_khr;
+typedef struct _cl_mutable_dispatch_config_khr {
+    cl_command_buffer_structure_type_khr type;
+    const void* next;
+    cl_mutable_command_khr command;
+    cl_uint num_args;
+    cl_uint num_svm_args;
+    cl_uint num_exec_infos;
+    cl_uint work_dim;
+    const cl_mutable_dispatch_arg_khr* arg_list;
+    const cl_mutable_dispatch_arg_khr* arg_svm_list;
+    const cl_mutable_dispatch_exec_info_khr* exec_info_list;
+    const size_t* global_work_offset;
+    const size_t* global_work_size;
+    const size_t* local_work_size;
+} cl_mutable_dispatch_config_khr;
+typedef struct _cl_mutable_base_config_khr {
+    cl_command_buffer_structure_type_khr type;
+    const void* next;
+    cl_uint num_mutable_dispatch;
+    const cl_mutable_dispatch_config_khr* mutable_dispatch_list;
+} cl_mutable_base_config_khr;
+
+/* cl_command_buffer_flags_khr - bitfield */
+#define CL_COMMAND_BUFFER_MUTABLE_KHR                       (1 << 1)
+
+/* Error codes */
+#define CL_INVALID_MUTABLE_COMMAND_KHR                      -1141
+
+/* cl_device_info */
+#define CL_DEVICE_MUTABLE_DISPATCH_CAPABILITIES_KHR         0x12B0
+
+/* cl_ndrange_kernel_command_properties_khr */
+#define CL_MUTABLE_DISPATCH_UPDATABLE_FIELDS_KHR            0x12B1
+
+/* cl_mutable_dispatch_fields_khr - bitfield */
+#define CL_MUTABLE_DISPATCH_GLOBAL_OFFSET_KHR               (1 << 0)
+#define CL_MUTABLE_DISPATCH_GLOBAL_SIZE_KHR                 (1 << 1)
+#define CL_MUTABLE_DISPATCH_LOCAL_SIZE_KHR                  (1 << 2)
+#define CL_MUTABLE_DISPATCH_ARGUMENTS_KHR                   (1 << 3)
+#define CL_MUTABLE_DISPATCH_EXEC_INFO_KHR                   (1 << 4)
+
+/* cl_mutable_command_info_khr */
+#define CL_MUTABLE_COMMAND_COMMAND_QUEUE_KHR                0x12A0
+#define CL_MUTABLE_COMMAND_COMMAND_BUFFER_KHR               0x12A1
+#define CL_MUTABLE_COMMAND_COMMAND_TYPE_KHR                 0x12AD
+#define CL_MUTABLE_DISPATCH_PROPERTIES_ARRAY_KHR            0x12A2
+#define CL_MUTABLE_DISPATCH_KERNEL_KHR                      0x12A3
+#define CL_MUTABLE_DISPATCH_DIMENSIONS_KHR                  0x12A4
+#define CL_MUTABLE_DISPATCH_GLOBAL_WORK_OFFSET_KHR          0x12A5
+#define CL_MUTABLE_DISPATCH_GLOBAL_WORK_SIZE_KHR            0x12A6
+#define CL_MUTABLE_DISPATCH_LOCAL_WORK_SIZE_KHR             0x12A7
+
+/* cl_command_buffer_structure_type_khr */
+#define CL_STRUCTURE_TYPE_MUTABLE_BASE_CONFIG_KHR           0
+#define CL_STRUCTURE_TYPE_MUTABLE_DISPATCH_CONFIG_KHR       1
+
+
+typedef cl_int (CL_API_CALL *
+clUpdateMutableCommandsKHR_fn)(
+    cl_command_buffer_khr command_buffer,
+    const cl_mutable_base_config_khr* mutable_config) ;
+
+typedef cl_int (CL_API_CALL *
+clGetMutableCommandInfoKHR_fn)(
+    cl_mutable_command_khr command,
+    cl_mutable_command_info_khr param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret) ;
+
+#ifndef CL_NO_PROTOTYPES
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clUpdateMutableCommandsKHR(
+    cl_command_buffer_khr command_buffer,
+    const cl_mutable_base_config_khr* mutable_config) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetMutableCommandInfoKHR(
+    cl_mutable_command_khr command,
+    cl_mutable_command_info_khr param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret) ;
+
+#endif /* CL_NO_PROTOTYPES */
+
+/***************************************************************
 * cl_khr_create_command_queue
 ***************************************************************/
 #define cl_khr_create_command_queue 1
@@ -1117,11 +1224,16 @@ clGetKernelSuggestedLocalWorkSizeKHR(
 #define CL_KHR_TERMINATE_CONTEXT_EXTENSION_NAME \
     "cl_khr_terminate_context"
 
+typedef cl_bitfield         cl_device_terminate_capability_khr;
+
 /* cl_device_info */
 #define CL_DEVICE_TERMINATE_CAPABILITY_KHR                  0x2031
 
 /* cl_context_properties */
 #define CL_CONTEXT_TERMINATE_KHR                            0x2032
+
+/* cl_device_terminate_capability_khr */
+#define CL_DEVICE_TERMINATE_CAPABILITY_CONTEXT_KHR          (1 << 0)
 
 /* Error codes */
 #define CL_CONTEXT_TERMINATED_KHR                           -1121
@@ -1265,6 +1377,59 @@ typedef cl_bitfield         cl_device_fp_atomic_capabilities_ext;
 #define CL_DEVICE_SINGLE_FP_ATOMIC_CAPABILITIES_EXT         0x4231
 #define CL_DEVICE_DOUBLE_FP_ATOMIC_CAPABILITIES_EXT         0x4232
 #define CL_DEVICE_HALF_FP_ATOMIC_CAPABILITIES_EXT           0x4233
+
+/***************************************************************
+* cl_ext_image_requirements_info
+***************************************************************/
+#if defined(CL_VERSION_3_0)
+
+#define cl_ext_image_requirements_info 1
+#define CL_EXT_IMAGE_REQUIREMENTS_INFO_EXTENSION_NAME \
+    "cl_ext_image_requirements_info"
+
+/* Types */
+typedef cl_uint             cl_image_requirements_info_ext;
+
+/* cl_image_requirements_info_ext */
+#define CL_IMAGE_REQUIREMENTS_BASE_ADDRESS_ALIGNMENT_EXT    0x1292
+#define CL_IMAGE_REQUIREMENTS_ROW_PITCH_ALIGNMENT_EXT       0x1290
+#define CL_IMAGE_REQUIREMENTS_SIZE_EXT                      0x12B2
+#define CL_IMAGE_REQUIREMENTS_MAX_WIDTH_EXT                 0x12B3
+#define CL_IMAGE_REQUIREMENTS_MAX_HEIGHT_EXT                0x12B4
+#define CL_IMAGE_REQUIREMENTS_MAX_DEPTH_EXT                 0x12B5
+#define CL_IMAGE_REQUIREMENTS_MAX_ARRAY_SIZE_EXT            0x12B6
+
+/* Enqueued Commands APIs */
+
+typedef cl_int (CL_API_CALL *
+clGetImageRequirementsInfoEXT_fn)(
+    cl_context context,
+    const cl_mem_properties* properties,
+    cl_mem_flags flags,
+    const cl_image_format* image_format,
+    const cl_image_desc* image_desc,
+    cl_image_requirements_info_ext param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
+
+#ifndef CL_NO_PROTOTYPES
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetImageRequirementsInfoEXT(
+    cl_context context,
+    const cl_mem_properties* properties,
+    cl_mem_flags flags,
+    const cl_image_format* image_format,
+    const cl_image_desc* image_desc,
+    cl_image_requirements_info_ext param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
+
+#endif /* CL_NO_PROTOTYPES */
+
+#endif /* defined(CL_VERSION_3_0) */
 
 /***************************************************************
 * cl_ext_migrate_memobject
@@ -1533,22 +1698,22 @@ typedef cl_bitfield         cl_device_scheduling_controls_capabilities_arm;
 #define CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM (1 << 2)
 #define CL_DEVICE_SCHEDULING_DEFERRED_FLUSH_ARM             (1 << 3)
 #define CL_DEVICE_SCHEDULING_REGISTER_ALLOCATION_ARM        (1 << 4)
-#define CL_DEVICE_SCHEDULING_WARP_THROTTLING_ARM               (1 << 5)
+#define CL_DEVICE_SCHEDULING_WARP_THROTTLING_ARM            (1 << 5)
 #define CL_DEVICE_SCHEDULING_COMPUTE_UNIT_BATCH_QUEUE_SIZE_ARM (1 << 6)
 
 /* cl_device_info */
 #define CL_DEVICE_SCHEDULING_CONTROLS_CAPABILITIES_ARM      0x41E4
 #define CL_DEVICE_SUPPORTED_REGISTER_ALLOCATIONS_ARM        0x41EB
-#define CL_DEVICE_MAX_WARP_COUNT_ARM                            0x41EA
-
-/* cl_kernel_exec_info */
-#define CL_KERNEL_MAX_WARP_COUNT_ARM                            0x41E9
+#define CL_DEVICE_MAX_WARP_COUNT_ARM                        0x41EA
 
 /* cl_kernel_exec_info */
 #define CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_ARM        0x41E5
 #define CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_MODIFIER_ARM 0x41E6
-#define CL_KERNEL_EXEC_INFO_WARP_COUNT_LIMIT_ARM                0x41E8
+#define CL_KERNEL_EXEC_INFO_WARP_COUNT_LIMIT_ARM            0x41E8
 #define CL_KERNEL_EXEC_INFO_COMPUTE_UNIT_MAX_QUEUED_BATCHES_ARM 0x41F1
+
+/* cl_kernel_info */
+#define CL_KERNEL_MAX_WARP_COUNT_ARM                        0x41E9
 
 /* cl_queue_properties */
 #define CL_QUEUE_KERNEL_BATCHING_ARM                        0x41E7
@@ -2490,6 +2655,16 @@ clEnqueueWriteHostPipeINTEL(
     cl_event* event) ;
 
 #endif /* CL_NO_PROTOTYPES */
+
+/***************************************************************
+* cl_intel_queue_no_sync_operations
+***************************************************************/
+#define cl_intel_queue_no_sync_operations 1
+#define CL_INTEL_QUEUE_NO_SYNC_OPERATIONS_EXTENSION_NAME \
+    "cl_intel_queue_no_sync_operations"
+
+/* cl_command_queue_properties */
+#define CL_QUEUE_NO_SYNC_OPERATIONS_INTEL                   (1 << 29)
 
 /***************************************************************
 * cl_intel_required_subgroup_size
