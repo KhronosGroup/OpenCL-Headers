@@ -1744,12 +1744,20 @@ typedef cl_bitfield cl_device_scheduling_controls_capabilities_arm;
 #define CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM (1 << 2)
 #define CL_DEVICE_SCHEDULING_DEFERRED_FLUSH_ARM                (1 << 3)
 #define CL_DEVICE_SCHEDULING_REGISTER_ALLOCATION_ARM           (1 << 4)
+#define CL_DEVICE_SCHEDULING_WARP_THROTTLING_ARM               (1 << 5)
+#define CL_DEVICE_SCHEDULING_COMPUTE_UNIT_BATCH_QUEUE_SIZE_ARM (1 << 6)
 
 #define CL_DEVICE_SUPPORTED_REGISTER_ALLOCATIONS_ARM            0x41EB
+#define CL_DEVICE_MAX_WARP_COUNT_ARM                            0x41EA
 
 /* cl_kernel_info */
+#define CL_KERNEL_MAX_WARP_COUNT_ARM                            0x41E9
+
+/* cl_kernel_exec_info */
 #define CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_ARM            0x41E5
 #define CL_KERNEL_EXEC_INFO_WORKGROUP_BATCH_SIZE_MODIFIER_ARM   0x41E6
+#define CL_KERNEL_EXEC_INFO_WARP_COUNT_LIMIT_ARM                0x41E8
+#define CL_KERNEL_EXEC_INFO_COMPUTE_UNIT_MAX_QUEUED_BATCHES_ARM 0x41F1
 
 /* cl_queue_properties */
 #define CL_QUEUE_KERNEL_BATCHING_ARM                            0x41E7
