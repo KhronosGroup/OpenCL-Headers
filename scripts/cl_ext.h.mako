@@ -134,6 +134,10 @@ extern "C" {
 %>/***************************************************************
 * ${name}
 ***************************************************************/
+%if extension.get('condition'):
+#if ${extension.get('condition')}
+
+%endif
 #define ${name} 1
 #define ${name.upper()}_EXTENSION_NAME ${"\\"}
     "${name}"
@@ -248,6 +252,10 @@ ${api.Name}(
 
 %  endif
 %endfor
+%if extension.get('condition'):
+#endif /* ${extension.get('condition')} */
+
+%endif
 %  endif
 %endfor
 #ifdef __cplusplus
