@@ -1,6 +1,10 @@
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
 # Add a test for a given source file for each version of OpenCL
 function(add_header_test NAME SOURCE)
   # Some headers include system files which require anonymous structs
