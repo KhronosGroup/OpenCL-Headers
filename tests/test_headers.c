@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 The Khronos Group Inc.
+// Copyright (c) 2020-2022 The Khronos Group Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,17 @@
 // limitations under the License.
 //
 
+/*
+Some versions of inttypes.h required defining the macro __STDC_FORMAT_MACROS to
+use the format macros for C++ compiles, but not all.  To improve robustness we
+will use inttypes.h for C compiles and cinttypes for C++ compiles.
+*/
+#if defined(__cplusplus)
+#include <cinttypes>
+#else
 #include <inttypes.h>
+#endif
+
 #include <stdio.h>
 
 #include "CL/cl.h"
