@@ -8,10 +8,7 @@ jobs:
       - run: sudo apt-get update
       - run: sudo apt-get install -y clang-format
       - name: run git-clang-format
-        run: |
-          git clang-format --quiet --diff > clang-format-diff
-          lint=$(grep -v --color=never "no modified files to format" clang-format-diff || true)
-          if [ ! -z "$lint" ]; then echo "format errors, inspect the clang-format-diff artifact for info"; exit 1; else exit 0; fi
+        run: clang-format --style=file --dry-run --Werror `git ls-files *.c *.h` >clang-format-diff 2>&1
         shell: bash
       - name: output clang format diff
         if: always()
