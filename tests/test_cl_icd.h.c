@@ -27,6 +27,6 @@
 int
 main(void)
 {
-  printf("cl_icd.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_icd.h standalone test PASSED.\n");
+    return 0;
 }

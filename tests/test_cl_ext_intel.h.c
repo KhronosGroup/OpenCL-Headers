@@ -21,6 +21,6 @@
 int
 main(void)
 {
-  printf("cl_ext_intel.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_ext_intel.h standalone test PASSED.\n");
+    return 0;
 }

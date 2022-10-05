@@ -3,5 +3,5 @@
 int
 main()
 {
-  return sizeof(cl_platform_id) - sizeof(cl_context);
+    return sizeof(cl_platform_id) - sizeof(cl_context);
 }

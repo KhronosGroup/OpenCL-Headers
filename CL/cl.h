@@ -119,26 +119,26 @@ typedef cl_uint       cl_version;
 #endif
 
 typedef struct _cl_image_format {
-  cl_channel_order image_channel_order;
-  cl_channel_type  image_channel_data_type;
+    cl_channel_order image_channel_order;
+    cl_channel_type  image_channel_data_type;
 } cl_image_format;
 
 #ifdef CL_VERSION_1_2
 
 typedef struct _cl_image_desc {
-  cl_mem_object_type image_type;
-  size_t             image_width;
-  size_t             image_height;
-  size_t             image_depth;
-  size_t             image_array_size;
-  size_t             image_row_pitch;
-  size_t             image_slice_pitch;
-  cl_uint            num_mip_levels;
-  cl_uint            num_samples;
+    cl_mem_object_type image_type;
+    size_t             image_width;
+    size_t             image_height;
+    size_t             image_depth;
+    size_t             image_array_size;
+    size_t             image_row_pitch;
+    size_t             image_slice_pitch;
+    cl_uint            num_mip_levels;
+    cl_uint            num_samples;
 #ifdef CL_VERSION_2_0
 #if defined(__GNUC__)
-  __extension__ /* Prevents warnings about anonymous union in -pedantic builds
-                 */
+    __extension__ /* Prevents warnings about anonymous union in -pedantic builds
+                   */
 #endif
 #if defined(_MSC_VER) && !defined(__STDC__)
 #pragma warning(push)
@@ -152,18 +152,18 @@ typedef struct _cl_image_desc {
                         extension*/
 #endif
 #if defined(_MSC_VER) && defined(__STDC__)
-  /* Anonymous unions are not supported in /Za builds */
+    /* Anonymous unions are not supported in /Za builds */
 #else
-  union {
+    union {
 #endif
 #endif
-    cl_mem buffer;
+      cl_mem buffer;
 #ifdef CL_VERSION_2_0
 #if defined(_MSC_VER) && defined(__STDC__)
-  /* Anonymous unions are not supported in /Za builds */
+    /* Anonymous unions are not supported in /Za builds */
 #else
-    cl_mem mem_object;
-  };
+        cl_mem mem_object;
+    };
 #endif
 #if defined(_MSC_VER) && !defined(__STDC__)
 #pragma warning(pop)
@@ -179,8 +179,8 @@ typedef struct _cl_image_desc {
 #ifdef CL_VERSION_1_1
 
 typedef struct _cl_buffer_region {
-  size_t origin;
-  size_t size;
+    size_t origin;
+    size_t size;
 } cl_buffer_region;
 
 #endif
@@ -190,8 +190,8 @@ typedef struct _cl_buffer_region {
 #define CL_NAME_VERSION_MAX_NAME_SIZE 64
 
 typedef struct _cl_name_version {
-  cl_version version;
-  char       name[CL_NAME_VERSION_MAX_NAME_SIZE];
+    cl_version version;
+    char       name[CL_NAME_VERSION_MAX_NAME_SIZE];
 } cl_name_version;
 
 #endif
@@ -547,7 +547,7 @@ typedef struct _cl_name_version {
 #endif
 #ifdef CL_VERSION_2_0
 #define CL_MEM_SVM_FINE_GRAIN_BUFFER                                           \
-  (1 << 10) /* used by cl_svm_mem_flags only */
+    (1 << 10) /* used by cl_svm_mem_flags only */
 #define CL_MEM_SVM_ATOMICS           (1 << 11) /* used by cl_svm_mem_flags only */
 #define CL_MEM_KERNEL_READ_AND_WRITE (1 << 12)
 #endif
@@ -938,18 +938,18 @@ typedef struct _cl_name_version {
 #define CL_VERSION_PATCH_MASK ((1 << CL_VERSION_PATCH_BITS) - 1)
 
 #define CL_VERSION_MAJOR(version)                                              \
-  ((version) >> (CL_VERSION_MINOR_BITS + CL_VERSION_PATCH_BITS))
+    ((version) >> (CL_VERSION_MINOR_BITS + CL_VERSION_PATCH_BITS))
 
 #define CL_VERSION_MINOR(version)                                              \
-  (((version) >> CL_VERSION_PATCH_BITS) & CL_VERSION_MINOR_MASK)
+    (((version) >> CL_VERSION_PATCH_BITS) & CL_VERSION_MINOR_MASK)
 
 #define CL_VERSION_PATCH(version) ((version)&CL_VERSION_PATCH_MASK)
 
 #define CL_MAKE_VERSION(major, minor, patch)                                   \
-  ((((major)&CL_VERSION_MAJOR_MASK)                                            \
-    << (CL_VERSION_MINOR_BITS + CL_VERSION_PATCH_BITS)) |                      \
-   (((minor)&CL_VERSION_MINOR_MASK) << CL_VERSION_PATCH_BITS) |                \
-   ((patch)&CL_VERSION_PATCH_MASK))
+    ((((major)&CL_VERSION_MAJOR_MASK)                                          \
+      << (CL_VERSION_MINOR_BITS + CL_VERSION_PATCH_BITS)) |                    \
+     (((minor)&CL_VERSION_MINOR_MASK) << CL_VERSION_PATCH_BITS) |              \
+     ((patch)&CL_VERSION_PATCH_MASK))
 
 #endif
 

@@ -23,6 +23,6 @@
 int
 main(void)
 {
-  printf("cl_dx9_media_sharing_intel.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_dx9_media_sharing_intel.h standalone test PASSED.\n");
+    return 0;
 }

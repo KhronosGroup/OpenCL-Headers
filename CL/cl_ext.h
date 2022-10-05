@@ -381,41 +381,41 @@ clGetCommandBufferInfoKHR(cl_command_buffer_khr      command_buffer,
  ***************************************************************/
 #define cl_khr_command_buffer_mutable_dispatch 1
 #define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_NAME                  \
-  "cl_khr_command_buffer_mutable_dispatch"
+    "cl_khr_command_buffer_mutable_dispatch"
 
 typedef cl_uint     cl_command_buffer_structure_type_khr;
 typedef cl_bitfield cl_mutable_dispatch_fields_khr;
 typedef cl_uint     cl_mutable_command_info_khr;
 typedef struct _cl_mutable_dispatch_arg_khr {
-  cl_uint     arg_index;
-  size_t      arg_size;
-  const void* arg_value;
+    cl_uint     arg_index;
+    size_t      arg_size;
+    const void* arg_value;
 } cl_mutable_dispatch_arg_khr;
 typedef struct _cl_mutable_dispatch_exec_info_khr {
-  cl_uint     param_name;
-  size_t      param_value_size;
-  const void* param_value;
+    cl_uint     param_name;
+    size_t      param_value_size;
+    const void* param_value;
 } cl_mutable_dispatch_exec_info_khr;
 typedef struct _cl_mutable_dispatch_config_khr {
-  cl_command_buffer_structure_type_khr     type;
-  const void*                              next;
-  cl_mutable_command_khr                   command;
-  cl_uint                                  num_args;
-  cl_uint                                  num_svm_args;
-  cl_uint                                  num_exec_infos;
-  cl_uint                                  work_dim;
-  const cl_mutable_dispatch_arg_khr*       arg_list;
-  const cl_mutable_dispatch_arg_khr*       arg_svm_list;
-  const cl_mutable_dispatch_exec_info_khr* exec_info_list;
-  const size_t*                            global_work_offset;
-  const size_t*                            global_work_size;
-  const size_t*                            local_work_size;
+    cl_command_buffer_structure_type_khr     type;
+    const void*                              next;
+    cl_mutable_command_khr                   command;
+    cl_uint                                  num_args;
+    cl_uint                                  num_svm_args;
+    cl_uint                                  num_exec_infos;
+    cl_uint                                  work_dim;
+    const cl_mutable_dispatch_arg_khr*       arg_list;
+    const cl_mutable_dispatch_arg_khr*       arg_svm_list;
+    const cl_mutable_dispatch_exec_info_khr* exec_info_list;
+    const size_t*                            global_work_offset;
+    const size_t*                            global_work_size;
+    const size_t*                            local_work_size;
 } cl_mutable_dispatch_config_khr;
 typedef struct _cl_mutable_base_config_khr {
-  cl_command_buffer_structure_type_khr  type;
-  const void*                           next;
-  cl_uint                               num_mutable_dispatch;
-  const cl_mutable_dispatch_config_khr* mutable_dispatch_list;
+    cl_command_buffer_structure_type_khr  type;
+    const void*                           next;
+    cl_uint                               num_mutable_dispatch;
+    const cl_mutable_dispatch_config_khr* mutable_dispatch_list;
 } cl_mutable_base_config_khr;
 
 /* cl_command_buffer_flags_khr - bitfield */
@@ -778,9 +778,9 @@ typedef cl_int(CL_API_CALL* clCreateSubDevicesEXT_fn)(
 /* cl_device_partition_property_ext list terminators */
 #define CL_PROPERTIES_LIST_END_EXT                 ((cl_device_partition_property_ext)0)
 #define CL_PARTITION_BY_COUNTS_LIST_END_EXT                                    \
-  ((cl_device_partition_property_ext)0)
+    ((cl_device_partition_property_ext)0)
 #define CL_PARTITION_BY_NAMES_LIST_END_EXT                                     \
-  ((cl_device_partition_property_ext)0 - 1)
+    ((cl_device_partition_property_ext)0 - 1)
 
 /***********************************
  * cl_ext_migrate_memobject extension definitions
@@ -847,12 +847,12 @@ clGetDeviceImageInfoQCOM(cl_device_id             device,
                          size_t*                  param_value_size_ret);
 
 typedef struct _cl_mem_ext_host_ptr {
-  /* Type of external memory allocation. */
-  /* Legal values will be defined in layered extensions. */
-  cl_uint allocation_type;
+    /* Type of external memory allocation. */
+    /* Legal values will be defined in layered extensions. */
+    cl_uint allocation_type;
 
-  /* Host cache policy for this external memory allocation. */
-  cl_uint host_cache_policy;
+    /* Host cache policy for this external memory allocation. */
+    cl_uint host_cache_policy;
 
 } cl_mem_ext_host_ptr;
 
@@ -870,15 +870,15 @@ typedef struct _cl_mem_ext_host_ptr {
 #define CL_MEM_ION_HOST_PTR_QCOM    0x40A8
 
 typedef struct _cl_mem_ion_host_ptr {
-  /* Type of external memory allocation. */
-  /* Must be CL_MEM_ION_HOST_PTR_QCOM for ION allocations. */
-  cl_mem_ext_host_ptr ext_host_ptr;
+    /* Type of external memory allocation. */
+    /* Must be CL_MEM_ION_HOST_PTR_QCOM for ION allocations. */
+    cl_mem_ext_host_ptr ext_host_ptr;
 
-  /* ION file descriptor */
-  int                 ion_filedesc;
+    /* ION file descriptor */
+    int                 ion_filedesc;
 
-  /* Host pointer to the ION allocated memory */
-  void*               ion_hostptr;
+    /* Host pointer to the ION allocated memory */
+    void*               ion_hostptr;
 
 } cl_mem_ion_host_ptr;
 
@@ -889,13 +889,13 @@ typedef struct _cl_mem_ion_host_ptr {
 #define CL_MEM_ANDROID_NATIVE_BUFFER_HOST_PTR_QCOM 0x40C6
 
 typedef struct _cl_mem_android_native_buffer_host_ptr {
-  /* Type of external memory allocation. */
-  /* Must be CL_MEM_ANDROID_NATIVE_BUFFER_HOST_PTR_QCOM for Android native
-   * buffers. */
-  cl_mem_ext_host_ptr ext_host_ptr;
+    /* Type of external memory allocation. */
+    /* Must be CL_MEM_ANDROID_NATIVE_BUFFER_HOST_PTR_QCOM for Android native
+     * buffers. */
+    cl_mem_ext_host_ptr ext_host_ptr;
 
-  /* Virtual pointer to the android native buffer */
-  void*               anb_ptr;
+    /* Virtual pointer to the android native buffer */
+    void*               anb_ptr;
 
 } cl_mem_android_native_buffer_host_ptr;
 
@@ -1093,24 +1093,24 @@ typedef cl_uint cl_queue_throttle_khr;
 #define CL_VERSION_PATCH_MASK_KHR             ((1 << CL_VERSION_PATCH_BITS_KHR) - 1)
 
 #define CL_VERSION_MAJOR_KHR(version)                                          \
-  ((version) >> (CL_VERSION_MINOR_BITS_KHR + CL_VERSION_PATCH_BITS_KHR))
+    ((version) >> (CL_VERSION_MINOR_BITS_KHR + CL_VERSION_PATCH_BITS_KHR))
 #define CL_VERSION_MINOR_KHR(version)                                          \
-  (((version) >> CL_VERSION_PATCH_BITS_KHR) & CL_VERSION_MINOR_MASK_KHR)
+    (((version) >> CL_VERSION_PATCH_BITS_KHR) & CL_VERSION_MINOR_MASK_KHR)
 #define CL_VERSION_PATCH_KHR(version) ((version)&CL_VERSION_PATCH_MASK_KHR)
 
 #define CL_MAKE_VERSION_KHR(major, minor, patch)                               \
-  ((((major)&CL_VERSION_MAJOR_MASK_KHR)                                        \
-    << (CL_VERSION_MINOR_BITS_KHR + CL_VERSION_PATCH_BITS_KHR)) |              \
-   (((minor)&CL_VERSION_MINOR_MASK_KHR) << CL_VERSION_PATCH_BITS_KHR) |        \
-   ((patch)&CL_VERSION_PATCH_MASK_KHR))
+    ((((major)&CL_VERSION_MAJOR_MASK_KHR)                                      \
+      << (CL_VERSION_MINOR_BITS_KHR + CL_VERSION_PATCH_BITS_KHR)) |            \
+     (((minor)&CL_VERSION_MINOR_MASK_KHR) << CL_VERSION_PATCH_BITS_KHR) |      \
+     ((patch)&CL_VERSION_PATCH_MASK_KHR))
 
 typedef cl_uint cl_version_khr;
 
 #define CL_NAME_VERSION_MAX_NAME_SIZE_KHR 64
 
 typedef struct _cl_name_version_khr {
-  cl_version_khr version;
-  char           name[CL_NAME_VERSION_MAX_NAME_SIZE_KHR];
+    cl_version_khr version;
+    char           name[CL_NAME_VERSION_MAX_NAME_SIZE_KHR];
 } cl_name_version_khr;
 
 /* cl_platform_info */
@@ -1144,10 +1144,10 @@ typedef struct _cl_name_version_khr {
 #define cl_khr_pci_bus_info                         1
 
 typedef struct _cl_device_pci_bus_info_khr {
-  cl_uint pci_domain;
-  cl_uint pci_bus;
-  cl_uint pci_device;
-  cl_uint pci_function;
+    cl_uint pci_domain;
+    cl_uint pci_bus;
+    cl_uint pci_device;
+    cl_uint pci_function;
 } cl_device_pci_bus_info_khr;
 
 /* cl_device_info */
@@ -1187,19 +1187,19 @@ typedef cl_bitfield cl_device_integer_dot_product_capabilities_khr;
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR        (1 << 1)
 
 typedef struct _cl_device_integer_dot_product_acceleration_properties_khr {
-  cl_bool signed_accelerated;
-  cl_bool unsigned_accelerated;
-  cl_bool mixed_signedness_accelerated;
-  cl_bool accumulating_saturating_signed_accelerated;
-  cl_bool accumulating_saturating_unsigned_accelerated;
-  cl_bool accumulating_saturating_mixed_signedness_accelerated;
+    cl_bool signed_accelerated;
+    cl_bool unsigned_accelerated;
+    cl_bool mixed_signedness_accelerated;
+    cl_bool accumulating_saturating_signed_accelerated;
+    cl_bool accumulating_saturating_unsigned_accelerated;
+    cl_bool accumulating_saturating_mixed_signedness_accelerated;
 } cl_device_integer_dot_product_acceleration_properties_khr;
 
 /* cl_device_info */
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_CAPABILITIES_KHR                 0x1073
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_ACCELERATION_PROPERTIES_8BIT_KHR 0x1074
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_ACCELERATION_PROPERTIES_4x8BIT_PACKED_KHR \
-  0x1075
+    0x1075
 
 /***************************************************************
  * cl_khr_external_memory
@@ -1789,10 +1789,10 @@ typedef cl_uint                       cl_accelerator_type_intel;
 typedef cl_uint                       cl_accelerator_info_intel;
 
 typedef struct _cl_motion_estimation_desc_intel {
-  cl_uint mb_block_type;
-  cl_uint subpixel_mode;
-  cl_uint sad_adjust_mode;
-  cl_uint search_path_type;
+    cl_uint mb_block_type;
+    cl_uint subpixel_mode;
+    cl_uint sad_adjust_mode;
+    cl_uint search_path_type;
 } cl_motion_estimation_desc_intel;
 
 /* error codes */
@@ -2371,7 +2371,7 @@ clEnqueueMemsetINTEL(cl_command_queue command_queue,
  ***************************************************************/
 #define cl_intel_mem_alloc_buffer_location 1
 #define CL_INTEL_MEM_ALLOC_BUFFER_LOCATION_EXTENSION_NAME                      \
-  "cl_intel_mem_alloc_buffer_location"
+    "cl_intel_mem_alloc_buffer_location"
 
 /* cl_mem_properties_intel */
 #define CL_MEM_ALLOC_BUFFER_LOCATION_INTEL     0x419E
@@ -2427,10 +2427,10 @@ typedef cl_bitfield cl_command_queue_capabilities_intel;
 #define CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL 64
 
 typedef struct _cl_queue_family_properties_intel {
-  cl_command_queue_properties         properties;
-  cl_command_queue_capabilities_intel capabilities;
-  cl_uint                             count;
-  char                                name[CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL];
+    cl_command_queue_properties         properties;
+    cl_command_queue_capabilities_intel capabilities;
+    cl_uint                             count;
+    char name[CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL];
 } cl_queue_family_properties_intel;
 
 /* cl_device_info */

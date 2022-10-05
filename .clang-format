@@ -1,5 +1,6 @@
 ---
 BasedOnStyle:  Mozilla
+IndentWidth: 4
 AlignConsecutiveMacros: AcrossEmptyLinesAndComments
 AlignConsecutiveDeclarations: AcrossEmptyLinesAndComments
 SortIncludes:    false

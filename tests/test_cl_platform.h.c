@@ -21,6 +21,6 @@
 int
 main(void)
 {
-  printf("cl_platform.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_platform.h standalone test PASSED.\n");
+    return 0;
 }
