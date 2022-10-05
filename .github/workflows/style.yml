@@ -1,5 +1,5 @@
 name: style-checks
-on: [pull_request]
+on: [push, pull_request]
 jobs:
   clang-format:
     runs-on: ubuntu-latest
