@@ -18,7 +18,8 @@
 
 #include "CL/cl.h"
 
-int main( void )
+int
+main(void)
 {
   printf("cl.h standalone test PASSED.\n");
   return 0;

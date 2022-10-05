@@ -24,7 +24,8 @@
 #define CL_USE_DEPRECATED_OPENCL_2_2_APIS
 #include "CL/cl_layer.h"
 
-int main( void )
+int
+main(void)
 {
   printf("cl_icd_layer.h standalone test PASSED.\n");
   return 0;

@@ -19,12 +19,14 @@
 
 #include "CL/cl_half.h"
 
-union FI {
-  float f;
+union FI
+{
+  float    f;
   uint32_t i;
 };
 
-int test_half_to_float(cl_half h, cl_float ref)
+int
+test_half_to_float(cl_half h, cl_float ref)
 {
   cl_float f = cl_half_to_float(h);
   if (f != ref) {
@@ -32,14 +34,19 @@ int test_half_to_float(cl_half h, cl_float ref)
     f_i.f = f;
     ref_i.f = ref;
     printf("\nERROR: converting 0x%04x to float: expected 0x%08x, got 0x%08x\n",
-           h, ref_i.i, f_i.i);
+           h,
+           ref_i.i,
+           f_i.i);
     return 0;
   }
   return 1;
 }
 
-int test_half_from_float(cl_float f, cl_half ref,
-                         cl_half_rounding_mode mode, const char *mode_str)
+int
+test_half_from_float(cl_float              f,
+                     cl_half               ref,
+                     cl_half_rounding_mode mode,
+                     const char*           mode_str)
 {
   cl_half h = cl_half_from_float(f, mode);
   if (h != ref) {
@@ -47,20 +54,24 @@ int test_half_from_float(cl_float f, cl_half ref,
     f_i.f = f;
     printf(
       "\nERROR: converting 0x%08x to half (%s): expected 0x%04x, got 0x%04x\n",
-      f_i.i, mode_str, ref, h);
+      f_i.i,
+      mode_str,
+      ref,
+      h);
     return 0;
   }
   return 1;
 }
 
-int main(void)
+int
+main(void)
 {
   printf("\nChecking conversion routines in cl_half.h\n");
 
-#define CHECK_TO_FLOAT(h, ref)                     \
-  if (!test_half_to_float(h, ref)) {               \
-    printf("Test failed on line %d.\n", __LINE__); \
-    return 1;                                      \
+#define CHECK_TO_FLOAT(h, ref)                                                 \
+  if (!test_half_to_float(h, ref)) {                                           \
+    printf("Test failed on line %d.\n", __LINE__);                             \
+    return 1;                                                                  \
   }
 
   // Check a handful of values
@@ -70,11 +81,10 @@ int main(void)
   CHECK_TO_FLOAT(0x7c00, INFINITY);
   CHECK_TO_FLOAT(0xfc00, -INFINITY);
 
-
-#define CHECK_FROM_FLOAT(f, ref, mode)                         \
-  if (!test_half_from_float(f, ref, CL_HALF_##mode, #mode)) {  \
-    printf("Test failed on line %d.\n", __LINE__);             \
-    return 1;                                                  \
+#define CHECK_FROM_FLOAT(f, ref, mode)                                         \
+  if (!test_half_from_float(f, ref, CL_HALF_##mode, #mode)) {                  \
+    printf("Test failed on line %d.\n", __LINE__);                             \
+    return 1;                                                                  \
   }
 
   // Check a handful of normal values

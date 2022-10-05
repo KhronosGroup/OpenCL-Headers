@@ -18,7 +18,8 @@
 
 #include "CL/cl_ext.h"
 
-int main( void )
+int
+main(void)
 {
   printf("cl_ext.h standalone test PASSED.\n");
   return 0;

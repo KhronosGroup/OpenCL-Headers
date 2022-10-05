@@ -18,7 +18,8 @@
 
 #include "CL/cl_gl.h"
 
-int main( void )
+int
+main(void)
 {
   printf("cl_gl.h standalone test PASSED.\n");
   return 0;
