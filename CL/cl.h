@@ -118,16 +118,14 @@ typedef cl_properties cl_mem_properties;
 typedef cl_uint       cl_version;
 #endif
 
-typedef struct _cl_image_format
-{
+typedef struct _cl_image_format {
   cl_channel_order image_channel_order;
   cl_channel_type  image_channel_data_type;
 } cl_image_format;
 
 #ifdef CL_VERSION_1_2
 
-typedef struct _cl_image_desc
-{
+typedef struct _cl_image_desc {
   cl_mem_object_type image_type;
   size_t             image_width;
   size_t             image_height;
@@ -156,8 +154,7 @@ typedef struct _cl_image_desc
 #if defined(_MSC_VER) && defined(__STDC__)
   /* Anonymous unions are not supported in /Za builds */
 #else
-  union
-  {
+  union {
 #endif
 #endif
     cl_mem buffer;
@@ -181,8 +178,7 @@ typedef struct _cl_image_desc
 
 #ifdef CL_VERSION_1_1
 
-typedef struct _cl_buffer_region
-{
+typedef struct _cl_buffer_region {
   size_t origin;
   size_t size;
 } cl_buffer_region;
@@ -193,8 +189,7 @@ typedef struct _cl_buffer_region
 
 #define CL_NAME_VERSION_MAX_NAME_SIZE 64
 
-typedef struct _cl_name_version
-{
+typedef struct _cl_name_version {
   cl_version version;
   char       name[CL_NAME_VERSION_MAX_NAME_SIZE];
 } cl_name_version;

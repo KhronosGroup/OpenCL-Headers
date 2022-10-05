@@ -386,20 +386,17 @@ clGetCommandBufferInfoKHR(cl_command_buffer_khr      command_buffer,
 typedef cl_uint     cl_command_buffer_structure_type_khr;
 typedef cl_bitfield cl_mutable_dispatch_fields_khr;
 typedef cl_uint     cl_mutable_command_info_khr;
-typedef struct _cl_mutable_dispatch_arg_khr
-{
+typedef struct _cl_mutable_dispatch_arg_khr {
   cl_uint     arg_index;
   size_t      arg_size;
   const void* arg_value;
 } cl_mutable_dispatch_arg_khr;
-typedef struct _cl_mutable_dispatch_exec_info_khr
-{
+typedef struct _cl_mutable_dispatch_exec_info_khr {
   cl_uint     param_name;
   size_t      param_value_size;
   const void* param_value;
 } cl_mutable_dispatch_exec_info_khr;
-typedef struct _cl_mutable_dispatch_config_khr
-{
+typedef struct _cl_mutable_dispatch_config_khr {
   cl_command_buffer_structure_type_khr     type;
   const void*                              next;
   cl_mutable_command_khr                   command;
@@ -414,8 +411,7 @@ typedef struct _cl_mutable_dispatch_config_khr
   const size_t*                            global_work_size;
   const size_t*                            local_work_size;
 } cl_mutable_dispatch_config_khr;
-typedef struct _cl_mutable_base_config_khr
-{
+typedef struct _cl_mutable_base_config_khr {
   cl_command_buffer_structure_type_khr  type;
   const void*                           next;
   cl_uint                               num_mutable_dispatch;
@@ -850,8 +846,7 @@ clGetDeviceImageInfoQCOM(cl_device_id             device,
                          void*                    param_value,
                          size_t*                  param_value_size_ret);
 
-typedef struct _cl_mem_ext_host_ptr
-{
+typedef struct _cl_mem_ext_host_ptr {
   /* Type of external memory allocation. */
   /* Legal values will be defined in layered extensions. */
   cl_uint allocation_type;
@@ -874,8 +869,7 @@ typedef struct _cl_mem_ext_host_ptr
 
 #define CL_MEM_ION_HOST_PTR_QCOM    0x40A8
 
-typedef struct _cl_mem_ion_host_ptr
-{
+typedef struct _cl_mem_ion_host_ptr {
   /* Type of external memory allocation. */
   /* Must be CL_MEM_ION_HOST_PTR_QCOM for ION allocations. */
   cl_mem_ext_host_ptr ext_host_ptr;
@@ -894,8 +888,7 @@ typedef struct _cl_mem_ion_host_ptr
 
 #define CL_MEM_ANDROID_NATIVE_BUFFER_HOST_PTR_QCOM 0x40C6
 
-typedef struct _cl_mem_android_native_buffer_host_ptr
-{
+typedef struct _cl_mem_android_native_buffer_host_ptr {
   /* Type of external memory allocation. */
   /* Must be CL_MEM_ANDROID_NATIVE_BUFFER_HOST_PTR_QCOM for Android native
    * buffers. */
@@ -1115,8 +1108,7 @@ typedef cl_uint cl_version_khr;
 
 #define CL_NAME_VERSION_MAX_NAME_SIZE_KHR 64
 
-typedef struct _cl_name_version_khr
-{
+typedef struct _cl_name_version_khr {
   cl_version_khr version;
   char           name[CL_NAME_VERSION_MAX_NAME_SIZE_KHR];
 } cl_name_version_khr;
@@ -1151,8 +1143,7 @@ typedef struct _cl_name_version_khr
  ***************************************************************/
 #define cl_khr_pci_bus_info                         1
 
-typedef struct _cl_device_pci_bus_info_khr
-{
+typedef struct _cl_device_pci_bus_info_khr {
   cl_uint pci_domain;
   cl_uint pci_bus;
   cl_uint pci_device;
@@ -1195,8 +1186,7 @@ typedef cl_bitfield cl_device_integer_dot_product_capabilities_khr;
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR (1 << 0)
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR        (1 << 1)
 
-typedef struct _cl_device_integer_dot_product_acceleration_properties_khr
-{
+typedef struct _cl_device_integer_dot_product_acceleration_properties_khr {
   cl_bool signed_accelerated;
   cl_bool unsigned_accelerated;
   cl_bool mixed_signedness_accelerated;
@@ -1798,8 +1788,7 @@ typedef struct _cl_accelerator_intel* cl_accelerator_intel;
 typedef cl_uint                       cl_accelerator_type_intel;
 typedef cl_uint                       cl_accelerator_info_intel;
 
-typedef struct _cl_motion_estimation_desc_intel
-{
+typedef struct _cl_motion_estimation_desc_intel {
   cl_uint mb_block_type;
   cl_uint subpixel_mode;
   cl_uint sad_adjust_mode;
@@ -2437,8 +2426,7 @@ typedef cl_bitfield cl_command_queue_capabilities_intel;
 
 #define CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL 64
 
-typedef struct _cl_queue_family_properties_intel
-{
+typedef struct _cl_queue_family_properties_intel {
   cl_command_queue_properties         properties;
   cl_command_queue_capabilities_intel capabilities;
   cl_uint                             count;

@@ -40,8 +40,7 @@ extern "C" {
 /**
  * Rounding mode used when converting to cl_half.
  */
-typedef enum
-{
+typedef enum {
   CL_HALF_RTE, // round to nearest even
   CL_HALF_RTZ, // round towards zero
   CL_HALF_RTP, // round towards positive infinity
@@ -100,8 +99,7 @@ static inline cl_half
 cl_half_from_float(cl_float f, cl_half_rounding_mode rounding_mode)
 {
   // Type-punning to get direct access to underlying bits
-  union
-  {
+  union {
     cl_float f;
     uint32_t i;
   } f32;
@@ -211,8 +209,7 @@ static inline cl_half
 cl_half_from_double(cl_double d, cl_half_rounding_mode rounding_mode)
 {
   // Type-punning to get direct access to underlying bits
-  union
-  {
+  union {
     cl_double d;
     uint64_t  i;
   } f64;
@@ -322,8 +319,7 @@ static inline cl_float
 cl_half_to_float(cl_half h)
 {
   // Type-punning to get direct access to underlying bits
-  union
-  {
+  union {
     cl_float f;
     uint32_t i;
   } f32;

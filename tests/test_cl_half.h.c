@@ -19,8 +19,7 @@
 
 #include "CL/cl_half.h"
 
-union FI
-{
+union FI {
   float    f;
   uint32_t i;
 };

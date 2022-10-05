@@ -45,8 +45,7 @@ typedef cl_uint cl_dx9_media_adapter_set_khr;
 #pragma warning(pop)
 #endif
 #endif
-typedef struct _cl_dx9_surface_info_khr
-{
+typedef struct _cl_dx9_surface_info_khr {
   IDirect3DSurface9* resource;
   HANDLE             shared_handle;
 } cl_dx9_surface_info_khr;

@@ -1478,8 +1478,7 @@ typedef void* cl_api_clGetHostTimer;
 
 /* Vendor dispatch table structure */
 
-typedef struct _cl_icd_dispatch
-{
+typedef struct _cl_icd_dispatch {
   /* OpenCL 1.0 */
   cl_api_clGetPlatformIDs                  clGetPlatformIDs;
   cl_api_clGetPlatformInfo                 clGetPlatformInfo;
