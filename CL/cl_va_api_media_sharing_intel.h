@@ -38,17 +38,17 @@ clGetSupportedVA_APIMediaSurfaceFormatsINTEL(cl_context         context,
                                              cl_mem_object_type image_type,
                                              cl_uint            plane,
                                              cl_uint            num_entries,
-                                             VAImageFormat*     va_api_formats,
-                                             cl_uint* num_surface_formats);
+                                             VAImageFormat *    va_api_formats,
+                                             cl_uint * num_surface_formats);
 
-typedef cl_int(CL_API_CALL* clGetSupportedVA_APIMediaSurfaceFormatsINTEL_fn)(
+typedef cl_int(CL_API_CALL * clGetSupportedVA_APIMediaSurfaceFormatsINTEL_fn)(
   cl_context         context,
   cl_mem_flags       flags,
   cl_mem_object_type image_type,
   cl_uint            plane,
   cl_uint            num_entries,
-  VAImageFormat*     va_api_formats,
-  cl_uint*           num_surface_formats);
+  VAImageFormat *    va_api_formats,
+  cl_uint *          num_surface_formats);
 
 /******************************************
  * cl_intel_va_api_media_sharing extension *
@@ -89,69 +89,69 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceIDsFromVA_APIMediaAdapterINTEL(
   cl_platform_id                platform,
   cl_va_api_device_source_intel media_adapter_type,
-  void*                         media_adapter,
+  void *                        media_adapter,
   cl_va_api_device_set_intel    media_adapter_set,
   cl_uint                       num_entries,
-  cl_device_id*                 devices,
-  cl_uint*                      num_devices) CL_API_SUFFIX__VERSION_1_2;
+  cl_device_id *                devices,
+  cl_uint *                     num_devices) CL_API_SUFFIX__VERSION_1_2;
 
-typedef cl_int(CL_API_CALL* clGetDeviceIDsFromVA_APIMediaAdapterINTEL_fn)(
+typedef cl_int(CL_API_CALL * clGetDeviceIDsFromVA_APIMediaAdapterINTEL_fn)(
   cl_platform_id                platform,
   cl_va_api_device_source_intel media_adapter_type,
-  void*                         media_adapter,
+  void *                        media_adapter,
   cl_va_api_device_set_intel    media_adapter_set,
   cl_uint                       num_entries,
-  cl_device_id*                 devices,
-  cl_uint*                      num_devices) CL_API_SUFFIX__VERSION_1_2;
+  cl_device_id *                devices,
+  cl_uint *                     num_devices) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
-clCreateFromVA_APIMediaSurfaceINTEL(cl_context   context,
-                                    cl_mem_flags flags,
-                                    VASurfaceID* surface,
-                                    cl_uint      plane,
-                                    cl_int*      errcode_ret)
+clCreateFromVA_APIMediaSurfaceINTEL(cl_context    context,
+                                    cl_mem_flags  flags,
+                                    VASurfaceID * surface,
+                                    cl_uint       plane,
+                                    cl_int *      errcode_ret)
   CL_API_SUFFIX__VERSION_1_2;
 
-typedef cl_mem(CL_API_CALL* clCreateFromVA_APIMediaSurfaceINTEL_fn)(
-  cl_context   context,
-  cl_mem_flags flags,
-  VASurfaceID* surface,
-  cl_uint      plane,
-  cl_int*      errcode_ret) CL_API_SUFFIX__VERSION_1_2;
+typedef cl_mem(CL_API_CALL * clCreateFromVA_APIMediaSurfaceINTEL_fn)(
+  cl_context    context,
+  cl_mem_flags  flags,
+  VASurfaceID * surface,
+  cl_uint       plane,
+  cl_int *      errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueAcquireVA_APIMediaSurfacesINTEL(cl_command_queue command_queue,
                                          cl_uint          num_objects,
-                                         const cl_mem*    mem_objects,
+                                         const cl_mem *   mem_objects,
                                          cl_uint num_events_in_wait_list,
-                                         const cl_event* event_wait_list,
-                                         cl_event*       event)
+                                         const cl_event * event_wait_list,
+                                         cl_event *       event)
   CL_API_SUFFIX__VERSION_1_2;
 
-typedef cl_int(CL_API_CALL* clEnqueueAcquireVA_APIMediaSurfacesINTEL_fn)(
+typedef cl_int(CL_API_CALL * clEnqueueAcquireVA_APIMediaSurfacesINTEL_fn)(
   cl_command_queue command_queue,
   cl_uint          num_objects,
-  const cl_mem*    mem_objects,
+  const cl_mem *   mem_objects,
   cl_uint          num_events_in_wait_list,
-  const cl_event*  event_wait_list,
-  cl_event*        event) CL_API_SUFFIX__VERSION_1_2;
+  const cl_event * event_wait_list,
+  cl_event *       event) CL_API_SUFFIX__VERSION_1_2;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueReleaseVA_APIMediaSurfacesINTEL(cl_command_queue command_queue,
                                          cl_uint          num_objects,
-                                         const cl_mem*    mem_objects,
+                                         const cl_mem *   mem_objects,
                                          cl_uint num_events_in_wait_list,
-                                         const cl_event* event_wait_list,
-                                         cl_event*       event)
+                                         const cl_event * event_wait_list,
+                                         cl_event *       event)
   CL_API_SUFFIX__VERSION_1_2;
 
-typedef cl_int(CL_API_CALL* clEnqueueReleaseVA_APIMediaSurfacesINTEL_fn)(
+typedef cl_int(CL_API_CALL * clEnqueueReleaseVA_APIMediaSurfacesINTEL_fn)(
   cl_command_queue command_queue,
   cl_uint          num_objects,
-  const cl_mem*    mem_objects,
+  const cl_mem *   mem_objects,
   cl_uint          num_events_in_wait_list,
-  const cl_event*  event_wait_list,
-  cl_event*        event) CL_API_SUFFIX__VERSION_1_2;
+  const cl_event * event_wait_list,
+  cl_event *       event) CL_API_SUFFIX__VERSION_1_2;
 
 #ifdef __cplusplus
 }

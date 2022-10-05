@@ -366,7 +366,7 @@ typedef double   cl_double;
 #define CL_HUGE_VALF ((cl_float)1e50)
 #define CL_HUGE_VAL  ((cl_double)1e500)
 float
-nanf(const char*);
+nanf(const char *);
 #define CL_NAN       nanf("")
 #endif
 #define CL_MAXFLOAT CL_FLT_MAX

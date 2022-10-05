@@ -46,7 +46,7 @@ int
 test_half_from_float(cl_float              f,
                      cl_half               ref,
                      cl_half_rounding_mode mode,
-                     const char*           mode_str)
+                     const char *          mode_str)
 {
     cl_half h = cl_half_from_float(f, mode);
     if (h != ref) {
