@@ -19,16 +19,16 @@
 
 /* Detect which version to target */
 #if !defined(CL_TARGET_OPENCL_VERSION)
-#pragma message(                                                               \
-  "cl_version.h: CL_TARGET_OPENCL_VERSION is not defined. Defaulting to 300 (OpenCL 3.0)")
+#pragma message(                                                                                   \
+    "cl_version.h: CL_TARGET_OPENCL_VERSION is not defined. Defaulting to 300 (OpenCL 3.0)")
 #define CL_TARGET_OPENCL_VERSION 300
 #endif
-#if CL_TARGET_OPENCL_VERSION != 100 && CL_TARGET_OPENCL_VERSION != 110 &&      \
-  CL_TARGET_OPENCL_VERSION != 120 && CL_TARGET_OPENCL_VERSION != 200 &&        \
-  CL_TARGET_OPENCL_VERSION != 210 && CL_TARGET_OPENCL_VERSION != 220 &&        \
-  CL_TARGET_OPENCL_VERSION != 300
-#pragma message(                                                               \
-  "cl_version: CL_TARGET_OPENCL_VERSION is not a valid value (100, 110, 120, 200, 210, 220, 300). Defaulting to 300 (OpenCL 3.0)")
+#if CL_TARGET_OPENCL_VERSION != 100 && CL_TARGET_OPENCL_VERSION != 110 &&                          \
+    CL_TARGET_OPENCL_VERSION != 120 && CL_TARGET_OPENCL_VERSION != 200 &&                          \
+    CL_TARGET_OPENCL_VERSION != 210 && CL_TARGET_OPENCL_VERSION != 220 &&                          \
+    CL_TARGET_OPENCL_VERSION != 300
+#pragma message(                                                                                   \
+    "cl_version: CL_TARGET_OPENCL_VERSION is not a valid value (100, 110, 120, 200, 210, 220, 300). Defaulting to 300 (OpenCL 3.0)")
 #undef CL_TARGET_OPENCL_VERSION
 #define CL_TARGET_OPENCL_VERSION 300
 #endif
@@ -57,28 +57,22 @@
 #endif
 
 /* Allow deprecated APIs for older OpenCL versions. */
-#if CL_TARGET_OPENCL_VERSION <= 220 &&                                         \
-  !defined(CL_USE_DEPRECATED_OPENCL_2_2_APIS)
+#if CL_TARGET_OPENCL_VERSION <= 220 && !defined(CL_USE_DEPRECATED_OPENCL_2_2_APIS)
 #define CL_USE_DEPRECATED_OPENCL_2_2_APIS
 #endif
-#if CL_TARGET_OPENCL_VERSION <= 210 &&                                         \
-  !defined(CL_USE_DEPRECATED_OPENCL_2_1_APIS)
+#if CL_TARGET_OPENCL_VERSION <= 210 && !defined(CL_USE_DEPRECATED_OPENCL_2_1_APIS)
 #define CL_USE_DEPRECATED_OPENCL_2_1_APIS
 #endif
-#if CL_TARGET_OPENCL_VERSION <= 200 &&                                         \
-  !defined(CL_USE_DEPRECATED_OPENCL_2_0_APIS)
+#if CL_TARGET_OPENCL_VERSION <= 200 && !defined(CL_USE_DEPRECATED_OPENCL_2_0_APIS)
 #define CL_USE_DEPRECATED_OPENCL_2_0_APIS
 #endif
-#if CL_TARGET_OPENCL_VERSION <= 120 &&                                         \
-  !defined(CL_USE_DEPRECATED_OPENCL_1_2_APIS)
+#if CL_TARGET_OPENCL_VERSION <= 120 && !defined(CL_USE_DEPRECATED_OPENCL_1_2_APIS)
 #define CL_USE_DEPRECATED_OPENCL_1_2_APIS
 #endif
-#if CL_TARGET_OPENCL_VERSION <= 110 &&                                         \
-  !defined(CL_USE_DEPRECATED_OPENCL_1_1_APIS)
+#if CL_TARGET_OPENCL_VERSION <= 110 && !defined(CL_USE_DEPRECATED_OPENCL_1_1_APIS)
 #define CL_USE_DEPRECATED_OPENCL_1_1_APIS
 #endif
-#if CL_TARGET_OPENCL_VERSION <= 100 &&                                         \
-  !defined(CL_USE_DEPRECATED_OPENCL_1_0_APIS)
+#if CL_TARGET_OPENCL_VERSION <= 100 && !defined(CL_USE_DEPRECATED_OPENCL_1_0_APIS)
 #define CL_USE_DEPRECATED_OPENCL_1_0_APIS
 #endif
 

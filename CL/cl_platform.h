@@ -88,60 +88,48 @@ extern "C" {
 #define CL_API_SUFFIX__VERSION_1_0_DEPRECATED CL_API_SUFFIX_COMMON
 #define CL_API_PREFIX__VERSION_1_0_DEPRECATED CL_API_PREFIX_COMMON
 #else
-#define CL_API_SUFFIX__VERSION_1_0_DEPRECATED                                  \
-    CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
-#define CL_API_PREFIX__VERSION_1_0_DEPRECATED                                  \
-    CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
+#define CL_API_SUFFIX__VERSION_1_0_DEPRECATED CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
+#define CL_API_PREFIX__VERSION_1_0_DEPRECATED CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
 #endif
 
 #ifdef CL_USE_DEPRECATED_OPENCL_1_1_APIS
 #define CL_API_SUFFIX__VERSION_1_1_DEPRECATED CL_API_SUFFIX_COMMON
 #define CL_API_PREFIX__VERSION_1_1_DEPRECATED CL_API_PREFIX_COMMON
 #else
-#define CL_API_SUFFIX__VERSION_1_1_DEPRECATED                                  \
-    CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
-#define CL_API_PREFIX__VERSION_1_1_DEPRECATED                                  \
-    CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
+#define CL_API_SUFFIX__VERSION_1_1_DEPRECATED CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
+#define CL_API_PREFIX__VERSION_1_1_DEPRECATED CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
 #endif
 
 #ifdef CL_USE_DEPRECATED_OPENCL_1_2_APIS
 #define CL_API_SUFFIX__VERSION_1_2_DEPRECATED CL_API_SUFFIX_COMMON
 #define CL_API_PREFIX__VERSION_1_2_DEPRECATED CL_API_PREFIX_COMMON
 #else
-#define CL_API_SUFFIX__VERSION_1_2_DEPRECATED                                  \
-    CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
-#define CL_API_PREFIX__VERSION_1_2_DEPRECATED                                  \
-    CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
+#define CL_API_SUFFIX__VERSION_1_2_DEPRECATED CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
+#define CL_API_PREFIX__VERSION_1_2_DEPRECATED CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
 #endif
 
 #ifdef CL_USE_DEPRECATED_OPENCL_2_0_APIS
 #define CL_API_SUFFIX__VERSION_2_0_DEPRECATED CL_API_SUFFIX_COMMON
 #define CL_API_PREFIX__VERSION_2_0_DEPRECATED CL_API_PREFIX_COMMON
 #else
-#define CL_API_SUFFIX__VERSION_2_0_DEPRECATED                                  \
-    CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
-#define CL_API_PREFIX__VERSION_2_0_DEPRECATED                                  \
-    CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
+#define CL_API_SUFFIX__VERSION_2_0_DEPRECATED CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
+#define CL_API_PREFIX__VERSION_2_0_DEPRECATED CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
 #endif
 
 #ifdef CL_USE_DEPRECATED_OPENCL_2_1_APIS
 #define CL_API_SUFFIX__VERSION_2_1_DEPRECATED CL_API_SUFFIX_COMMON
 #define CL_API_PREFIX__VERSION_2_1_DEPRECATED CL_API_PREFIX_COMMON
 #else
-#define CL_API_SUFFIX__VERSION_2_1_DEPRECATED                                  \
-    CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
-#define CL_API_PREFIX__VERSION_2_1_DEPRECATED                                  \
-    CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
+#define CL_API_SUFFIX__VERSION_2_1_DEPRECATED CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
+#define CL_API_PREFIX__VERSION_2_1_DEPRECATED CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
 #endif
 
 #ifdef CL_USE_DEPRECATED_OPENCL_2_2_APIS
 #define CL_API_SUFFIX__VERSION_2_2_DEPRECATED CL_API_SUFFIX_COMMON
 #define CL_API_PREFIX__VERSION_2_2_DEPRECATED CL_API_PREFIX_COMMON
 #else
-#define CL_API_SUFFIX__VERSION_2_2_DEPRECATED                                  \
-    CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
-#define CL_API_PREFIX__VERSION_2_2_DEPRECATED                                  \
-    CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
+#define CL_API_SUFFIX__VERSION_2_2_DEPRECATED CL_API_SUFFIX_COMMON CL_API_SUFFIX_DEPRECATED
+#define CL_API_PREFIX__VERSION_2_2_DEPRECATED CL_API_PREFIX_COMMON CL_API_PREFIX_DEPRECATED
 #endif
 
 #if (defined(_WIN32) && defined(_MSC_VER))
@@ -325,7 +313,7 @@ typedef double   cl_double;
 #define CL_DBL_MIN_10_EXP  -307
 #define CL_DBL_MIN_EXP     -1021
 #define CL_DBL_RADIX       2
-#define CL_DBL_MAX                                                             \
+#define CL_DBL_MAX                                                                                 \
     179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0
 #define CL_DBL_MIN      2.225073858507201383090e-308
 #define CL_DBL_EPSILON  2.220446049250313080847e-16
@@ -523,8 +511,7 @@ typedef __m256d __cl_double4;
 #endif
 
 /* Define capabilities for anonymous struct members. */
-#if !defined(__cplusplus) && defined(__STDC_VERSION__) &&                      \
-  __STDC_VERSION__ >= 201112L
+#if !defined(__cplusplus) && defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
 #define __CL_HAS_ANON_STRUCT__ 1
 #define __CL_ANON_STRUCT__
 #elif defined(_WIN32) && defined(_MSC_VER) && !defined(__STDC__)
@@ -644,8 +631,8 @@ typedef union {
     cl_char CL_ALIGNED(16) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_char x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_char x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_char s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -740,8 +727,8 @@ typedef union {
     cl_uchar CL_ALIGNED(16) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_uchar x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_uchar x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_uchar s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -836,8 +823,8 @@ typedef union {
     cl_short CL_ALIGNED(32) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_short x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_short x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_short s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -932,12 +919,11 @@ typedef union {
     cl_ushort CL_ALIGNED(32) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_ushort x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_ushort x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
-        cl_ushort s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE,
-          sF;
+        cl_ushort s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
     };
     __CL_ANON_STRUCT__ struct {
         cl_ushort8 lo, hi;
@@ -1029,8 +1015,8 @@ typedef union {
     cl_half CL_ALIGNED(32) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_half x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_half x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_half s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -1125,8 +1111,8 @@ typedef union {
     cl_int CL_ALIGNED(64) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_int x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_int x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa, sb,
+            sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_int s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -1221,8 +1207,8 @@ typedef union {
     cl_uint CL_ALIGNED(64) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_uint x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_uint x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_uint s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -1317,8 +1303,8 @@ typedef union {
     cl_long CL_ALIGNED(128) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_long x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_long x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_long s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -1413,8 +1399,8 @@ typedef union {
     cl_ulong CL_ALIGNED(128) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_ulong x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_ulong x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_ulong s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -1510,8 +1496,8 @@ typedef union {
     cl_float CL_ALIGNED(64) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_float x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_float x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
         cl_float s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
@@ -1607,12 +1593,11 @@ typedef union {
     cl_double CL_ALIGNED(128) s[16];
 #if __CL_HAS_ANON_STRUCT__
     __CL_ANON_STRUCT__ struct {
-        cl_double x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7,
-          __spacer8, __spacer9, sa, sb, sc, sd, se, sf;
+        cl_double x, y, z, w, __spacer4, __spacer5, __spacer6, __spacer7, __spacer8, __spacer9, sa,
+            sb, sc, sd, se, sf;
     };
     __CL_ANON_STRUCT__ struct {
-        cl_double s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE,
-          sF;
+        cl_double s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, sA, sB, sC, sD, sE, sF;
     };
     __CL_ANON_STRUCT__ struct {
         cl_double8 lo, hi;
@@ -1652,10 +1637,9 @@ typedef union {
  * This should correctly set up the line, (column) and file information for your
  * source string so you can do source level debugging.
  */
-#define __CL_STRINGIFY(_x) #_x
-#define _CL_STRINGIFY(_x)  __CL_STRINGIFY(_x)
-#define CL_PROGRAM_STRING_DEBUG_INFO                                           \
-    "#line " _CL_STRINGIFY(__LINE__) " \"" __FILE__ "\" \n\n"
+#define __CL_STRINGIFY(_x)           #_x
+#define _CL_STRINGIFY(_x)            __CL_STRINGIFY(_x)
+#define CL_PROGRAM_STRING_DEBUG_INFO "#line " _CL_STRINGIFY(__LINE__) " \"" __FILE__ "\" \n\n"
 
 #ifdef __cplusplus
 }

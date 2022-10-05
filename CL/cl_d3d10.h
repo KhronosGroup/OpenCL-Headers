@@ -77,49 +77,49 @@ typedef cl_uint cl_d3d10_device_set_khr;
 /******************************************************************************/
 
 typedef cl_int(CL_API_CALL * clGetDeviceIDsFromD3D10KHR_fn)(
-  cl_platform_id             platform,
-  cl_d3d10_device_source_khr d3d_device_source,
-  void *                     d3d_object,
-  cl_d3d10_device_set_khr    d3d_device_set,
-  cl_uint                    num_entries,
-  cl_device_id *             devices,
-  cl_uint *                  num_devices) CL_API_SUFFIX__VERSION_1_0;
+    cl_platform_id             platform,
+    cl_d3d10_device_source_khr d3d_device_source,
+    void *                     d3d_object,
+    cl_d3d10_device_set_khr    d3d_device_set,
+    cl_uint                    num_entries,
+    cl_device_id *             devices,
+    cl_uint *                  num_devices) CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_mem(CL_API_CALL * clCreateFromD3D10BufferKHR_fn)(
-  cl_context     context,
-  cl_mem_flags   flags,
-  ID3D10Buffer * resource,
-  cl_int *       errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+    cl_context     context,
+    cl_mem_flags   flags,
+    ID3D10Buffer * resource,
+    cl_int *       errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_mem(CL_API_CALL * clCreateFromD3D10Texture2DKHR_fn)(
-  cl_context        context,
-  cl_mem_flags      flags,
-  ID3D10Texture2D * resource,
-  UINT              subresource,
-  cl_int *          errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+    cl_context        context,
+    cl_mem_flags      flags,
+    ID3D10Texture2D * resource,
+    UINT              subresource,
+    cl_int *          errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_mem(CL_API_CALL * clCreateFromD3D10Texture3DKHR_fn)(
-  cl_context        context,
-  cl_mem_flags      flags,
-  ID3D10Texture3D * resource,
-  UINT              subresource,
-  cl_int *          errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+    cl_context        context,
+    cl_mem_flags      flags,
+    ID3D10Texture3D * resource,
+    UINT              subresource,
+    cl_int *          errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int(CL_API_CALL * clEnqueueAcquireD3D10ObjectsKHR_fn)(
-  cl_command_queue command_queue,
-  cl_uint          num_objects,
-  const cl_mem *   mem_objects,
-  cl_uint          num_events_in_wait_list,
-  const cl_event * event_wait_list,
-  cl_event *       event) CL_API_SUFFIX__VERSION_1_0;
+    cl_command_queue command_queue,
+    cl_uint          num_objects,
+    const cl_mem *   mem_objects,
+    cl_uint          num_events_in_wait_list,
+    const cl_event * event_wait_list,
+    cl_event *       event) CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int(CL_API_CALL * clEnqueueReleaseD3D10ObjectsKHR_fn)(
-  cl_command_queue command_queue,
-  cl_uint          num_objects,
-  const cl_mem *   mem_objects,
-  cl_uint          num_events_in_wait_list,
-  const cl_event * event_wait_list,
-  cl_event *       event) CL_API_SUFFIX__VERSION_1_0;
+    cl_command_queue command_queue,
+    cl_uint          num_objects,
+    const cl_mem *   mem_objects,
+    cl_uint          num_events_in_wait_list,
+    const cl_event * event_wait_list,
+    cl_event *       event) CL_API_SUFFIX__VERSION_1_0;
 
 /***************************************************************
  * cl_intel_sharing_format_query_d3d10
@@ -129,20 +129,21 @@ typedef cl_int(CL_API_CALL * clEnqueueReleaseD3D10ObjectsKHR_fn)(
 /* when cl_khr_d3d10_sharing is supported */
 
 extern CL_API_ENTRY cl_int CL_API_CALL
-clGetSupportedD3D10TextureFormatsINTEL(cl_context         context,
-                                       cl_mem_flags       flags,
-                                       cl_mem_object_type image_type,
-                                       cl_uint            num_entries,
-                                       DXGI_FORMAT *      d3d10_formats,
-                                       cl_uint *          num_texture_formats);
+clGetSupportedD3D10TextureFormatsINTEL(
+    cl_context         context,
+    cl_mem_flags       flags,
+    cl_mem_object_type image_type,
+    cl_uint            num_entries,
+    DXGI_FORMAT *      d3d10_formats,
+    cl_uint *          num_texture_formats);
 
 typedef cl_int(CL_API_CALL * clGetSupportedD3D10TextureFormatsINTEL_fn)(
-  cl_context         context,
-  cl_mem_flags       flags,
-  cl_mem_object_type image_type,
-  cl_uint            num_entries,
-  DXGI_FORMAT *      d3d10_formats,
-  cl_uint *          num_texture_formats);
+    cl_context         context,
+    cl_mem_flags       flags,
+    cl_mem_object_type image_type,
+    cl_uint            num_entries,
+    DXGI_FORMAT *      d3d10_formats,
+    cl_uint *          num_texture_formats);
 
 #ifdef __cplusplus
 }
