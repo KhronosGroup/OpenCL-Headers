@@ -2,7 +2,7 @@ name: style-checks
 on: [push, pull_request]
 jobs:
   clang-format:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
       - run: sudo apt-get update
