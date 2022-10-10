@@ -1,0 +1,6 @@
+includedir=@CMAKE_INSTALL_FULL_INCLUDEDIR@
+
+Name: OpenCL-Headers
+Description: Khronos OpenCL Headers
+Version: 3.0
+Cflags: -I${includedir}

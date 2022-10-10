@@ -93,3 +93,11 @@ endif()
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR OPENCL_HEADERS_BUILD_TESTING) AND BUILD_TESTING)
   add_subdirectory(tests)
 endif()
+
+if (UNIX)
+  configure_file(OpenCL-Headers.pc.in OpenCL-Headers.pc @ONLY)
+  set(pkg_config_location ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+  install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/OpenCL-Headers.pc
+    DESTINATION ${pkg_config_location})
+endif()
