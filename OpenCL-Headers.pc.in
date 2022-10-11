@@ -1,4 +1,5 @@
-includedir=@CMAKE_INSTALL_FULL_INCLUDEDIR@
+prefix=@CMAKE_INSTALL_PREFIX@
+includedir=${prefix}/@CMAKE_INSTALL_INCLUDEDIR@
 
 Name: OpenCL-Headers
 Description: Khronos OpenCL Headers
