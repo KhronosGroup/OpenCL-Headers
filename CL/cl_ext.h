@@ -1379,6 +1379,16 @@ typedef cl_bitfield         cl_device_fp_atomic_capabilities_ext;
 #define CL_DEVICE_HALF_FP_ATOMIC_CAPABILITIES_EXT           0x4233
 
 /***************************************************************
+* cl_ext_image_from_buffer
+***************************************************************/
+#define cl_ext_image_from_buffer 1
+#define CL_EXT_IMAGE_FROM_BUFFER_EXTENSION_NAME \
+    "cl_ext_image_from_buffer"
+
+/* cl_image_requirements_info_ext */
+#define CL_IMAGE_REQUIREMENTS_SLICE_PITCH_ALIGNMENT_EXT     0x1291
+
+/***************************************************************
 * cl_ext_image_requirements_info
 ***************************************************************/
 #if defined(CL_VERSION_3_0)
@@ -1661,6 +1671,19 @@ clImportMemoryARM(
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 #endif /* CL_NO_PROTOTYPES */
+
+/***************************************************************
+* cl_arm_job_slot_selection
+***************************************************************/
+#define cl_arm_job_slot_selection 1
+#define CL_ARM_JOB_SLOT_SELECTION_EXTENSION_NAME \
+    "cl_arm_job_slot_selection"
+
+/* cl_device_info */
+#define CL_DEVICE_JOB_SLOTS_ARM                             0x41E0
+
+/* cl_queue_properties */
+#define CL_QUEUE_JOB_SLOT_ARM                               0x41E1
 
 /***************************************************************
 * cl_arm_printf
