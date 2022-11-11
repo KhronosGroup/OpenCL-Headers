@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   compatibility:
-    runs-on: macos-latest
+    runs-on: macos-11
     strategy:
       matrix:
         VER: [9, 11]
@@ -13,7 +13,7 @@ jobs:
 
     steps:
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Create Build Environment
       shell: bash

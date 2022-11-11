@@ -25,7 +25,7 @@ jobs:
       UseMultiToolTask: true # Better parallel MSBuild execution
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Cache Ninja install
       if: matrix.GEN == 'Ninja Multi-Config'
