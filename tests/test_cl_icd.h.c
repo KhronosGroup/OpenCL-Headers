@@ -24,8 +24,9 @@
 #define CL_USE_DEPRECATED_OPENCL_2_2_APIS
 #include "CL/cl_icd.h"
 
-int main( void )
+int
+main(void)
 {
-  printf("cl_icd.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_icd.h standalone test PASSED.\n");
+    return 0;
 }

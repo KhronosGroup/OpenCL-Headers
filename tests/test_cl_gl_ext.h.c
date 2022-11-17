@@ -18,8 +18,9 @@
 
 #include "CL/cl_gl_ext.h"
 
-int main( void )
+int
+main(void)
 {
-  printf("cl_gl_ext.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_gl_ext.h standalone test PASSED.\n");
+    return 0;
 }

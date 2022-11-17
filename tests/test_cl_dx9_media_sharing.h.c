@@ -20,8 +20,9 @@
 #include "CL/cl_dx9_media_sharing.h"
 #endif
 
-int main( void )
+int
+main(void)
 {
-  printf("cl_dx9_media_sharing.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_dx9_media_sharing.h standalone test PASSED.\n");
+    return 0;
 }

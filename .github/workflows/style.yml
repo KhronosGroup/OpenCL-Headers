@@ -1,0 +1,15 @@
+name: style-checks
+on: [push, pull_request]
+jobs:
+  clang-format:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y clang-format
+      - name: run git-clang-format
+        run: clang-format --style=file --dry-run --Werror `git ls-files *.c *.h` >clang-format-diff 2>&1
+        shell: bash
+      - name: output clang format diff
+        if: always()
+        run: cat ./clang-format-diff

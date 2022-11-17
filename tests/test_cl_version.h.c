@@ -18,8 +18,9 @@
 
 #include "CL/cl_version.h"
 
-int main( void )
+int
+main(void)
 {
-  printf("cl_version.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_version.h standalone test PASSED.\n");
+    return 0;
 }

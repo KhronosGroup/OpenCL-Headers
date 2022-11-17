@@ -20,8 +20,9 @@
 #include "CL/cl_d3d10.h"
 #endif
 
-int main( void )
+int
+main(void)
 {
-  printf("cl_d3d10.h standalone test PASSED.\n");
-  return 0;
+    printf("cl_d3d10.h standalone test PASSED.\n");
+    return 0;
 }
