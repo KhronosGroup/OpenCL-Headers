@@ -10,3 +10,6 @@
 # $ git config blame.ignoreRevsFile .git-blame-ignore-revs
 #
 # Ignore changes introduced when doing global file format changes
+
+# removing comments around arguments
+f937adaf3a80055f9187e226f9724d3265980e00
