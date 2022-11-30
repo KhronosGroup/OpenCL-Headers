@@ -13,3 +13,7 @@
 
 # removing comments around arguments
 f937adaf3a80055f9187e226f9724d3265980e00
+# Formatted headers and added style check.
+24fa0fe9f6fcf12ae4695b4cd324793e573a1756
+# Revert "Formatted headers and added style check."
+b590a6bfe034ea3a418b7b523e3490956bcb367a
