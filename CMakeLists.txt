@@ -99,10 +99,8 @@ endif()
 
 join_paths(OPENCL_INCLUDEDIR_PC "\${prefix}" "${CMAKE_INSTALL_INCLUDEDIR}")
 
-if (NOT MSVC)
-  configure_file(OpenCL-Headers.pc.in OpenCL-Headers.pc @ONLY)
-  set(pkg_config_location ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-  install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/OpenCL-Headers.pc
-    DESTINATION ${pkg_config_location})
-endif()
+configure_file(OpenCL-Headers.pc.in OpenCL-Headers.pc @ONLY)
+set(pkg_config_location ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/OpenCL-Headers.pc
+  DESTINATION ${pkg_config_location})
