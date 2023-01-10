@@ -51,3 +51,11 @@ jobs:
       run: |
         ctest -C Release --output-on-failure --parallel `sysctl -n hw.logicalcpu`
         ctest -C Debug   --output-on-failure --parallel `sysctl -n hw.logicalcpu`
+
+    - name: Test install
+      shell: bash
+      run: cmake --build $GITHUB_WORKSPACE/build --target install --config Release
+
+    - name: Test pkg-config
+      shell: bash
+      run: PKG_CONFIG_PATH="$GITHUB_WORKSPACE/install/lib/pkgconfig" pkg-config OpenCL-Headers --cflags | grep -q "\-I$GITHUB_WORKSPACE/install/include"

@@ -15,6 +15,9 @@ project(OpenCLHeaders
 option(OPENCL_HEADERS_BUILD_TESTING "Enable support for OpenCL C headers testing." OFF)
 option(OPENCL_HEADERS_BUILD_CXX_TESTS "Enable support for OpenCL C headers testing in C++ mode." ON)
 
+set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(JoinPaths)
+
 include(GNUInstallDirs)
 
 add_library(Headers INTERFACE)
@@ -93,3 +96,11 @@ endif()
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR OPENCL_HEADERS_BUILD_TESTING) AND BUILD_TESTING)
   add_subdirectory(tests)
 endif()
+
+join_paths(OPENCL_INCLUDEDIR_PC "\${prefix}" "${CMAKE_INSTALL_INCLUDEDIR}")
+
+configure_file(OpenCL-Headers.pc.in OpenCL-Headers.pc @ONLY)
+set(pkg_config_location ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/OpenCL-Headers.pc
+  DESTINATION ${pkg_config_location})
