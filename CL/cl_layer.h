@@ -27,15 +27,8 @@ extern "C" {
 
 typedef cl_uint cl_layer_info;
 typedef cl_uint cl_layer_api_version;
-typedef struct _cl_layer_option {
-    const char *name;
-    const char *value;
-    const char *default_value;
-    const char *description;
-} cl_layer_option;
 #define CL_LAYER_API_VERSION 0x4240
 #define CL_LAYER_NAME        0x4241
-#define CL_LAYER_OPTIONS     0x4242
 #define CL_LAYER_API_VERSION_100 100
 
 extern CL_API_ENTRY cl_int CL_API_CALL
