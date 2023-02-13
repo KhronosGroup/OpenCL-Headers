@@ -60,4 +60,4 @@ jobs:
       shell: bash
       run: |
         if [[ ! `which pkg-config` ]]; then brew install pkg-config; fi;
-        PKG_CONFIG_PATH="$GITHUB_WORKSPACE/install/lib/pkgconfig" pkg-config OpenCL-Headers --cflags | grep -q "\-I$GITHUB_WORKSPACE/install/include"
+        PKG_CONFIG_PATH="$GITHUB_WORKSPACE/install/share/pkgconfig" pkg-config OpenCL-Headers --cflags | grep -q "\-I$GITHUB_WORKSPACE/install/include"
