@@ -2287,6 +2287,17 @@ clCreateBufferWithPropertiesINTEL(
 #endif /* CL_NO_PROTOTYPES */
 
 /***************************************************************
+* cl_intel_create_mem_object_properties
+***************************************************************/
+#define cl_intel_create_mem_object_properties 1
+#define CL_INTEL_CREATE_MEM_OBJECT_PROPERTIES_EXTENSION_NAME \
+    "cl_intel_create_mem_object_properties"
+
+/* cl_mem_properties */
+#define CL_MEM_LOCALLY_UNCACHED_RESOURCE_INTEL              0x4218
+#define CL_MEM_DEVICE_ID_INTEL                              0x4219
+
+/***************************************************************
 * cl_intel_device_attribute_query
 ***************************************************************/
 #define cl_intel_device_attribute_query 1
