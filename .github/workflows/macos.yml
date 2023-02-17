@@ -58,4 +58,6 @@ jobs:
 
     - name: Test pkg-config
       shell: bash
-      run: PKG_CONFIG_PATH="$GITHUB_WORKSPACE/install/lib/pkgconfig" pkg-config OpenCL-Headers --cflags | grep -q "\-I$GITHUB_WORKSPACE/install/include"
+      run: |
+        if [[ ! `which pkg-config` ]]; then brew install pkg-config; fi;
+        PKG_CONFIG_PATH="$GITHUB_WORKSPACE/install/lib/pkgconfig" pkg-config OpenCL-Headers --cflags | grep -q "\-I$GITHUB_WORKSPACE/install/include"
