@@ -2626,6 +2626,25 @@ clGetImageRequirementsInfoEXT_fn)(
 
 #endif
 
+/***************************************************************
+* cl_loader_info
+***************************************************************/
+
+#define cl_loader_info 1
+
+typedef cl_uint cl_icdl_info;
+
+#define CL_ICDL_OCL_VERSION 1
+#define CL_ICDL_VERSION     2
+#define CL_ICDL_NAME        3
+#define CL_ICDL_VENDOR      4
+
+typedef cl_int
+(CL_API_CALL * pfn_clGetICDLoaderInfoOCLICD)(cl_icdl_info param_name,
+                                             size_t       param_value_size,
+                                             void *       param_value,
+                                             size_t *     param_value_size_ret);
+
 #ifdef __cplusplus
 }
 #endif
