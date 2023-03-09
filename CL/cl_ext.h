@@ -2499,6 +2499,64 @@ clCreateBufferWithPropertiesINTEL_fn)(
     void *       host_ptr,
     cl_int *     errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
+/***********************************
+* cl_intel_program_scope_host_pipe *
+***********************************/
+#define cl_intel_program_scope_host_pipe 1
+#define CL_INTEL_PROGRAM_SCOPE_HOST_PIPE_EXTENSION_NAME "cl_intel_program_scope_host_pipe"
+
+/* New return values from clGetEventInfo when param_name is CL_EVENT_COMMAND_TYPE */
+#define CL_COMMAND_READ_HOST_PIPE_INTEL   0x4214
+#define CL_COMMAND_WRITE_HOST_PIPE_INTEL  0x4215
+#define CL_PROGRAM_NUM_HOST_PIPES_INTEL   0x4216
+#define CL_PROGRAM_HOST_PIPE_NAMES_INTEL  0x4217
+
+typedef CL_API_ENTRY cl_int (CL_API_CALL *clEnqueueReadHostPipeIntelFPGA_fn )(
+            cl_command_queue command_queue,
+            cl_program program,
+            const char* pipe_symbol,
+            cl_bool blocking_read,
+            void* ptr,
+            size_t size,
+            cl_uint num_events_in_wait_list,
+            const cl_event* event_wait_list,
+            cl_event* event) CL_API_SUFFIX__VERSION_1_0;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueReadHostPipeINTEL(
+            cl_command_queue command_queue,
+            cl_program program,
+            const char* pipe_symbol,
+            cl_bool blocking_read,
+            void* ptr,
+            size_t size,
+            cl_uint num_events_in_wait_list,
+            const cl_event* event_wait_list,
+            cl_event* event) CL_API_SUFFIX__VERSION_1_0;
+
+typedef CL_API_ENTRY cl_int (CL_API_CALL *clEnqueueWriteHostPipeIntelFPGA_fn)(
+            cl_command_queue command_queue,
+            cl_program program,
+            const char* pipe_symbol,
+            cl_bool blocking_write,
+            void* ptr,
+            size_t size,
+            cl_uint num_events_in_wait_list,
+            const cl_event* event_wait_list,
+            cl_event* event) CL_API_SUFFIX__VERSION_1_0;
+            
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueWriteHostPipeINTEL(
+            cl_command_queue command_queue,
+            cl_program program,
+            const char* pipe_symbol,
+            cl_bool blocking_write,
+            void* ptr,
+            size_t size,
+            cl_uint num_events_in_wait_list,
+            const cl_event* event_wait_list,
+            cl_event* event) CL_API_SUFFIX__VERSION_1_0;
+
 /******************************************
 * cl_intel_mem_channel_property extension *
 *******************************************/
