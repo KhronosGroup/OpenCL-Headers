@@ -2511,7 +2511,7 @@ clCreateBufferWithPropertiesINTEL_fn)(
 #define CL_PROGRAM_NUM_HOST_PIPES_INTEL   0x4216
 #define CL_PROGRAM_HOST_PIPE_NAMES_INTEL  0x4217
 
-typedef cl_int (CL_API_CALL *clEnqueueReadHostPipeIntelFPGA_fn )(
+typedef cl_int (CL_API_CALL *clEnqueueReadHostPipeINTEL_fn )(
             cl_command_queue command_queue,
             cl_program program,
             const char* pipe_symbol,
@@ -2534,7 +2534,7 @@ clEnqueueReadHostPipeINTEL(
             const cl_event* event_wait_list,
             cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-typedef cl_int (CL_API_CALL *clEnqueueWriteHostPipeIntelFPGA_fn)(
+typedef cl_int (CL_API_CALL *clEnqueueWriteHostPipeINTEL_fn)(
             cl_command_queue command_queue,
             cl_program program,
             const char* pipe_symbol,
