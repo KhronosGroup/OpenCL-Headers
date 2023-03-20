@@ -2645,6 +2645,13 @@ typedef cl_int
                                              void *       param_value,
                                              size_t *     param_value_size_ret);
 
+#ifndef CL_NO_PROTOTYPES
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetICDLoaderInfoOCLICD(cl_icdl_info param_name,
+                         size_t       param_value_size,
+                         void *       param_value,
+                         size_t *     param_value_size_ret);
+#endif
 #ifdef __cplusplus
 }
 #endif
