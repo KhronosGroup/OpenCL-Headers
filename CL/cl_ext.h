@@ -680,11 +680,11 @@ clCreateProgramWithILKHR(
 #endif /* CL_NO_PROTOTYPES */
 
 /***************************************************************
-* cl_khr_image2D_from_buffer
+* cl_khr_image2d_from_buffer
 ***************************************************************/
-#define cl_khr_image2D_from_buffer 1
+#define cl_khr_image2d_from_buffer 1
 #define CL_KHR_IMAGE2D_FROM_BUFFER_EXTENSION_NAME \
-    "cl_khr_image2D_from_buffer"
+    "cl_khr_image2d_from_buffer"
 
 /* cl_device_info */
 #define CL_DEVICE_IMAGE_PITCH_ALIGNMENT_KHR                 0x104A
