@@ -28,64 +28,6 @@ extern "C" {
 #endif
 
 /***************************************************************
-* cl_khr_gl_depth_images
-***************************************************************/
-#define cl_khr_gl_depth_images 1
-#define CL_KHR_GL_DEPTH_IMAGES_EXTENSION_NAME \
-    "cl_khr_gl_depth_images"
-
-#if !defined(CL_VERSION_1_2)
-/* cl_channel_order - defined in CL.h for OpenCL 1.2 and newer */
-#define CL_DEPTH_STENCIL                                    0x10BE
-
-#endif /* !defined(CL_VERSION_1_2) */
-
-#if !defined(CL_VERSION_1_2)
-/* cl_channel_type - defined in CL.h for OpenCL 1.2 and newer */
-#define CL_UNORM_INT24                                      0x10DF
-
-#endif /* !defined(CL_VERSION_1_2) */
-
-/***************************************************************
-* cl_khr_gl_event
-***************************************************************/
-#define cl_khr_gl_event 1
-#define CL_KHR_GL_EVENT_EXTENSION_NAME \
-    "cl_khr_gl_event"
-
-typedef struct __GLsync *   cl_GLsync;
-
-/* cl_command_type */
-#define CL_COMMAND_GL_FENCE_SYNC_OBJECT_KHR                 0x200D
-
-
-typedef cl_event (CL_API_CALL *
-clCreateEventFromGLsyncKHR_fn)(
-    cl_context context,
-    cl_GLsync sync,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
-
-#ifndef CL_NO_PROTOTYPES
-
-extern CL_API_ENTRY cl_event CL_API_CALL
-clCreateEventFromGLsyncKHR(
-    cl_context context,
-    cl_GLsync sync,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
-
-#endif /* CL_NO_PROTOTYPES */
-
-/***************************************************************
-* cl_khr_gl_msaa_sharing
-***************************************************************/
-#define cl_khr_gl_msaa_sharing 1
-#define CL_KHR_GL_MSAA_SHARING_EXTENSION_NAME \
-    "cl_khr_gl_msaa_sharing"
-
-/* cl_gl_texture_info */
-#define CL_GL_NUM_SAMPLES                                   0x2012
-
-/***************************************************************
 * cl_khr_gl_sharing
 ***************************************************************/
 #define cl_khr_gl_sharing 1
@@ -316,6 +258,64 @@ clCreateFromGLTexture3D(
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
 
 #endif /* CL_NO_PROTOTYPES */
+
+/***************************************************************
+* cl_khr_gl_event
+***************************************************************/
+#define cl_khr_gl_event 1
+#define CL_KHR_GL_EVENT_EXTENSION_NAME \
+    "cl_khr_gl_event"
+
+typedef struct __GLsync *   cl_GLsync;
+
+/* cl_command_type */
+#define CL_COMMAND_GL_FENCE_SYNC_OBJECT_KHR                 0x200D
+
+
+typedef cl_event (CL_API_CALL *
+clCreateEventFromGLsyncKHR_fn)(
+    cl_context context,
+    cl_GLsync sync,
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
+
+#ifndef CL_NO_PROTOTYPES
+
+extern CL_API_ENTRY cl_event CL_API_CALL
+clCreateEventFromGLsyncKHR(
+    cl_context context,
+    cl_GLsync sync,
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
+
+#endif /* CL_NO_PROTOTYPES */
+
+/***************************************************************
+* cl_khr_gl_depth_images
+***************************************************************/
+#define cl_khr_gl_depth_images 1
+#define CL_KHR_GL_DEPTH_IMAGES_EXTENSION_NAME \
+    "cl_khr_gl_depth_images"
+
+#if !defined(CL_VERSION_1_2)
+/* cl_channel_order - defined in CL.h for OpenCL 1.2 and newer */
+#define CL_DEPTH_STENCIL                                    0x10BE
+
+#endif /* !defined(CL_VERSION_1_2) */
+
+#if !defined(CL_VERSION_1_2)
+/* cl_channel_type - defined in CL.h for OpenCL 1.2 and newer */
+#define CL_UNORM_INT24                                      0x10DF
+
+#endif /* !defined(CL_VERSION_1_2) */
+
+/***************************************************************
+* cl_khr_gl_msaa_sharing
+***************************************************************/
+#define cl_khr_gl_msaa_sharing 1
+#define CL_KHR_GL_MSAA_SHARING_EXTENSION_NAME \
+    "cl_khr_gl_msaa_sharing"
+
+/* cl_gl_texture_info */
+#define CL_GL_NUM_SAMPLES                                   0x2012
 
 /***************************************************************
 * cl_intel_sharing_format_query_gl

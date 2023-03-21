@@ -44,9 +44,128 @@ def shouldEmit(block):
         return True
     return False
 
+# Initially, keep the same extension order:
+orderedExtensions = [
+    # cl_ext.h:
+    'cl_khr_command_buffer',
+    'cl_khr_command_buffer_mutable_dispatch',
+    'cl_khr_fp64',
+    'cl_khr_fp16',
+    'cl_APPLE_SetMemObjectDestructor',
+    'cl_APPLE_ContextLoggingFunctions',
+    'cl_khr_icd',
+    'cl_khr_il_program',
+    'cl_khr_image2D_from_buffer',   # incorrect name
+    'cl_khr_image2d_from_buffer',
+    'cl_khr_initialize_memory',
+    'cl_khr_terminate_context',
+    'cl_khr_spir',
+    'cl_khr_create_command_queue',
+    'cl_nv_device_attribute_query',
+    'cl_amd_device_attribute_query',
+    'cl_arm_printf',
+    'cl_ext_device_fission',
+    'cl_ext_migrate_memobject',
+    'cl_ext_cxx_for_opencl',
+    'cl_qcom_ext_host_ptr',
+    'cl_qcom_ext_host_ptr_iocoherent',
+    'cl_qcom_ion_host_ptr',
+    'cl_qcom_android_native_buffer_host_ptr',
+    'cl_img_yuv_image',
+    'cl_img_cached_allocations',
+    'cl_img_use_gralloc_ptr',
+    'cl_img_generate_mipmap',
+    'cl_img_mem_properties',
+    'cl_khr_subgroups',
+    'cl_khr_mipmap_image',
+    'cl_khr_priority_hints',
+    'cl_khr_throttle_hints',
+    'cl_khr_subgroup_named_barrier',
+    'cl_khr_extended_versioning',
+    'cl_khr_device_uuid',
+    'cl_khr_pci_bus_info',
+    'cl_khr_suggested_local_work_size',
+    'cl_khr_integer_dot_product',
+    'cl_khr_external_memory',
+    'cl_khr_external_memory_dma_buf',
+    'cl_khr_external_memory_dx',
+    'cl_khr_external_memory_opaque_fd',
+    'cl_khr_external_memory_win32',
+    'cl_khr_external_semaphore',
+    'cl_khr_external_semaphore_dx_fence',
+    'cl_khr_external_semaphore_opaque_fd',
+    'cl_khr_external_semaphore_sync_fd',
+    'cl_khr_external_semaphore_win32',
+    'cl_khr_semaphore',
+    'cl_arm_import_memory',
+    'cl_arm_shared_virtual_memory',
+    'cl_arm_get_core_id',
+    'cl_arm_job_slot_selection',
+    'cl_arm_scheduling_controls',
+    'cl_arm_controlled_kernel_termination',
+    'cl_arm_protected_memory_allocation',
+    'cl_intel_exec_by_local_thread',
+    'cl_intel_device_attribute_query',
+    'cl_intel_device_partition_by_names',
+    'cl_intel_accelerator',
+    'cl_intel_motion_estimation',
+    'cl_intel_advanced_motion_estimation',
+    'cl_intel_simultaneous_sharing',
+    'cl_intel_egl_image_yuv',
+    'cl_intel_packed_yuv',
+    'cl_intel_required_subgroup_size',
+    'cl_intel_driver_diagnostics',
+    'cl_intel_planar_yuv',
+    'cl_intel_device_side_avc_motion_estimation',
+    'cl_intel_unified_shared_memory',
+    'cl_intel_mem_alloc_buffer_location',
+    'cl_intel_create_buffer_with_properties',
+    'cl_intel_program_scope_host_pipe',
+    'cl_intel_mem_channel_property',
+    'cl_intel_mem_force_host_memory',
+    'cl_intel_command_queue_families',
+    'cl_intel_queue_no_sync_operations',
+    'cl_intel_sharing_format_query',
+    'cl_ext_image_requirements_info',
+    'cl_ext_image_from_buffer',
+    'cl_loader_info',
+    'cl_khr_depth_images',
+    'cl_ext_float_atomics',
+    'cl_intel_create_mem_object_properties',
+    'cl_pocl_content_size',
+    # cl_d3d10.h
+    'cl_khr_d3d10_sharing',
+    'cl_intel_sharing_format_query_d3d10',
+    # cl_d3d11.h
+    'cl_khr_d3d11_sharing',
+    'cl_intel_sharing_format_query_d3d11',
+    # cl_dx9_media_sharing.h
+    'cl_khr_dx9_media_sharing',
+    'cl_intel_dx9_media_sharing',
+    'cl_intel_sharing_format_query_dx9',
+    # cl_egl.h
+    'cl_khr_egl_image',
+    'cl_khr_egl_event',
+    # cl_gl.h
+    'cl_khr_gl_sharing',
+    'cl_khr_gl_event',
+    'cl_khr_gl_depth_images',
+    'cl_khr_gl_msaa_sharing',
+    'cl_intel_sharing_format_query_gl',
+    # cl_layer.h
+    'cl_loader_layers',
+    # cl_va_api_media_sharing_intel.h
+    'cl_intel_sharing_format_query_va_api',
+    'cl_intel_va_api_media_sharing',
+    ]
+
+def getExtensionSortKey(item):
+    name = item.get('name')
+    return orderedExtensions.index(name)
+
 # Order the extensions should be emitted in the headers.
 # KHR -> EXT -> Vendor Extensions
-def getExtensionSortKey(item):
+def getExtensionSortKey_ideal(item):
     name = item.get('name')
     if name.startswith('cl_khr'):
         return 0, name
