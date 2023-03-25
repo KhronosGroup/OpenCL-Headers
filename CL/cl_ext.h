@@ -2000,12 +2000,16 @@ clSetKernelExecInfoARM(
 /***************************************************************
 * cl_arm_get_core_id
 ***************************************************************/
+#if defined(CL_VERSION_1_2)
+
 #define cl_arm_get_core_id 1
 #define CL_ARM_GET_CORE_ID_EXTENSION_NAME \
     "cl_arm_get_core_id"
 
 /* cl_device_info */
 #define CL_DEVICE_COMPUTE_UNITS_BITFIELD_ARM                0x40BF
+
+#endif /* defined(CL_VERSION_1_2) */
 
 /***************************************************************
 * cl_arm_job_slot_selection
