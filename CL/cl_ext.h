@@ -2866,7 +2866,7 @@ clCreateBufferWithPropertiesINTEL_fn)(
     cl_mem_flags flags,
     size_t size,
     void* host_ptr,
-    cl_int* errcode_ret) ;
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 #ifndef CL_NO_PROTOTYPES
 
@@ -2877,7 +2877,7 @@ clCreateBufferWithPropertiesINTEL(
     cl_mem_flags flags,
     size_t size,
     void* host_ptr,
-    cl_int* errcode_ret) ;
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 #endif /* CL_NO_PROTOTYPES */
 
