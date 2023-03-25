@@ -3082,12 +3082,16 @@ clGetImageRequirementsInfoEXT(
 /***************************************************************
 * cl_ext_image_from_buffer
 ***************************************************************/
+#if defined(CL_VERSION_3_0)
+
 #define cl_ext_image_from_buffer 1
 #define CL_EXT_IMAGE_FROM_BUFFER_EXTENSION_NAME \
     "cl_ext_image_from_buffer"
 
 /* cl_image_requirements_info_ext */
 #define CL_IMAGE_REQUIREMENTS_SLICE_PITCH_ALIGNMENT_EXT     0x1291
+
+#endif /* defined(CL_VERSION_3_0) */
 
 /***************************************************************
 * cl_khr_depth_images
