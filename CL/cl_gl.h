@@ -87,7 +87,7 @@ clCreateFromGLBuffer_fn)(
     cl_context context,
     cl_mem_flags flags,
     cl_GLuint bufobj,
-    int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 #ifndef CL_NO_PROTOTYPES
 
@@ -104,7 +104,7 @@ clCreateFromGLBuffer(
     cl_context context,
     cl_mem_flags flags,
     cl_GLuint bufobj,
-    int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
 #endif /* CL_NO_PROTOTYPES */
 
