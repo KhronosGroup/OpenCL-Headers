@@ -2907,7 +2907,7 @@ clEnqueueReadHostPipeINTEL_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int (CL_API_CALL *
 clEnqueueWriteHostPipeINTEL_fn)(
@@ -2919,7 +2919,7 @@ clEnqueueWriteHostPipeINTEL_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
 #ifndef CL_NO_PROTOTYPES
 
@@ -2933,7 +2933,7 @@ clEnqueueReadHostPipeINTEL(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueWriteHostPipeINTEL(
@@ -2945,7 +2945,7 @@ clEnqueueWriteHostPipeINTEL(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
 #endif /* CL_NO_PROTOTYPES */
 
