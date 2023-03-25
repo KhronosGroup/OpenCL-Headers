@@ -59,7 +59,7 @@ clInitLayer_fn)(
     cl_uint num_entries,
     const cl_icd_dispatch* target_dispatch,
     cl_uint* num_entries_ret,
-    const cl_icd_dispatch** layer_dispatch) ;
+    const cl_icd_dispatch** layer_dispatch_ret) ;
 
 /*
 ** The function pointer typedefs prefixed with "pfn_" are provided for
@@ -80,7 +80,7 @@ pfn_clInitLayer)(
     cl_uint num_entries,
     const cl_icd_dispatch* target_dispatch,
     cl_uint* num_entries_ret,
-    const cl_icd_dispatch** layer_dispatch) ;
+    const cl_icd_dispatch** layer_dispatch_ret) ;
 
 #ifndef CL_NO_PROTOTYPES
 
@@ -96,7 +96,7 @@ clInitLayer(
     cl_uint num_entries,
     const cl_icd_dispatch* target_dispatch,
     cl_uint* num_entries_ret,
-    const cl_icd_dispatch** layer_dispatch) ;
+    const cl_icd_dispatch** layer_dispatch_ret) ;
 
 #endif /* CL_NO_PROTOTYPES */
 
