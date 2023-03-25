@@ -197,9 +197,9 @@ def getCParameterStrings(params):
 
 # Gets a bit string for the specified bit position:
 def getBitPosString(bitpos):
-    ret = '(1'
-    ret += 'ULL' if int(bitpos) >= 31 else ''
-    ret += ' << '
+    ret = '('
+    ret += '(cl_bitfield)' if int(bitpos) >= 31 else ''
+    ret += '1 << '
     ret += bitpos
     ret += ')'
     return ret

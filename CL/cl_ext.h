@@ -2098,7 +2098,7 @@ typedef cl_bitfield         cl_device_controlled_termination_capabilities_arm;
 #define CL_ARM_PROTECTED_MEMORY_ALLOCATION_EXTENSION_NAME \
     "cl_arm_protected_memory_allocation"
 
-#define CL_MEM_PROTECTED_ALLOC_ARM                          (1ULL << 36)
+#define CL_MEM_PROTECTED_ALLOC_ARM                          ((cl_bitfield)1 << 36)
 
 /***************************************************************
 * cl_intel_exec_by_local_thread
@@ -2108,7 +2108,7 @@ typedef cl_bitfield         cl_device_controlled_termination_capabilities_arm;
     "cl_intel_exec_by_local_thread"
 
 /* cl_command_queue_properties - bitfield */
-#define CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL             (1ULL << 31)
+#define CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL             ((cl_bitfield)1 << 31)
 
 /***************************************************************
 * cl_intel_device_attribute_query
