@@ -2108,7 +2108,7 @@ typedef cl_bitfield         cl_device_controlled_termination_capabilities_arm;
     "cl_intel_exec_by_local_thread"
 
 /* cl_command_queue_properties - bitfield */
-#define CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL             (1 << 31)
+#define CL_QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL             (1ULL << 31)
 
 /***************************************************************
 * cl_intel_device_attribute_query
