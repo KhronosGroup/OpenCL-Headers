@@ -949,7 +949,7 @@ typedef struct _cl_name_version {
 
 /********************************************************************************************************/
 
-#ifndef CL_NO_CORE_API_PROTOTYPES
+#if !defined(CL_NO_PROTOTYPES) && !defined(CL_NO_CORE_PROTOTYPES)
 
 /* Platform API */
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -1931,7 +1931,7 @@ clEnqueueTask(cl_command_queue  command_queue,
               const cl_event *  event_wait_list,
               cl_event *        event) CL_API_SUFFIX__VERSION_1_2_DEPRECATED;
 
-#endif /* CL_NO_CORE_API_PROTOTYPES */
+#endif /* !defined(CL_NO_PROTOTYPES) && !defined(CL_NO_CORE_PROTOTYPES) */
 
 #ifdef __cplusplus
 }
