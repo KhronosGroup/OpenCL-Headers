@@ -39,6 +39,17 @@
 
 #include <CL/cl.h>
 
+#if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
+#define CL_NO_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -131,7 +142,7 @@ clEnqueueReleaseDX9MediaSurfacesKHR_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceIDsFromDX9MediaAdapterKHR(
@@ -171,7 +182,7 @@ clEnqueueReleaseDX9MediaSurfacesKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_dx9_media_sharing
@@ -252,7 +263,7 @@ clEnqueueReleaseDX9ObjectsINTEL_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_1;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceIDsFromDX9INTEL(
@@ -291,7 +302,7 @@ clEnqueueReleaseDX9ObjectsINTEL(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_1;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_sharing_format_query_dx9
@@ -312,7 +323,7 @@ clGetSupportedDX9MediaSurfaceFormatsINTEL_fn)(
     D3DFORMAT* dx9_formats,
     cl_uint* num_surface_formats) ;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSupportedDX9MediaSurfaceFormatsINTEL(
@@ -324,7 +335,7 @@ clGetSupportedDX9MediaSurfaceFormatsINTEL(
     D3DFORMAT* dx9_formats,
     cl_uint* num_surface_formats) ;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }

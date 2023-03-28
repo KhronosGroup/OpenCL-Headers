@@ -204,6 +204,24 @@ def getBitPosString(bitpos):
     ret += ')'
     return ret
 
+# Extensions that are exported from some OpenCL ICD loaders:
+exportedExtensions = {
+    'cl_ext_device_fission',
+    'cl_khr_egl_event',
+    'cl_khr_egl_image',
+    'cl_khr_gl_event',
+    'cl_khr_gl_sharing',
+    'cl_khr_subgroups'
+    }
+
+# Gets the preprocessor guard for the given extension:
+def getPrototypeIfGuard(name):
+    if name in exportedExtensions:
+        guard = '!defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)'
+    else:
+        guard = '!defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)'
+    return guard
+
 # Names that have been generated already, since some may be shared by multiple
 # extensions:
 generatedNames = set()
@@ -242,6 +260,17 @@ ${includes}
 
 %endif
 #include <CL/cl.h>
+
+#if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
+#define CL_NO_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 extern "C" {
@@ -347,7 +376,7 @@ pfn_${api.Name})(
 %        endfor
 %      endif
 
-#ifndef CL_NO_PROTOTYPES
+#if ${getPrototypeIfGuard(name)}
 %      for func in block.findall('command'):
 <%
     api = apisigs[func.get('name')]
@@ -363,7 +392,7 @@ ${api.Name}(
 %        endfor
 %      endfor
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* ${getPrototypeIfGuard(name)} */
 %    endif
 %    if block.get('condition'):
 

@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import gen
+import re
 
 from mako.template import Template
 from mako.exceptions import RichTraceback
@@ -58,167 +59,167 @@ if __name__ == "__main__":
     extapis = gen.get_extapis(spec, apisigs)
 
     try:
-        cl_ext_h_template = Template(filename='cl_ext.h.mako')
+        cl_ext_h_template = Template(filename='cl_ext.h.mako', input_encoding='utf-8')
 
         print('Generating cl_dx9_media_sharing.h...')
-        gen = open(args.directory + '/cl_dx9_media_sharing.h', 'wb')
-        gen.write(
-          cl_ext_h_template.render_unicode(
-              genExtensions={
-                  'cl_khr_dx9_media_sharing',
-                  'cl_intel_dx9_media_sharing',
-                  'cl_intel_sharing_format_query_dx9',
-              },
-              guard="OPENCL_CL_DX9_MEDIA_SHARING_H_",
-              includes=getWin32OnlyIncludeString(getDisableWarningIncludeString("#include <d3d9.h>")),
-              generate_pfn_typedefs=False,
-              spec=spec,
-              typedefs=typedefs,
-              macros=macros,
-              structs=structs,
-              enums=enums,
-              apisigs=apisigs,
-              coreapis=coreapis,
-              extapis=extapis).
-          encode('utf-8', 'replace'))
+        text = cl_ext_h_template.render(
+            genExtensions={
+                'cl_khr_dx9_media_sharing',
+                'cl_intel_dx9_media_sharing',
+                'cl_intel_sharing_format_query_dx9',
+            },
+            guard="OPENCL_CL_DX9_MEDIA_SHARING_H_",
+            includes=getWin32OnlyIncludeString(getDisableWarningIncludeString("#include <d3d9.h>")),
+            generate_pfn_typedefs=False,
+            spec=spec,
+            typedefs=typedefs,
+            macros=macros,
+            structs=structs,
+            enums=enums,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_dx9_media_sharing.h', 'w') as gen:
+            gen.write(text)
 
         print('Generating cl_d3d10.h...')
-        gen = open(args.directory + '/cl_d3d10.h', 'wb')
-        gen.write(
-          cl_ext_h_template.render_unicode(
-              genExtensions={
-                  'cl_khr_d3d10_sharing',
-                  'cl_intel_sharing_format_query_d3d10',
-              },
-              guard="OPENCL_CL_D3D10_H_",
-              includes=getDisableWarningIncludeString("#include <d3d10.h>"),
-              generate_pfn_typedefs=False,
-              spec=spec,
-              typedefs=typedefs,
-              macros=macros,
-              structs=structs,
-              enums=enums,
-              apisigs=apisigs,
-              coreapis=coreapis,
-              extapis=extapis).
-          encode('utf-8', 'replace'))
+        text = cl_ext_h_template.render(
+            genExtensions={
+                'cl_khr_d3d10_sharing',
+                'cl_intel_sharing_format_query_d3d10',
+            },
+            guard="OPENCL_CL_D3D10_H_",
+            includes=getDisableWarningIncludeString("#include <d3d10.h>"),
+            generate_pfn_typedefs=False,
+            spec=spec,
+            typedefs=typedefs,
+            macros=macros,
+            structs=structs,
+            enums=enums,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_d3d10.h', 'w') as gen:
+            gen.write(text)
 
         print('Generating cl_d3d11.h...')
-        gen = open(args.directory + '/cl_d3d11.h', 'wb')
-        gen.write(
-          cl_ext_h_template.render_unicode(
-              genExtensions={
-                  'cl_khr_d3d11_sharing',
-                  'cl_intel_sharing_format_query_d3d11'
-              },
-              guard="OPENCL_CL_D3D11_H_",
-              includes=getDisableWarningIncludeString("#include <d3d11.h>"),
-              generate_pfn_typedefs=False,
-              spec=spec,
-              typedefs=typedefs,
-              macros=macros,
-              structs=structs,
-              enums=enums,
-              apisigs=apisigs,
-              coreapis=coreapis,
-              extapis=extapis).
-          encode('utf-8', 'replace'))
+        text = cl_ext_h_template.render(
+            genExtensions={
+                'cl_khr_d3d11_sharing',
+                'cl_intel_sharing_format_query_d3d11'
+            },
+            guard="OPENCL_CL_D3D11_H_",
+            includes=getDisableWarningIncludeString("#include <d3d11.h>"),
+            generate_pfn_typedefs=False,
+            spec=spec,
+            typedefs=typedefs,
+            macros=macros,
+            structs=structs,
+            enums=enums,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_d3d11.h', 'w') as gen:
+            gen.write(text)
 
         print('Generating cl_egl.h...')
-        gen = open(args.directory + '/cl_egl.h', 'wb')
-        gen.write(
-          cl_ext_h_template.render_unicode(
-              genExtensions={'cl_khr_egl_event', 'cl_khr_egl_image'},
-              guard="OPENCL_CL_EGL_H_",
-              generate_pfn_typedefs=False,
-              spec=spec,
-              typedefs=typedefs,
-              macros=macros,
-              structs=structs,
-              enums=enums,
-              apisigs=apisigs,
-              coreapis=coreapis,
-              extapis=extapis).
-          encode('utf-8', 'replace'))
+        text = cl_ext_h_template.render(
+            genExtensions={'cl_khr_egl_event', 'cl_khr_egl_image'},
+            guard="OPENCL_CL_EGL_H_",
+            generate_pfn_typedefs=False,
+            spec=spec,
+            typedefs=typedefs,
+            macros=macros,
+            structs=structs,
+            enums=enums,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_egl.h', 'w') as gen:
+            gen.write(text)
 
         print('Generating cl_gl.h...')
-        gen = open(args.directory + '/cl_gl.h', 'wb')
-        gen.write(
-          cl_ext_h_template.render_unicode(
-              genExtensions={
-                  'cl_khr_gl_depth_images',
-                  'cl_khr_gl_event',
-                  'cl_khr_gl_msaa_sharing',
-                  'cl_khr_gl_sharing',
-                  'cl_intel_sharing_format_query_gl',
-              },
-              guard="OPENCL_CL_GL_H_",
-              generate_pfn_typedefs=False,
-              spec=spec,
-              typedefs=typedefs,
-              macros=macros,
-              structs=structs,
-              enums=enums,
-              apisigs=apisigs,
-              coreapis=coreapis,
-              extapis=extapis).
-          encode('utf-8', 'replace'))
+        text = cl_ext_h_template.render(
+            genExtensions={
+                'cl_khr_gl_depth_images',
+                'cl_khr_gl_event',
+                'cl_khr_gl_msaa_sharing',
+                'cl_khr_gl_sharing',
+                'cl_intel_sharing_format_query_gl',
+            },
+            guard="OPENCL_CL_GL_H_",
+            generate_pfn_typedefs=False,
+            spec=spec,
+            typedefs=typedefs,
+            macros=macros,
+            structs=structs,
+            enums=enums,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_gl.h', 'w') as gen:
+            gen.write(text)
 
         print('Generating cl_layer.h...')
-        gen = open(args.directory + '/cl_layer.h', 'wb')
-        gen.write(
-          cl_ext_h_template.render_unicode(
-              genExtensions={'cl_loader_layers'},
-              guard="OPENCL_CL_LAYER_H_",
-              includes='#include <CL/cl_icd.h>',
-              generate_pfn_typedefs=True,
-              spec=spec,
-              typedefs=typedefs,
-              macros=macros,
-              structs=structs,
-              enums=enums,
-              apisigs=apisigs,
-              coreapis=coreapis,
-              extapis=extapis).
-          encode('utf-8', 'replace'))
+        text = cl_ext_h_template.render(
+            genExtensions={'cl_loader_layers'},
+            guard="OPENCL_CL_LAYER_H_",
+            includes='#include <CL/cl_icd.h>',
+            generate_pfn_typedefs=True,
+            spec=spec,
+            typedefs=typedefs,
+            macros=macros,
+            structs=structs,
+            enums=enums,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_layer.h', 'w') as gen:
+            gen.write(text)
 
         print('Generating cl_va_api_media_sharing_intel.h...')
-        gen = open(args.directory + '/cl_va_api_media_sharing_intel.h', 'wb')
-        gen.write(
-          cl_ext_h_template.render_unicode(
-              genExtensions={
-                  'cl_intel_va_api_media_sharing',
-                  'cl_intel_sharing_format_query_va_api',
-              },
-              guard="OPENCL_CL_VA_API_MEDIA_SHARING_INTEL_H_",
-              includes='#include <va/va.h>',
-              generate_pfn_typedefs=False,
-              spec=spec,
-              typedefs=typedefs,
-              macros=macros,
-              structs=structs,
-              enums=enums,
-              apisigs=apisigs,
-              coreapis=coreapis,
-              extapis=extapis).
-          encode('utf-8', 'replace'))
+        text = cl_ext_h_template.render(
+            genExtensions={
+                'cl_intel_va_api_media_sharing',
+                'cl_intel_sharing_format_query_va_api',
+            },
+            guard="OPENCL_CL_VA_API_MEDIA_SHARING_INTEL_H_",
+            includes='#include <va/va.h>',
+            generate_pfn_typedefs=False,
+            spec=spec,
+            typedefs=typedefs,
+            macros=macros,
+            structs=structs,
+            enums=enums,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_va_api_media_sharing_intel.h', 'w') as gen:
+            gen.write(text)
 
         print('Generating cl_ext.h...')
-        gen = open(args.directory + '/cl_ext.h', 'wb')
-        gen.write(
-          cl_ext_h_template.render_unicode(
-              genExtensions={},
-              guard="OPENCL_CL_EXT_H_",
-              generate_pfn_typedefs=False,
-              spec=spec,
-              typedefs=typedefs,
-              macros=macros,
-              structs=structs,
-              enums=enums,
-              apisigs=apisigs,
-              coreapis=coreapis,
-              extapis=extapis).
-          encode('utf-8', 'replace'))
+        text = cl_ext_h_template.render(
+            genExtensions={},
+            guard="OPENCL_CL_EXT_H_",
+            generate_pfn_typedefs=False,
+            spec=spec,
+            typedefs=typedefs,
+            macros=macros,
+            structs=structs,
+            enums=enums,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_ext.h', 'w') as gen:
+            gen.write(text)
     except:
         traceback = RichTraceback()
         for (filename, lineno, function, line) in traceback.traceback:

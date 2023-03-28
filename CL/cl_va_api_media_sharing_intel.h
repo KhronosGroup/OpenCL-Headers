@@ -25,6 +25,17 @@
 
 #include <CL/cl.h>
 
+#if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
+#define CL_NO_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,7 +59,7 @@ clGetSupportedVA_APIMediaSurfaceFormatsINTEL_fn)(
     VAImageFormat* va_api_formats,
     cl_uint* num_surface_formats) ;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSupportedVA_APIMediaSurfaceFormatsINTEL(
@@ -60,7 +71,7 @@ clGetSupportedVA_APIMediaSurfaceFormatsINTEL(
     VAImageFormat* va_api_formats,
     cl_uint* num_surface_formats) ;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_va_api_media_sharing
@@ -135,7 +146,7 @@ clEnqueueReleaseVA_APIMediaSurfacesINTEL_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceIDsFromVA_APIMediaAdapterINTEL(
@@ -173,7 +184,7 @@ clEnqueueReleaseVA_APIMediaSurfacesINTEL(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }

@@ -23,6 +23,17 @@
 
 #include <CL/cl.h>
 
+#if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
+#define CL_NO_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -80,7 +91,7 @@ clEnqueueReleaseEGLObjectsKHR_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateFromEGLImageKHR(
@@ -109,7 +120,7 @@ clEnqueueReleaseEGLObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_egl_event
@@ -132,7 +143,7 @@ clCreateEventFromEGLSyncKHR_fn)(
     CLeglDisplayKHR display,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_event CL_API_CALL
 clCreateEventFromEGLSyncKHR(
@@ -141,7 +152,7 @@ clCreateEventFromEGLSyncKHR(
     CLeglDisplayKHR display,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }

@@ -23,6 +23,17 @@
 
 #include <CL/cl.h>
 
+#if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
+#define CL_NO_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -89,7 +100,7 @@ clCreateFromGLBuffer_fn)(
     cl_GLuint bufobj,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetGLContextInfoKHR(
@@ -106,7 +117,7 @@ clCreateFromGLBuffer(
     cl_GLuint bufobj,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
 
 #if defined(CL_VERSION_1_2)
 
@@ -119,7 +130,7 @@ clCreateFromGLTexture_fn)(
     cl_GLuint texture,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateFromGLTexture(
@@ -130,7 +141,7 @@ clCreateFromGLTexture(
     cl_GLuint texture,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
 
 #endif /* defined(CL_VERSION_1_2) */
 
@@ -174,7 +185,7 @@ clEnqueueReleaseGLObjects_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateFromGLRenderbuffer(
@@ -215,7 +226,7 @@ clEnqueueReleaseGLObjects(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
 
 /* OpenCL 1.0 APIs that were deprecated in OpenCL 1.2 */
 
@@ -237,7 +248,7 @@ clCreateFromGLTexture3D_fn)(
     cl_GLuint texture,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateFromGLTexture2D(
@@ -257,7 +268,7 @@ clCreateFromGLTexture3D(
     cl_GLuint texture,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_gl_event
@@ -278,7 +289,7 @@ clCreateEventFromGLsyncKHR_fn)(
     cl_GLsync sync,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_event CL_API_CALL
 clCreateEventFromGLsyncKHR(
@@ -286,7 +297,7 @@ clCreateEventFromGLsyncKHR(
     cl_GLsync sync,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_1;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_gl_depth_images
@@ -335,7 +346,7 @@ clGetSupportedGLTextureFormatsINTEL_fn)(
     cl_GLenum* gl_formats,
     cl_uint* num_texture_formats) ;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSupportedGLTextureFormatsINTEL(
@@ -346,7 +357,7 @@ clGetSupportedGLTextureFormatsINTEL(
     cl_GLenum* gl_formats,
     cl_uint* num_texture_formats) ;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }

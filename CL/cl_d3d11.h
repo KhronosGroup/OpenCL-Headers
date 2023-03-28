@@ -37,6 +37,17 @@
 
 #include <CL/cl.h>
 
+#if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
+#define CL_NO_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
+#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -131,7 +142,7 @@ clEnqueueReleaseD3D11ObjectsKHR_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceIDsFromD3D11KHR(
@@ -184,7 +195,7 @@ clEnqueueReleaseD3D11ObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_sharing_format_query_d3d11
@@ -205,7 +216,7 @@ clGetSupportedD3D11TextureFormatsINTEL_fn)(
     DXGI_FORMAT* d3d11_formats,
     cl_uint* num_texture_formats) ;
 
-#ifndef CL_NO_PROTOTYPES
+#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSupportedD3D11TextureFormatsINTEL(
@@ -217,7 +228,7 @@ clGetSupportedD3D11TextureFormatsINTEL(
     DXGI_FORMAT* d3d11_formats,
     cl_uint* num_texture_formats) ;
 
-#endif /* CL_NO_PROTOTYPES */
+#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }
