@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   compatibility:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     container: streamhpc/opencl-sdk-base:ubuntu-18.04-20220127
     strategy:
       matrix:
