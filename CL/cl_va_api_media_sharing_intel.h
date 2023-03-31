@@ -25,16 +25,22 @@
 
 #include <CL/cl.h>
 
+/* CL_NO_PROTOTYPES implies CL_NO_EXTENSION_PROTOTYPES: */
 #if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
 #define CL_NO_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+#endif
 
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+/* CL_NO_EXTENSION_PROTOTYPES implies
+   CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES and
+   CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES: */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && \
+    !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && \
+    !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -59,7 +65,7 @@ clGetSupportedVA_APIMediaSurfaceFormatsINTEL_fn)(
     VAImageFormat* va_api_formats,
     cl_uint* num_surface_formats) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSupportedVA_APIMediaSurfaceFormatsINTEL(
@@ -71,7 +77,7 @@ clGetSupportedVA_APIMediaSurfaceFormatsINTEL(
     VAImageFormat* va_api_formats,
     cl_uint* num_surface_formats) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_va_api_media_sharing
@@ -146,7 +152,7 @@ clEnqueueReleaseVA_APIMediaSurfacesINTEL_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceIDsFromVA_APIMediaAdapterINTEL(
@@ -184,7 +190,7 @@ clEnqueueReleaseVA_APIMediaSurfacesINTEL(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }

@@ -23,16 +23,22 @@
 
 #include <CL/cl.h>
 
+/* CL_NO_PROTOTYPES implies CL_NO_EXTENSION_PROTOTYPES: */
 #if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
 #define CL_NO_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+#endif
 
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+/* CL_NO_EXTENSION_PROTOTYPES implies
+   CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES and
+   CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES: */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && \
+    !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && \
+    !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -255,7 +261,7 @@ clGetCommandBufferInfoKHR_fn)(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_command_buffer_khr CL_API_CALL
 clCreateCommandBufferKHR(
@@ -418,7 +424,7 @@ clGetCommandBufferInfoKHR(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_command_buffer_mutable_dispatch
@@ -510,7 +516,7 @@ clGetMutableCommandInfoKHR_fn)(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clUpdateMutableCommandsKHR(
@@ -525,7 +531,7 @@ clGetMutableCommandInfoKHR(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_fp64
@@ -564,7 +570,7 @@ clSetMemObjectDestructorAPPLE_fn)(
     void (CL_CALLBACK* pfn_notify)(cl_mem memobj, void* user_data),
     void* user_data) CL_API_SUFFIX__VERSION_1_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clSetMemObjectDestructorAPPLE(
@@ -572,7 +578,7 @@ clSetMemObjectDestructorAPPLE(
     void (CL_CALLBACK* pfn_notify)(cl_mem memobj, void* user_data),
     void* user_data) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_APPLE_ContextLoggingFunctions
@@ -603,7 +609,7 @@ clLogMessagesToStderrAPPLE_fn)(
     size_t cb,
     void* user_data) CL_API_SUFFIX__VERSION_1_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY void CL_API_CALL
 clLogMessagesToSystemLogAPPLE(
@@ -626,7 +632,7 @@ clLogMessagesToStderrAPPLE(
     size_t cb,
     void* user_data) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_icd
@@ -648,7 +654,7 @@ clIcdGetPlatformIDsKHR_fn)(
     cl_platform_id* platforms,
     cl_uint* num_platforms) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clIcdGetPlatformIDsKHR(
@@ -656,7 +662,7 @@ clIcdGetPlatformIDsKHR(
     cl_platform_id* platforms,
     cl_uint* num_platforms) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_il_program
@@ -679,7 +685,7 @@ clCreateProgramWithILKHR_fn)(
     size_t length,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_program CL_API_CALL
 clCreateProgramWithILKHR(
@@ -688,7 +694,7 @@ clCreateProgramWithILKHR(
     size_t length,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_image2d_from_buffer
@@ -737,13 +743,13 @@ typedef cl_int (CL_API_CALL *
 clTerminateContextKHR_fn)(
     cl_context context) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clTerminateContextKHR(
     cl_context context) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_spir
@@ -775,7 +781,7 @@ clCreateCommandQueueWithPropertiesKHR_fn)(
     const cl_queue_properties_khr* properties,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_command_queue CL_API_CALL
 clCreateCommandQueueWithPropertiesKHR(
@@ -784,7 +790,7 @@ clCreateCommandQueueWithPropertiesKHR(
     const cl_queue_properties_khr* properties,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_nv_device_attribute_query
@@ -900,7 +906,7 @@ clCreateSubDevicesEXT_fn)(
     cl_device_id* out_devices,
     cl_uint* num_devices) CL_API_SUFFIX__VERSION_1_1;
 
-#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseDeviceEXT(
@@ -918,7 +924,7 @@ clCreateSubDevicesEXT(
     cl_device_id* out_devices,
     cl_uint* num_devices) CL_API_SUFFIX__VERSION_1_1;
 
-#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_ext_migrate_memobject
@@ -946,7 +952,7 @@ clEnqueueMigrateMemObjectEXT_fn)(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueMigrateMemObjectEXT(
@@ -958,7 +964,7 @@ clEnqueueMigrateMemObjectEXT(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_ext_cxx_for_opencl
@@ -1012,7 +1018,7 @@ clGetDeviceImageInfoQCOM_fn)(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceImageInfoQCOM(
@@ -1025,7 +1031,7 @@ clGetDeviceImageInfoQCOM(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_qcom_ext_host_ptr_iocoherent
@@ -1129,7 +1135,7 @@ clEnqueueReleaseGrallocObjectsIMG_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueAcquireGrallocObjectsIMG(
@@ -1149,7 +1155,7 @@ clEnqueueReleaseGrallocObjectsIMG(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_img_generate_mipmap
@@ -1180,7 +1186,7 @@ clEnqueueGenerateMipmapIMG_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueGenerateMipmapIMG(
@@ -1194,7 +1200,7 @@ clEnqueueGenerateMipmapIMG(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_img_mem_properties
@@ -1238,7 +1244,7 @@ clGetKernelSubGroupInfoKHR_fn)(
     void* param_value,
     size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_2_0_DEPRECATED;
 
-#if !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetKernelSubGroupInfoKHR(
@@ -1251,7 +1257,7 @@ clGetKernelSubGroupInfoKHR(
     void* param_value,
     size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_2_0_DEPRECATED;
 
-#endif /* !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_mipmap_image
@@ -1406,7 +1412,7 @@ clGetKernelSuggestedLocalWorkSizeKHR_fn)(
     const size_t* global_work_size,
     size_t* suggested_local_work_size) CL_API_SUFFIX__VERSION_3_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetKernelSuggestedLocalWorkSizeKHR(
@@ -1417,7 +1423,7 @@ clGetKernelSuggestedLocalWorkSizeKHR(
     const size_t* global_work_size,
     size_t* suggested_local_work_size) CL_API_SUFFIX__VERSION_3_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_integer_dot_product
@@ -1487,7 +1493,7 @@ clEnqueueReleaseExternalMemObjectsKHR_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_3_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueAcquireExternalMemObjectsKHR(
@@ -1507,7 +1513,7 @@ clEnqueueReleaseExternalMemObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_3_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_external_memory_dma_buf
@@ -1585,7 +1591,7 @@ clGetSemaphoreHandleForTypeKHR_fn)(
     void* handle_ptr,
     size_t* handle_size_ret) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSemaphoreHandleForTypeKHR(
@@ -1596,7 +1602,7 @@ clGetSemaphoreHandleForTypeKHR(
     void* handle_ptr,
     size_t* handle_size_ret) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_external_semaphore_dx_fence
@@ -1722,7 +1728,7 @@ typedef cl_int (CL_API_CALL *
 clRetainSemaphoreKHR_fn)(
     cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_semaphore_khr CL_API_CALL
 clCreateSemaphoreWithPropertiesKHR(
@@ -1766,7 +1772,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clRetainSemaphoreKHR(
     cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_arm_import_memory
@@ -1798,7 +1804,7 @@ clImportMemoryARM_fn)(
     size_t size,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clImportMemoryARM(
@@ -1809,7 +1815,7 @@ clImportMemoryARM(
     size_t size,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_arm_shared_virtual_memory
@@ -1927,7 +1933,7 @@ clSetKernelExecInfoARM_fn)(
     size_t param_value_size,
     const void* param_value) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY void* CL_API_CALL
 clSVMAllocARM(
@@ -2006,7 +2012,7 @@ clSetKernelExecInfoARM(
     size_t param_value_size,
     const void* param_value) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_arm_get_core_id
@@ -2201,7 +2207,7 @@ typedef cl_int (CL_API_CALL *
 clReleaseAcceleratorINTEL_fn)(
     cl_accelerator_intel accelerator) CL_API_SUFFIX__VERSION_1_2;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_accelerator_intel CL_API_CALL
 clCreateAcceleratorINTEL(
@@ -2227,7 +2233,7 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clReleaseAcceleratorINTEL(
     cl_accelerator_intel accelerator) CL_API_SUFFIX__VERSION_1_2;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_motion_estimation
@@ -2705,7 +2711,7 @@ clEnqueueMemAdviseINTEL_fn)(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY void* CL_API_CALL
 clHostMemAllocINTEL(
@@ -2790,7 +2796,7 @@ clEnqueueMemAdviseINTEL(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 #if defined(CL_VERSION_1_2)
 /* Requires OpenCL 1.2 for cl_mem_migration_flags: */
@@ -2805,7 +2811,7 @@ clEnqueueMigrateMemINTEL_fn)(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueMigrateMemINTEL(
@@ -2817,7 +2823,7 @@ clEnqueueMigrateMemINTEL(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 #endif /* defined(CL_VERSION_1_2) */
 
@@ -2833,7 +2839,7 @@ clEnqueueMemsetINTEL_fn)(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueMemsetINTEL(
@@ -2845,7 +2851,7 @@ clEnqueueMemsetINTEL(
     const cl_event* event_wait_list,
     cl_event* event) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_mem_alloc_buffer_location
@@ -2879,7 +2885,7 @@ clCreateBufferWithPropertiesINTEL_fn)(
     void* host_ptr,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_mem CL_API_CALL
 clCreateBufferWithPropertiesINTEL(
@@ -2890,7 +2896,7 @@ clCreateBufferWithPropertiesINTEL(
     void* host_ptr,
     cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_program_scope_host_pipe
@@ -2932,7 +2938,7 @@ clEnqueueWriteHostPipeINTEL_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clEnqueueReadHostPipeINTEL(
@@ -2958,7 +2964,7 @@ clEnqueueWriteHostPipeINTEL(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_mem_channel_property
@@ -3076,7 +3082,7 @@ clGetImageRequirementsInfoEXT_fn)(
     void* param_value,
     size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetImageRequirementsInfoEXT(
@@ -3090,7 +3096,7 @@ clGetImageRequirementsInfoEXT(
     void* param_value,
     size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 #endif /* defined(CL_VERSION_3_0) */
 
@@ -3131,7 +3137,7 @@ clGetICDLoaderInfoOCLICD_fn)(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetICDLoaderInfoOCLICD(
@@ -3140,7 +3146,7 @@ clGetICDLoaderInfoOCLICD(
     void* param_value,
     size_t* param_value_size_ret) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_depth_images
@@ -3201,14 +3207,14 @@ clSetContentSizeBufferPoCL_fn)(
     cl_mem buffer,
     cl_mem content_size_buffer) CL_API_SUFFIX__VERSION_1_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clSetContentSizeBufferPoCL(
     cl_mem buffer,
     cl_mem content_size_buffer) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }

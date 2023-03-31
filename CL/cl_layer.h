@@ -25,16 +25,22 @@
 
 #include <CL/cl.h>
 
+/* CL_NO_PROTOTYPES implies CL_NO_EXTENSION_PROTOTYPES: */
 #if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
 #define CL_NO_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+#endif
 
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+/* CL_NO_EXTENSION_PROTOTYPES implies
+   CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES and
+   CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES: */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && \
+    !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && \
+    !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -93,7 +99,7 @@ pfn_clInitLayer)(
     cl_uint* num_entries_ret,
     const cl_icd_dispatch** layer_dispatch_ret) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetLayerInfo(
@@ -109,7 +115,7 @@ clInitLayer(
     cl_uint* num_entries_ret,
     const cl_icd_dispatch** layer_dispatch_ret) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }

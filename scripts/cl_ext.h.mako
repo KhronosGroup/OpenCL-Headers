@@ -1,5 +1,5 @@
 <%
-# Extensions to skip - they are in dedicated headers.
+# Extensions to skip by default because they are in dedicated headers:
 skipExtensions = {
     'cl_khr_d3d10_sharing',
     'cl_khr_d3d11_sharing',
@@ -44,7 +44,7 @@ def shouldEmit(block):
         return True
     return False
 
-# Initially, keep the same extension order:
+# Initially, keep the same extension order as the original headers:
 orderedExtensions = [
     # cl_ext.h:
     'cl_khr_command_buffer',
@@ -173,7 +173,7 @@ def getExtensionSortKey_ideal(item):
         return 1, name
     return 99, name
 
-# Order enums should be emitted in the haders.
+# Order enums should be emitted in the headers.
 # Enums Without Bits -> Ordered Bit Enums
 def getEnumSortKey(item):
     name = item.get('name')
@@ -204,9 +204,13 @@ def getBitPosString(bitpos):
     ret += ')'
     return ret
 
-# Extensions that are exported from some OpenCL ICD loaders:
-exportedExtensions = {
+# Extensions that are included in the ICD dispatch table for historical reasons.
+# This should not be required for new extensions!
+loaderExtensions = {
     'cl_ext_device_fission',
+    'cl_khr_d3d10_sharing',
+    'cl_khr_d3d11_sharing',
+    'cl_khr_dx9_media_sharing',
     'cl_khr_egl_event',
     'cl_khr_egl_image',
     'cl_khr_gl_event',
@@ -216,10 +220,10 @@ exportedExtensions = {
 
 # Gets the preprocessor guard for the given extension:
 def getPrototypeIfGuard(name):
-    if name in exportedExtensions:
-        guard = '!defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)'
+    if name in loaderExtensions:
+        guard = '!defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)'
     else:
-        guard = '!defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)'
+        guard = '!defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)'
     return guard
 
 # Names that have been generated already, since some may be shared by multiple
@@ -261,16 +265,22 @@ ${includes}
 %endif
 #include <CL/cl.h>
 
+/* CL_NO_PROTOTYPES implies CL_NO_EXTENSION_PROTOTYPES: */
 #if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
 #define CL_NO_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+#endif
 
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+/* CL_NO_EXTENSION_PROTOTYPES implies
+   CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES and
+   CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES: */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && ${"\\"}
+    !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && ${"\\"}
+    !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
 
 #ifdef __cplusplus
 extern "C" {

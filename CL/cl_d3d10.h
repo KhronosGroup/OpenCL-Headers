@@ -37,16 +37,22 @@
 
 #include <CL/cl.h>
 
+/* CL_NO_PROTOTYPES implies CL_NO_EXTENSION_PROTOTYPES: */
 #if defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES)
 #define CL_NO_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_PROTOTYPES) && !defined(CL_NO_EXTENSION_PROTOTYPES) */
+#endif
 
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_EXPORTED_EXTENSION_PROTOTYPES) */
-#if defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
-#define CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES
-#endif /* defined(CL_NO_EXTENSION_PROTOTYPES) && !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+/* CL_NO_EXTENSION_PROTOTYPES implies
+   CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES and
+   CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES: */
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && \
+    !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
+#if defined(CL_NO_EXTENSION_PROTOTYPES) && \
+    !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+#define CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -142,7 +148,7 @@ clEnqueueReleaseD3D10ObjectsKHR_fn)(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetDeviceIDsFromD3D10KHR(
@@ -195,7 +201,7 @@ clEnqueueReleaseD3D10ObjectsKHR(
     const cl_event* event_wait_list,
     cl_event* event) CL_API_SUFFIX__VERSION_1_0;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_intel_sharing_format_query_d3d10
@@ -215,7 +221,7 @@ clGetSupportedD3D10TextureFormatsINTEL_fn)(
     DXGI_FORMAT* d3d10_formats,
     cl_uint* num_texture_formats) ;
 
-#if !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES)
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetSupportedD3D10TextureFormatsINTEL(
@@ -226,7 +232,7 @@ clGetSupportedD3D10TextureFormatsINTEL(
     DXGI_FORMAT* d3d10_formats,
     cl_uint* num_texture_formats) ;
 
-#endif /* !defined(CL_NO_NON_EXPORTED_EXTENSION_PROTOTYPES) */
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 #ifdef __cplusplus
 }
