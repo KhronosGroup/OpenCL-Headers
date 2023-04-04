@@ -70,6 +70,7 @@ typedef struct _cl_mutable_command_khr* cl_mutable_command_khr;
 #define CL_COMMAND_BUFFER_REFERENCE_COUNT_KHR               0x1296
 #define CL_COMMAND_BUFFER_STATE_KHR                         0x1297
 #define CL_COMMAND_BUFFER_PROPERTIES_ARRAY_KHR              0x1298
+#define CL_COMMAND_BUFFER_CONTEXT_KHR                       0x1299
 
 /* cl_command_buffer_state_khr */
 #define CL_COMMAND_BUFFER_STATE_RECORDING_KHR               0
