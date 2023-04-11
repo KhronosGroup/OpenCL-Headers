@@ -70,6 +70,34 @@ include the OpenCL API headers as follows:
 #include <CL/opencl.h>
 ```
 
+## Controlling Function Prototypes
+
+By default, the OpenCL API headers in this repository declare function
+prototypes for every known core OpenCL API and OpenCL extension API.  If this is
+not desired, the declared function prototypes can be controlled by the following
+preprocessor defines:
+
+* `CL_NO_PROTOTYPES`: No function prototypes will be declared.  This control
+  applies to core OpenCL APIs and OpenCL extension APIs.
+* `CL_NO_CORE_PROTOTYPES`: No function prototypes will be declared for core
+  OpenCL APIs.  
+* `CL_NO_EXTENSION_PROTOTYPES`: No function prototypes will be declared for
+  OpenCL extension APIs.  This control applies to all OpenCL extension APIs.
+* `CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES`: No function prototypes will be
+  declared for OpenCL extension APIs that are in the ICD dispatch table for
+  historical reasons.
+* `CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES`: No function prototypes will be
+  declared for OpenCL extension APIs that are not in the ICD dispatch table.
+
+For example, to declare function prototypes for core OpenCL 3.0 APIs only, you
+may include the OpenCL API headers as follows:
+
+```c
+#define CL_TARGET_OPENCL_VERSION 300
+#define CL_NO_EXTENSION_PROTOTYPES
+#include <CL/opencl.h>
+```
+
 ## Directory Structure
 
 ```
