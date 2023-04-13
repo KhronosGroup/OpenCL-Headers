@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In order to ease maintenance and enable faster development in the OpenCL headers the OpenCL headers for extensions are generated from the OpenCL XML machine readable grammar.
+In order to ease maintenance and enable faster development in the OpenCL headers, the OpenCL headers for extensions are generated from the OpenCL XML machine readable grammar.
 Currently, header generation is only enabled for the OpenCL headers for extensions, and the OpenCL headers for core APIs are still authored manually.
 
 ## Dependencies
