@@ -427,6 +427,60 @@ clGetCommandBufferInfoKHR(
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
+* cl_khr_command_buffer_multi_device
+***************************************************************/
+#define cl_khr_command_buffer_multi_device 1
+#define CL_KHR_COMMAND_BUFFER_MULTI_DEVICE_EXTENSION_NAME \
+    "cl_khr_command_buffer_multi_device"
+
+typedef cl_bitfield         cl_platform_command_buffer_capabilities_khr;
+
+/* cl_platform_info */
+#define CL_PLATFORM_COMMAND_BUFFER_CAPABILITIES_KHR         0x0908
+
+/* cl_platform_command_buffer_capabilities_khr - bitfield */
+#define CL_COMMAND_BUFFER_PLATFORM_UNIVERSAL_SYNC_KHR       (1 << 0)
+#define CL_COMMAND_BUFFER_PLATFORM_REMAP_QUEUES_KHR         (1 << 1)
+#define CL_COMMAND_BUFFER_PLATFORM_AUTOMATIC_REMAP_KHR      (1 << 2)
+
+/* cl_device_info */
+#define CL_DEVICE_COMMAND_BUFFER_NUM_SYNC_DEVICES_KHR       0x12AB
+#define CL_DEVICE_COMMAND_BUFFER_SYNC_DEVICES_KHR           0x12AC
+
+/* cl_device_command_buffer_capabilities_khr - bitfield */
+#define CL_COMMAND_BUFFER_CAPABILITY_MULTIPLE_QUEUE_KHR     (1 << 4)
+
+/* cl_command_buffer_flags_khr - bitfield */
+#define CL_COMMAND_BUFFER_DEVICE_SIDE_SYNC_KHR              (1 << 2)
+
+
+typedef cl_command_buffer_khr (CL_API_CALL *
+clRemapCommandBufferKHR_fn)(
+    cl_command_buffer_khr command_buffer,
+    cl_bool automatic,
+    cl_uint num_queues,
+    const cl_command_queue* queues,
+    cl_uint num_handles,
+    const cl_mutable_command_khr* handles,
+    cl_mutable_command_khr* handles_ret,
+    cl_int* errcode_ret) ;
+
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+
+extern CL_API_ENTRY cl_command_buffer_khr CL_API_CALL
+clRemapCommandBufferKHR(
+    cl_command_buffer_khr command_buffer,
+    cl_bool automatic,
+    cl_uint num_queues,
+    const cl_command_queue* queues,
+    cl_uint num_handles,
+    const cl_mutable_command_khr* handles,
+    cl_mutable_command_khr* handles_ret,
+    cl_int* errcode_ret) ;
+
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
+
+/***************************************************************
 * cl_khr_command_buffer_mutable_dispatch
 ***************************************************************/
 #define cl_khr_command_buffer_mutable_dispatch 1

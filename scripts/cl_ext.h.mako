@@ -48,6 +48,7 @@ def shouldEmit(block):
 orderedExtensions = [
     # cl_ext.h:
     'cl_khr_command_buffer',
+    'cl_khr_command_buffer_multi_device',
     'cl_khr_command_buffer_mutable_dispatch',
     'cl_khr_fp64',
     'cl_khr_fp16',
