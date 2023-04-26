@@ -16,6 +16,9 @@
  * OpenCL is a trademark of Apple Inc. used under license by Khronos.
  */
 
+#ifndef OPENCL_CL_FUNCTION_TYPES_H_
+#define OPENCL_CL_FUNCTION_TYPES_H_
+
 #include <CL/cl.h>
 
 typedef cl_int CL_API_CALL clGetPlatformIDs_t(
@@ -830,3 +833,5 @@ typedef cl_mem CL_API_CALL clCreateImageWithProperties_t(
 
 #endif /* CL_VERSION_3_0 */
 
+
+#endif /* OPENCL_CL_FUNCTION_TYPES_H_ */

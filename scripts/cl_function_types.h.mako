@@ -30,6 +30,9 @@ def getCParameterStrings(params):
  * OpenCL is a trademark of Apple Inc. used under license by Khronos.
  */
 
+#ifndef OPENCL_CL_FUNCTION_TYPES_H_
+#define OPENCL_CL_FUNCTION_TYPES_H_
+
 #include <CL/cl.h>
 
 %for version, apis in coreapis.items():
@@ -52,3 +55,5 @@ typedef ${api.RetType} CL_API_CALL ${api.Name}_t(
 
 %  endif
 %endfor
+
+#endif /* OPENCL_CL_FUNCTION_TYPES_H_ */
