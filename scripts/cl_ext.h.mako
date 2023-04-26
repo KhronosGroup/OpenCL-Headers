@@ -353,15 +353,17 @@ ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 <%
     api = apisigs[func.get('name')]
 %>
-typedef ${api.RetType} (CL_API_CALL *
-${api.Name}_fn)(
+typedef ${api.RetType} CL_API_CALL
+${api.Name}_t(
 %        for i, paramStr in enumerate(getCParameterStrings(api.Params)):
 %          if i < len(api.Params)-1:
     ${paramStr},
 %          else:
-    ${paramStr}) ${api.Suffix};
+    ${paramStr});
 %          endif
 %        endfor
+
+typedef ${api.Name}_t *${api.Name}_fn ${api.Suffix};
 %      endfor
 %      if generate_pfn_typedefs:
 
@@ -375,15 +377,7 @@ ${api.Name}_fn)(
 <%
     api = apisigs[func.get('name')]
 %>
-typedef ${api.RetType} (CL_API_CALL *
-pfn_${api.Name})(
-%          for i, paramStr in enumerate(getCParameterStrings(api.Params)):
-%            if i < len(api.Params)-1:
-    ${paramStr},
-%            else:
-    ${paramStr}) ${api.Suffix};
-%            endif
-%          endfor
+typedef ${api.Name}_t *pfn_${api.Name} ${api.Suffix};
 %        endfor
 %      endif
 

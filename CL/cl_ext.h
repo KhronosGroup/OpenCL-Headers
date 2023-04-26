@@ -100,45 +100,57 @@ typedef struct _cl_mutable_command_khr* cl_mutable_command_khr;
 #define CL_COMMAND_COMMAND_BUFFER_KHR                       0x12A8
 
 
-typedef cl_command_buffer_khr (CL_API_CALL *
-clCreateCommandBufferKHR_fn)(
+typedef cl_command_buffer_khr CL_API_CALL
+clCreateCommandBufferKHR_t(
     cl_uint num_queues,
     const cl_command_queue* queues,
     const cl_command_buffer_properties_khr* properties,
-    cl_int* errcode_ret) ;
+    cl_int* errcode_ret);
 
-typedef cl_int (CL_API_CALL *
-clFinalizeCommandBufferKHR_fn)(
-    cl_command_buffer_khr command_buffer) ;
+typedef clCreateCommandBufferKHR_t *clCreateCommandBufferKHR_fn ;
 
-typedef cl_int (CL_API_CALL *
-clRetainCommandBufferKHR_fn)(
-    cl_command_buffer_khr command_buffer) ;
+typedef cl_int CL_API_CALL
+clFinalizeCommandBufferKHR_t(
+    cl_command_buffer_khr command_buffer);
 
-typedef cl_int (CL_API_CALL *
-clReleaseCommandBufferKHR_fn)(
-    cl_command_buffer_khr command_buffer) ;
+typedef clFinalizeCommandBufferKHR_t *clFinalizeCommandBufferKHR_fn ;
 
-typedef cl_int (CL_API_CALL *
-clEnqueueCommandBufferKHR_fn)(
+typedef cl_int CL_API_CALL
+clRetainCommandBufferKHR_t(
+    cl_command_buffer_khr command_buffer);
+
+typedef clRetainCommandBufferKHR_t *clRetainCommandBufferKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clReleaseCommandBufferKHR_t(
+    cl_command_buffer_khr command_buffer);
+
+typedef clReleaseCommandBufferKHR_t *clReleaseCommandBufferKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clEnqueueCommandBufferKHR_t(
     cl_uint num_queues,
     cl_command_queue* queues,
     cl_command_buffer_khr command_buffer,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clCommandBarrierWithWaitListKHR_fn)(
+typedef clEnqueueCommandBufferKHR_t *clEnqueueCommandBufferKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandBarrierWithWaitListKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clCommandCopyBufferKHR_fn)(
+typedef clCommandBarrierWithWaitListKHR_t *clCommandBarrierWithWaitListKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandCopyBufferKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     cl_mem src_buffer,
@@ -149,10 +161,12 @@ clCommandCopyBufferKHR_fn)(
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clCommandCopyBufferRectKHR_fn)(
+typedef clCommandCopyBufferKHR_t *clCommandCopyBufferKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandCopyBufferRectKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     cl_mem src_buffer,
@@ -167,10 +181,12 @@ clCommandCopyBufferRectKHR_fn)(
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clCommandCopyBufferToImageKHR_fn)(
+typedef clCommandCopyBufferRectKHR_t *clCommandCopyBufferRectKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandCopyBufferToImageKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     cl_mem src_buffer,
@@ -181,10 +197,12 @@ clCommandCopyBufferToImageKHR_fn)(
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clCommandCopyImageKHR_fn)(
+typedef clCommandCopyBufferToImageKHR_t *clCommandCopyBufferToImageKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandCopyImageKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     cl_mem src_image,
@@ -195,10 +213,12 @@ clCommandCopyImageKHR_fn)(
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clCommandCopyImageToBufferKHR_fn)(
+typedef clCommandCopyImageKHR_t *clCommandCopyImageKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandCopyImageToBufferKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     cl_mem src_image,
@@ -209,10 +229,12 @@ clCommandCopyImageToBufferKHR_fn)(
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clCommandFillBufferKHR_fn)(
+typedef clCommandCopyImageToBufferKHR_t *clCommandCopyImageToBufferKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandFillBufferKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     cl_mem buffer,
@@ -223,10 +245,12 @@ clCommandFillBufferKHR_fn)(
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clCommandFillImageKHR_fn)(
+typedef clCommandFillBufferKHR_t *clCommandFillBufferKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandFillImageKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     cl_mem image,
@@ -236,10 +260,12 @@ clCommandFillImageKHR_fn)(
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clCommandNDRangeKernelKHR_fn)(
+typedef clCommandFillImageKHR_t *clCommandFillImageKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clCommandNDRangeKernelKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_queue command_queue,
     const cl_ndrange_kernel_command_properties_khr* properties,
@@ -251,15 +277,19 @@ clCommandNDRangeKernelKHR_fn)(
     cl_uint num_sync_points_in_wait_list,
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
-    cl_mutable_command_khr* mutable_handle) ;
+    cl_mutable_command_khr* mutable_handle);
 
-typedef cl_int (CL_API_CALL *
-clGetCommandBufferInfoKHR_fn)(
+typedef clCommandNDRangeKernelKHR_t *clCommandNDRangeKernelKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clGetCommandBufferInfoKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_buffer_info_khr param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) ;
+    size_t* param_value_size_ret);
+
+typedef clGetCommandBufferInfoKHR_t *clGetCommandBufferInfoKHR_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -454,8 +484,8 @@ typedef cl_bitfield         cl_platform_command_buffer_capabilities_khr;
 #define CL_COMMAND_BUFFER_DEVICE_SIDE_SYNC_KHR              (1 << 2)
 
 
-typedef cl_command_buffer_khr (CL_API_CALL *
-clRemapCommandBufferKHR_fn)(
+typedef cl_command_buffer_khr CL_API_CALL
+clRemapCommandBufferKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_bool automatic,
     cl_uint num_queues,
@@ -463,7 +493,9 @@ clRemapCommandBufferKHR_fn)(
     cl_uint num_handles,
     const cl_mutable_command_khr* handles,
     cl_mutable_command_khr* handles_ret,
-    cl_int* errcode_ret) ;
+    cl_int* errcode_ret);
+
+typedef clRemapCommandBufferKHR_t *clRemapCommandBufferKHR_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -557,18 +589,22 @@ typedef struct _cl_mutable_base_config_khr {
 #define CL_STRUCTURE_TYPE_MUTABLE_DISPATCH_CONFIG_KHR       1
 
 
-typedef cl_int (CL_API_CALL *
-clUpdateMutableCommandsKHR_fn)(
+typedef cl_int CL_API_CALL
+clUpdateMutableCommandsKHR_t(
     cl_command_buffer_khr command_buffer,
-    const cl_mutable_base_config_khr* mutable_config) ;
+    const cl_mutable_base_config_khr* mutable_config);
 
-typedef cl_int (CL_API_CALL *
-clGetMutableCommandInfoKHR_fn)(
+typedef clUpdateMutableCommandsKHR_t *clUpdateMutableCommandsKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clGetMutableCommandInfoKHR_t(
     cl_mutable_command_khr command,
     cl_mutable_command_info_khr param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) ;
+    size_t* param_value_size_ret);
+
+typedef clGetMutableCommandInfoKHR_t *clGetMutableCommandInfoKHR_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -618,11 +654,13 @@ clGetMutableCommandInfoKHR(
     "cl_APPLE_SetMemObjectDestructor"
 
 
-typedef cl_int (CL_API_CALL *
-clSetMemObjectDestructorAPPLE_fn)(
+typedef cl_int CL_API_CALL
+clSetMemObjectDestructorAPPLE_t(
     cl_mem memobj,
     void (CL_CALLBACK* pfn_notify)(cl_mem memobj, void* user_data),
-    void* user_data) CL_API_SUFFIX__VERSION_1_0;
+    void* user_data);
+
+typedef clSetMemObjectDestructorAPPLE_t *clSetMemObjectDestructorAPPLE_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -642,26 +680,32 @@ clSetMemObjectDestructorAPPLE(
     "cl_APPLE_ContextLoggingFunctions"
 
 
-typedef void (CL_API_CALL *
-clLogMessagesToSystemLogAPPLE_fn)(
+typedef void CL_API_CALL
+clLogMessagesToSystemLogAPPLE_t(
     const char* errstr,
     const void* private_info,
     size_t cb,
-    void* user_data) CL_API_SUFFIX__VERSION_1_0;
+    void* user_data);
 
-typedef void (CL_API_CALL *
-clLogMessagesToStdoutAPPLE_fn)(
-    const char* errstr,
-    const void* private_info,
-    size_t cb,
-    void* user_data) CL_API_SUFFIX__VERSION_1_0;
+typedef clLogMessagesToSystemLogAPPLE_t *clLogMessagesToSystemLogAPPLE_fn CL_API_SUFFIX__VERSION_1_0;
 
-typedef void (CL_API_CALL *
-clLogMessagesToStderrAPPLE_fn)(
+typedef void CL_API_CALL
+clLogMessagesToStdoutAPPLE_t(
     const char* errstr,
     const void* private_info,
     size_t cb,
-    void* user_data) CL_API_SUFFIX__VERSION_1_0;
+    void* user_data);
+
+typedef clLogMessagesToStdoutAPPLE_t *clLogMessagesToStdoutAPPLE_fn CL_API_SUFFIX__VERSION_1_0;
+
+typedef void CL_API_CALL
+clLogMessagesToStderrAPPLE_t(
+    const char* errstr,
+    const void* private_info,
+    size_t cb,
+    void* user_data);
+
+typedef clLogMessagesToStderrAPPLE_t *clLogMessagesToStderrAPPLE_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -702,11 +746,13 @@ clLogMessagesToStderrAPPLE(
 #define CL_PLATFORM_NOT_FOUND_KHR                           -1001
 
 
-typedef cl_int (CL_API_CALL *
-clIcdGetPlatformIDsKHR_fn)(
+typedef cl_int CL_API_CALL
+clIcdGetPlatformIDsKHR_t(
     cl_uint num_entries,
     cl_platform_id* platforms,
-    cl_uint* num_platforms) ;
+    cl_uint* num_platforms);
+
+typedef clIcdGetPlatformIDsKHR_t *clIcdGetPlatformIDsKHR_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -732,12 +778,14 @@ clIcdGetPlatformIDsKHR(
 #define CL_PROGRAM_IL_KHR                                   0x1169
 
 
-typedef cl_program (CL_API_CALL *
-clCreateProgramWithILKHR_fn)(
+typedef cl_program CL_API_CALL
+clCreateProgramWithILKHR_t(
     cl_context context,
     const void* il,
     size_t length,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
+    cl_int* errcode_ret);
+
+typedef clCreateProgramWithILKHR_t *clCreateProgramWithILKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -793,9 +841,11 @@ typedef cl_bitfield         cl_device_terminate_capability_khr;
 #define CL_CONTEXT_TERMINATED_KHR                           -1121
 
 
-typedef cl_int (CL_API_CALL *
-clTerminateContextKHR_fn)(
-    cl_context context) CL_API_SUFFIX__VERSION_1_2;
+typedef cl_int CL_API_CALL
+clTerminateContextKHR_t(
+    cl_context context);
+
+typedef clTerminateContextKHR_t *clTerminateContextKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -828,12 +878,14 @@ clTerminateContextKHR(
 typedef cl_properties       cl_queue_properties_khr;
 
 
-typedef cl_command_queue (CL_API_CALL *
-clCreateCommandQueueWithPropertiesKHR_fn)(
+typedef cl_command_queue CL_API_CALL
+clCreateCommandQueueWithPropertiesKHR_t(
     cl_context context,
     cl_device_id device,
     const cl_queue_properties_khr* properties,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
+    cl_int* errcode_ret);
+
+typedef clCreateCommandQueueWithPropertiesKHR_t *clCreateCommandQueueWithPropertiesKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -944,21 +996,27 @@ typedef cl_ulong            cl_device_partition_property_ext;
 #define CL_PARTITION_BY_NAMES_LIST_END_EXT                  ((cl_device_partition_property_ext)0 - 1)
 
 
-typedef cl_int (CL_API_CALL *
-clReleaseDeviceEXT_fn)(
-    cl_device_id device) CL_API_SUFFIX__VERSION_1_1;
+typedef cl_int CL_API_CALL
+clReleaseDeviceEXT_t(
+    cl_device_id device);
 
-typedef cl_int (CL_API_CALL *
-clRetainDeviceEXT_fn)(
-    cl_device_id device) CL_API_SUFFIX__VERSION_1_1;
+typedef clReleaseDeviceEXT_t *clReleaseDeviceEXT_fn CL_API_SUFFIX__VERSION_1_1;
 
-typedef cl_int (CL_API_CALL *
-clCreateSubDevicesEXT_fn)(
+typedef cl_int CL_API_CALL
+clRetainDeviceEXT_t(
+    cl_device_id device);
+
+typedef clRetainDeviceEXT_t *clRetainDeviceEXT_fn CL_API_SUFFIX__VERSION_1_1;
+
+typedef cl_int CL_API_CALL
+clCreateSubDevicesEXT_t(
     cl_device_id in_device,
     const cl_device_partition_property_ext* properties,
     cl_uint num_entries,
     cl_device_id* out_devices,
-    cl_uint* num_devices) CL_API_SUFFIX__VERSION_1_1;
+    cl_uint* num_devices);
+
+typedef clCreateSubDevicesEXT_t *clCreateSubDevicesEXT_fn CL_API_SUFFIX__VERSION_1_1;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -996,15 +1054,17 @@ typedef cl_bitfield         cl_mem_migration_flags_ext;
 #define CL_COMMAND_MIGRATE_MEM_OBJECT_EXT                   0x4040
 
 
-typedef cl_int (CL_API_CALL *
-clEnqueueMigrateMemObjectEXT_fn)(
+typedef cl_int CL_API_CALL
+clEnqueueMigrateMemObjectEXT_t(
     cl_command_queue command_queue,
     cl_uint num_mem_objects,
     const cl_mem* mem_objects,
     cl_mem_migration_flags_ext flags,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event);
+
+typedef clEnqueueMigrateMemObjectEXT_t *clEnqueueMigrateMemObjectEXT_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1061,8 +1121,8 @@ typedef struct _cl_mem_ext_host_ptr {
 #define CL_MEM_HOST_WRITE_COMBINING_QCOM                    0x40A7
 
 
-typedef cl_int (CL_API_CALL *
-clGetDeviceImageInfoQCOM_fn)(
+typedef cl_int CL_API_CALL
+clGetDeviceImageInfoQCOM_t(
     cl_device_id device,
     size_t image_width,
     size_t image_height,
@@ -1070,7 +1130,9 @@ clGetDeviceImageInfoQCOM_fn)(
     cl_image_pitch_info_qcom param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) ;
+    size_t* param_value_size_ret);
+
+typedef clGetDeviceImageInfoQCOM_t *clGetDeviceImageInfoQCOM_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1171,23 +1233,27 @@ typedef struct _cl_mem_android_native_buffer_host_ptr {
 #define CL_COMMAND_RELEASE_GRALLOC_OBJECTS_IMG              0x40D3
 
 
-typedef cl_int (CL_API_CALL *
-clEnqueueAcquireGrallocObjectsIMG_fn)(
+typedef cl_int CL_API_CALL
+clEnqueueAcquireGrallocObjectsIMG_t(
     cl_command_queue command_queue,
     cl_uint num_objects,
     const cl_mem* mem_objects,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueReleaseGrallocObjectsIMG_fn)(
+typedef clEnqueueAcquireGrallocObjectsIMG_t *clEnqueueAcquireGrallocObjectsIMG_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clEnqueueReleaseGrallocObjectsIMG_t(
     cl_command_queue command_queue,
     cl_uint num_objects,
     const cl_mem* mem_objects,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
+
+typedef clEnqueueReleaseGrallocObjectsIMG_t *clEnqueueReleaseGrallocObjectsIMG_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1228,8 +1294,8 @@ typedef cl_uint             cl_mipmap_filter_mode_img;
 #define CL_COMMAND_GENERATE_MIPMAP_IMG                      0x40D6
 
 
-typedef cl_int (CL_API_CALL *
-clEnqueueGenerateMipmapIMG_fn)(
+typedef cl_int CL_API_CALL
+clEnqueueGenerateMipmapIMG_t(
     cl_command_queue command_queue,
     cl_mem src_image,
     cl_mem dst_image,
@@ -1238,7 +1304,9 @@ clEnqueueGenerateMipmapIMG_fn)(
     const size_t* mip_region,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
+
+typedef clEnqueueGenerateMipmapIMG_t *clEnqueueGenerateMipmapIMG_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1287,8 +1355,8 @@ typedef cl_uint             cl_kernel_sub_group_info;
 #define CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE_KHR           0x2034
 
 
-typedef cl_int (CL_API_CALL *
-clGetKernelSubGroupInfoKHR_fn)(
+typedef cl_int CL_API_CALL
+clGetKernelSubGroupInfoKHR_t(
     cl_kernel in_kernel,
     cl_device_id in_device,
     cl_kernel_sub_group_info param_name,
@@ -1296,7 +1364,9 @@ clGetKernelSubGroupInfoKHR_fn)(
     const void* input_value,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_2_0_DEPRECATED;
+    size_t* param_value_size_ret);
+
+typedef clGetKernelSubGroupInfoKHR_t *clGetKernelSubGroupInfoKHR_fn CL_API_SUFFIX__VERSION_2_0_DEPRECATED;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1457,14 +1527,16 @@ typedef struct _cl_device_pci_bus_info_khr {
     "cl_khr_suggested_local_work_size"
 
 
-typedef cl_int (CL_API_CALL *
-clGetKernelSuggestedLocalWorkSizeKHR_fn)(
+typedef cl_int CL_API_CALL
+clGetKernelSuggestedLocalWorkSizeKHR_t(
     cl_command_queue command_queue,
     cl_kernel kernel,
     cl_uint work_dim,
     const size_t* global_work_offset,
     const size_t* global_work_size,
-    size_t* suggested_local_work_size) CL_API_SUFFIX__VERSION_3_0;
+    size_t* suggested_local_work_size);
+
+typedef clGetKernelSuggestedLocalWorkSizeKHR_t *clGetKernelSuggestedLocalWorkSizeKHR_fn CL_API_SUFFIX__VERSION_3_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1529,23 +1601,27 @@ typedef cl_uint             cl_external_memory_handle_type_khr;
 #define CL_COMMAND_RELEASE_EXTERNAL_MEM_OBJECTS_KHR         0x2048
 
 
-typedef cl_int (CL_API_CALL *
-clEnqueueAcquireExternalMemObjectsKHR_fn)(
+typedef cl_int CL_API_CALL
+clEnqueueAcquireExternalMemObjectsKHR_t(
     cl_command_queue command_queue,
     cl_uint num_mem_objects,
     const cl_mem* mem_objects,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_3_0;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueReleaseExternalMemObjectsKHR_fn)(
+typedef clEnqueueAcquireExternalMemObjectsKHR_t *clEnqueueAcquireExternalMemObjectsKHR_fn CL_API_SUFFIX__VERSION_3_0;
+
+typedef cl_int CL_API_CALL
+clEnqueueReleaseExternalMemObjectsKHR_t(
     cl_command_queue command_queue,
     cl_uint num_mem_objects,
     const cl_mem* mem_objects,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_3_0;
+    cl_event* event);
+
+typedef clEnqueueReleaseExternalMemObjectsKHR_t *clEnqueueReleaseExternalMemObjectsKHR_fn CL_API_SUFFIX__VERSION_3_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1636,14 +1712,16 @@ typedef cl_uint             cl_external_semaphore_handle_type_khr;
 #define CL_SEMAPHORE_EXPORT_HANDLE_TYPES_LIST_END_KHR       0
 
 
-typedef cl_int (CL_API_CALL *
-clGetSemaphoreHandleForTypeKHR_fn)(
+typedef cl_int CL_API_CALL
+clGetSemaphoreHandleForTypeKHR_t(
     cl_semaphore_khr sema_object,
     cl_device_id device,
     cl_external_semaphore_handle_type_khr handle_type,
     size_t handle_size,
     void* handle_ptr,
-    size_t* handle_size_ret) CL_API_SUFFIX__VERSION_1_2;
+    size_t* handle_size_ret);
+
+typedef clGetSemaphoreHandleForTypeKHR_t *clGetSemaphoreHandleForTypeKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1740,47 +1818,59 @@ typedef cl_ulong            cl_semaphore_payload_khr;
 #define CL_INVALID_SEMAPHORE_KHR                            -1142
 
 
-typedef cl_semaphore_khr (CL_API_CALL *
-clCreateSemaphoreWithPropertiesKHR_fn)(
+typedef cl_semaphore_khr CL_API_CALL
+clCreateSemaphoreWithPropertiesKHR_t(
     cl_context context,
     const cl_semaphore_properties_khr* sema_props,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
+    cl_int* errcode_ret);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueWaitSemaphoresKHR_fn)(
+typedef clCreateSemaphoreWithPropertiesKHR_t *clCreateSemaphoreWithPropertiesKHR_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clEnqueueWaitSemaphoresKHR_t(
     cl_command_queue command_queue,
     cl_uint num_sema_objects,
     const cl_semaphore_khr* sema_objects,
     const cl_semaphore_payload_khr* sema_payload_list,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueSignalSemaphoresKHR_fn)(
+typedef clEnqueueWaitSemaphoresKHR_t *clEnqueueWaitSemaphoresKHR_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clEnqueueSignalSemaphoresKHR_t(
     cl_command_queue command_queue,
     cl_uint num_sema_objects,
     const cl_semaphore_khr* sema_objects,
     const cl_semaphore_payload_khr* sema_payload_list,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clGetSemaphoreInfoKHR_fn)(
+typedef clEnqueueSignalSemaphoresKHR_t *clEnqueueSignalSemaphoresKHR_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clGetSemaphoreInfoKHR_t(
     cl_semaphore_khr sema_object,
     cl_semaphore_info_khr param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_2;
+    size_t* param_value_size_ret);
 
-typedef cl_int (CL_API_CALL *
-clReleaseSemaphoreKHR_fn)(
-    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
+typedef clGetSemaphoreInfoKHR_t *clGetSemaphoreInfoKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
-typedef cl_int (CL_API_CALL *
-clRetainSemaphoreKHR_fn)(
-    cl_semaphore_khr sema_object) CL_API_SUFFIX__VERSION_1_2;
+typedef cl_int CL_API_CALL
+clReleaseSemaphoreKHR_t(
+    cl_semaphore_khr sema_object);
+
+typedef clReleaseSemaphoreKHR_t *clReleaseSemaphoreKHR_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clRetainSemaphoreKHR_t(
+    cl_semaphore_khr sema_object);
+
+typedef clRetainSemaphoreKHR_t *clRetainSemaphoreKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1849,14 +1939,16 @@ typedef intptr_t            cl_import_properties_arm;
 #define CL_IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM   0x41F0
 
 
-typedef cl_mem (CL_API_CALL *
-clImportMemoryARM_fn)(
+typedef cl_mem CL_API_CALL
+clImportMemoryARM_t(
     cl_context context,
     cl_mem_flags flags,
     const cl_import_properties_arm* properties,
     void* memory,
     size_t size,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+    cl_int* errcode_ret);
+
+typedef clImportMemoryARM_t *clImportMemoryARM_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -1910,20 +2002,24 @@ typedef cl_bitfield         cl_device_svm_capabilities_arm;
 #define CL_MEM_SVM_ATOMICS_ARM                              (1 << 11)
 
 
-typedef void* (CL_API_CALL *
-clSVMAllocARM_fn)(
+typedef void* CL_API_CALL
+clSVMAllocARM_t(
     cl_context context,
     cl_svm_mem_flags_arm flags,
     size_t size,
-    cl_uint alignment) CL_API_SUFFIX__VERSION_1_2;
+    cl_uint alignment);
 
-typedef void (CL_API_CALL *
-clSVMFreeARM_fn)(
+typedef clSVMAllocARM_t *clSVMAllocARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef void CL_API_CALL
+clSVMFreeARM_t(
     cl_context context,
-    void* svm_pointer) CL_API_SUFFIX__VERSION_1_2;
+    void* svm_pointer);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueSVMFreeARM_fn)(
+typedef clSVMFreeARM_t *clSVMFreeARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clEnqueueSVMFreeARM_t(
     cl_command_queue command_queue,
     cl_uint num_svm_pointers,
     void* svm_pointers[],
@@ -1931,10 +2027,12 @@ clEnqueueSVMFreeARM_fn)(
     void* user_data,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueSVMMemcpyARM_fn)(
+typedef clEnqueueSVMFreeARM_t *clEnqueueSVMFreeARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clEnqueueSVMMemcpyARM_t(
     cl_command_queue command_queue,
     cl_bool blocking_copy,
     void* dst_ptr,
@@ -1942,10 +2040,12 @@ clEnqueueSVMMemcpyARM_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueSVMMemFillARM_fn)(
+typedef clEnqueueSVMMemcpyARM_t *clEnqueueSVMMemcpyARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clEnqueueSVMMemFillARM_t(
     cl_command_queue command_queue,
     void* svm_ptr,
     const void* pattern,
@@ -1953,10 +2053,12 @@ clEnqueueSVMMemFillARM_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueSVMMapARM_fn)(
+typedef clEnqueueSVMMemFillARM_t *clEnqueueSVMMemFillARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clEnqueueSVMMapARM_t(
     cl_command_queue command_queue,
     cl_bool blocking_map,
     cl_map_flags flags,
@@ -1964,28 +2066,36 @@ clEnqueueSVMMapARM_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueSVMUnmapARM_fn)(
+typedef clEnqueueSVMMapARM_t *clEnqueueSVMMapARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clEnqueueSVMUnmapARM_t(
     cl_command_queue command_queue,
     void* svm_ptr,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_2;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clSetKernelArgSVMPointerARM_fn)(
+typedef clEnqueueSVMUnmapARM_t *clEnqueueSVMUnmapARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clSetKernelArgSVMPointerARM_t(
     cl_kernel kernel,
     cl_uint arg_index,
-    const void* arg_value) CL_API_SUFFIX__VERSION_1_2;
+    const void* arg_value);
 
-typedef cl_int (CL_API_CALL *
-clSetKernelExecInfoARM_fn)(
+typedef clSetKernelArgSVMPointerARM_t *clSetKernelArgSVMPointerARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clSetKernelExecInfoARM_t(
     cl_kernel kernel,
     cl_kernel_exec_info_arm param_name,
     size_t param_value_size,
-    const void* param_value) CL_API_SUFFIX__VERSION_1_2;
+    const void* param_value);
+
+typedef clSetKernelExecInfoARM_t *clSetKernelExecInfoARM_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -2237,29 +2347,37 @@ typedef cl_uint             cl_accelerator_info_intel;
 #define CL_ACCELERATOR_TYPE_NOT_SUPPORTED_INTEL             -1097
 
 
-typedef cl_accelerator_intel (CL_API_CALL *
-clCreateAcceleratorINTEL_fn)(
+typedef cl_accelerator_intel CL_API_CALL
+clCreateAcceleratorINTEL_t(
     cl_context context,
     cl_accelerator_type_intel accelerator_type,
     size_t descriptor_size,
     const void* descriptor,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_2;
+    cl_int* errcode_ret);
 
-typedef cl_int (CL_API_CALL *
-clGetAcceleratorInfoINTEL_fn)(
+typedef clCreateAcceleratorINTEL_t *clCreateAcceleratorINTEL_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clGetAcceleratorInfoINTEL_t(
     cl_accelerator_intel accelerator,
     cl_accelerator_info_intel param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_1_2;
+    size_t* param_value_size_ret);
 
-typedef cl_int (CL_API_CALL *
-clRetainAcceleratorINTEL_fn)(
-    cl_accelerator_intel accelerator) CL_API_SUFFIX__VERSION_1_2;
+typedef clGetAcceleratorInfoINTEL_t *clGetAcceleratorInfoINTEL_fn CL_API_SUFFIX__VERSION_1_2;
 
-typedef cl_int (CL_API_CALL *
-clReleaseAcceleratorINTEL_fn)(
-    cl_accelerator_intel accelerator) CL_API_SUFFIX__VERSION_1_2;
+typedef cl_int CL_API_CALL
+clRetainAcceleratorINTEL_t(
+    cl_accelerator_intel accelerator);
+
+typedef clRetainAcceleratorINTEL_t *clRetainAcceleratorINTEL_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef cl_int CL_API_CALL
+clReleaseAcceleratorINTEL_t(
+    cl_accelerator_intel accelerator);
+
+typedef clReleaseAcceleratorINTEL_t *clReleaseAcceleratorINTEL_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -2682,59 +2800,73 @@ typedef cl_uint             cl_mem_advice_intel;
 #define CL_COMMAND_MEMADVISE_INTEL                          0x4207
 
 
-typedef void* (CL_API_CALL *
-clHostMemAllocINTEL_fn)(
+typedef void* CL_API_CALL
+clHostMemAllocINTEL_t(
     cl_context context,
     const cl_mem_properties_intel* properties,
     size_t size,
     cl_uint alignment,
-    cl_int* errcode_ret) ;
+    cl_int* errcode_ret);
 
-typedef void* (CL_API_CALL *
-clDeviceMemAllocINTEL_fn)(
+typedef clHostMemAllocINTEL_t *clHostMemAllocINTEL_fn ;
+
+typedef void* CL_API_CALL
+clDeviceMemAllocINTEL_t(
     cl_context context,
     cl_device_id device,
     const cl_mem_properties_intel* properties,
     size_t size,
     cl_uint alignment,
-    cl_int* errcode_ret) ;
+    cl_int* errcode_ret);
 
-typedef void* (CL_API_CALL *
-clSharedMemAllocINTEL_fn)(
+typedef clDeviceMemAllocINTEL_t *clDeviceMemAllocINTEL_fn ;
+
+typedef void* CL_API_CALL
+clSharedMemAllocINTEL_t(
     cl_context context,
     cl_device_id device,
     const cl_mem_properties_intel* properties,
     size_t size,
     cl_uint alignment,
-    cl_int* errcode_ret) ;
+    cl_int* errcode_ret);
 
-typedef cl_int (CL_API_CALL *
-clMemFreeINTEL_fn)(
+typedef clSharedMemAllocINTEL_t *clSharedMemAllocINTEL_fn ;
+
+typedef cl_int CL_API_CALL
+clMemFreeINTEL_t(
     cl_context context,
-    void* ptr) ;
+    void* ptr);
 
-typedef cl_int (CL_API_CALL *
-clMemBlockingFreeINTEL_fn)(
+typedef clMemFreeINTEL_t *clMemFreeINTEL_fn ;
+
+typedef cl_int CL_API_CALL
+clMemBlockingFreeINTEL_t(
     cl_context context,
-    void* ptr) ;
+    void* ptr);
 
-typedef cl_int (CL_API_CALL *
-clGetMemAllocInfoINTEL_fn)(
+typedef clMemBlockingFreeINTEL_t *clMemBlockingFreeINTEL_fn ;
+
+typedef cl_int CL_API_CALL
+clGetMemAllocInfoINTEL_t(
     cl_context context,
     const void* ptr,
     cl_mem_info_intel param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) ;
+    size_t* param_value_size_ret);
 
-typedef cl_int (CL_API_CALL *
-clSetKernelArgMemPointerINTEL_fn)(
+typedef clGetMemAllocInfoINTEL_t *clGetMemAllocInfoINTEL_fn ;
+
+typedef cl_int CL_API_CALL
+clSetKernelArgMemPointerINTEL_t(
     cl_kernel kernel,
     cl_uint arg_index,
-    const void* arg_value) ;
+    const void* arg_value);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueMemFillINTEL_fn)(
+typedef clSetKernelArgMemPointerINTEL_t *clSetKernelArgMemPointerINTEL_fn ;
+
+typedef cl_int CL_API_CALL
+clEnqueueMemFillINTEL_t(
     cl_command_queue command_queue,
     void* dst_ptr,
     const void* pattern,
@@ -2742,10 +2874,12 @@ clEnqueueMemFillINTEL_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueMemcpyINTEL_fn)(
+typedef clEnqueueMemFillINTEL_t *clEnqueueMemFillINTEL_fn ;
+
+typedef cl_int CL_API_CALL
+clEnqueueMemcpyINTEL_t(
     cl_command_queue command_queue,
     cl_bool blocking,
     void* dst_ptr,
@@ -2753,17 +2887,21 @@ clEnqueueMemcpyINTEL_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueMemAdviseINTEL_fn)(
+typedef clEnqueueMemcpyINTEL_t *clEnqueueMemcpyINTEL_fn ;
+
+typedef cl_int CL_API_CALL
+clEnqueueMemAdviseINTEL_t(
     cl_command_queue command_queue,
     const void* ptr,
     size_t size,
     cl_mem_advice_intel advice,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event);
+
+typedef clEnqueueMemAdviseINTEL_t *clEnqueueMemAdviseINTEL_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -2855,15 +2993,17 @@ clEnqueueMemAdviseINTEL(
 #if defined(CL_VERSION_1_2)
 /* Requires OpenCL 1.2 for cl_mem_migration_flags: */
 
-typedef cl_int (CL_API_CALL *
-clEnqueueMigrateMemINTEL_fn)(
+typedef cl_int CL_API_CALL
+clEnqueueMigrateMemINTEL_t(
     cl_command_queue command_queue,
     const void* ptr,
     size_t size,
     cl_mem_migration_flags flags,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event);
+
+typedef clEnqueueMigrateMemINTEL_t *clEnqueueMigrateMemINTEL_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -2883,15 +3023,17 @@ clEnqueueMigrateMemINTEL(
 
 /* deprecated, use clEnqueueMemFillINTEL instead */
 
-typedef cl_int (CL_API_CALL *
-clEnqueueMemsetINTEL_fn)(
+typedef cl_int CL_API_CALL
+clEnqueueMemsetINTEL_t(
     cl_command_queue command_queue,
     void* dst_ptr,
     cl_int value,
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) ;
+    cl_event* event);
+
+typedef clEnqueueMemsetINTEL_t *clEnqueueMemsetINTEL_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -2930,14 +3072,16 @@ clEnqueueMemsetINTEL(
 /* type cl_mem_properties_intel */
 
 
-typedef cl_mem (CL_API_CALL *
-clCreateBufferWithPropertiesINTEL_fn)(
+typedef cl_mem CL_API_CALL
+clCreateBufferWithPropertiesINTEL_t(
     cl_context context,
     const cl_mem_properties_intel* properties,
     cl_mem_flags flags,
     size_t size,
     void* host_ptr,
-    cl_int* errcode_ret) CL_API_SUFFIX__VERSION_1_0;
+    cl_int* errcode_ret);
+
+typedef clCreateBufferWithPropertiesINTEL_t *clCreateBufferWithPropertiesINTEL_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -2968,8 +3112,8 @@ clCreateBufferWithPropertiesINTEL(
 #define CL_PROGRAM_HOST_PIPE_NAMES_INTEL                    0x4217
 
 
-typedef cl_int (CL_API_CALL *
-clEnqueueReadHostPipeINTEL_fn)(
+typedef cl_int CL_API_CALL
+clEnqueueReadHostPipeINTEL_t(
     cl_command_queue command_queue,
     cl_program program,
     const char* pipe_symbol,
@@ -2978,10 +3122,12 @@ clEnqueueReadHostPipeINTEL_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
+    cl_event* event);
 
-typedef cl_int (CL_API_CALL *
-clEnqueueWriteHostPipeINTEL_fn)(
+typedef clEnqueueReadHostPipeINTEL_t *clEnqueueReadHostPipeINTEL_fn CL_API_SUFFIX__VERSION_1_0;
+
+typedef cl_int CL_API_CALL
+clEnqueueWriteHostPipeINTEL_t(
     cl_command_queue command_queue,
     cl_program program,
     const char* pipe_symbol,
@@ -2990,7 +3136,9 @@ clEnqueueWriteHostPipeINTEL_fn)(
     size_t size,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
-    cl_event* event) CL_API_SUFFIX__VERSION_1_0;
+    cl_event* event);
+
+typedef clEnqueueWriteHostPipeINTEL_t *clEnqueueWriteHostPipeINTEL_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -3124,8 +3272,8 @@ typedef cl_uint             cl_image_requirements_info_ext;
 
 /* Enqueued Commands APIs */
 
-typedef cl_int (CL_API_CALL *
-clGetImageRequirementsInfoEXT_fn)(
+typedef cl_int CL_API_CALL
+clGetImageRequirementsInfoEXT_t(
     cl_context context,
     const cl_mem_properties* properties,
     cl_mem_flags flags,
@@ -3134,7 +3282,9 @@ clGetImageRequirementsInfoEXT_fn)(
     cl_image_requirements_info_ext param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) CL_API_SUFFIX__VERSION_3_0;
+    size_t* param_value_size_ret);
+
+typedef clGetImageRequirementsInfoEXT_t *clGetImageRequirementsInfoEXT_fn CL_API_SUFFIX__VERSION_3_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -3184,12 +3334,14 @@ typedef cl_uint             cl_icdl_info;
 #define CL_ICDL_VENDOR                                      4
 
 
-typedef cl_int (CL_API_CALL *
-clGetICDLoaderInfoOCLICD_fn)(
+typedef cl_int CL_API_CALL
+clGetICDLoaderInfoOCLICD_t(
     cl_icdl_info param_name,
     size_t param_value_size,
     void* param_value,
-    size_t* param_value_size_ret) ;
+    size_t* param_value_size_ret);
+
+typedef clGetICDLoaderInfoOCLICD_t *clGetICDLoaderInfoOCLICD_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -3256,10 +3408,12 @@ typedef cl_bitfield         cl_device_fp_atomic_capabilities_ext;
     "cl_pocl_content_size"
 
 
-typedef cl_int (CL_API_CALL *
-clSetContentSizeBufferPoCL_fn)(
+typedef cl_int CL_API_CALL
+clSetContentSizeBufferPoCL_t(
     cl_mem buffer,
-    cl_mem content_size_buffer) CL_API_SUFFIX__VERSION_1_0;
+    cl_mem content_size_buffer);
+
+typedef clSetContentSizeBufferPoCL_t *clSetContentSizeBufferPoCL_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
