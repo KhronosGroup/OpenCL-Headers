@@ -60,6 +60,7 @@ if __name__ == "__main__":
 
     try:
         cl_ext_h_template = Template(filename='cl_ext.h.mako', input_encoding='utf-8')
+        cl_function_types_h_template = Template(filename='cl_function_types.h.mako', input_encoding='utf-8')
 
         print('Generating cl_dx9_media_sharing.h...')
         text = cl_ext_h_template.render(
@@ -220,6 +221,17 @@ if __name__ == "__main__":
         text = re.sub(r'\r\n', r'\n', text)
         with open(args.directory + '/cl_ext.h', 'w') as gen:
             gen.write(text)
+
+        print('Generating cl_function_types.h...')
+        text = cl_function_types_h_template.render(
+            spec=spec,
+            apisigs=apisigs,
+            coreapis=coreapis,
+            extapis=extapis)
+        text = re.sub(r'\r\n', r'\n', text)
+        with open(args.directory + '/cl_function_types.h', 'w') as gen:
+            gen.write(text)
+
     except:
         traceback = RichTraceback()
         for (filename, lineno, function, line) in traceback.traceback:
