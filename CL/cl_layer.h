@@ -71,7 +71,8 @@ clGetLayerInfo_t(
     void* param_value,
     size_t* param_value_size_ret);
 
-typedef clGetLayerInfo_t *clGetLayerInfo_fn ;
+typedef clGetLayerInfo_t *
+clGetLayerInfo_fn ;
 
 typedef cl_int CL_API_CALL
 clInitLayer_t(
@@ -80,7 +81,8 @@ clInitLayer_t(
     cl_uint* num_entries_ret,
     const cl_icd_dispatch** layer_dispatch_ret);
 
-typedef clInitLayer_t *clInitLayer_fn ;
+typedef clInitLayer_t *
+clInitLayer_fn ;
 
 /*
 ** The function pointer typedefs prefixed with "pfn_" are provided for
@@ -89,9 +91,11 @@ typedef clInitLayer_t *clInitLayer_fn ;
 ** "_fn" instead, for consistency.
 */
 
-typedef clGetLayerInfo_t *pfn_clGetLayerInfo ;
+typedef clGetLayerInfo_t *
+pfn_clGetLayerInfo ;
 
-typedef clInitLayer_t *pfn_clInitLayer ;
+typedef clInitLayer_t *
+pfn_clInitLayer ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 

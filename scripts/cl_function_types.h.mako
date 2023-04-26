@@ -38,6 +38,7 @@ def getCParameterStrings(params):
 %for version, apis in coreapis.items():
 %  if version != "CL_VERSION_1_0":
 #ifdef ${version}
+
 %  endif
 %  for api in apis:
 typedef ${api.RetType} CL_API_CALL ${api.Name}_t(
@@ -55,5 +56,4 @@ typedef ${api.RetType} CL_API_CALL ${api.Name}_t(
 
 %  endif
 %endfor
-
 #endif /* OPENCL_CL_FUNCTION_TYPES_H_ */

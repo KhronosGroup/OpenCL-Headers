@@ -465,6 +465,7 @@ typedef cl_int CL_API_CALL clEnqueueTask_t(
     cl_event* event);
 
 #ifdef CL_VERSION_1_1
+
 typedef cl_mem CL_API_CALL clCreateSubBuffer_t(
     cl_mem buffer,
     cl_mem_flags flags,
@@ -541,6 +542,7 @@ typedef cl_int CL_API_CALL clEnqueueCopyBufferRect_t(
 #endif /* CL_VERSION_1_1 */
 
 #ifdef CL_VERSION_1_2
+
 typedef cl_int CL_API_CALL clCreateSubDevices_t(
     cl_device_id in_device,
     const cl_device_partition_property* properties,
@@ -651,6 +653,7 @@ typedef void* CL_API_CALL clGetExtensionFunctionAddressForPlatform_t(
 #endif /* CL_VERSION_1_2 */
 
 #ifdef CL_VERSION_2_0
+
 typedef cl_command_queue CL_API_CALL clCreateCommandQueueWithProperties_t(
     cl_context context,
     cl_device_id device,
@@ -748,6 +751,7 @@ typedef cl_int CL_API_CALL clEnqueueSVMUnmap_t(
 #endif /* CL_VERSION_2_0 */
 
 #ifdef CL_VERSION_2_1
+
 typedef cl_int CL_API_CALL clSetDefaultDeviceCommandQueue_t(
     cl_context context,
     cl_device_id device,
@@ -795,6 +799,7 @@ typedef cl_int CL_API_CALL clEnqueueSVMMigrateMem_t(
 #endif /* CL_VERSION_2_1 */
 
 #ifdef CL_VERSION_2_2
+
 typedef cl_int CL_API_CALL clSetProgramSpecializationConstant_t(
     cl_program program,
     cl_uint spec_id,
@@ -809,6 +814,7 @@ typedef cl_int CL_API_CALL clSetProgramReleaseCallback_t(
 #endif /* CL_VERSION_2_2 */
 
 #ifdef CL_VERSION_3_0
+
 typedef cl_int CL_API_CALL clSetContextDestructorCallback_t(
     cl_context context,
     void (CL_CALLBACK* pfn_notify)(cl_context context, void* user_data),
@@ -832,6 +838,5 @@ typedef cl_mem CL_API_CALL clCreateImageWithProperties_t(
     cl_int* errcode_ret);
 
 #endif /* CL_VERSION_3_0 */
-
 
 #endif /* OPENCL_CL_FUNCTION_TYPES_H_ */

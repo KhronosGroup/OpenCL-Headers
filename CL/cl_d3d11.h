@@ -107,7 +107,8 @@ clGetDeviceIDsFromD3D11KHR_t(
     cl_device_id* devices,
     cl_uint* num_devices);
 
-typedef clGetDeviceIDsFromD3D11KHR_t *clGetDeviceIDsFromD3D11KHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clGetDeviceIDsFromD3D11KHR_t *
+clGetDeviceIDsFromD3D11KHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_mem CL_API_CALL
 clCreateFromD3D11BufferKHR_t(
@@ -116,7 +117,8 @@ clCreateFromD3D11BufferKHR_t(
     ID3D11Buffer* resource,
     cl_int* errcode_ret);
 
-typedef clCreateFromD3D11BufferKHR_t *clCreateFromD3D11BufferKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clCreateFromD3D11BufferKHR_t *
+clCreateFromD3D11BufferKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_mem CL_API_CALL
 clCreateFromD3D11Texture2DKHR_t(
@@ -126,7 +128,8 @@ clCreateFromD3D11Texture2DKHR_t(
     UINT subresource,
     cl_int* errcode_ret);
 
-typedef clCreateFromD3D11Texture2DKHR_t *clCreateFromD3D11Texture2DKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clCreateFromD3D11Texture2DKHR_t *
+clCreateFromD3D11Texture2DKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_mem CL_API_CALL
 clCreateFromD3D11Texture3DKHR_t(
@@ -136,7 +139,8 @@ clCreateFromD3D11Texture3DKHR_t(
     UINT subresource,
     cl_int* errcode_ret);
 
-typedef clCreateFromD3D11Texture3DKHR_t *clCreateFromD3D11Texture3DKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clCreateFromD3D11Texture3DKHR_t *
+clCreateFromD3D11Texture3DKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int CL_API_CALL
 clEnqueueAcquireD3D11ObjectsKHR_t(
@@ -147,7 +151,8 @@ clEnqueueAcquireD3D11ObjectsKHR_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueAcquireD3D11ObjectsKHR_t *clEnqueueAcquireD3D11ObjectsKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clEnqueueAcquireD3D11ObjectsKHR_t *
+clEnqueueAcquireD3D11ObjectsKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int CL_API_CALL
 clEnqueueReleaseD3D11ObjectsKHR_t(
@@ -158,7 +163,8 @@ clEnqueueReleaseD3D11ObjectsKHR_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueReleaseD3D11ObjectsKHR_t *clEnqueueReleaseD3D11ObjectsKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clEnqueueReleaseD3D11ObjectsKHR_t *
+clEnqueueReleaseD3D11ObjectsKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -234,7 +240,8 @@ clGetSupportedD3D11TextureFormatsINTEL_t(
     DXGI_FORMAT* d3d11_formats,
     cl_uint* num_texture_formats);
 
-typedef clGetSupportedD3D11TextureFormatsINTEL_t *clGetSupportedD3D11TextureFormatsINTEL_fn ;
+typedef clGetSupportedD3D11TextureFormatsINTEL_t *
+clGetSupportedD3D11TextureFormatsINTEL_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 

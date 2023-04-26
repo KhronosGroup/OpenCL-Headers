@@ -65,7 +65,8 @@ clGetSupportedVA_APIMediaSurfaceFormatsINTEL_t(
     VAImageFormat* va_api_formats,
     cl_uint* num_surface_formats);
 
-typedef clGetSupportedVA_APIMediaSurfaceFormatsINTEL_t *clGetSupportedVA_APIMediaSurfaceFormatsINTEL_fn ;
+typedef clGetSupportedVA_APIMediaSurfaceFormatsINTEL_t *
+clGetSupportedVA_APIMediaSurfaceFormatsINTEL_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -128,7 +129,8 @@ clGetDeviceIDsFromVA_APIMediaAdapterINTEL_t(
     cl_device_id* devices,
     cl_uint* num_devices);
 
-typedef clGetDeviceIDsFromVA_APIMediaAdapterINTEL_t *clGetDeviceIDsFromVA_APIMediaAdapterINTEL_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clGetDeviceIDsFromVA_APIMediaAdapterINTEL_t *
+clGetDeviceIDsFromVA_APIMediaAdapterINTEL_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_mem CL_API_CALL
 clCreateFromVA_APIMediaSurfaceINTEL_t(
@@ -138,7 +140,8 @@ clCreateFromVA_APIMediaSurfaceINTEL_t(
     cl_uint plane,
     cl_int* errcode_ret);
 
-typedef clCreateFromVA_APIMediaSurfaceINTEL_t *clCreateFromVA_APIMediaSurfaceINTEL_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clCreateFromVA_APIMediaSurfaceINTEL_t *
+clCreateFromVA_APIMediaSurfaceINTEL_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int CL_API_CALL
 clEnqueueAcquireVA_APIMediaSurfacesINTEL_t(
@@ -149,7 +152,8 @@ clEnqueueAcquireVA_APIMediaSurfacesINTEL_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueAcquireVA_APIMediaSurfacesINTEL_t *clEnqueueAcquireVA_APIMediaSurfacesINTEL_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clEnqueueAcquireVA_APIMediaSurfacesINTEL_t *
+clEnqueueAcquireVA_APIMediaSurfacesINTEL_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int CL_API_CALL
 clEnqueueReleaseVA_APIMediaSurfacesINTEL_t(
@@ -160,7 +164,8 @@ clEnqueueReleaseVA_APIMediaSurfacesINTEL_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueReleaseVA_APIMediaSurfacesINTEL_t *clEnqueueReleaseVA_APIMediaSurfacesINTEL_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clEnqueueReleaseVA_APIMediaSurfacesINTEL_t *
+clEnqueueReleaseVA_APIMediaSurfacesINTEL_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 

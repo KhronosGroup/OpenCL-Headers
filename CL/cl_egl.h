@@ -79,7 +79,8 @@ clCreateFromEGLImageKHR_t(
     const cl_egl_image_properties_khr* properties,
     cl_int* errcode_ret);
 
-typedef clCreateFromEGLImageKHR_t *clCreateFromEGLImageKHR_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clCreateFromEGLImageKHR_t *
+clCreateFromEGLImageKHR_fn CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int CL_API_CALL
 clEnqueueAcquireEGLObjectsKHR_t(
@@ -90,7 +91,8 @@ clEnqueueAcquireEGLObjectsKHR_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueAcquireEGLObjectsKHR_t *clEnqueueAcquireEGLObjectsKHR_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clEnqueueAcquireEGLObjectsKHR_t *
+clEnqueueAcquireEGLObjectsKHR_fn CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int CL_API_CALL
 clEnqueueReleaseEGLObjectsKHR_t(
@@ -101,7 +103,8 @@ clEnqueueReleaseEGLObjectsKHR_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueReleaseEGLObjectsKHR_t *clEnqueueReleaseEGLObjectsKHR_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clEnqueueReleaseEGLObjectsKHR_t *
+clEnqueueReleaseEGLObjectsKHR_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -155,7 +158,8 @@ clCreateEventFromEGLSyncKHR_t(
     CLeglDisplayKHR display,
     cl_int* errcode_ret);
 
-typedef clCreateEventFromEGLSyncKHR_t *clCreateEventFromEGLSyncKHR_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clCreateEventFromEGLSyncKHR_t *
+clCreateEventFromEGLSyncKHR_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 

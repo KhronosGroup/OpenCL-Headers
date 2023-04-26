@@ -363,7 +363,8 @@ ${api.Name}_t(
 %          endif
 %        endfor
 
-typedef ${api.Name}_t *${api.Name}_fn ${api.Suffix};
+typedef ${api.Name}_t *
+${api.Name}_fn ${api.Suffix};
 %      endfor
 %      if generate_pfn_typedefs:
 
@@ -377,7 +378,8 @@ typedef ${api.Name}_t *${api.Name}_fn ${api.Suffix};
 <%
     api = apisigs[func.get('name')]
 %>
-typedef ${api.Name}_t *pfn_${api.Name} ${api.Suffix};
+typedef ${api.Name}_t *
+pfn_${api.Name} ${api.Suffix};
 %        endfor
 %      endif
 

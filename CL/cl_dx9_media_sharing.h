@@ -121,7 +121,8 @@ clGetDeviceIDsFromDX9MediaAdapterKHR_t(
     cl_device_id* devices,
     cl_uint* num_devices);
 
-typedef clGetDeviceIDsFromDX9MediaAdapterKHR_t *clGetDeviceIDsFromDX9MediaAdapterKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clGetDeviceIDsFromDX9MediaAdapterKHR_t *
+clGetDeviceIDsFromDX9MediaAdapterKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_mem CL_API_CALL
 clCreateFromDX9MediaSurfaceKHR_t(
@@ -132,7 +133,8 @@ clCreateFromDX9MediaSurfaceKHR_t(
     cl_uint plane,
     cl_int* errcode_ret);
 
-typedef clCreateFromDX9MediaSurfaceKHR_t *clCreateFromDX9MediaSurfaceKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clCreateFromDX9MediaSurfaceKHR_t *
+clCreateFromDX9MediaSurfaceKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int CL_API_CALL
 clEnqueueAcquireDX9MediaSurfacesKHR_t(
@@ -143,7 +145,8 @@ clEnqueueAcquireDX9MediaSurfacesKHR_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueAcquireDX9MediaSurfacesKHR_t *clEnqueueAcquireDX9MediaSurfacesKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clEnqueueAcquireDX9MediaSurfacesKHR_t *
+clEnqueueAcquireDX9MediaSurfacesKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 typedef cl_int CL_API_CALL
 clEnqueueReleaseDX9MediaSurfacesKHR_t(
@@ -154,7 +157,8 @@ clEnqueueReleaseDX9MediaSurfacesKHR_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueReleaseDX9MediaSurfacesKHR_t *clEnqueueReleaseDX9MediaSurfacesKHR_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clEnqueueReleaseDX9MediaSurfacesKHR_t *
+clEnqueueReleaseDX9MediaSurfacesKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -250,7 +254,8 @@ clGetDeviceIDsFromDX9INTEL_t(
     cl_device_id* devices,
     cl_uint* num_devices);
 
-typedef clGetDeviceIDsFromDX9INTEL_t *clGetDeviceIDsFromDX9INTEL_fn CL_API_SUFFIX__VERSION_1_1;
+typedef clGetDeviceIDsFromDX9INTEL_t *
+clGetDeviceIDsFromDX9INTEL_fn CL_API_SUFFIX__VERSION_1_1;
 
 typedef cl_mem CL_API_CALL
 clCreateFromDX9MediaSurfaceINTEL_t(
@@ -261,7 +266,8 @@ clCreateFromDX9MediaSurfaceINTEL_t(
     UINT plane,
     cl_int* errcode_ret);
 
-typedef clCreateFromDX9MediaSurfaceINTEL_t *clCreateFromDX9MediaSurfaceINTEL_fn CL_API_SUFFIX__VERSION_1_1;
+typedef clCreateFromDX9MediaSurfaceINTEL_t *
+clCreateFromDX9MediaSurfaceINTEL_fn CL_API_SUFFIX__VERSION_1_1;
 
 typedef cl_int CL_API_CALL
 clEnqueueAcquireDX9ObjectsINTEL_t(
@@ -272,7 +278,8 @@ clEnqueueAcquireDX9ObjectsINTEL_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueAcquireDX9ObjectsINTEL_t *clEnqueueAcquireDX9ObjectsINTEL_fn CL_API_SUFFIX__VERSION_1_1;
+typedef clEnqueueAcquireDX9ObjectsINTEL_t *
+clEnqueueAcquireDX9ObjectsINTEL_fn CL_API_SUFFIX__VERSION_1_1;
 
 typedef cl_int CL_API_CALL
 clEnqueueReleaseDX9ObjectsINTEL_t(
@@ -283,7 +290,8 @@ clEnqueueReleaseDX9ObjectsINTEL_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueReleaseDX9ObjectsINTEL_t *clEnqueueReleaseDX9ObjectsINTEL_fn CL_API_SUFFIX__VERSION_1_1;
+typedef clEnqueueReleaseDX9ObjectsINTEL_t *
+clEnqueueReleaseDX9ObjectsINTEL_fn CL_API_SUFFIX__VERSION_1_1;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -345,7 +353,8 @@ clGetSupportedDX9MediaSurfaceFormatsINTEL_t(
     D3DFORMAT* dx9_formats,
     cl_uint* num_surface_formats);
 
-typedef clGetSupportedDX9MediaSurfaceFormatsINTEL_t *clGetSupportedDX9MediaSurfaceFormatsINTEL_fn ;
+typedef clGetSupportedDX9MediaSurfaceFormatsINTEL_t *
+clGetSupportedDX9MediaSurfaceFormatsINTEL_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 

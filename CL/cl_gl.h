@@ -99,7 +99,8 @@ clGetGLContextInfoKHR_t(
     void* param_value,
     size_t* param_value_size_ret);
 
-typedef clGetGLContextInfoKHR_t *clGetGLContextInfoKHR_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clGetGLContextInfoKHR_t *
+clGetGLContextInfoKHR_fn CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_mem CL_API_CALL
 clCreateFromGLBuffer_t(
@@ -108,7 +109,8 @@ clCreateFromGLBuffer_t(
     cl_GLuint bufobj,
     cl_int* errcode_ret);
 
-typedef clCreateFromGLBuffer_t *clCreateFromGLBuffer_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clCreateFromGLBuffer_t *
+clCreateFromGLBuffer_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -140,7 +142,8 @@ clCreateFromGLTexture_t(
     cl_GLuint texture,
     cl_int* errcode_ret);
 
-typedef clCreateFromGLTexture_t *clCreateFromGLTexture_fn CL_API_SUFFIX__VERSION_1_2;
+typedef clCreateFromGLTexture_t *
+clCreateFromGLTexture_fn CL_API_SUFFIX__VERSION_1_2;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -165,7 +168,8 @@ clCreateFromGLRenderbuffer_t(
     cl_GLuint renderbuffer,
     cl_int* errcode_ret);
 
-typedef clCreateFromGLRenderbuffer_t *clCreateFromGLRenderbuffer_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clCreateFromGLRenderbuffer_t *
+clCreateFromGLRenderbuffer_fn CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int CL_API_CALL
 clGetGLObjectInfo_t(
@@ -173,7 +177,8 @@ clGetGLObjectInfo_t(
     cl_gl_object_type* gl_object_type,
     cl_GLuint* gl_object_name);
 
-typedef clGetGLObjectInfo_t *clGetGLObjectInfo_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clGetGLObjectInfo_t *
+clGetGLObjectInfo_fn CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int CL_API_CALL
 clGetGLTextureInfo_t(
@@ -183,7 +188,8 @@ clGetGLTextureInfo_t(
     void* param_value,
     size_t* param_value_size_ret);
 
-typedef clGetGLTextureInfo_t *clGetGLTextureInfo_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clGetGLTextureInfo_t *
+clGetGLTextureInfo_fn CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int CL_API_CALL
 clEnqueueAcquireGLObjects_t(
@@ -194,7 +200,8 @@ clEnqueueAcquireGLObjects_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueAcquireGLObjects_t *clEnqueueAcquireGLObjects_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clEnqueueAcquireGLObjects_t *
+clEnqueueAcquireGLObjects_fn CL_API_SUFFIX__VERSION_1_0;
 
 typedef cl_int CL_API_CALL
 clEnqueueReleaseGLObjects_t(
@@ -205,7 +212,8 @@ clEnqueueReleaseGLObjects_t(
     const cl_event* event_wait_list,
     cl_event* event);
 
-typedef clEnqueueReleaseGLObjects_t *clEnqueueReleaseGLObjects_fn CL_API_SUFFIX__VERSION_1_0;
+typedef clEnqueueReleaseGLObjects_t *
+clEnqueueReleaseGLObjects_fn CL_API_SUFFIX__VERSION_1_0;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -261,7 +269,8 @@ clCreateFromGLTexture2D_t(
     cl_GLuint texture,
     cl_int* errcode_ret);
 
-typedef clCreateFromGLTexture2D_t *clCreateFromGLTexture2D_fn CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
+typedef clCreateFromGLTexture2D_t *
+clCreateFromGLTexture2D_fn CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
 
 typedef cl_mem CL_API_CALL
 clCreateFromGLTexture3D_t(
@@ -272,7 +281,8 @@ clCreateFromGLTexture3D_t(
     cl_GLuint texture,
     cl_int* errcode_ret);
 
-typedef clCreateFromGLTexture3D_t *clCreateFromGLTexture3D_fn CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
+typedef clCreateFromGLTexture3D_t *
+clCreateFromGLTexture3D_fn CL_API_SUFFIX__VERSION_1_1_DEPRECATED;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -315,7 +325,8 @@ clCreateEventFromGLsyncKHR_t(
     cl_GLsync sync,
     cl_int* errcode_ret);
 
-typedef clCreateEventFromGLsyncKHR_t *clCreateEventFromGLsyncKHR_fn CL_API_SUFFIX__VERSION_1_1;
+typedef clCreateEventFromGLsyncKHR_t *
+clCreateEventFromGLsyncKHR_fn CL_API_SUFFIX__VERSION_1_1;
 
 #if !defined(CL_NO_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -374,7 +385,8 @@ clGetSupportedGLTextureFormatsINTEL_t(
     cl_GLenum* gl_formats,
     cl_uint* num_texture_formats);
 
-typedef clGetSupportedGLTextureFormatsINTEL_t *clGetSupportedGLTextureFormatsINTEL_fn ;
+typedef clGetSupportedGLTextureFormatsINTEL_t *
+clGetSupportedGLTextureFormatsINTEL_fn ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
