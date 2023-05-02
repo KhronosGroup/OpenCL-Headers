@@ -33,296 +33,278 @@
 extern "C" {
 #endif
 
-#ifndef CL_VERSION_1_1
-
-typedef void *clSetEventCallback_fn;
-typedef void *clCreateSubBuffer_fn;
-typedef void *clSetMemObjectDestructorCallback_fn;
-typedef void *clCreateUserEvent_fn;
-typedef void *clSetUserEventStatus_fn;
-typedef void *clEnqueueReadBufferRect_fn;
-typedef void *clEnqueueWriteBufferRect_fn;
-typedef void *clEnqueueCopyBufferRect_fn;
-
-#endif
-
-#ifndef CL_VERSION_1_2
-
-typedef void *clCreateSubDevices_fn;
-typedef void *clRetainDevice_fn;
-typedef void *clReleaseDevice_fn;
-typedef void *clCreateImage_fn;
-typedef void *clCreateProgramWithBuiltInKernels_fn;
-typedef void *clCompileProgram_fn;
-typedef void *clLinkProgram_fn;
-typedef void *clUnloadPlatformCompiler_fn;
-typedef void *clGetKernelArgInfo_fn;
-typedef void *clEnqueueFillBuffer_fn;
-typedef void *clEnqueueFillImage_fn;
-typedef void *clEnqueueMigrateMemObjects_fn;
-typedef void *clEnqueueMarkerWithWaitList_fn;
-typedef void *clEnqueueBarrierWithWaitList_fn;
-typedef void *clGetExtensionFunctionAddressForPlatform_fn;
-typedef void *clCreateFromGLTexture_fn;
-
-#endif
-
-#ifndef CL_VERSION_2_0
-
-typedef void *clCreateCommandQueueWithProperties_fn;
-typedef void *clCreatePipe_fn;
-typedef void *clGetPipeInfo_fn;
-typedef void *clSVMAlloc_fn;
-typedef void *clSVMFree_fn;
-typedef void *clEnqueueSVMFree_fn;
-typedef void *clEnqueueSVMMemcpy_fn;
-typedef void *clEnqueueSVMMemFill_fn;
-typedef void *clEnqueueSVMMap_fn;
-typedef void *clEnqueueSVMUnmap_fn;
-typedef void *clCreateSamplerWithProperties_fn;
-typedef void *clSetKernelArgSVMPointer_fn;
-typedef void *clSetKernelExecInfo_fn;
-
-#endif
-
-#ifndef CL_VERSION_2_1
-
-typedef void *clCloneKernel_fn;
-typedef void *clCreateProgramWithIL_fn;
-typedef void *clEnqueueSVMMigrateMem_fn;
-typedef void *clGetDeviceAndHostTimer_fn;
-typedef void *clGetHostTimer_fn;
-typedef void *clGetKernelSubGroupInfo_fn;
-typedef void *clSetDefaultDeviceCommandQueue_fn;
-
-#endif
-
-#ifndef CL_VERSION_2_2
-
-typedef void *clSetProgramReleaseCallback_fn;
-typedef void *clSetProgramSpecializationConstant_fn;
-
-#endif
-
-#ifndef CL_VERSION_3_0
-
-typedef void *clCreateBufferWithProperties_fn;
-typedef void *clCreateImageWithProperties_fn;
-typedef void *clSetContextDestructorCallback_fn;
-
-#endif
-
-#ifndef _WIN32
-
-/* cl_khr_d3d10_sharing */
-typedef void *clGetDeviceIDsFromD3D10KHR_fn;
-typedef void *clCreateFromD3D10BufferKHR_fn;
-typedef void *clCreateFromD3D10Texture2DKHR_fn;
-typedef void *clCreateFromD3D10Texture3DKHR_fn;
-typedef void *clEnqueueAcquireD3D10ObjectsKHR_fn;
-typedef void *clEnqueueReleaseD3D10ObjectsKHR_fn;
-
-/* cl_khr_d3d11_sharing */
-typedef void *clGetDeviceIDsFromD3D11KHR_fn;
-typedef void *clCreateFromD3D11BufferKHR_fn;
-typedef void *clCreateFromD3D11Texture2DKHR_fn;
-typedef void *clCreateFromD3D11Texture3DKHR_fn;
-typedef void *clEnqueueAcquireD3D11ObjectsKHR_fn;
-typedef void *clEnqueueReleaseD3D11ObjectsKHR_fn;
-
-/* cl_khr_dx9_media_sharing */
-typedef void *clCreateFromDX9MediaSurfaceKHR_fn;
-typedef void *clEnqueueAcquireDX9MediaSurfacesKHR_fn;
-typedef void *clEnqueueReleaseDX9MediaSurfacesKHR_fn;
-typedef void *clGetDeviceIDsFromDX9MediaAdapterKHR_fn;
-
-#endif
-
 /* Vendor dispatch table structure */
 
 typedef struct _cl_icd_dispatch {
   /* OpenCL 1.0 */
-  clGetPlatformIDs_fn clGetPlatformIDs;
-  clGetPlatformInfo_fn clGetPlatformInfo;
-  clGetDeviceIDs_fn clGetDeviceIDs;
-  clGetDeviceInfo_fn clGetDeviceInfo;
-  clCreateContext_fn clCreateContext;
-  clCreateContextFromType_fn clCreateContextFromType;
-  clRetainContext_fn clRetainContext;
-  clReleaseContext_fn clReleaseContext;
-  clGetContextInfo_fn clGetContextInfo;
-  clCreateCommandQueue_fn clCreateCommandQueue;
-  clRetainCommandQueue_fn clRetainCommandQueue;
-  clReleaseCommandQueue_fn clReleaseCommandQueue;
-  clGetCommandQueueInfo_fn clGetCommandQueueInfo;
-  clSetCommandQueueProperty_fn clSetCommandQueueProperty;
-  clCreateBuffer_fn clCreateBuffer;
-  clCreateImage2D_fn clCreateImage2D;
-  clCreateImage3D_fn clCreateImage3D;
-  clRetainMemObject_fn clRetainMemObject;
-  clReleaseMemObject_fn clReleaseMemObject;
-  clGetSupportedImageFormats_fn clGetSupportedImageFormats;
-  clGetMemObjectInfo_fn clGetMemObjectInfo;
-  clGetImageInfo_fn clGetImageInfo;
-  clCreateSampler_fn clCreateSampler;
-  clRetainSampler_fn clRetainSampler;
-  clReleaseSampler_fn clReleaseSampler;
-  clGetSamplerInfo_fn clGetSamplerInfo;
-  clCreateProgramWithSource_fn clCreateProgramWithSource;
-  clCreateProgramWithBinary_fn clCreateProgramWithBinary;
-  clRetainProgram_fn clRetainProgram;
-  clReleaseProgram_fn clReleaseProgram;
-  clBuildProgram_fn clBuildProgram;
-  clUnloadCompiler_fn clUnloadCompiler;
-  clGetProgramInfo_fn clGetProgramInfo;
-  clGetProgramBuildInfo_fn clGetProgramBuildInfo;
-  clCreateKernel_fn clCreateKernel;
-  clCreateKernelsInProgram_fn clCreateKernelsInProgram;
-  clRetainKernel_fn clRetainKernel;
-  clReleaseKernel_fn clReleaseKernel;
-  clSetKernelArg_fn clSetKernelArg;
-  clGetKernelInfo_fn clGetKernelInfo;
-  clGetKernelWorkGroupInfo_fn clGetKernelWorkGroupInfo;
-  clWaitForEvents_fn clWaitForEvents;
-  clGetEventInfo_fn clGetEventInfo;
-  clRetainEvent_fn clRetainEvent;
-  clReleaseEvent_fn clReleaseEvent;
-  clGetEventProfilingInfo_fn clGetEventProfilingInfo;
-  clFlush_fn clFlush;
-  clFinish_fn clFinish;
-  clEnqueueReadBuffer_fn clEnqueueReadBuffer;
-  clEnqueueWriteBuffer_fn clEnqueueWriteBuffer;
-  clEnqueueCopyBuffer_fn clEnqueueCopyBuffer;
-  clEnqueueReadImage_fn clEnqueueReadImage;
-  clEnqueueWriteImage_fn clEnqueueWriteImage;
-  clEnqueueCopyImage_fn clEnqueueCopyImage;
-  clEnqueueCopyImageToBuffer_fn clEnqueueCopyImageToBuffer;
-  clEnqueueCopyBufferToImage_fn clEnqueueCopyBufferToImage;
-  clEnqueueMapBuffer_fn clEnqueueMapBuffer;
-  clEnqueueMapImage_fn clEnqueueMapImage;
-  clEnqueueUnmapMemObject_fn clEnqueueUnmapMemObject;
-  clEnqueueNDRangeKernel_fn clEnqueueNDRangeKernel;
-  clEnqueueTask_fn clEnqueueTask;
-  clEnqueueNativeKernel_fn clEnqueueNativeKernel;
-  clEnqueueMarker_fn clEnqueueMarker;
-  clEnqueueWaitForEvents_fn clEnqueueWaitForEvents;
-  clEnqueueBarrier_fn clEnqueueBarrier;
-  clGetExtensionFunctionAddress_fn clGetExtensionFunctionAddress;
-  clCreateFromGLBuffer_fn clCreateFromGLBuffer;
-  clCreateFromGLTexture2D_fn clCreateFromGLTexture2D;
-  clCreateFromGLTexture3D_fn clCreateFromGLTexture3D;
-  clCreateFromGLRenderbuffer_fn clCreateFromGLRenderbuffer;
-  clGetGLObjectInfo_fn clGetGLObjectInfo;
-  clGetGLTextureInfo_fn clGetGLTextureInfo;
-  clEnqueueAcquireGLObjects_fn clEnqueueAcquireGLObjects;
-  clEnqueueReleaseGLObjects_fn clEnqueueReleaseGLObjects;
-  clGetGLContextInfoKHR_fn clGetGLContextInfoKHR;
+  clGetPlatformIDs_t *clGetPlatformIDs;
+  clGetPlatformInfo_t *clGetPlatformInfo;
+  clGetDeviceIDs_t *clGetDeviceIDs;
+  clGetDeviceInfo_t *clGetDeviceInfo;
+  clCreateContext_t *clCreateContext;
+  clCreateContextFromType_t *clCreateContextFromType;
+  clRetainContext_t *clRetainContext;
+  clReleaseContext_t *clReleaseContext;
+  clGetContextInfo_t *clGetContextInfo;
+  clCreateCommandQueue_t *clCreateCommandQueue;
+  clRetainCommandQueue_t *clRetainCommandQueue;
+  clReleaseCommandQueue_t *clReleaseCommandQueue;
+  clGetCommandQueueInfo_t *clGetCommandQueueInfo;
+  clSetCommandQueueProperty_t *clSetCommandQueueProperty;
+  clCreateBuffer_t *clCreateBuffer;
+  clCreateImage2D_t *clCreateImage2D;
+  clCreateImage3D_t *clCreateImage3D;
+  clRetainMemObject_t *clRetainMemObject;
+  clReleaseMemObject_t *clReleaseMemObject;
+  clGetSupportedImageFormats_t *clGetSupportedImageFormats;
+  clGetMemObjectInfo_t *clGetMemObjectInfo;
+  clGetImageInfo_t *clGetImageInfo;
+  clCreateSampler_t *clCreateSampler;
+  clRetainSampler_t *clRetainSampler;
+  clReleaseSampler_t *clReleaseSampler;
+  clGetSamplerInfo_t *clGetSamplerInfo;
+  clCreateProgramWithSource_t *clCreateProgramWithSource;
+  clCreateProgramWithBinary_t *clCreateProgramWithBinary;
+  clRetainProgram_t *clRetainProgram;
+  clReleaseProgram_t *clReleaseProgram;
+  clBuildProgram_t *clBuildProgram;
+  clUnloadCompiler_t *clUnloadCompiler;
+  clGetProgramInfo_t *clGetProgramInfo;
+  clGetProgramBuildInfo_t *clGetProgramBuildInfo;
+  clCreateKernel_t *clCreateKernel;
+  clCreateKernelsInProgram_t *clCreateKernelsInProgram;
+  clRetainKernel_t *clRetainKernel;
+  clReleaseKernel_t *clReleaseKernel;
+  clSetKernelArg_t *clSetKernelArg;
+  clGetKernelInfo_t *clGetKernelInfo;
+  clGetKernelWorkGroupInfo_t *clGetKernelWorkGroupInfo;
+  clWaitForEvents_t *clWaitForEvents;
+  clGetEventInfo_t *clGetEventInfo;
+  clRetainEvent_t *clRetainEvent;
+  clReleaseEvent_t *clReleaseEvent;
+  clGetEventProfilingInfo_t *clGetEventProfilingInfo;
+  clFlush_t *clFlush;
+  clFinish_t *clFinish;
+  clEnqueueReadBuffer_t *clEnqueueReadBuffer;
+  clEnqueueWriteBuffer_t *clEnqueueWriteBuffer;
+  clEnqueueCopyBuffer_t *clEnqueueCopyBuffer;
+  clEnqueueReadImage_t *clEnqueueReadImage;
+  clEnqueueWriteImage_t *clEnqueueWriteImage;
+  clEnqueueCopyImage_t *clEnqueueCopyImage;
+  clEnqueueCopyImageToBuffer_t *clEnqueueCopyImageToBuffer;
+  clEnqueueCopyBufferToImage_t *clEnqueueCopyBufferToImage;
+  clEnqueueMapBuffer_t *clEnqueueMapBuffer;
+  clEnqueueMapImage_t *clEnqueueMapImage;
+  clEnqueueUnmapMemObject_t *clEnqueueUnmapMemObject;
+  clEnqueueNDRangeKernel_t *clEnqueueNDRangeKernel;
+  clEnqueueTask_t *clEnqueueTask;
+  clEnqueueNativeKernel_t *clEnqueueNativeKernel;
+  clEnqueueMarker_t *clEnqueueMarker;
+  clEnqueueWaitForEvents_t *clEnqueueWaitForEvents;
+  clEnqueueBarrier_t *clEnqueueBarrier;
+  clGetExtensionFunctionAddress_t *clGetExtensionFunctionAddress;
+  clCreateFromGLBuffer_t *clCreateFromGLBuffer;
+  clCreateFromGLTexture2D_t *clCreateFromGLTexture2D;
+  clCreateFromGLTexture3D_t *clCreateFromGLTexture3D;
+  clCreateFromGLRenderbuffer_t *clCreateFromGLRenderbuffer;
+  clGetGLObjectInfo_t *clGetGLObjectInfo;
+  clGetGLTextureInfo_t *clGetGLTextureInfo;
+  clEnqueueAcquireGLObjects_t *clEnqueueAcquireGLObjects;
+  clEnqueueReleaseGLObjects_t *clEnqueueReleaseGLObjects;
+  clGetGLContextInfoKHR_t *clGetGLContextInfoKHR;
 
   /* cl_khr_d3d10_sharing */
-  clGetDeviceIDsFromD3D10KHR_fn clGetDeviceIDsFromD3D10KHR;
-  clCreateFromD3D10BufferKHR_fn clCreateFromD3D10BufferKHR;
-  clCreateFromD3D10Texture2DKHR_fn clCreateFromD3D10Texture2DKHR;
-  clCreateFromD3D10Texture3DKHR_fn clCreateFromD3D10Texture3DKHR;
-  clEnqueueAcquireD3D10ObjectsKHR_fn clEnqueueAcquireD3D10ObjectsKHR;
-  clEnqueueReleaseD3D10ObjectsKHR_fn clEnqueueReleaseD3D10ObjectsKHR;
+#ifdef _WIN32
+  clGetDeviceIDsFromD3D10KHR_t *clGetDeviceIDsFromD3D10KHR;
+  clCreateFromD3D10BufferKHR_t *clCreateFromD3D10BufferKHR;
+  clCreateFromD3D10Texture2DKHR_t *clCreateFromD3D10Texture2DKHR;
+  clCreateFromD3D10Texture3DKHR_t *clCreateFromD3D10Texture3DKHR;
+  clEnqueueAcquireD3D10ObjectsKHR_t *clEnqueueAcquireD3D10ObjectsKHR;
+  clEnqueueReleaseD3D10ObjectsKHR_t *clEnqueueReleaseD3D10ObjectsKHR;
+#else
+  void *clGetDeviceIDsFromD3D10KHR;
+  void *clCreateFromD3D10BufferKHR;
+  void *clCreateFromD3D10Texture2DKHR;
+  void *clCreateFromD3D10Texture3DKHR;
+  void *clEnqueueAcquireD3D10ObjectsKHR;
+  void *clEnqueueReleaseD3D10ObjectsKHR;
+#endif
 
   /* OpenCL 1.1 */
-  clSetEventCallback_fn clSetEventCallback;
-  clCreateSubBuffer_fn clCreateSubBuffer;
-  clSetMemObjectDestructorCallback_fn clSetMemObjectDestructorCallback;
-  clCreateUserEvent_fn clCreateUserEvent;
-  clSetUserEventStatus_fn clSetUserEventStatus;
-  clEnqueueReadBufferRect_fn clEnqueueReadBufferRect;
-  clEnqueueWriteBufferRect_fn clEnqueueWriteBufferRect;
-  clEnqueueCopyBufferRect_fn clEnqueueCopyBufferRect;
+#ifdef CL_VERSION_1_1
+  clSetEventCallback_t *clSetEventCallback;
+  clCreateSubBuffer_t *clCreateSubBuffer;
+  clSetMemObjectDestructorCallback_t *clSetMemObjectDestructorCallback;
+  clCreateUserEvent_t *clCreateUserEvent;
+  clSetUserEventStatus_t *clSetUserEventStatus;
+  clEnqueueReadBufferRect_t *clEnqueueReadBufferRect;
+  clEnqueueWriteBufferRect_t *clEnqueueWriteBufferRect;
+  clEnqueueCopyBufferRect_t *clEnqueueCopyBufferRect;
+#else
+  void *clSetEventCallback;
+  void *clCreateSubBuffer;
+  void *clSetMemObjectDestructorCallback;
+  void *clCreateUserEvent;
+  void *clSetUserEventStatus;
+  void *clEnqueueReadBufferRect;
+  void *clEnqueueWriteBufferRect;
+  void *clEnqueueCopyBufferRect;
+#endif
 
   /* cl_ext_device_fission */
-  clCreateSubDevicesEXT_fn clCreateSubDevicesEXT;
-  clRetainDeviceEXT_fn clRetainDeviceEXT;
-  clReleaseDeviceEXT_fn clReleaseDeviceEXT;
+  clCreateSubDevicesEXT_t *clCreateSubDevicesEXT;
+  clRetainDeviceEXT_t *clRetainDeviceEXT;
+  clReleaseDeviceEXT_t *clReleaseDeviceEXT;
 
   /* cl_khr_gl_event */
-  clCreateEventFromGLsyncKHR_fn clCreateEventFromGLsyncKHR;
+  clCreateEventFromGLsyncKHR_t *clCreateEventFromGLsyncKHR;
 
   /* OpenCL 1.2 */
-  clCreateSubDevices_fn clCreateSubDevices;
-  clRetainDevice_fn clRetainDevice;
-  clReleaseDevice_fn clReleaseDevice;
-  clCreateImage_fn clCreateImage;
-  clCreateProgramWithBuiltInKernels_fn clCreateProgramWithBuiltInKernels;
-  clCompileProgram_fn clCompileProgram;
-  clLinkProgram_fn clLinkProgram;
-  clUnloadPlatformCompiler_fn clUnloadPlatformCompiler;
-  clGetKernelArgInfo_fn clGetKernelArgInfo;
-  clEnqueueFillBuffer_fn clEnqueueFillBuffer;
-  clEnqueueFillImage_fn clEnqueueFillImage;
-  clEnqueueMigrateMemObjects_fn clEnqueueMigrateMemObjects;
-  clEnqueueMarkerWithWaitList_fn clEnqueueMarkerWithWaitList;
-  clEnqueueBarrierWithWaitList_fn clEnqueueBarrierWithWaitList;
-  clGetExtensionFunctionAddressForPlatform_fn
+#ifdef CL_VERSION_1_2
+  clCreateSubDevices_t *clCreateSubDevices;
+  clRetainDevice_t *clRetainDevice;
+  clReleaseDevice_t *clReleaseDevice;
+  clCreateImage_t *clCreateImage;
+  clCreateProgramWithBuiltInKernels_t *clCreateProgramWithBuiltInKernels;
+  clCompileProgram_t *clCompileProgram;
+  clLinkProgram_t *clLinkProgram;
+  clUnloadPlatformCompiler_t *clUnloadPlatformCompiler;
+  clGetKernelArgInfo_t *clGetKernelArgInfo;
+  clEnqueueFillBuffer_t *clEnqueueFillBuffer;
+  clEnqueueFillImage_t *clEnqueueFillImage;
+  clEnqueueMigrateMemObjects_t *clEnqueueMigrateMemObjects;
+  clEnqueueMarkerWithWaitList_t *clEnqueueMarkerWithWaitList;
+  clEnqueueBarrierWithWaitList_t *clEnqueueBarrierWithWaitList;
+  clGetExtensionFunctionAddressForPlatform_t *
       clGetExtensionFunctionAddressForPlatform;
-  clCreateFromGLTexture_fn clCreateFromGLTexture;
+  clCreateFromGLTexture_t *clCreateFromGLTexture;
+#else
+  void *clCreateSubDevices;
+  void *clRetainDevice;
+  void *clReleaseDevice;
+  void *clCreateImage;
+  void *clCreateProgramWithBuiltInKernels;
+  void *clCompileProgram;
+  void *clLinkProgram;
+  void *clUnloadPlatformCompiler;
+  void *clGetKernelArgInfo;
+  void *clEnqueueFillBuffer;
+  void *clEnqueueFillImage;
+  void *clEnqueueMigrateMemObjects;
+  void *clEnqueueMarkerWithWaitList;
+  void *clEnqueueBarrierWithWaitList;
+  void *clGetExtensionFunctionAddressForPlatform;
+  void *clCreateFromGLTexture;
+#endif
 
-  /* cl_khr_d3d11_sharing */
-  clGetDeviceIDsFromD3D11KHR_fn clGetDeviceIDsFromD3D11KHR;
-  clCreateFromD3D11BufferKHR_fn clCreateFromD3D11BufferKHR;
-  clCreateFromD3D11Texture2DKHR_fn clCreateFromD3D11Texture2DKHR;
-  clCreateFromD3D11Texture3DKHR_fn clCreateFromD3D11Texture3DKHR;
-  clCreateFromDX9MediaSurfaceKHR_fn clCreateFromDX9MediaSurfaceKHR;
-  clEnqueueAcquireD3D11ObjectsKHR_fn clEnqueueAcquireD3D11ObjectsKHR;
-  clEnqueueReleaseD3D11ObjectsKHR_fn clEnqueueReleaseD3D11ObjectsKHR;
-
-  /* cl_khr_dx9_media_sharing */
-  clGetDeviceIDsFromDX9MediaAdapterKHR_fn
+  /* cl_khr_d3d11_sharing and cl_khr_dx9_media_sharing */
+#ifdef _WIN32
+  clGetDeviceIDsFromD3D11KHR_t *clGetDeviceIDsFromD3D11KHR;
+  clCreateFromD3D11BufferKHR_t *clCreateFromD3D11BufferKHR;
+  clCreateFromD3D11Texture2DKHR_t *clCreateFromD3D11Texture2DKHR;
+  clCreateFromD3D11Texture3DKHR_t *clCreateFromD3D11Texture3DKHR;
+  clCreateFromDX9MediaSurfaceKHR_t *clCreateFromDX9MediaSurfaceKHR;
+  clEnqueueAcquireD3D11ObjectsKHR_t *clEnqueueAcquireD3D11ObjectsKHR;
+  clEnqueueReleaseD3D11ObjectsKHR_t *clEnqueueReleaseD3D11ObjectsKHR;
+  clGetDeviceIDsFromDX9MediaAdapterKHR_t *
       clGetDeviceIDsFromDX9MediaAdapterKHR;
-  clEnqueueAcquireDX9MediaSurfacesKHR_fn
+  clEnqueueAcquireDX9MediaSurfacesKHR_t *
       clEnqueueAcquireDX9MediaSurfacesKHR;
-  clEnqueueReleaseDX9MediaSurfacesKHR_fn
+  clEnqueueReleaseDX9MediaSurfacesKHR_t *
       clEnqueueReleaseDX9MediaSurfacesKHR;
+#else
+  void *clGetDeviceIDsFromD3D11KHR;
+  void *clCreateFromD3D11BufferKHR;
+  void *clCreateFromD3D11Texture2DKHR;
+  void *clCreateFromD3D11Texture3DKHR;
+  void *clCreateFromDX9MediaSurfaceKHR;
+  void *clEnqueueAcquireD3D11ObjectsKHR;
+  void *clEnqueueReleaseD3D11ObjectsKHR;
+  void *clGetDeviceIDsFromDX9MediaAdapterKHR;
+  void *clEnqueueAcquireDX9MediaSurfacesKHR;
+  void *clEnqueueReleaseDX9MediaSurfacesKHR;
+#endif
 
   /* cl_khr_egl_image */
-  clCreateFromEGLImageKHR_fn clCreateFromEGLImageKHR;
-  clEnqueueAcquireEGLObjectsKHR_fn clEnqueueAcquireEGLObjectsKHR;
-  clEnqueueReleaseEGLObjectsKHR_fn clEnqueueReleaseEGLObjectsKHR;
+  clCreateFromEGLImageKHR_t *clCreateFromEGLImageKHR;
+  clEnqueueAcquireEGLObjectsKHR_t *clEnqueueAcquireEGLObjectsKHR;
+  clEnqueueReleaseEGLObjectsKHR_t *clEnqueueReleaseEGLObjectsKHR;
 
   /* cl_khr_egl_event */
-  clCreateEventFromEGLSyncKHR_fn clCreateEventFromEGLSyncKHR;
+  clCreateEventFromEGLSyncKHR_t *clCreateEventFromEGLSyncKHR;
 
   /* OpenCL 2.0 */
-  clCreateCommandQueueWithProperties_fn clCreateCommandQueueWithProperties;
-  clCreatePipe_fn clCreatePipe;
-  clGetPipeInfo_fn clGetPipeInfo;
-  clSVMAlloc_fn clSVMAlloc;
-  clSVMFree_fn clSVMFree;
-  clEnqueueSVMFree_fn clEnqueueSVMFree;
-  clEnqueueSVMMemcpy_fn clEnqueueSVMMemcpy;
-  clEnqueueSVMMemFill_fn clEnqueueSVMMemFill;
-  clEnqueueSVMMap_fn clEnqueueSVMMap;
-  clEnqueueSVMUnmap_fn clEnqueueSVMUnmap;
-  clCreateSamplerWithProperties_fn clCreateSamplerWithProperties;
-  clSetKernelArgSVMPointer_fn clSetKernelArgSVMPointer;
-  clSetKernelExecInfo_fn clSetKernelExecInfo;
+#ifdef CL_VERSION_2_0
+  clCreateCommandQueueWithProperties_t *clCreateCommandQueueWithProperties;
+  clCreatePipe_t *clCreatePipe;
+  clGetPipeInfo_t *clGetPipeInfo;
+  clSVMAlloc_t *clSVMAlloc;
+  clSVMFree_t *clSVMFree;
+  clEnqueueSVMFree_t *clEnqueueSVMFree;
+  clEnqueueSVMMemcpy_t *clEnqueueSVMMemcpy;
+  clEnqueueSVMMemFill_t *clEnqueueSVMMemFill;
+  clEnqueueSVMMap_t *clEnqueueSVMMap;
+  clEnqueueSVMUnmap_t *clEnqueueSVMUnmap;
+  clCreateSamplerWithProperties_t *clCreateSamplerWithProperties;
+  clSetKernelArgSVMPointer_t *clSetKernelArgSVMPointer;
+  clSetKernelExecInfo_t *clSetKernelExecInfo;
+#else
+  void *clCreateCommandQueueWithProperties;
+  void *clCreatePipe;
+  void *clGetPipeInfo;
+  void *clSVMAlloc;
+  void *clSVMFree;
+  void *clEnqueueSVMFree;
+  void *clEnqueueSVMMemcpy;
+  void *clEnqueueSVMMemFill;
+  void *clEnqueueSVMMap;
+  void *clEnqueueSVMUnmap;
+  void *clCreateSamplerWithProperties;
+  void *clSetKernelArgSVMPointer;
+  void *clSetKernelExecInfo;
+#endif
 
   /* cl_khr_sub_groups */
-  clGetKernelSubGroupInfoKHR_fn clGetKernelSubGroupInfoKHR;
+  clGetKernelSubGroupInfoKHR_t *clGetKernelSubGroupInfoKHR;
 
   /* OpenCL 2.1 */
-  clCloneKernel_fn clCloneKernel;
-  clCreateProgramWithIL_fn clCreateProgramWithIL;
-  clEnqueueSVMMigrateMem_fn clEnqueueSVMMigrateMem;
-  clGetDeviceAndHostTimer_fn clGetDeviceAndHostTimer;
-  clGetHostTimer_fn clGetHostTimer;
-  clGetKernelSubGroupInfo_fn clGetKernelSubGroupInfo;
-  clSetDefaultDeviceCommandQueue_fn clSetDefaultDeviceCommandQueue;
+#ifdef CL_VERSION_2_1
+  clCloneKernel_t *clCloneKernel;
+  clCreateProgramWithIL_t *clCreateProgramWithIL;
+  clEnqueueSVMMigrateMem_t *clEnqueueSVMMigrateMem;
+  clGetDeviceAndHostTimer_t *clGetDeviceAndHostTimer;
+  clGetHostTimer_t *clGetHostTimer;
+  clGetKernelSubGroupInfo_t *clGetKernelSubGroupInfo;
+  clSetDefaultDeviceCommandQueue_t *clSetDefaultDeviceCommandQueue;
+#else
+  void *clCloneKernel;
+  void *clCreateProgramWithIL;
+  void *clEnqueueSVMMigrateMem;
+  void *clGetDeviceAndHostTimer;
+  void *clGetHostTimer;
+  void *clGetKernelSubGroupInfo;
+  void *clSetDefaultDeviceCommandQueue;
+#endif
 
   /* OpenCL 2.2 */
-  clSetProgramReleaseCallback_fn clSetProgramReleaseCallback;
-  clSetProgramSpecializationConstant_fn clSetProgramSpecializationConstant;
+#ifdef CL_VERSION_2_2
+  clSetProgramReleaseCallback_t *clSetProgramReleaseCallback;
+  clSetProgramSpecializationConstant_t *clSetProgramSpecializationConstant;
+#else
+  void *clSetProgramReleaseCallback;
+  void *clSetProgramSpecializationConstant;
+#endif
 
   /* OpenCL 3.0 */
-  clCreateBufferWithProperties_fn clCreateBufferWithProperties;
-  clCreateImageWithProperties_fn clCreateImageWithProperties;
-  clSetContextDestructorCallback_fn clSetContextDestructorCallback;
+#ifdef CL_VERSION_3_0
+  clCreateBufferWithProperties_t *clCreateBufferWithProperties;
+  clCreateImageWithProperties_t *clCreateImageWithProperties;
+  clSetContextDestructorCallback_t *clSetContextDestructorCallback;
+#else
+  void *clCreateBufferWithProperties;
+  void *clCreateImageWithProperties;
+  void *clSetContextDestructorCallback;
+#endif
 
 } cl_icd_dispatch;
 
