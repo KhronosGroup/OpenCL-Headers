@@ -50,6 +50,9 @@ typedef ${api.RetType} CL_API_CALL ${api.Name}_t(
 %      endif
 %    endfor
 
+typedef ${api.Name}_t *
+${api.Name}_fn ${api.Suffix};
+
 %  endfor
 %  if version != "CL_VERSION_1_0":
 #endif /* ${version} */
