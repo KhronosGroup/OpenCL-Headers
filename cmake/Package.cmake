@@ -11,7 +11,7 @@ if(NOT CPACK_PACKAGING_INSTALL_PREFIX)
 endif()
 
 if(NOT CPACK_SOURCE_IGNORE_FILES)
-  set(CPACK_SOURCE_IGNORE_FILES="/.github/")
+  set(CPACK_SOURCE_IGNORE_FILES="/.github/;/build/")
 endif()
 
 # DEB packaging configuration
