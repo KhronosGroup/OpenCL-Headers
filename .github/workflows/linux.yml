@@ -158,12 +158,13 @@ jobs:
             BIN: 32
     env:
       CMAKE_EXE: /opt/Kitware/CMake/${{ matrix.CMAKE }}/bin/cmake
+      CPACK_EXE: /opt/Kitware/CMake/${{ matrix.CMAKE }}/bin/cpack
       CTEST_EXE: /opt/Kitware/CMake/${{ matrix.CMAKE }}/bin/ctest
 
     steps:
     - name: Checkout OpenCL-Headers
       uses: actions/checkout@v3
-      
+
     - name: Configure
       shell: bash
       run: $CMAKE_EXE
@@ -190,6 +191,38 @@ jobs:
           $CMAKE_EXE --build $GITHUB_WORKSPACE/build --config Release -- -j`nproc`;
         fi;
 
+    - name: Package DEB
+      shell: bash
+      run: $CPACK_EXE
+        --config "$GITHUB_WORKSPACE/build/CPackSourceConfig.cmake"
+        -G DEB
+        -C Release
+        -B "$GITHUB_WORKSPACE/package-deb"
+
+    - name: Consume (Package DEB)
+      shell: bash
+      run: |
+        dpkg -i $GITHUB_WORKSPACE/package-deb/*.deb
+        rm -rf $GITHUB_WORKSPACE/build
+        $CMAKE_EXE \
+        -G "${{matrix.GEN}}" \
+        -D BUILD_TESTING=ON \
+        `if [[ "${{matrix.GEN}}" == "Unix Makefiles" ]]; then echo -D CMAKE_BUILD_TYPE=${{matrix.CONFIG}}; fi;` \
+        -D CMAKE_C_FLAGS="-Wall -Wextra -pedantic -Werror -m${{matrix.BIN}}" \
+        -D CMAKE_C_COMPILER=${{matrix.C_COMPILER}} \
+        -D CMAKE_C_EXTENSIONS=OFF \
+        -D CMAKE_CXX_FLAGS="-Wall -Wextra -pedantic -Werror -m${{matrix.BIN}}" \
+        -D CMAKE_CXX_COMPILER=${{matrix.CXX_COMPILER}} \
+        -D CMAKE_CXX_EXTENSIONS=OFF \
+        -B$GITHUB_WORKSPACE/build \
+        -H$GITHUB_WORKSPACE
+        if [[ "${{matrix.GEN}}" == "Unix Makefiles" ]]; then
+          $CMAKE_EXE --build $GITHUB_WORKSPACE/build -- -j`nproc`
+        else
+          $CMAKE_EXE --build $GITHUB_WORKSPACE/build --config Debug   -- -j`nproc`
+          $CMAKE_EXE --build $GITHUB_WORKSPACE/build --config Release -- -j`nproc`
+        fi
+
     - name: Test
       shell: bash
       working-directory: ${{runner.workspace}}/OpenCL-Headers/build
@@ -212,4 +245,4 @@ jobs:
 
     - name: Test pkg-config
       shell: bash
-      run: PKG_CONFIG_PATH="$GITHUB_WORKSPACE/install/share/pkgconfig" pkg-config OpenCL-Headers --cflags | grep -q "\-I$GITHUB_WORKSPACE/install/include"
+      run: pkg-config OpenCL-Headers --cflags | grep -q "\-I/usr/local/include"
