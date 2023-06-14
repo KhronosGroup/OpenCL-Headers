@@ -1,0 +1,12 @@
+# Build dir
+[Bb]uild/
+
+# Package dir
+[Pp]ackage[-_\s\d]*/
+
+# Test dir
+[Tt]esting/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
