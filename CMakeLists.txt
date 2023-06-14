@@ -17,6 +17,7 @@ option(OPENCL_HEADERS_BUILD_CXX_TESTS "Enable support for OpenCL C headers testi
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(JoinPaths)
+include(Package)
 
 include(GNUInstallDirs)
 
