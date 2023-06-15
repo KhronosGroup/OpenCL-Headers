@@ -1,6 +1,9 @@
 # Build dir
 [Bb]uild/
 
+# Install dir
+[Ii]nstall/
+
 # Package dir
 [Pp]ackage[-_\s\d]*/
 

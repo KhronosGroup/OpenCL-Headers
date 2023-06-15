@@ -7,7 +7,7 @@ if(TARGET Headers)
 endif()
 
 project(OpenCLHeaders
-  VERSION 2.2
+  VERSION 3.0
   LANGUAGES C # Ideally should be NONE, but GNUInstallDirs detects platform arch using try_compile
   # https://stackoverflow.com/questions/43379311/why-does-project-affect-cmakes-opinion-on-cmake-sizeof-void-p
 )
