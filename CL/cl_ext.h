@@ -1627,6 +1627,7 @@ typedef cl_uint             cl_external_memory_handle_type_khr;
 
 /* cl_device_info */
 #define CL_DEVICE_EXTERNAL_MEMORY_IMPORT_HANDLE_TYPES_KHR   0x204F
+#define CL_DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_HANDLE_TYPES_KHR 0x2052
 
 /* cl_mem_properties */
 #define CL_DEVICE_HANDLE_LIST_KHR                           0x2051
