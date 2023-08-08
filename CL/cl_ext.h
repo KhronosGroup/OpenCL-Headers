@@ -94,7 +94,6 @@ typedef struct _cl_mutable_command_khr* cl_mutable_command_khr;
 #define CL_COMMAND_BUFFER_STATE_RECORDING_KHR               0
 #define CL_COMMAND_BUFFER_STATE_EXECUTABLE_KHR              1
 #define CL_COMMAND_BUFFER_STATE_PENDING_KHR                 2
-#define CL_COMMAND_BUFFER_STATE_INVALID_KHR                 3
 
 /* cl_command_type */
 #define CL_COMMAND_COMMAND_BUFFER_KHR                       0x12A8
@@ -3500,6 +3499,17 @@ clSetContentSizeBufferPoCL(
     cl_mem content_size_buffer) CL_API_SUFFIX__VERSION_1_0;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
+
+/***************************************************************
+* cl_ext_image_raw10_raw12
+***************************************************************/
+#define cl_ext_image_raw10_raw12 1
+#define CL_EXT_IMAGE_RAW10_RAW12_EXTENSION_NAME \
+    "cl_ext_image_raw10_raw12"
+
+/* cl_channel_type */
+#define CL_UNSIGNED_INT_RAW10_EXT                           0x10E3
+#define CL_UNSIGNED_INT_RAW12_EXT                           0x10E4
 
 #ifdef __cplusplus
 }
