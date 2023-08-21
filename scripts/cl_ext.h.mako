@@ -162,7 +162,16 @@ orderedExtensions = [
 
 def getExtensionSortKey(item):
     name = item.get('name')
-    return orderedExtensions.index(name)
+    try:
+        index = orderedExtensions.index(name)
+    except ValueError:
+        if name.startswith('cl_khr'):
+            index = 10000
+        elif name.startswith('cl_ext'):
+            index = 10001
+        else:
+            index = 10002
+    return index, name
 
 # Order the extensions should be emitted in the headers.
 # KHR -> EXT -> Vendor Extensions
