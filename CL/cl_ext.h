@@ -1762,6 +1762,18 @@ clGetSemaphoreHandleForTypeKHR_t(
 typedef clGetSemaphoreHandleForTypeKHR_t *
 clGetSemaphoreHandleForTypeKHR_fn CL_API_SUFFIX__VERSION_1_2;
 
+typedef cl_int clImportSemaphoreKHR_t(
+    cl_semaphore_khr sema_object,
+    cl_semaphore_properties_khr *import_props,
+    cl_external_semaphore_handle_type_khr handle_type,
+    size_t handle_size,
+    void *handle_ptr,
+    size_t *handle_size_ret);
+
+typedef clImportSemaphoreKHR_t *
+clImportSemaphoreKHR_fn CL_API_SUFFIX__VERSION_1_2;
+
+
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -1772,6 +1784,14 @@ clGetSemaphoreHandleForTypeKHR(
     size_t handle_size,
     void* handle_ptr,
     size_t* handle_size_ret) CL_API_SUFFIX__VERSION_1_2;
+
+extern CL_API_ENTRY cl_int clImportSemaphoreKHR(
+    cl_semaphore_khr sema_object,
+    cl_semaphore_properties_khr *import_props,
+    cl_external_semaphore_handle_type_khr handle_type,
+    size_t handle_size,
+    void *handle_ptr,
+    size_t *handle_size_ret);
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
