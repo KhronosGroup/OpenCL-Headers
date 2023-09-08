@@ -98,6 +98,22 @@ may include the OpenCL API headers as follows:
 #include <CL/opencl.h>
 ```
 
+## Compatibility Notes
+
+OpenCL values backward compatibility and in most cases an application using an
+older version of the OpenCL API headers can seamlessly update to a newer version
+of the OpenCL API headers.  In rare cases, though, the OpenCL API headers may
+break backward compatibility:
+
+* Very rarely, there may be bugs or other issues in the OpenCL API headers that
+  cannot be fixed without breaking compatibility.
+* The OpenCL API headers for provisional features or provisional extensions may
+  be changed in a way that breaks compatibility.
+
+Applications are encouraged to use a tagged or released version of the OpenCL
+API headers to avoid potential compatibility issues, if desired.  The OpenCL API
+headers are tagged at least as often as each OpenCL specification release.
+
 ## Directory Structure
 
 ```
