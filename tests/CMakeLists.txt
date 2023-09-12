@@ -1,3 +1,17 @@
+if(NOT DEFINED CMAKE_C_STANDARD)
+  set(CMAKE_C_STANDARD 99)
+endif()
+if(NOT DEFINED CMAKE_C_STANDARD_REQUIRED)
+  set(CMAKE_C_STANDARD_REQUIRED ON)
+endif()
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+endif()
+if(NOT DEFINED CMAKE_CXX_STANDARD_REQUIRED)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
+endif()
+
+
 # Add a test for a given source file for each version of OpenCL
 function(add_header_test NAME SOURCE)
   # Some headers include system files which require anonymous structs
