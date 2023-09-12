@@ -134,6 +134,7 @@ orderedExtensions = [
     'cl_ext_float_atomics',
     'cl_intel_create_mem_object_properties',
     'cl_pocl_content_size',
+    'cl_ext_image_raw10_raw12',
     # cl_d3d10.h
     'cl_khr_d3d10_sharing',
     'cl_intel_sharing_format_query_d3d10',
