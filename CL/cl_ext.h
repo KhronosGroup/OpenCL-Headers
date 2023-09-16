@@ -3437,11 +3437,11 @@ clGetICDLoaderInfoOCLICD(
 #define CL_KHR_DEPTH_IMAGES_EXTENSION_NAME \
     "cl_khr_depth_images"
 
-#if !defined(CL_VERSION_1_2)
-/* cl_channel_order - defined in CL.h for OpenCL 1.2 (?) and newer */
+#if !defined(CL_VERSION_2_0)
+/* cl_channel_order - defined in CL.h for OpenCL 2.0 and newer */
 #define CL_DEPTH                                            0x10BD
 
-#endif /* !defined(CL_VERSION_1_2) */
+#endif /* !defined(CL_VERSION_2_0) */
 
 /***************************************************************
 * cl_ext_float_atomics
