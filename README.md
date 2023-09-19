@@ -110,9 +110,10 @@ break backward compatibility:
 * The OpenCL API headers for provisional features or provisional extensions may
   be changed in a way that breaks compatibility.
 
-Applications are encouraged to use tagged or released OpenCL API headers to
-avoid rare compatibility issues, if desired.  The OpenCL API headers are tagged
-at least as often as each OpenCL specification release.
+Applications or libraries that require stable OpenCL API headers are encouraged
+to use tagged or released OpenCL API headers.  We will do our best to document
+any breaking changes in the description of each release.  The OpenCL API headers
+are tagged at least as often as each OpenCL specification release.
 
 ## Directory Structure
 
