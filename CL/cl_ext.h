@@ -2520,7 +2520,7 @@ typedef struct _cl_motion_estimation_desc_intel {
 #define CL_ME_LUMA_INTRA_PREDICT_ENABLED_INTEL              0x2
 
 #define CL_ME_SKIP_BLOCK_TYPE_16x16_INTEL                   0x0
-#define CL_ME_SKIP_BLOCK_TYPE_8x8_INTEL                     0x1
+#define CL_ME_SKIP_BLOCK_TYPE_8x8_INTEL                     0x4
 
 #define CL_ME_COST_PENALTY_NONE_INTEL                       0x0
 #define CL_ME_COST_PENALTY_LOW_INTEL                        0x1
