@@ -295,6 +295,37 @@ typedef clCommandNDRangeKernelKHR_t *
 clCommandNDRangeKernelKHR_fn ;
 
 typedef cl_int CL_API_CALL
+clCommandSVMMemcpyKHR_t(
+    cl_command_buffer_khr command_buffer,
+    cl_command_queue command_queue,
+    void* dst_ptr,
+    const void* src_ptr,
+    size_t size,
+    cl_uint num_sync_points_in_wait_list,
+    const cl_sync_point_khr* sync_point_wait_list,
+    cl_sync_point_khr* sync_point,
+    cl_mutable_command_khr* mutable_handle);
+
+typedef clCommandSVMMemcpyKHR_t *
+clCommandSVMMemcpyKHR_fn CL_API_SUFFIX__VERSION_2_0;
+
+typedef cl_int CL_API_CALL
+clCommandSVMMemFillKHR_t(
+    cl_command_buffer_khr command_buffer,
+    cl_command_queue command_queue,
+    void* svm_ptr,
+    const void* pattern,
+    size_t pattern_size,
+    size_t size,
+    cl_uint num_sync_points_in_wait_list,
+    const cl_sync_point_khr* sync_point_wait_list,
+    cl_sync_point_khr* sync_point,
+    cl_mutable_command_khr* mutable_handle);
+
+typedef clCommandSVMMemFillKHR_t *
+clCommandSVMMemFillKHR_fn CL_API_SUFFIX__VERSION_2_0;
+
+typedef cl_int CL_API_CALL
 clGetCommandBufferInfoKHR_t(
     cl_command_buffer_khr command_buffer,
     cl_command_buffer_info_khr param_name,
@@ -459,6 +490,31 @@ clCommandNDRangeKernelKHR(
     const cl_sync_point_khr* sync_point_wait_list,
     cl_sync_point_khr* sync_point,
     cl_mutable_command_khr* mutable_handle) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clCommandSVMMemcpyKHR(
+    cl_command_buffer_khr command_buffer,
+    cl_command_queue command_queue,
+    void* dst_ptr,
+    const void* src_ptr,
+    size_t size,
+    cl_uint num_sync_points_in_wait_list,
+    const cl_sync_point_khr* sync_point_wait_list,
+    cl_sync_point_khr* sync_point,
+    cl_mutable_command_khr* mutable_handle) CL_API_SUFFIX__VERSION_2_0;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clCommandSVMMemFillKHR(
+    cl_command_buffer_khr command_buffer,
+    cl_command_queue command_queue,
+    void* svm_ptr,
+    const void* pattern,
+    size_t pattern_size,
+    size_t size,
+    cl_uint num_sync_points_in_wait_list,
+    const cl_sync_point_khr* sync_point_wait_list,
+    cl_sync_point_khr* sync_point,
+    cl_mutable_command_khr* mutable_handle) CL_API_SUFFIX__VERSION_2_0;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetCommandBufferInfoKHR(
