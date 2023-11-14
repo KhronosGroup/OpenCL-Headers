@@ -895,8 +895,14 @@ clCreateProgramWithILKHR(
 #define CL_KHR_INITIALIZE_MEMORY_EXTENSION_NAME \
     "cl_khr_initialize_memory"
 
-/* Interop tokens */
+typedef cl_bitfield         cl_context_memory_initialize_khr;
+
+/* cl_context_properties */
 #define CL_CONTEXT_MEMORY_INITIALIZE_KHR                    0x2030
+
+/* cl_context_memory_initialize_khr */
+#define CL_CONTEXT_MEMORY_INITIALIZE_LOCAL_KHR              (1 << 0)
+#define CL_CONTEXT_MEMORY_INITIALIZE_PRIVATE_KHR            (1 << 1)
 
 /***************************************************************
 * cl_khr_terminate_context
@@ -1685,8 +1691,8 @@ typedef cl_uint             cl_external_memory_handle_type_khr;
 #define CL_DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_IMAGES_HANDLE_TYPES_KHR 0x2052
 
 /* cl_mem_properties */
-#define CL_DEVICE_HANDLE_LIST_KHR                           0x2051
-#define CL_DEVICE_HANDLE_LIST_END_KHR                       0
+#define CL_MEM_DEVICE_HANDLE_LIST_KHR                       0x2051
+#define CL_MEM_DEVICE_HANDLE_LIST_END_KHR                   0
 
 /* cl_command_type */
 #define CL_COMMAND_ACQUIRE_EXTERNAL_MEM_OBJECTS_KHR         0x2047
@@ -1902,8 +1908,8 @@ typedef cl_ulong            cl_semaphore_payload_khr;
 
 /* cl_semaphore_info_khr or cl_semaphore_properties_khr */
 #define CL_SEMAPHORE_TYPE_KHR                               0x203D
-/* enum CL_DEVICE_HANDLE_LIST_KHR */
-/* enum CL_DEVICE_HANDLE_LIST_END_KHR */
+#define CL_SEMAPHORE_DEVICE_HANDLE_LIST_KHR                 0x2053
+#define CL_SEMAPHORE_DEVICE_HANDLE_LIST_END_KHR             0
 
 /* cl_command_type */
 #define CL_COMMAND_SEMAPHORE_WAIT_KHR                       0x2042
@@ -2334,6 +2340,7 @@ typedef cl_bitfield         cl_device_scheduling_controls_capabilities_arm;
 #define CL_DEVICE_SCHEDULING_REGISTER_ALLOCATION_ARM        (1 << 4)
 #define CL_DEVICE_SCHEDULING_WARP_THROTTLING_ARM            (1 << 5)
 #define CL_DEVICE_SCHEDULING_COMPUTE_UNIT_BATCH_QUEUE_SIZE_ARM (1 << 6)
+#define CL_DEVICE_SCHEDULING_COMPUTE_UNIT_LIMIT_ARM         (1 << 7)
 
 /* cl_device_info */
 #define CL_DEVICE_SCHEDULING_CONTROLS_CAPABILITIES_ARM      0x41E4
@@ -2352,6 +2359,7 @@ typedef cl_bitfield         cl_device_scheduling_controls_capabilities_arm;
 /* cl_queue_properties */
 #define CL_QUEUE_KERNEL_BATCHING_ARM                        0x41E7
 #define CL_QUEUE_DEFERRED_FLUSH_ARM                         0x41EC
+#define CL_QUEUE_COMPUTE_UNIT_LIMIT_ARM                     0x41F3
 
 /***************************************************************
 * cl_arm_controlled_kernel_termination
