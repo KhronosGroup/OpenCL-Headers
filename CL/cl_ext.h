@@ -1811,6 +1811,9 @@ typedef cl_uint             cl_external_semaphore_handle_type_khr;
 #define CL_SEMAPHORE_EXPORT_HANDLE_TYPES_KHR                0x203F
 #define CL_SEMAPHORE_EXPORT_HANDLE_TYPES_LIST_END_KHR       0
 
+/* cl_semaphore_info_khr */
+#define CL_SEMAPHORE_EXPORTABLE_KHR                         0x2054
+
 
 typedef cl_int CL_API_CALL
 clGetSemaphoreHandleForTypeKHR_t(
@@ -1864,8 +1867,30 @@ clGetSemaphoreHandleForTypeKHR(
 #define CL_KHR_EXTERNAL_SEMAPHORE_SYNC_FD_EXTENSION_NAME \
     "cl_khr_external_semaphore_sync_fd"
 
+typedef cl_properties       cl_semaphore_reimport_properties_khr;
+
 /* cl_external_semaphore_handle_type_khr */
 #define CL_SEMAPHORE_HANDLE_SYNC_FD_KHR                     0x2058
+
+
+typedef cl_int CL_API_CALL
+clReImportSemaphoreSyncFdKHR_t(
+    cl_semaphore_khr sema_object,
+    cl_semaphore_reimport_properties_khr* reimport_props,
+    int fd);
+
+typedef clReImportSemaphoreSyncFdKHR_t *
+clReImportSemaphoreSyncFdKHR_fn CL_API_SUFFIX__VERSION_3_0;
+
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clReImportSemaphoreSyncFdKHR(
+    cl_semaphore_khr sema_object,
+    cl_semaphore_reimport_properties_khr* reimport_props,
+    int fd) CL_API_SUFFIX__VERSION_3_0;
+
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
 * cl_khr_external_semaphore_win32
