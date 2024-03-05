@@ -1,4 +1,4 @@
-prefix=@CMAKE_INSTALL_PREFIX@
+prefix=@PKGCONFIG_PREFIX@
 includedir=@OPENCL_INCLUDEDIR_PC@
 
 Name: OpenCL-Headers

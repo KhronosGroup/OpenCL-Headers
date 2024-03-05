@@ -1,0 +1,70 @@
+name: Release
+
+on:
+  push:
+    tags:
+    - "v*"
+env:
+  distroseries: jammy
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: Install prerequisites
+      run: sudo apt-get update -qq && sudo apt-get install -y cmake devscripts debhelper-compat=13
+
+    - name: Import GPG signing key
+      run: echo "${{ secrets.DEB_SIGNING_KEY }}" | gpg --import
+
+    - name: Download and extract source code
+      run: |
+        wget -O $GITHUB_WORKSPACE/source.orig.tar.gz https://github.com/$GITHUB_REPOSITORY/archive/refs/tags/$GITHUB_REF_NAME.tar.gz
+        tar -xvf $GITHUB_WORKSPACE/source.orig.tar.gz
+
+    - name: Configure project out-of-tree
+      run: cmake
+        -S $GITHUB_WORKSPACE/OpenCL-Headers*
+        -B $GITHUB_WORKSPACE/../build
+        -D CMAKE_BUILD_TYPE=Release
+        -D CMAKE_INSTALL_PREFIX=/usr
+        -D BUILD_TESTING=OFF
+        -D LATEST_RELEASE_VERSION=$GITHUB_REF_NAME
+        -D CPACK_DEBIAN_PACKAGE_MAINTAINER="${{ vars.DEB_MAINTAINER }}"
+        -D DEBIAN_VERSION_SUFFIX=${{ vars.DEB_VERSION_SUFFIX }}
+
+    - name: Generate packaging scripts
+      run: cmake
+        -D CMAKE_CACHE_PATH=$GITHUB_WORKSPACE/../build/CMakeCache.txt
+        -D ORIG_ARCHIVE=$GITHUB_WORKSPACE/source.orig.tar.gz
+        -D LATEST_RELEASE_VERSION=$GITHUB_REF_NAME
+        -D DEBIAN_DISTROSERIES=${{ env.distroseries }}
+        -D DEBIAN_PACKAGE_MAINTAINER="${{ vars.DEB_MAINTAINER }}"
+        -D DEBIAN_VERSION_SUFFIX=${{ vars.DEB_VERSION_SUFFIX }}
+        -P $GITHUB_WORKSPACE/OpenCL-Headers*/cmake/DebSourcePkg.cmake
+
+    - name: Build source package
+      run: |
+        cd $GITHUB_WORKSPACE/OpenCL-Headers*/
+        debuild -S -sa
+
+    - name: Build binary package
+      run: cpack
+        -G DEB
+        -C Release
+        -B $GITHUB_WORKSPACE/../build
+        --config $GITHUB_WORKSPACE/../build/CPackConfig.cmake
+
+    # The following step does not depend on the previous step "Build binary package",
+    # but if the binary package build is unsuccessful, it is better not to push the
+    # source packages to the PPA
+    - name: Push source package to the PPA
+      run: dput ppa:${{ vars.PPA }} $GITHUB_WORKSPACE/*source.changes
+
+    - name: Create GitHub release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ${{ github.workspace }}/../build/*.deb

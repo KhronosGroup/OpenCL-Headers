@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0...3.22)
+cmake_minimum_required(VERSION 3.16...3.26)
 
 # Include guard for including this project multiple times
 if(TARGET Headers)
@@ -6,7 +6,7 @@ if(TARGET Headers)
 endif()
 
 project(OpenCLHeaders
-  VERSION 2.2
+  VERSION 3.0
   LANGUAGES C # Ideally should be NONE, but GNUInstallDirs detects platform arch using try_compile
   # https://stackoverflow.com/questions/43379311/why-does-project-affect-cmakes-opinion-on-cmake-sizeof-void-p
 )
@@ -15,9 +15,9 @@ option(OPENCL_HEADERS_BUILD_TESTING "Enable support for OpenCL C headers testing
 option(OPENCL_HEADERS_BUILD_CXX_TESTS "Enable support for OpenCL C headers testing in C++ mode." ON)
 
 set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(JoinPaths)
-
 include(GNUInstallDirs)
+include(JoinPaths)
+include(Package)
 
 add_library(Headers INTERFACE)
 add_library(OpenCL::Headers ALIAS Headers)
@@ -139,11 +139,3 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     set_target_properties(headers_generate PROPERTIES FOLDER "Generation")
     set_target_properties(headers_copy PROPERTIES FOLDER "Generation")
 endif()
-
-join_paths(OPENCL_INCLUDEDIR_PC "\${prefix}" "${CMAKE_INSTALL_INCLUDEDIR}")
-
-configure_file(OpenCL-Headers.pc.in OpenCL-Headers.pc @ONLY)
-set(pkg_config_location ${CMAKE_INSTALL_DATADIR}/pkgconfig)
-install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/OpenCL-Headers.pc
-  DESTINATION ${pkg_config_location})

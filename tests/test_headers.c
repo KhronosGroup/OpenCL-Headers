@@ -29,7 +29,7 @@ will use inttypes.h for C compiles and cinttypes for C++ compiles.
 
 #include "CL/cl.h"
 
-int test_char()
+int test_char(void)
 {
 /* char */
     /* Constructor */
@@ -89,7 +89,7 @@ int test_char()
     return 0;
 }
 
-int test_uchar()
+int test_uchar(void)
 {
 /* uchar */
     /* Constructor */
@@ -149,7 +149,7 @@ int test_uchar()
     return 0;
 }
 
-int test_short()
+int test_short(void)
 {
 /* short */
     /* Constructor */
@@ -209,7 +209,7 @@ int test_short()
     return 0;
 }
 
-int test_ushort()
+int test_ushort(void)
 {
 /* ushort */
     /* Constructor */
@@ -269,7 +269,7 @@ int test_ushort()
     return 0;
 }
 
-int test_int()
+int test_int(void)
 {
 /* int */
     /* Constructor */
@@ -329,7 +329,7 @@ int test_int()
     return 0;
 }
 
-int test_uint()
+int test_uint(void)
 {
 /* uint */
     /* Constructor */
@@ -389,7 +389,7 @@ int test_uint()
     return 0;
 }
 
-int test_long()
+int test_long(void)
 {
 /* long */
     /* Constructor */
@@ -449,7 +449,7 @@ int test_long()
     return 0;
 }
 
-int test_ulong()
+int test_ulong(void)
 {
 /* ulong */
     /* Constructor */
@@ -509,7 +509,7 @@ int test_ulong()
     return 0;
 }
 
-int test_float()
+int test_float(void)
 {
 /* float */
     /* Constructor */
@@ -571,7 +571,7 @@ int test_float()
     return 0;
 }
 
-int test_double()
+int test_double(void)
 {
 /* double */
     /* Constructor */

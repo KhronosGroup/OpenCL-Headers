@@ -1,6 +1,3 @@
 #include <CL/cl.h>
 
-int main()
-{
-    return sizeof(cl_platform_id) - sizeof(cl_context);
-}
+int main(void) { return sizeof(cl_platform_id) - sizeof(cl_context); }
