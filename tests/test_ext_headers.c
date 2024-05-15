@@ -18,38 +18,39 @@
 #include <inttypes.h>
 #include <stdio.h>
 
-int extVersionMacro() {
-  // Test a non-provisional extension with non-placeholder semantic version.
-  printf(
-      "Checking version macro for the cl_khr_integer_dot_product extension\n");
+int extVersionMacro(void)
+{
+    // Test a non-provisional extension with non-placeholder semantic version.
+    printf("Checking version macro for the cl_khr_integer_dot_product "
+           "extension\n");
 
-  cl_version ExtVersion = CL_KHR_INTEGER_DOT_PRODUCT_EXTENSION_VERSION;
-  cl_version ExtMajorVersion = CL_VERSION_MAJOR(ExtVersion);
-  cl_version ExtMinorVersion = CL_VERSION_MINOR(ExtVersion);
-  cl_version ExtPatchVersion = CL_VERSION_PATCH(ExtVersion);
+    cl_version ExtVersion = CL_KHR_INTEGER_DOT_PRODUCT_EXTENSION_VERSION;
+    cl_version ExtMajorVersion = CL_VERSION_MAJOR(ExtVersion);
+    cl_version ExtMinorVersion = CL_VERSION_MINOR(ExtVersion);
+    cl_version ExtPatchVersion = CL_VERSION_PATCH(ExtVersion);
 
-  printf("cl_khr_integer_dot_product version value %" PRIu32
-         " which is semantic version %" PRIu32 ".%" PRIu32 ".%" PRIu32 "\n",
-         ExtVersion, ExtMajorVersion, ExtMinorVersion, ExtPatchVersion);
+    printf("cl_khr_integer_dot_product version value %" PRIu32
+           " which is semantic version %" PRIu32 ".%" PRIu32 ".%" PRIu32 "\n",
+           ExtVersion, ExtMajorVersion, ExtMinorVersion, ExtPatchVersion);
 
-  // Test vendor extension which uses default semantic version.
-  printf(
-      "Checking version macro for the cl_APPLE_SetMemObjectDestructor\n");
+    // Test vendor extension which uses default semantic version.
+    printf("Checking version macro for the cl_APPLE_SetMemObjectDestructor\n");
 
-  ExtVersion = CL_APPLE_SETMEMOBJECTDESTRUCTOR_EXTENSION_VERSION;
-  ExtMajorVersion = CL_VERSION_MAJOR(ExtVersion);
-  ExtMinorVersion = CL_VERSION_MINOR(ExtVersion);
-  ExtPatchVersion = CL_VERSION_PATCH(ExtVersion);
+    ExtVersion = CL_APPLE_SETMEMOBJECTDESTRUCTOR_EXTENSION_VERSION;
+    ExtMajorVersion = CL_VERSION_MAJOR(ExtVersion);
+    ExtMinorVersion = CL_VERSION_MINOR(ExtVersion);
+    ExtPatchVersion = CL_VERSION_PATCH(ExtVersion);
 
-  printf("cl_APPLE_SetMemObjectDestructor version value %" PRIu32
-         " which is semantic version %" PRIu32 ".%" PRIu32 ".%" PRIu32 "\n",
-         ExtVersion, ExtMajorVersion, ExtMinorVersion, ExtPatchVersion);
+    printf("cl_APPLE_SetMemObjectDestructor version value %" PRIu32
+           " which is semantic version %" PRIu32 ".%" PRIu32 ".%" PRIu32 "\n",
+           ExtVersion, ExtMajorVersion, ExtMinorVersion, ExtPatchVersion);
 
-  return 0;
+    return 0;
 }
 
-int main(void) {
-  int Result = extVersionMacro();
+int main(void)
+{
+    int Result = extVersionMacro();
 
-  return Result;
+    return Result;
 }

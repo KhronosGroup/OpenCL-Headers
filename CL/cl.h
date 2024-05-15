@@ -112,9 +112,9 @@ typedef cl_uint             cl_kernel_exec_info;
 typedef cl_bitfield         cl_device_atomic_capabilities;
 typedef cl_bitfield         cl_device_device_enqueue_capabilities;
 typedef cl_uint             cl_khronos_vendor_id;
-typedef cl_properties       cl_mem_properties;
+typedef cl_properties cl_mem_properties;
 #endif
-typedef cl_uint             cl_version;
+typedef cl_uint cl_version;
 
 typedef struct _cl_image_format {
     cl_channel_order        image_channel_order;
