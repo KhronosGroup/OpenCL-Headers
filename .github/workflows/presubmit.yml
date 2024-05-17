@@ -507,17 +507,17 @@ jobs:
       matrix:
         C_COMPILER:
         - /usr/bin/clang
-        - /usr/local/bin/gcc-11
-        - /usr/local/bin/gcc-13
+        - gcc-11
+        - gcc-13
         GEN:
         - Xcode
         - Ninja Multi-Config
         STD: [99, 11, 17]
         exclude:
         # These entries are excluded, since XCode selects its own compiler
-        - C_COMPILER: /usr/local/bin/gcc-11
+        - C_COMPILER: gcc-11
           GEN: Xcode
-        - C_COMPILER: /usr/local/bin/gcc-13
+        - C_COMPILER: gcc-13
           GEN: Xcode
     env:
       CFLAGS: -Wall -Wextra -pedantic -Werror
