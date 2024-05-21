@@ -16,7 +16,7 @@ jobs:
       run:
         shell: bash
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         # repository: ${{github.repository}} (default)
         fetch-depth: 0
@@ -36,11 +36,19 @@ jobs:
     strategy:
       matrix:
         CMAKE: [3.26.4]
-        C_COMPILER:
-        - gcc-11
-        - gcc-13
-        - clang-14
-        - clang-16
+        COMPILER:
+        - C_NAME: gcc
+          CXX_NAME: g++
+          VER: 11
+        - C_NAME: gcc
+          CXX_NAME: g++
+          VER: 13
+        - C_NAME: clang
+          CXX_NAME: clang++
+          VER: 14
+        - C_NAME: clang
+          CXX_NAME: clang++
+          VER: 16
         BIN: [64]
         STD: [99, 11, 17]
         CONF:
@@ -54,7 +62,10 @@ jobs:
         - streamhpc/opencl-sdk-intelcpu:ubuntu-22.04-20230717
         include:
         - CMAKE: system
-          C_COMPILER: gcc-9
+          COMPILER:
+            C_NAME: gcc
+            CXX_NAME: g++
+            VER: 9
           BIN: 64
           STD: 99
           CONF:
@@ -62,7 +73,10 @@ jobs:
             CONFIG: Debug
           IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-20.04-20230717
         - CMAKE: system
-          C_COMPILER: gcc-9
+          COMPILER:
+            C_NAME: gcc
+            CXX_NAME: g++
+            VER: 9
           BIN: 64
           STD: 99
           CONF:
@@ -70,7 +84,10 @@ jobs:
             CONFIG: Release
           IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-20.04-20230717
         - CMAKE: system
-          C_COMPILER: gcc-9
+          COMPILER:
+            C_NAME: gcc
+            CXX_NAME: g++
+            VER: 9
           BIN: 32
           STD: 99
           CONF:
@@ -78,7 +95,10 @@ jobs:
             CONFIG: Debug
           IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-20.04-20230717
         - CMAKE: system
-          C_COMPILER: gcc-9
+          COMPILER:
+            C_NAME: gcc
+            CXX_NAME: g++
+            VER: 9
           BIN: 32
           STD: 99
           CONF:
@@ -86,7 +106,10 @@ jobs:
             CONFIG: Release
           IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-20.04-20230717
         - CMAKE: system
-          C_COMPILER: gcc-11
+          COMPILER:
+            C_NAME: gcc
+            CXX_NAME: g++
+            VER: 11
           BIN: 64
           STD: 99
           CONF:
@@ -94,7 +117,10 @@ jobs:
             CONFIG: Debug
           IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-22.04-20230717
         - CMAKE: system
-          C_COMPILER: gcc-11
+          COMPILER:
+            C_NAME: gcc
+            CXX_NAME: g++
+            VER: 11
           BIN: 64
           STD: 99
           CONF:
@@ -106,7 +132,8 @@ jobs:
       CMAKE_EXE: /opt/Kitware/CMake/${{matrix.CMAKE}}/bin/cmake
       CPACK_EXE: /opt/Kitware/CMake/${{matrix.CMAKE}}/bin/cpack
       CTEST_EXE: /opt/Kitware/CMake/${{matrix.CMAKE}}/bin/ctest
-      CC: ${{matrix.C_COMPILER}}
+      CC: ${{matrix.COMPILER.C_NAME}}-${{matrix.COMPILER.VER}}
+      CXX: ${{matrix.COMPILER.CXX_NAME}}-${{matrix.COMPILER.VER}}
       CFLAGS: -Wall -Wextra -pedantic -Werror -m${{matrix.BIN}}
 
     steps:
@@ -118,7 +145,7 @@ jobs:
         echo "CTEST_EXE=ctest" >> "$GITHUB_ENV"
 
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configure
       run: $CMAKE_EXE
@@ -243,7 +270,7 @@ jobs:
         shell: pwsh
     strategy:
       matrix:
-        VER: [v141, v142, v143, clangcl]
+        VER: [v142, v143, clangcl]
         GEN: [Visual Studio 17 2022, Ninja Multi-Config]
         BIN: [x64]
         STD: [99, 11, 17]
@@ -282,7 +309,7 @@ jobs:
         Remove-Item ~\Downloads\*
 
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configure (MSBuild)
       if: matrix.GEN == 'Visual Studio 17 2022'
@@ -304,7 +331,6 @@ jobs:
       if: matrix.GEN == 'Ninja Multi-Config'
       run: |
         $VER = switch ('${{matrix.VER}}') { `
-          'v141' {'14.1'} `
           'v142' {'14.2'} `
           'v143' {'14.3'} }
         Import-Module "${env:VS_ROOT}\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
@@ -339,7 +365,6 @@ jobs:
       if: matrix.GEN == 'Ninja Multi-Config'
       run: |
         $VER = switch ('${{matrix.VER}}') { `
-          'v141' {'14.1'} `
           'v142' {'14.2'} `
           'v143' {'14.3'} }
         Import-Module "${env:VS_ROOT}\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
@@ -406,7 +431,6 @@ jobs:
       if: matrix.GEN == 'Ninja Multi-Config'
       run: |
         $VER = switch ('${{matrix.VER}}') { `
-          'v141' {'14.1'} `
           'v142' {'14.2'} `
           'v143' {'14.3'} }
         Import-Module "${env:VS_ROOT}\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
@@ -471,7 +495,6 @@ jobs:
       if: matrix.GEN == 'Ninja Multi-Config'
       run: |
         $VER = switch ('${{matrix.VER}}') { `
-          'v141' {'14.1'} `
           'v142' {'14.2'} `
           'v143' {'14.3'} }
         Import-Module "${env:VS_ROOT}\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
@@ -505,26 +528,34 @@ jobs:
         shell: bash
     strategy:
       matrix:
-        C_COMPILER:
-        - /usr/bin/clang
-        - /usr/local/bin/gcc-11
-        - /usr/local/bin/gcc-13
+        COMPILER:
+        - CC: /usr/bin/clang
+          CXX: /usr/bin/clang++
+        - CC: gcc-11
+          CXX: g++-11
+        - CC: gcc-13
+          CXX: g++-13
         GEN:
         - Xcode
         - Ninja Multi-Config
         STD: [99, 11, 17]
         exclude:
         # These entries are excluded, since XCode selects its own compiler
-        - C_COMPILER: /usr/local/bin/gcc-11
+        - COMPILER:
+            CC: gcc-11
+            CXX: g++-11
           GEN: Xcode
-        - C_COMPILER: /usr/local/bin/gcc-13
+        - COMPILER:
+            CC: gcc-13
+            CXX: g++-13
           GEN: Xcode
     env:
       CFLAGS: -Wall -Wextra -pedantic -Werror
-      CC: ${{matrix.C_COMPILER}}
+      CC: ${{matrix.COMPILER.CC}}
+      CXX: ${{matrix.COMPILER.CXX}}
     steps:
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Create Build Environment
       run: |
@@ -601,7 +632,7 @@ jobs:
       CFLAGS: -Wall -Wextra -pedantic -Werror
     steps:
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Configure
       run: cmake
