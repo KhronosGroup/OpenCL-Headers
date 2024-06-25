@@ -533,8 +533,9 @@ jobs:
           CXX: /usr/bin/clang++
         - CC: gcc-11
           CXX: g++-11
-        - CC: gcc-13
-          CXX: g++-13
+        # Disabled due to problems with the __API_AVAILABLE macro
+        # - CC: gcc-13
+        #   CXX: g++-13
         GEN:
         - Xcode
         - Ninja Multi-Config
