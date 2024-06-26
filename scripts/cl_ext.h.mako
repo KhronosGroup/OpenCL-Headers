@@ -1,4 +1,7 @@
 <%
+# re.match used to parse extension semantic versions
+from re import match
+
 # Extensions to skip by default because they are in dedicated headers:
 skipExtensions = {
     'cl_khr_d3d10_sharing',
@@ -311,6 +314,19 @@ extern "C" {
 #define ${name} 1
 #define ${name.upper()}_EXTENSION_NAME ${"\\"}
     "${name}"
+
+<%
+  # Use re.match to parse semantic major.minor.patch version
+  sem_ver = match('[0-9]+\.[0-9]+\.?[0-9]+', extension.get('revision'))
+  if not sem_ver:
+    raise TypeError(name +
+      ' XML revision field is not semantically versioned as "major.minor.patch"')
+  version = sem_ver[0].split('.')
+  major = version[0]
+  minor = version[1]
+  patch = version[2]
+%>
+#define ${name.upper()}_EXTENSION_VERSION CL_MAKE_VERSION(${major}, ${minor}, ${patch})
 
 %for block in extension.findall('require'):
 %  if shouldEmit(block):
