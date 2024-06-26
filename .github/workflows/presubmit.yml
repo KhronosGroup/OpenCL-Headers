@@ -59,7 +59,7 @@ jobs:
         - GEN: Ninja Multi-Config
           CONFIG: Release
         IMAGE:
-        - streamhpc/opencl-sdk-intelcpu:ubuntu-22.04-20230717
+        - khronosgroup/docker-images:opencl-sdk-intelcpu-ubuntu-22.04.20230717
         include:
         - CMAKE: system
           COMPILER:
@@ -71,7 +71,7 @@ jobs:
           CONF:
             GEN: Unix Makefiles
             CONFIG: Debug
-          IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-20.04-20230717
+          IMAGE: khronosgroup/docker-images:opencl-sdk-intelcpu-ubuntu-20.04.20230717
         - CMAKE: system
           COMPILER:
             C_NAME: gcc
@@ -82,7 +82,7 @@ jobs:
           CONF:
             GEN: Unix Makefiles
             CONFIG: Release
-          IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-20.04-20230717
+          IMAGE: khronosgroup/docker-images:opencl-sdk-intelcpu-ubuntu-20.04.20230717
         - CMAKE: system
           COMPILER:
             C_NAME: gcc
@@ -93,7 +93,7 @@ jobs:
           CONF:
             GEN: Unix Makefiles
             CONFIG: Debug
-          IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-20.04-20230717
+          IMAGE: khronosgroup/docker-images:opencl-sdk-intelcpu-ubuntu-20.04.20230717
         - CMAKE: system
           COMPILER:
             C_NAME: gcc
@@ -104,7 +104,7 @@ jobs:
           CONF:
             GEN: Unix Makefiles
             CONFIG: Release
-          IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-20.04-20230717
+          IMAGE: khronosgroup/docker-images:opencl-sdk-intelcpu-ubuntu-20.04.20230717
         - CMAKE: system
           COMPILER:
             C_NAME: gcc
@@ -115,7 +115,7 @@ jobs:
           CONF:
             GEN: Unix Makefiles
             CONFIG: Debug
-          IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-22.04-20230717
+          IMAGE: khronosgroup/docker-images:opencl-sdk-intelcpu-ubuntu-22.04.20230717
         - CMAKE: system
           COMPILER:
             C_NAME: gcc
@@ -126,7 +126,7 @@ jobs:
           CONF:
             GEN: Unix Makefiles
             CONFIG: Release
-          IMAGE: streamhpc/opencl-sdk-intelcpu:ubuntu-22.04-20230717
+          IMAGE: khronosgroup/docker-images:opencl-sdk-intelcpu-ubuntu-22.04.20230717
     container: ${{matrix.IMAGE}}
     env:
       CMAKE_EXE: /opt/Kitware/CMake/${{matrix.CMAKE}}/bin/cmake
@@ -295,7 +295,7 @@ jobs:
     - name: Cache Ninja install
       if: matrix.GEN == 'Ninja Multi-Config'
       id: ninja-install
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           C:\Tools\Ninja
@@ -332,7 +332,7 @@ jobs:
       run: |
         $VER = switch ('${{matrix.VER}}') { `
           'v142' {'14.2'} `
-          'v143' {'14.3'} }
+          'v143' {'14.4'} }
         Import-Module "${env:VS_ROOT}\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
         Enter-VsDevShell -VsInstallPath ${env:VS_ROOT} -SkipAutomaticLocation -DevCmdArguments "-host_arch=x64 -arch=${{matrix.BIN}} -vcvars_ver=${VER}"
         & cmake `
@@ -366,7 +366,7 @@ jobs:
       run: |
         $VER = switch ('${{matrix.VER}}') { `
           'v142' {'14.2'} `
-          'v143' {'14.3'} }
+          'v143' {'14.4'} }
         Import-Module "${env:VS_ROOT}\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
         Enter-VsDevShell -VsInstallPath ${env:VS_ROOT} -SkipAutomaticLocation -DevCmdArguments "-host_arch=x64 -arch=${{matrix.BIN}} -vcvars_ver=${VER}"
         foreach ($Config in 'Release','Debug') {
@@ -432,7 +432,7 @@ jobs:
       run: |
         $VER = switch ('${{matrix.VER}}') { `
           'v142' {'14.2'} `
-          'v143' {'14.3'} }
+          'v143' {'14.4'} }
         Import-Module "${env:VS_ROOT}\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
         Enter-VsDevShell -VsInstallPath ${env:VS_ROOT} -SkipAutomaticLocation -DevCmdArguments "-host_arch=x64 -arch=${{matrix.BIN}} -vcvars_ver=${VER}"
         & cmake `
@@ -496,7 +496,7 @@ jobs:
       run: |
         $VER = switch ('${{matrix.VER}}') { `
           'v142' {'14.2'} `
-          'v143' {'14.3'} }
+          'v143' {'14.4'} }
         Import-Module "${env:VS_ROOT}\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
         Enter-VsDevShell -VsInstallPath ${env:VS_ROOT} -SkipAutomaticLocation -DevCmdArguments "-host_arch=x64 -arch=${{matrix.BIN}} -vcvars_ver=${VER}"
         & cmake `
@@ -533,8 +533,9 @@ jobs:
           CXX: /usr/bin/clang++
         - CC: gcc-11
           CXX: g++-11
-        - CC: gcc-13
-          CXX: g++-13
+        # Disabled due to problems with the __API_AVAILABLE macro
+        # - CC: gcc-13
+        #   CXX: g++-13
         GEN:
         - Xcode
         - Ninja Multi-Config
