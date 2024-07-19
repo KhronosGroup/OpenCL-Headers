@@ -603,9 +603,9 @@ clRemapCommandBufferKHR(
     "cl_khr_command_buffer_mutable_dispatch"
 
 
-#define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 1)
+#define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 2)
 
-typedef cl_uint             cl_command_buffer_structure_type_khr;
+typedef cl_uint             cl_command_buffer_update_type_khr;
 typedef cl_bitfield         cl_mutable_dispatch_fields_khr;
 typedef cl_uint             cl_mutable_command_info_khr;
 typedef struct _cl_mutable_dispatch_arg_khr {
@@ -619,8 +619,6 @@ typedef struct _cl_mutable_dispatch_exec_info_khr {
     const void* param_value;
 } cl_mutable_dispatch_exec_info_khr;
 typedef struct _cl_mutable_dispatch_config_khr {
-    cl_command_buffer_structure_type_khr type;
-    const void* next;
     cl_mutable_command_khr command;
     cl_uint num_args;
     cl_uint num_svm_args;
@@ -633,12 +631,6 @@ typedef struct _cl_mutable_dispatch_config_khr {
     const size_t* global_work_size;
     const size_t* local_work_size;
 } cl_mutable_dispatch_config_khr;
-typedef struct _cl_mutable_base_config_khr {
-    cl_command_buffer_structure_type_khr type;
-    const void* next;
-    cl_uint num_mutable_dispatch;
-    const cl_mutable_dispatch_config_khr* mutable_dispatch_list;
-} cl_mutable_base_config_khr;
 typedef cl_bitfield         cl_mutable_dispatch_asserts_khr;
 
 /* cl_command_buffer_flags_khr - bitfield */
@@ -671,9 +663,8 @@ typedef cl_bitfield         cl_mutable_dispatch_asserts_khr;
 #define CL_MUTABLE_DISPATCH_GLOBAL_WORK_SIZE_KHR            0x12A6
 #define CL_MUTABLE_DISPATCH_LOCAL_WORK_SIZE_KHR             0x12A7
 
-/* cl_command_buffer_structure_type_khr */
-#define CL_STRUCTURE_TYPE_MUTABLE_BASE_CONFIG_KHR           0
-#define CL_STRUCTURE_TYPE_MUTABLE_DISPATCH_CONFIG_KHR       1
+/* cl_command_buffer_update_type_khr */
+#define CL_STRUCTURE_TYPE_MUTABLE_DISPATCH_CONFIG_KHR       0
 
 /* cl_command_buffer_properties_khr */
 #define CL_COMMAND_BUFFER_MUTABLE_DISPATCH_ASSERTS_KHR      0x12B7
@@ -688,7 +679,9 @@ typedef cl_bitfield         cl_mutable_dispatch_asserts_khr;
 typedef cl_int CL_API_CALL
 clUpdateMutableCommandsKHR_t(
     cl_command_buffer_khr command_buffer,
-    const cl_mutable_base_config_khr* mutable_config);
+    cl_uint num_configs,
+    const cl_command_buffer_update_type_khr* config_types,
+    const void** configs);
 
 typedef clUpdateMutableCommandsKHR_t *
 clUpdateMutableCommandsKHR_fn ;
@@ -709,7 +702,9 @@ clGetMutableCommandInfoKHR_fn ;
 extern CL_API_ENTRY cl_int CL_API_CALL
 clUpdateMutableCommandsKHR(
     cl_command_buffer_khr command_buffer,
-    const cl_mutable_base_config_khr* mutable_config) ;
+    cl_uint num_configs,
+    const cl_command_buffer_update_type_khr* config_types,
+    const void** configs) ;
 
 extern CL_API_ENTRY cl_int CL_API_CALL
 clGetMutableCommandInfoKHR(
