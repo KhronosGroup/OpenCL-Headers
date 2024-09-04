@@ -854,13 +854,20 @@ clLogMessagesToStderrAPPLE(
     "cl_khr_icd"
 
 
-#define CL_KHR_ICD_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+#define CL_KHR_ICD_EXTENSION_VERSION CL_MAKE_VERSION(2, 0, 0)
 
 /* cl_platform_info */
 #define CL_PLATFORM_ICD_SUFFIX_KHR                          0x0920
 
 /* Error codes */
 #define CL_PLATFORM_NOT_FOUND_KHR                           -1001
+
+/* ICD 2 tag value */
+#if INTPTR_MAX == INT32_MAX
+#define CL_ICD2_TAG_KHR ((intptr_t)0x434C3331)
+#else
+#define CL_ICD2_TAG_KHR ((intptr_t)0x4F50454E434C3331)
+#endif
 
 
 typedef cl_int CL_API_CALL
@@ -872,6 +879,22 @@ clIcdGetPlatformIDsKHR_t(
 typedef clIcdGetPlatformIDsKHR_t *
 clIcdGetPlatformIDsKHR_fn ;
 
+typedef void* CL_API_CALL
+clIcdGetFunctionAddressForPlatformKHR_t(
+    cl_platform_id platform,
+    const char* func_name);
+
+typedef clIcdGetFunctionAddressForPlatformKHR_t *
+clIcdGetFunctionAddressForPlatformKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clIcdSetPlatformDispatchDataKHR_t(
+    cl_platform_id platform,
+    void* dispatch_data);
+
+typedef clIcdSetPlatformDispatchDataKHR_t *
+clIcdSetPlatformDispatchDataKHR_fn ;
+
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -879,6 +902,16 @@ clIcdGetPlatformIDsKHR(
     cl_uint num_entries,
     cl_platform_id* platforms,
     cl_uint* num_platforms) ;
+
+extern CL_API_ENTRY void* CL_API_CALL
+clIcdGetFunctionAddressForPlatformKHR(
+    cl_platform_id platform,
+    const char* func_name) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clIcdSetPlatformDispatchDataKHR(
+    cl_platform_id platform,
+    void* dispatch_data) ;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
