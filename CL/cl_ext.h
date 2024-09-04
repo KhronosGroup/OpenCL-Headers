@@ -856,12 +856,19 @@ clLogMessagesToStderrAPPLE(
 
 #define CL_KHR_ICD_EXTENSION_VERSION CL_MAKE_VERSION(2, 0, 0)
 
+typedef struct _cl_instance_khr * cl_instance_khr;
+typedef intptr_t            cl_instance_properties_khr;
+
 /* cl_platform_info */
 #define CL_PLATFORM_ICD_SUFFIX_KHR                          0x0920
 #define CL_PLATFORM_UNLOADABLE_KHR                          0x0921
 
+/* cl_instance_properties_khr */
+#define CL_INSTANCE_PROPERTIES_LIST_END_KHR                 0
+
 /* Error codes */
 #define CL_PLATFORM_NOT_FOUND_KHR                           -1001
+#define CL_INVALID_INSTANCE_KHR                             -1154
 
 /* ICD 2 tag value */
 #if INTPTR_MAX == INT32_MAX
@@ -896,6 +903,46 @@ clIcdSetPlatformDispatchDataKHR_t(
 typedef clIcdSetPlatformDispatchDataKHR_t *
 clIcdSetPlatformDispatchDataKHR_fn ;
 
+typedef cl_platform_id CL_API_CALL
+clIcdCreateInstancePlatformKHR_t(
+    cl_platform_id platform,
+    cl_int* errcode_ret);
+
+typedef clIcdCreateInstancePlatformKHR_t *
+clIcdCreateInstancePlatformKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clIcdDestroyInstancePlatformKHR_t(
+    cl_platform_id platform);
+
+typedef clIcdDestroyInstancePlatformKHR_t *
+clIcdDestroyInstancePlatformKHR_fn ;
+
+typedef cl_instance_khr CL_API_CALL
+clCreateInstanceKHR_t(
+    const cl_instance_properties_khr* properties,
+    cl_int* errcode_ret);
+
+typedef clCreateInstanceKHR_t *
+clCreateInstanceKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clDestroyInstanceKHR_t(
+    cl_instance_khr instance);
+
+typedef clDestroyInstanceKHR_t *
+clDestroyInstanceKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clGetPlatformIDsForInstanceKHR_t(
+    cl_instance_khr instance,
+    cl_uint num_entries,
+    cl_platform_id* platforms,
+    cl_uint* num_platforms);
+
+typedef clGetPlatformIDsForInstanceKHR_t *
+clGetPlatformIDsForInstanceKHR_fn ;
+
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -913,6 +960,31 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clIcdSetPlatformDispatchDataKHR(
     cl_platform_id platform,
     void* dispatch_data) ;
+
+extern CL_API_ENTRY cl_platform_id CL_API_CALL
+clIcdCreateInstancePlatformKHR(
+    cl_platform_id platform,
+    cl_int* errcode_ret) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clIcdDestroyInstancePlatformKHR(
+    cl_platform_id platform) ;
+
+extern CL_API_ENTRY cl_instance_khr CL_API_CALL
+clCreateInstanceKHR(
+    const cl_instance_properties_khr* properties,
+    cl_int* errcode_ret) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clDestroyInstanceKHR(
+    cl_instance_khr instance) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetPlatformIDsForInstanceKHR(
+    cl_instance_khr instance,
+    cl_uint num_entries,
+    cl_platform_id* platforms,
+    cl_uint* num_platforms) ;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
