@@ -531,8 +531,9 @@ jobs:
         COMPILER:
         - CC: /usr/bin/clang
           CXX: /usr/bin/clang++
-        - CC: gcc-11
-          CXX: g++-11
+        # Disabled due to "Could not find compiler set in environment variable CC: gcc-11.
+        # - CC: gcc-11
+        #   CXX: g++-11
         # Disabled due to problems with the __API_AVAILABLE macro
         # - CC: gcc-13
         #   CXX: g++-13
