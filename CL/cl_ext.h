@@ -623,7 +623,7 @@ clRemapCommandBufferKHR(
     "cl_khr_command_buffer_mutable_dispatch"
 
 
-#define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 1)
+#define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 3)
 
 typedef cl_uint             cl_command_buffer_structure_type_khr;
 typedef cl_bitfield         cl_mutable_dispatch_fields_khr;
@@ -684,7 +684,7 @@ typedef cl_bitfield         cl_mutable_dispatch_asserts_khr;
 #define CL_MUTABLE_COMMAND_COMMAND_QUEUE_KHR                0x12A0
 #define CL_MUTABLE_COMMAND_COMMAND_BUFFER_KHR               0x12A1
 #define CL_MUTABLE_COMMAND_COMMAND_TYPE_KHR                 0x12AD
-#define CL_MUTABLE_DISPATCH_PROPERTIES_ARRAY_KHR            0x12A2
+#define CL_MUTABLE_COMMAND_PROPERTIES_ARRAY_KHR             0x12A2
 #define CL_MUTABLE_DISPATCH_KERNEL_KHR                      0x12A3
 #define CL_MUTABLE_DISPATCH_DIMENSIONS_KHR                  0x12A4
 #define CL_MUTABLE_DISPATCH_GLOBAL_WORK_OFFSET_KHR          0x12A5
