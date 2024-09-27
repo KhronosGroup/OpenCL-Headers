@@ -47,6 +47,24 @@ def shouldEmit(block):
         return True
     return False
 
+# Block comment:
+def makeBlockComment(block):
+    group = block.get('group')
+    etype = block.get('etype')
+    comment = block.get('comment')
+    name = group
+    if etype:
+        if name:
+            name = name + ' - ' + etype
+        else:
+            name = etype
+    if comment:
+        if name:
+            name = name + ': ' + comment
+        else:
+            name = comment
+    return name
+
 # Initially, keep the same extension order as the original headers:
 orderedExtensions = [
     # cl_ext.h:
@@ -333,8 +351,8 @@ extern "C" {
 %    if block.get('condition'):
 #if ${block.get('condition')}
 %    endif
-%    if block.get('comment'):
-/* ${block.get('comment')} */
+%    if block.get('group') or block.get('etype') or block.get('comment'):
+/* ${makeBlockComment(block)} */
 %    endif
 %    for type in block.findall('type'):
 %      if isDuplicateName(type.get('name')):

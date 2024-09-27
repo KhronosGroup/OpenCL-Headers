@@ -63,7 +63,7 @@ typedef cl_uint             cl_layer_api_version;
 #define CL_LAYER_API_VERSION                                0x4240
 #define CL_LAYER_NAME                                       0x4241
 
-/* Misc API enums */
+/* constants: Misc API enums */
 #define CL_LAYER_API_VERSION_100                            100
 
 

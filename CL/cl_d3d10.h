@@ -85,8 +85,10 @@ typedef cl_uint             cl_d3d10_device_set_khr;
 #define CL_PREFERRED_DEVICES_FOR_D3D10_KHR                  0x4012
 #define CL_ALL_DEVICES_FOR_D3D10_KHR                        0x4013
 
-/* cl_context_info */
+/* cl_context_properties */
 #define CL_CONTEXT_D3D10_DEVICE_KHR                         0x4014
+
+/* cl_context_info */
 #define CL_CONTEXT_D3D10_PREFER_SHARED_RESOURCES_KHR        0x402C
 
 /* cl_mem_info */
