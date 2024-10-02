@@ -662,7 +662,7 @@ typedef cl_bitfield         cl_mutable_dispatch_asserts_khr;
 /* cl_device_info */
 #define CL_DEVICE_MUTABLE_DISPATCH_CAPABILITIES_KHR         0x12B0
 
-/* cl_ndrange_kernel_command_properties_khr */
+/* cl_command_properties_khr */
 #define CL_MUTABLE_DISPATCH_UPDATABLE_FIELDS_KHR            0x12B1
 
 /* cl_mutable_dispatch_fields_khr - bitfield */
@@ -689,7 +689,7 @@ typedef cl_bitfield         cl_mutable_dispatch_asserts_khr;
 /* cl_command_buffer_properties_khr */
 #define CL_COMMAND_BUFFER_MUTABLE_DISPATCH_ASSERTS_KHR      0x12B7
 
-/* cl_ndrange_kernel_command_properties_khr */
+/* cl_command_properties_khr */
 #define CL_MUTABLE_DISPATCH_ASSERTS_KHR                     0x12B8
 
 /* cl_mutable_dispatch_asserts_khr - bitfield */
@@ -1132,7 +1132,7 @@ clCreateCommandQueueWithPropertiesKHR(
     "cl_ext_device_fission"
 
 
-#define CL_EXT_DEVICE_FISSION_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_EXT_DEVICE_FISSION_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 typedef cl_ulong            cl_device_partition_property_ext;
 
@@ -1221,7 +1221,7 @@ clCreateSubDevicesEXT(
     "cl_ext_migrate_memobject"
 
 
-#define CL_EXT_MIGRATE_MEMOBJECT_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_EXT_MIGRATE_MEMOBJECT_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 typedef cl_bitfield         cl_mem_migration_flags_ext;
 
@@ -1267,7 +1267,7 @@ clEnqueueMigrateMemObjectEXT(
     "cl_ext_cxx_for_opencl"
 
 
-#define CL_EXT_CXX_FOR_OPENCL_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_EXT_CXX_FOR_OPENCL_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 /* cl_device_info */
 #define CL_DEVICE_CXX_FOR_OPENCL_NUMERIC_VERSION_EXT        0x4230
@@ -1838,7 +1838,7 @@ typedef struct _cl_device_integer_dot_product_acceleration_properties_khr {
     "cl_khr_external_memory"
 
 
-#define CL_KHR_EXTERNAL_MEMORY_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+#define CL_KHR_EXTERNAL_MEMORY_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 1)
 
 typedef cl_uint             cl_external_memory_handle_type_khr;
 
@@ -1938,11 +1938,12 @@ clEnqueueReleaseExternalMemObjectsKHR(
     "cl_khr_external_memory_win32"
 
 
-#define CL_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+#define CL_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_VERSION CL_MAKE_VERSION(1, 1, 0)
 
 /* cl_external_memory_handle_type_khr */
 #define CL_EXTERNAL_MEMORY_HANDLE_OPAQUE_WIN32_KHR          0x2061
 #define CL_EXTERNAL_MEMORY_HANDLE_OPAQUE_WIN32_KMT_KHR      0x2062
+#define CL_EXTERNAL_MEMORY_HANDLE_OPAQUE_WIN32_NAME_KHR     0x2069
 
 /***************************************************************
 * cl_khr_external_semaphore
@@ -1952,7 +1953,7 @@ clEnqueueReleaseExternalMemObjectsKHR(
     "cl_khr_external_semaphore"
 
 
-#define CL_KHR_EXTERNAL_SEMAPHORE_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+#define CL_KHR_EXTERNAL_SEMAPHORE_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 1)
 
 typedef struct _cl_semaphore_khr * cl_semaphore_khr;
 typedef cl_uint             cl_external_semaphore_handle_type_khr;
@@ -2054,11 +2055,12 @@ clReImportSemaphoreSyncFdKHR(
     "cl_khr_external_semaphore_win32"
 
 
-#define CL_KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 0)
+#define CL_KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 1)
 
 /* cl_external_semaphore_handle_type_khr */
 #define CL_SEMAPHORE_HANDLE_OPAQUE_WIN32_KHR                0x2056
 #define CL_SEMAPHORE_HANDLE_OPAQUE_WIN32_KMT_KHR            0x2057
+#define CL_SEMAPHORE_HANDLE_OPAQUE_WIN32_NAME_KHR           0x2068
 
 /***************************************************************
 * cl_khr_semaphore
@@ -2918,10 +2920,12 @@ typedef struct _cl_motion_estimation_desc_intel {
 
 #define CL_INTEL_DRIVER_DIAGNOSTICS_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
-typedef cl_uint             cl_diagnostics_verbose_level;
+typedef cl_bitfield         cl_diagnostic_verbose_level_intel;
 
 /* cl_context_properties */
 #define CL_CONTEXT_SHOW_DIAGNOSTICS_INTEL                   0x4106
+
+/* cl_diagnostic_verbose_level_intel */
 #define CL_CONTEXT_DIAGNOSTICS_LEVEL_ALL_INTEL              0xff
 #define CL_CONTEXT_DIAGNOSTICS_LEVEL_GOOD_INTEL             (1 << 0)
 #define CL_CONTEXT_DIAGNOSTICS_LEVEL_BAD_INTEL              (1 << 1)
@@ -3669,7 +3673,7 @@ typedef struct _cl_queue_family_properties_intel {
     "cl_ext_image_requirements_info"
 
 
-#define CL_EXT_IMAGE_REQUIREMENTS_INFO_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_EXT_IMAGE_REQUIREMENTS_INFO_EXTENSION_VERSION CL_MAKE_VERSION(0, 5, 0)
 
 /* Types */
 typedef cl_uint             cl_image_requirements_info_ext;
@@ -3728,7 +3732,7 @@ clGetImageRequirementsInfoEXT(
     "cl_ext_image_from_buffer"
 
 
-#define CL_EXT_IMAGE_FROM_BUFFER_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_EXT_IMAGE_FROM_BUFFER_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 /* cl_image_requirements_info_ext */
 #define CL_IMAGE_REQUIREMENTS_SLICE_PITCH_ALIGNMENT_EXT     0x1291
@@ -3799,7 +3803,7 @@ clGetICDLoaderInfoOCLICD(
     "cl_ext_float_atomics"
 
 
-#define CL_EXT_FLOAT_ATOMICS_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_EXT_FLOAT_ATOMICS_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 typedef cl_bitfield         cl_device_fp_atomic_capabilities_ext;
 
@@ -3866,7 +3870,7 @@ clSetContentSizeBufferPoCL(
     "cl_ext_image_raw10_raw12"
 
 
-#define CL_EXT_IMAGE_RAW10_RAW12_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_EXT_IMAGE_RAW10_RAW12_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 /* cl_channel_type */
 #define CL_UNSIGNED_INT_RAW10_EXT                           0x10E3
@@ -4171,6 +4175,19 @@ typedef cl_bitfield         cl_device_kernel_clock_capabilities_khr;
 
 
 #define CL_KHR_WORK_GROUP_UNIFORM_ARITHMETIC_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/***************************************************************
+* cl_ext_image_unorm_int_2_101010
+***************************************************************/
+#define cl_ext_image_unorm_int_2_101010 1
+#define CL_EXT_IMAGE_UNORM_INT_2_101010_EXTENSION_NAME \
+    "cl_ext_image_unorm_int_2_101010"
+
+
+#define CL_EXT_IMAGE_UNORM_INT_2_101010_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_channel_type */
+#define CL_UNORM_INT_2_101010_EXT                           0x10E5
 
 /***************************************************************
 * cl_img_cancel_command
