@@ -54,7 +54,7 @@ extern "C" {
 
 #define CL_KHR_EGL_IMAGE_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
-/* Command type for events created with clEnqueueAcquireEGLObjectsKHR */
+/* cl_command_type */
 #define CL_COMMAND_EGL_FENCE_SYNC_OBJECT_KHR                0x202F
 #define CL_COMMAND_ACQUIRE_EGL_OBJECTS_KHR                  0x202D
 #define CL_COMMAND_RELEASE_EGL_OBJECTS_KHR                  0x202E

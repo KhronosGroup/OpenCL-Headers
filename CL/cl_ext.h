@@ -576,6 +576,7 @@ typedef cl_bitfield         cl_platform_command_buffer_capabilities_khr;
 #define CL_COMMAND_BUFFER_PLATFORM_AUTOMATIC_REMAP_KHR      (1 << 2)
 
 /* cl_device_info */
+/* enum CL_DEVICE_COMMAND_BUFFER_CAPABILITIES_KHR */
 #define CL_DEVICE_COMMAND_BUFFER_NUM_SYNC_DEVICES_KHR       0x12AB
 #define CL_DEVICE_COMMAND_BUFFER_SYNC_DEVICES_KHR           0x12AC
 
@@ -747,7 +748,7 @@ clGetMutableCommandInfoKHR(
 #define CL_KHR_FP64_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 #if !defined(CL_VERSION_1_2)
-/* cl_device_info - defined in CL.h for OpenCL 1.2 and newer */
+/* cl_device_info */
 #define CL_DEVICE_DOUBLE_FP_CONFIG                          0x1032
 
 #endif /* !defined(CL_VERSION_1_2) */
@@ -986,7 +987,7 @@ typedef cl_bitfield         cl_device_terminate_capability_khr;
 /* cl_context_properties */
 #define CL_CONTEXT_TERMINATE_KHR                            0x2032
 
-/* cl_device_terminate_capability_khr */
+/* cl_device_terminate_capability_khr - bitfield */
 #define CL_DEVICE_TERMINATE_CAPABILITY_CONTEXT_KHR          (1 << 0)
 
 /* Error codes */
@@ -1151,21 +1152,17 @@ typedef cl_ulong            cl_device_partition_property_ext;
 /* cl_device_partition_property_ext */
 #define CL_DEVICE_PARTITION_EQUALLY_EXT                     0x4050
 #define CL_DEVICE_PARTITION_BY_COUNTS_EXT                   0x4051
+#define CL_PARTITION_BY_COUNTS_LIST_END_EXT                 ((cl_device_partition_property_ext)0)
 #define CL_DEVICE_PARTITION_BY_NAMES_EXT                    0x4052
+#define CL_PARTITION_BY_NAMES_LIST_END_EXT                  ((cl_device_partition_property_ext)0 - 1)
 #define CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN_EXT          0x4053
-
-/* cl_device_partition_property_ext - affinity domains */
+#define CL_PROPERTIES_LIST_END_EXT                          ((cl_device_partition_property_ext)0)
 #define CL_AFFINITY_DOMAIN_L1_CACHE_EXT                     0x1
 #define CL_AFFINITY_DOMAIN_L2_CACHE_EXT                     0x2
 #define CL_AFFINITY_DOMAIN_L3_CACHE_EXT                     0x3
 #define CL_AFFINITY_DOMAIN_L4_CACHE_EXT                     0x4
 #define CL_AFFINITY_DOMAIN_NUMA_EXT                         0x10
 #define CL_AFFINITY_DOMAIN_NEXT_FISSIONABLE_EXT             0x100
-
-/* cl_device_partition_property_ext - list terminators */
-#define CL_PROPERTIES_LIST_END_EXT                          ((cl_device_partition_property_ext)0)
-#define CL_PARTITION_BY_COUNTS_LIST_END_EXT                 ((cl_device_partition_property_ext)0)
-#define CL_PARTITION_BY_NAMES_LIST_END_EXT                  ((cl_device_partition_property_ext)0 - 1)
 
 
 typedef cl_int CL_API_CALL
@@ -1225,7 +1222,7 @@ clCreateSubDevicesEXT(
 
 typedef cl_bitfield         cl_mem_migration_flags_ext;
 
-/* cl_mem_migration_flags_ext */
+/* cl_mem_migration_flags_ext - bitfield */
 #define CL_MIGRATE_MEM_OBJECT_HOST_EXT                      (1 << 0)
 
 /* cl_command_type */
@@ -1288,7 +1285,7 @@ typedef struct _cl_mem_ext_host_ptr {
     cl_uint host_cache_policy;
 } cl_mem_ext_host_ptr;
 
-/* cl_mem_flags */
+/* cl_mem_flags - bitfield */
 #define CL_MEM_EXT_HOST_PTR_QCOM                            (1 << 29)
 
 /* cl_device_info */
@@ -1296,7 +1293,9 @@ typedef struct _cl_mem_ext_host_ptr {
 #define CL_DEVICE_PAGE_SIZE_QCOM                            0x40A1
 
 /* cl_image_pitch_info_qcom */
+#define CL_IMAGE_ROW_PITCH                                  0x1112
 #define CL_IMAGE_ROW_ALIGNMENT_QCOM                         0x40A2
+#define CL_IMAGE_SLICE_PITCH                                0x1113
 #define CL_IMAGE_SLICE_ALIGNMENT_QCOM                       0x40A3
 
 /* cl_uint host_cache_policy */
@@ -1411,7 +1410,7 @@ typedef struct _cl_mem_android_native_buffer_host_ptr {
 
 #define CL_IMG_CACHED_ALLOCATIONS_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
-/* cl_mem_flags */
+/* cl_mem_flags - bitfield */
 #define CL_MEM_USE_UNCACHED_CPU_MEMORY_IMG                  (1 << 26)
 #define CL_MEM_USE_CACHED_CPU_MEMORY_IMG                    (1 << 27)
 
@@ -1429,7 +1428,7 @@ typedef struct _cl_mem_android_native_buffer_host_ptr {
 #define CL_GRALLOC_RESOURCE_NOT_ACQUIRED_IMG                0x40D4
 #define CL_INVALID_GRALLOC_OBJECT_IMG                       0x40D5
 
-/* cl_mem_flags */
+/* cl_mem_flags - bitfield */
 #define CL_MEM_USE_GRALLOC_PTR_IMG                          (1 << 28)
 
 /* cl_command_type */
@@ -1544,10 +1543,12 @@ clEnqueueGenerateMipmapIMG(
 
 #define CL_IMG_MEM_PROPERTIES_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
+typedef cl_uint             cl_command_termination_reason_arm;
+
 /* cl_mem_properties */
 #define CL_MEM_ALLOC_FLAGS_IMG                              0x40D7
 
-/* cl_mem_alloc_flags_img */
+/* cl_mem_alloc_flags_img - bitfield */
 #define CL_MEM_ALLOC_RELAX_REQUIREMENTS_IMG                 (1 << 0)
 #define CL_MEM_ALLOC_GPU_WRITE_COMBINE_IMG                  (1 << 1)
 #define CL_MEM_ALLOC_GPU_CACHED_IMG                         (1 << 2)
@@ -1688,6 +1689,7 @@ typedef cl_uint             cl_queue_throttle_khr;
 
 #define CL_KHR_EXTENDED_VERSIONING_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
+/* constants */
 #define CL_VERSION_MAJOR_BITS_KHR                           10
 #define CL_VERSION_MINOR_BITS_KHR                           10
 #define CL_VERSION_PATCH_BITS_KHR                           12
@@ -1705,6 +1707,7 @@ typedef cl_uint             cl_queue_throttle_khr;
     (((minor) &  CL_VERSION_MINOR_MASK_KHR) << CL_VERSION_PATCH_BITS_KHR) | \
     ((patch) & CL_VERSION_PATCH_MASK_KHR))
 
+/* constants */
 #define CL_NAME_VERSION_MAX_NAME_SIZE_KHR                   64
 
 typedef cl_uint             cl_version_khr;
@@ -1734,7 +1737,7 @@ typedef struct _cl_name_version_khr {
 
 #define CL_KHR_DEVICE_UUID_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
-/* Size Constants */
+/* constants */
 #define CL_UUID_SIZE_KHR                                    16
 #define CL_LUID_SIZE_KHR                                    8
 
@@ -1821,7 +1824,7 @@ typedef struct _cl_device_integer_dot_product_acceleration_properties_khr {
     cl_bool accumulating_saturating_mixed_signedness_accelerated;
 } cl_device_integer_dot_product_acceleration_properties_khr;
 
-/* cl_device_integer_dot_product_capabilities_khr */
+/* cl_device_integer_dot_product_capabilities_khr - bitfield */
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_PACKED_KHR (1 << 0)
 #define CL_DEVICE_INTEGER_DOT_PRODUCT_INPUT_4x8BIT_KHR      (1 << 1)
 
@@ -2078,7 +2081,7 @@ typedef cl_uint             cl_semaphore_info_khr;
 typedef cl_uint             cl_semaphore_type_khr;
 typedef cl_ulong            cl_semaphore_payload_khr;
 
-/* cl_semaphore_type */
+/* cl_semaphore_type_khr */
 #define CL_SEMAPHORE_TYPE_BINARY_KHR                        1
 
 /* cl_platform_info */
@@ -2092,10 +2095,12 @@ typedef cl_ulong            cl_semaphore_payload_khr;
 #define CL_SEMAPHORE_REFERENCE_COUNT_KHR                    0x203A
 #define CL_SEMAPHORE_PROPERTIES_KHR                         0x203B
 #define CL_SEMAPHORE_PAYLOAD_KHR                            0x203C
-
-/* cl_semaphore_info_khr or cl_semaphore_properties_khr */
 #define CL_SEMAPHORE_TYPE_KHR                               0x203D
 #define CL_SEMAPHORE_DEVICE_HANDLE_LIST_KHR                 0x2053
+
+/* cl_semaphore_properties_khr */
+/* enum CL_SEMAPHORE_TYPE_KHR */
+/* enum CL_SEMAPHORE_DEVICE_HANDLE_LIST_KHR */
 #define CL_SEMAPHORE_DEVICE_HANDLE_LIST_END_KHR             0
 
 /* cl_command_type */
@@ -2231,9 +2236,11 @@ typedef intptr_t            cl_import_properties_arm;
 #define CL_IMPORT_TYPE_PROTECTED_ARM                        0x40B5
 #define CL_IMPORT_TYPE_ANDROID_HARDWARE_BUFFER_ARM          0x41E2
 #define CL_IMPORT_DMA_BUF_DATA_CONSISTENCY_WITH_HOST_ARM    0x41E3
-#define CL_IMPORT_MEMORY_WHOLE_ALLOCATION_ARM               SIZE_MAX
 #define CL_IMPORT_ANDROID_HARDWARE_BUFFER_PLANE_INDEX_ARM   0x41EF
 #define CL_IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM   0x41F0
+
+/* constants */
+#define CL_IMPORT_MEMORY_WHOLE_ALLOCATION_ARM               SIZE_MAX
 
 
 typedef cl_mem CL_API_CALL
@@ -2292,13 +2299,13 @@ typedef cl_bitfield         cl_device_svm_capabilities_arm;
 #define CL_COMMAND_SVM_MAP_ARM                              0x40BD
 #define CL_COMMAND_SVM_UNMAP_ARM                            0x40BE
 
-/* cl_device_svm_capabilities_arm */
+/* cl_device_svm_capabilities_arm - bitfield */
 #define CL_DEVICE_SVM_COARSE_GRAIN_BUFFER_ARM               (1 << 0)
 #define CL_DEVICE_SVM_FINE_GRAIN_BUFFER_ARM                 (1 << 1)
 #define CL_DEVICE_SVM_FINE_GRAIN_SYSTEM_ARM                 (1 << 2)
 #define CL_DEVICE_SVM_ATOMICS_ARM                           (1 << 3)
 
-/* cl_svm_mem_flags_arm */
+/* cl_svm_mem_flags_arm - bitfield */
 #define CL_MEM_SVM_FINE_GRAIN_BUFFER_ARM                    (1 << 10)
 #define CL_MEM_SVM_ATOMICS_ARM                              (1 << 11)
 
@@ -2534,7 +2541,7 @@ clSetKernelExecInfoARM(
 /* Types */
 typedef cl_bitfield         cl_device_scheduling_controls_capabilities_arm;
 
-/* cl_device_scheduling_controls_capabilities_arm */
+/* cl_device_scheduling_controls_capabilities_arm - bitfield */
 #define CL_DEVICE_SCHEDULING_KERNEL_BATCHING_ARM            (1 << 0)
 #define CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_ARM       (1 << 1)
 #define CL_DEVICE_SCHEDULING_WORKGROUP_BATCH_SIZE_MODIFIER_ARM (1 << 2)
@@ -2579,7 +2586,7 @@ typedef cl_bitfield         cl_device_controlled_termination_capabilities_arm;
 /* Error codes */
 #define CL_COMMAND_TERMINATED_ITSELF_WITH_FAILURE_ARM       -1108
 
-/* cl_device_controlled_termination_capabilities_arm */
+/* cl_device_controlled_termination_capabilities_arm - bitfield */
 #define CL_DEVICE_CONTROLLED_TERMINATION_SUCCESS_ARM        (1 << 0)
 #define CL_DEVICE_CONTROLLED_TERMINATION_FAILURE_ARM        (1 << 1)
 #define CL_DEVICE_CONTROLLED_TERMINATION_QUERY_ARM          (1 << 2)
@@ -2606,6 +2613,7 @@ typedef cl_bitfield         cl_device_controlled_termination_capabilities_arm;
 
 #define CL_ARM_PROTECTED_MEMORY_ALLOCATION_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
+/* cl_mem_flags - bitfield */
 #define CL_MEM_PROTECTED_ALLOC_ARM                          ((cl_bitfield)1 << 36)
 
 /***************************************************************
@@ -2633,7 +2641,7 @@ typedef cl_bitfield         cl_device_controlled_termination_capabilities_arm;
 
 typedef cl_bitfield         cl_device_feature_capabilities_intel;
 
-/* cl_device_feature_capabilities_intel */
+/* cl_device_feature_capabilities_intel - bitfield */
 #define CL_DEVICE_FEATURE_FLAG_DP4A_INTEL                   (1 << 0)
 #define CL_DEVICE_FEATURE_FLAG_DPAS_INTEL                   (1 << 1)
 
@@ -2656,6 +2664,7 @@ typedef cl_bitfield         cl_device_feature_capabilities_intel;
 
 #define CL_INTEL_DEVICE_PARTITION_BY_NAMES_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
+/* cl_device_partition_property */
 #define CL_DEVICE_PARTITION_BY_NAMES_INTEL                  0x4052
 #define CL_PARTITION_BY_NAMES_LIST_END_INTEL                -1
 
@@ -2802,26 +2811,32 @@ typedef struct _cl_motion_estimation_desc_intel {
 /* cl_device_info */
 #define CL_DEVICE_ME_VERSION_INTEL                          0x407E
 
+/* returned from clGetDeviceInfo with CL_DEVICE_ME_VERSION_INTEL */
 #define CL_ME_VERSION_LEGACY_INTEL                          0x0
 #define CL_ME_VERSION_ADVANCED_VER_1_INTEL                  0x1
 #define CL_ME_VERSION_ADVANCED_VER_2_INTEL                  0x2
 
+/* OpenCL-C only */
 #define CL_ME_CHROMA_INTRA_PREDICT_ENABLED_INTEL            0x1
 #define CL_ME_LUMA_INTRA_PREDICT_ENABLED_INTEL              0x2
 
+/* OpenCL-C only */
 #define CL_ME_SKIP_BLOCK_TYPE_16x16_INTEL                   0x0
 #define CL_ME_SKIP_BLOCK_TYPE_8x8_INTEL                     0x4
 
+/* OpenCL-C only */
 #define CL_ME_COST_PENALTY_NONE_INTEL                       0x0
 #define CL_ME_COST_PENALTY_LOW_INTEL                        0x1
 #define CL_ME_COST_PENALTY_NORMAL_INTEL                     0x2
 #define CL_ME_COST_PENALTY_HIGH_INTEL                       0x3
 
+/* OpenCL-C only */
 #define CL_ME_COST_PRECISION_QPEL_INTEL                     0x0
 #define CL_ME_COST_PRECISION_HPEL_INTEL                     0x1
 #define CL_ME_COST_PRECISION_PEL_INTEL                      0x2
 #define CL_ME_COST_PRECISION_DPEL_INTEL                     0x3
 
+/* OpenCL-C only */
 #define CL_ME_LUMA_PREDICTOR_MODE_VERTICAL_INTEL            0x0
 #define CL_ME_LUMA_PREDICTOR_MODE_HORIZONTAL_INTEL          0x1
 #define CL_ME_LUMA_PREDICTOR_MODE_DC_INTEL                  0x2
@@ -2833,15 +2848,18 @@ typedef struct _cl_motion_estimation_desc_intel {
 #define CL_ME_LUMA_PREDICTOR_MODE_VERTICAL_LEFT_INTEL       0x7
 #define CL_ME_LUMA_PREDICTOR_MODE_HORIZONTAL_UP_INTEL       0x8
 
+/* OpenCL-C only */
 #define CL_ME_CHROMA_PREDICTOR_MODE_DC_INTEL                0x0
 #define CL_ME_CHROMA_PREDICTOR_MODE_HORIZONTAL_INTEL        0x1
 #define CL_ME_CHROMA_PREDICTOR_MODE_VERTICAL_INTEL          0x2
 #define CL_ME_CHROMA_PREDICTOR_MODE_PLANE_INTEL             0x3
 
+/* OpenCL-C only */
 #define CL_ME_FORWARD_INPUT_MODE_INTEL                      0x1
 #define CL_ME_BACKWARD_INPUT_MODE_INTEL                     0x2
 #define CL_ME_BIDIRECTION_INPUT_MODE_INTEL                  0x3
 
+/* OpenCL-C only */
 #define CL_ME_BIDIR_WEIGHT_QUARTER_INTEL                    16
 #define CL_ME_BIDIR_WEIGHT_THIRD_INTEL                      21
 #define CL_ME_BIDIR_WEIGHT_HALF_INTEL                       32
@@ -2874,6 +2892,9 @@ typedef struct _cl_motion_estimation_desc_intel {
 
 /* cl_egl_image_properties_khr */
 #define CL_EGL_YUV_PLANE_INTEL                              0x4107
+
+/* cl_image_info */
+/* enum CL_EGL_YUV_PLANE_INTEL */
 
 /***************************************************************
 * cl_intel_packed_yuv
@@ -2944,7 +2965,7 @@ typedef cl_bitfield         cl_diagnostic_verbose_level_intel;
 /* cl_channel_order */
 #define CL_NV12_INTEL                                       0x410E
 
-/* cl_mem_flags */
+/* cl_mem_flags - bitfield */
 #define CL_MEM_NO_ACCESS_INTEL                              (1 << 24)
 #define CL_MEM_ACCESS_FLAGS_UNRESTRICTED_INTEL              (1 << 25)
 
@@ -2967,28 +2988,28 @@ typedef cl_bitfield         cl_diagnostic_verbose_level_intel;
 #define CL_DEVICE_AVC_ME_SUPPORTS_TEXTURE_SAMPLER_USE_INTEL 0x410C
 #define CL_DEVICE_AVC_ME_SUPPORTS_PREEMPTION_INTEL          0x410D
 
-/* returned by CL_DEVICE_AVC_ME_VERSION_INTEL */
+/* returned from clGetDeviceInfo with CL_DEVICE_AVC_ME_VERSION_INTEL */
 #define CL_AVC_ME_VERSION_0_INTEL                           0x0
 #define CL_AVC_ME_VERSION_1_INTEL                           0x1
 
-/* Inter macro-block major shape values */
+/* OpenCL-C only: Inter macro-block major shape values */
 #define CL_AVC_ME_MAJOR_16x16_INTEL                         0x0
 #define CL_AVC_ME_MAJOR_16x8_INTEL                          0x1
 #define CL_AVC_ME_MAJOR_8x16_INTEL                          0x2
 #define CL_AVC_ME_MAJOR_8x8_INTEL                           0x3
 
-/* Inter macro-block minor shape values */
+/* OpenCL-C only: Inter macro-block minor shape values */
 #define CL_AVC_ME_MINOR_8x8_INTEL                           0x0
 #define CL_AVC_ME_MINOR_8x4_INTEL                           0x1
 #define CL_AVC_ME_MINOR_4x8_INTEL                           0x2
 #define CL_AVC_ME_MINOR_4x4_INTEL                           0x3
 
-/* Inter macro-block major direction values */
+/* OpenCL-C only: Inter macro-block major direction values */
 #define CL_AVC_ME_MAJOR_FORWARD_INTEL                       0x0
 #define CL_AVC_ME_MAJOR_BACKWARD_INTEL                      0x1
 #define CL_AVC_ME_MAJOR_BIDIRECTIONAL_INTEL                 0x2
 
-/* Inter (IME) partition mask values */
+/* OpenCL-C only: Inter (IME) partition mask values */
 #define CL_AVC_ME_PARTITION_MASK_ALL_INTEL                  0x0
 #define CL_AVC_ME_PARTITION_MASK_16x16_INTEL                0x7E
 #define CL_AVC_ME_PARTITION_MASK_16x8_INTEL                 0x7D
@@ -2998,7 +3019,7 @@ typedef cl_bitfield         cl_diagnostic_verbose_level_intel;
 #define CL_AVC_ME_PARTITION_MASK_4x8_INTEL                  0x5F
 #define CL_AVC_ME_PARTITION_MASK_4x4_INTEL                  0x3F
 
-/* Search window configuration */
+/* OpenCL-C only: Search window configuration */
 #define CL_AVC_ME_SEARCH_WINDOW_EXHAUSTIVE_INTEL            0x0
 #define CL_AVC_ME_SEARCH_WINDOW_SMALL_INTEL                 0x1
 #define CL_AVC_ME_SEARCH_WINDOW_TINY_INTEL                  0x2
@@ -3012,39 +3033,39 @@ typedef cl_bitfield         cl_diagnostic_verbose_level_intel;
 #define CL_AVC_ME_SEARCH_WINDOW_4x4_RADIUS_INTEL            0x2
 #define CL_AVC_ME_SEARCH_WINDOW_2x2_RADIUS_INTEL            0xa
 
-/* SAD adjustment mode */
+/* OpenCL-C only: SAD adjustment mode */
 #define CL_AVC_ME_SAD_ADJUST_MODE_NONE_INTEL                0x0
 #define CL_AVC_ME_SAD_ADJUST_MODE_HAAR_INTEL                0x2
 
-/* Pixel resolution */
+/* OpenCL-C only: Pixel resolution */
 #define CL_AVC_ME_SUBPIXEL_MODE_INTEGER_INTEL               0x0
 #define CL_AVC_ME_SUBPIXEL_MODE_HPEL_INTEL                  0x1
 #define CL_AVC_ME_SUBPIXEL_MODE_QPEL_INTEL                  0x3
 
-/* Cost precision values */
+/* OpenCL-C only: Cost precision values */
 #define CL_AVC_ME_COST_PRECISION_QPEL_INTEL                 0x0
 #define CL_AVC_ME_COST_PRECISION_HPEL_INTEL                 0x1
 #define CL_AVC_ME_COST_PRECISION_PEL_INTEL                  0x2
 #define CL_AVC_ME_COST_PRECISION_DPEL_INTEL                 0x3
 
-/* Inter bidirectional weights */
+/* OpenCL-C only: Inter bidirectional weights */
 #define CL_AVC_ME_BIDIR_WEIGHT_QUARTER_INTEL                0x10
 #define CL_AVC_ME_BIDIR_WEIGHT_THIRD_INTEL                  0x15
 #define CL_AVC_ME_BIDIR_WEIGHT_HALF_INTEL                   0x20
 #define CL_AVC_ME_BIDIR_WEIGHT_TWO_THIRD_INTEL              0x2B
 #define CL_AVC_ME_BIDIR_WEIGHT_THREE_QUARTER_INTEL          0x30
 
-/* Inter border reached values */
+/* OpenCL-C only: Inter border reached values */
 #define CL_AVC_ME_BORDER_REACHED_LEFT_INTEL                 0x0
 #define CL_AVC_ME_BORDER_REACHED_RIGHT_INTEL                0x2
 #define CL_AVC_ME_BORDER_REACHED_TOP_INTEL                  0x4
 #define CL_AVC_ME_BORDER_REACHED_BOTTOM_INTEL               0x8
 
-/* Inter skip block partition type */
+/* OpenCL-C only: Inter skip block partition type */
 #define CL_AVC_ME_SKIP_BLOCK_PARTITION_16x16_INTEL          0x0
 #define CL_AVC_ME_SKIP_BLOCK_PARTITION_8x8_INTEL            0x4000
 
-/* Inter skip motion vector mask */
+/* OpenCL-C only: Inter skip motion vector mask */
 #define CL_AVC_ME_SKIP_BLOCK_16x16_FORWARD_ENABLE_INTEL     (0x1 << 24)
 #define CL_AVC_ME_SKIP_BLOCK_16x16_BACKWARD_ENABLE_INTEL    (0x2 << 24)
 #define CL_AVC_ME_SKIP_BLOCK_16x16_DUAL_ENABLE_INTEL        (0x3 << 24)
@@ -3060,27 +3081,27 @@ typedef cl_bitfield         cl_diagnostic_verbose_level_intel;
 #define CL_AVC_ME_SKIP_BLOCK_8x8_3_FORWARD_ENABLE_INTEL     (0x1 << 30)
 #define CL_AVC_ME_SKIP_BLOCK_8x8_3_BACKWARD_ENABLE_INTEL    (0x2 << 30)
 
-/* Block based skip type values */
+/* OpenCL-C only: Block based skip type values */
 #define CL_AVC_ME_BLOCK_BASED_SKIP_4x4_INTEL                0x00
 #define CL_AVC_ME_BLOCK_BASED_SKIP_8x8_INTEL                0x80
 
-/* cl_intel_device_side_avc_motion_estimation.?? */
+/* OpenCL-C only: cl_intel_device_side_avc_motion_estimation.?? */
 #define CL_AVC_ME_INTRA_16x16_INTEL                         0x0
 #define CL_AVC_ME_INTRA_8x8_INTEL                           0x1
 #define CL_AVC_ME_INTRA_4x4_INTEL                           0x2
 
-/* Luma intra partition mask values */
+/* OpenCL-C only: Luma intra partition mask values */
 #define CL_AVC_ME_INTRA_LUMA_PARTITION_MASK_16x16_INTEL     0x6
 #define CL_AVC_ME_INTRA_LUMA_PARTITION_MASK_8x8_INTEL       0x5
 #define CL_AVC_ME_INTRA_LUMA_PARTITION_MASK_4x4_INTEL       0x3
 
-/* Intra neighbor availability mask values */
+/* OpenCL-C only: Intra neighbor availability mask values */
 #define CL_AVC_ME_INTRA_NEIGHBOR_LEFT_MASK_ENABLE_INTEL     0x60
 #define CL_AVC_ME_INTRA_NEIGHBOR_UPPER_MASK_ENABLE_INTEL    0x10
 #define CL_AVC_ME_INTRA_NEIGHBOR_UPPER_RIGHT_MASK_ENABLE_INTEL 0x8
 #define CL_AVC_ME_INTRA_NEIGHBOR_UPPER_LEFT_MASK_ENABLE_INTEL 0x4
 
-/* Luma intra modes */
+/* OpenCL-C only: Luma intra modes */
 #define CL_AVC_ME_LUMA_PREDICTOR_MODE_VERTICAL_INTEL        0x0
 #define CL_AVC_ME_LUMA_PREDICTOR_MODE_HORIZONTAL_INTEL      0x1
 #define CL_AVC_ME_LUMA_PREDICTOR_MODE_DC_INTEL              0x2
@@ -3092,23 +3113,23 @@ typedef cl_bitfield         cl_diagnostic_verbose_level_intel;
 #define CL_AVC_ME_LUMA_PREDICTOR_MODE_VERTICAL_LEFT_INTEL   0x7
 #define CL_AVC_ME_LUMA_PREDICTOR_MODE_HORIZONTAL_UP_INTEL   0x8
 
-/* Chroma intra modes */
+/* OpenCL-C only: Chroma intra modes */
 #define CL_AVC_ME_CHROMA_PREDICTOR_MODE_DC_INTEL            0x0
 #define CL_AVC_ME_CHROMA_PREDICTOR_MODE_HORIZONTAL_INTEL    0x1
 #define CL_AVC_ME_CHROMA_PREDICTOR_MODE_VERTICAL_INTEL      0x2
 #define CL_AVC_ME_CHROMA_PREDICTOR_MODE_PLANE_INTEL         0x3
 
-/* Reference image select values */
+/* OpenCL-C only: Reference image select values */
 #define CL_AVC_ME_FRAME_FORWARD_INTEL                       0x1
 #define CL_AVC_ME_FRAME_BACKWARD_INTEL                      0x2
 #define CL_AVC_ME_FRAME_DUAL_INTEL                          0x3
 
-/* Slice type values */
+/* OpenCL-C only: Slice type values */
 #define CL_AVC_ME_SLICE_TYPE_PRED_INTEL                     0x0
 #define CL_AVC_ME_SLICE_TYPE_BPRED_INTEL                    0x1
 #define CL_AVC_ME_SLICE_TYPE_INTRA_INTEL                    0x2
 
-/* Interlaced image field polarity values */
+/* OpenCL-C only: Interlaced image field polarity values */
 #define CL_AVC_ME_INTERLACED_SCAN_TOP_FIELD_INTEL           0x0
 #define CL_AVC_ME_INTERLACED_SCAN_BOTTOM_FIELD_INTEL        0x1
 
@@ -3136,7 +3157,7 @@ typedef cl_uint             cl_mem_advice_intel;
 #define CL_DEVICE_CROSS_DEVICE_SHARED_MEM_CAPABILITIES_INTEL 0x4193
 #define CL_DEVICE_SHARED_SYSTEM_MEM_CAPABILITIES_INTEL      0x4194
 
-/* cl_unified_shared_memory_capabilities_intel - bitfield */
+/* cl_device_unified_shared_memory_capabilities_intel - bitfield */
 #define CL_UNIFIED_SHARED_MEMORY_ACCESS_INTEL               (1 << 0)
 #define CL_UNIFIED_SHARED_MEMORY_ATOMIC_ACCESS_INTEL        (1 << 1)
 #define CL_UNIFIED_SHARED_MEMORY_CONCURRENT_ACCESS_INTEL    (1 << 2)
@@ -3150,11 +3171,12 @@ typedef cl_uint             cl_mem_advice_intel;
 #define CL_MEM_ALLOC_INITIAL_PLACEMENT_DEVICE_INTEL         (1 << 1)
 #define CL_MEM_ALLOC_INITIAL_PLACEMENT_HOST_INTEL           (1 << 2)
 
-/* cl_mem_alloc_info_intel */
+/* cl_mem_info */
 #define CL_MEM_ALLOC_TYPE_INTEL                             0x419A
 #define CL_MEM_ALLOC_BASE_PTR_INTEL                         0x419B
 #define CL_MEM_ALLOC_SIZE_INTEL                             0x419C
 #define CL_MEM_ALLOC_DEVICE_INTEL                           0x419D
+/* enum CL_MEM_ALLOC_FLAGS_INTEL */
 
 /* cl_unified_shared_memory_type_intel */
 #define CL_MEM_TYPE_UNKNOWN_INTEL                           0x4196
@@ -3449,7 +3471,7 @@ clEnqueueMemsetINTEL(
 /* cl_mem_properties_intel */
 #define CL_MEM_ALLOC_BUFFER_LOCATION_INTEL                  0x419E
 
-/* cl_mem_alloc_info_intel */
+/* cl_mem_info_intel */
 /* enum CL_MEM_ALLOC_BUFFER_LOCATION_INTEL */
 
 /***************************************************************
@@ -3500,11 +3522,11 @@ clCreateBufferWithPropertiesINTEL(
 
 #define CL_INTEL_PROGRAM_SCOPE_HOST_PIPE_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
-/* clGetEventInfo response when param_name is CL_EVENT_COMMAND_TYPE */
+/* cl_command_type: clGetEventInfo response when param_name is CL_EVENT_COMMAND_TYPE */
 #define CL_COMMAND_READ_HOST_PIPE_INTEL                     0x4214
 #define CL_COMMAND_WRITE_HOST_PIPE_INTEL                    0x4215
 
-/* clGetProgramInfo param_name */
+/* cl_program_info */
 #define CL_PROGRAM_NUM_HOST_PIPES_INTEL                     0x4216
 #define CL_PROGRAM_HOST_PIPE_NAMES_INTEL                    0x4217
 
@@ -3590,7 +3612,7 @@ clEnqueueWriteHostPipeINTEL(
 
 #define CL_INTEL_MEM_FORCE_HOST_MEMORY_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
-/* cl_mem_flags */
+/* cl_mem_flags - bitfield */
 #define CL_MEM_FORCE_HOST_MEMORY_INTEL                      (1 << 20)
 
 /***************************************************************
@@ -3605,6 +3627,7 @@ clEnqueueWriteHostPipeINTEL(
 
 typedef cl_bitfield         cl_command_queue_capabilities_intel;
 
+/* constants */
 #define CL_QUEUE_FAMILY_MAX_NAME_SIZE_INTEL                 64
 
 typedef struct _cl_queue_family_properties_intel {
@@ -3621,7 +3644,11 @@ typedef struct _cl_queue_family_properties_intel {
 #define CL_QUEUE_FAMILY_INTEL                               0x418C
 #define CL_QUEUE_INDEX_INTEL                                0x418D
 
-/* cl_command_queue_capabilities_intel */
+/* cl_command_queue_info */
+/* enum CL_QUEUE_FAMILY_INTEL */
+/* enum CL_QUEUE_INDEX_INTEL */
+
+/* cl_command_queue_capabilities_intel - bitfield */
 #define CL_QUEUE_DEFAULT_CAPABILITIES_INTEL                 0
 #define CL_QUEUE_CAPABILITY_CREATE_SINGLE_QUEUE_EVENTS_INTEL (1 << 0)
 #define CL_QUEUE_CAPABILITY_CREATE_CROSS_QUEUE_EVENTS_INTEL (1 << 1)
@@ -3650,7 +3677,7 @@ typedef struct _cl_queue_family_properties_intel {
 
 #define CL_INTEL_QUEUE_NO_SYNC_OPERATIONS_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
-/* cl_command_queue_properties */
+/* cl_command_queue_properties - bitfield */
 #define CL_QUEUE_NO_SYNC_OPERATIONS_INTEL                   (1 << 29)
 
 /***************************************************************
@@ -3790,7 +3817,7 @@ clGetICDLoaderInfoOCLICD(
 #define CL_KHR_DEPTH_IMAGES_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 #if !defined(CL_VERSION_2_0)
-/* cl_channel_order - defined in CL.h for OpenCL 2.0 and newer */
+/* cl_channel_order */
 #define CL_DEPTH                                            0x10BD
 
 #endif /* !defined(CL_VERSION_2_0) */
@@ -3807,7 +3834,7 @@ clGetICDLoaderInfoOCLICD(
 
 typedef cl_bitfield         cl_device_fp_atomic_capabilities_ext;
 
-/* cl_device_fp_atomic_capabilities_ext */
+/* cl_device_fp_atomic_capabilities_ext - bitfield */
 #define CL_DEVICE_GLOBAL_FP_ATOMIC_LOAD_STORE_EXT           (1 << 0)
 #define CL_DEVICE_GLOBAL_FP_ATOMIC_ADD_EXT                  (1 << 1)
 #define CL_DEVICE_GLOBAL_FP_ATOMIC_MIN_MAX_EXT              (1 << 2)
@@ -4001,7 +4028,7 @@ clSetContentSizeBufferPoCL(
 
 typedef cl_bitfield         cl_device_kernel_clock_capabilities_khr;
 
-/* cl_device_kernel_clock_capabilities_khr */
+/* cl_device_kernel_clock_capabilities_khr - bitfield */
 #define CL_DEVICE_KERNEL_CLOCK_SCOPE_DEVICE_KHR             (1 << 0)
 #define CL_DEVICE_KERNEL_CLOCK_SCOPE_WORK_GROUP_KHR         (1 << 1)
 #define CL_DEVICE_KERNEL_CLOCK_SCOPE_SUB_GROUP_KHR          (1 << 2)

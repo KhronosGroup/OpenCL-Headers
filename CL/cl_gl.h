@@ -67,7 +67,7 @@ typedef cl_uint             cl_gl_context_info;
 #define CL_CURRENT_DEVICE_FOR_GL_CONTEXT_KHR                0x2006
 #define CL_DEVICES_FOR_GL_CONTEXT_KHR                       0x2007
 
-/* Additional cl_context_properties */
+/* cl_context_properties */
 #define CL_GL_CONTEXT_KHR                                   0x2008
 #define CL_EGL_DISPLAY_KHR                                  0x2009
 #define CL_GLX_DISPLAY_KHR                                  0x200A
