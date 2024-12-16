@@ -321,7 +321,7 @@ extern "C" {
 * ${name}${provisional_label}
 ***************************************************************/
 %if is_provisional:
-#if defined(CL_PROVISIONAL_EXTENSIONS)
+#if defined(CL_ENABLE_PROVISIONAL_EXTENSIONS)
 
 %endif
 %if extension.get('condition'):
@@ -446,7 +446,7 @@ ${api.Name}(
 
 %endif
 %if is_provisional:
-#endif /* defined(CL_PROVISIONAL_EXTENSIONS) */
+#endif /* defined(CL_ENABLE_PROVISIONAL_EXTENSIONS) */
 
 %endif
 %  endif
