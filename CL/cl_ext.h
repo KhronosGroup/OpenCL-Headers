@@ -52,7 +52,7 @@ extern "C" {
     "cl_khr_command_buffer"
 
 
-#define CL_KHR_COMMAND_BUFFER_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 6)
+#define CL_KHR_COMMAND_BUFFER_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 7)
 
 typedef cl_bitfield         cl_device_command_buffer_capabilities_khr;
 typedef struct _cl_command_buffer_khr* cl_command_buffer_khr;
@@ -563,7 +563,7 @@ clCommandSVMMemFillKHR(
     "cl_khr_command_buffer_multi_device"
 
 
-#define CL_KHR_COMMAND_BUFFER_MULTI_DEVICE_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 1)
+#define CL_KHR_COMMAND_BUFFER_MULTI_DEVICE_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 2)
 
 typedef cl_bitfield         cl_platform_command_buffer_capabilities_khr;
 
