@@ -94,6 +94,11 @@ def get_apimacros(spec):
                 name = name.strip()
                 macro = macro.rstrip() # keep spaces on the left!
                 macros[name] = Macro(define, name, macro)
+            elif noneStr(type.text).strip().startswith("#if"):
+                define = noneStr(type.text).strip()
+                name = type.get('name')
+                name = name.strip()
+                macros[name] = Macro(define, name, '')
     return macros
 
 def get_apistructs(spec):

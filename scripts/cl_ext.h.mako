@@ -343,7 +343,11 @@ extern "C" {
 %        if type.get('name') in typedefs:
 ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 %        elif type.get('name') in macros:
+%            if macros[type.get('name')].Macro == '':
+${macros[type.get('name')].Define}
+%            else:
 #define ${type.get('name')}${macros[type.get('name')].Macro}
+%            endif
 %        elif type.get('name') in structs:
 <%
     struct = structs[type.get('name')]
