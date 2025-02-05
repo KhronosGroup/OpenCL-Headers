@@ -85,8 +85,10 @@ typedef cl_uint             cl_d3d11_device_set_khr;
 #define CL_PREFERRED_DEVICES_FOR_D3D11_KHR                  0x401B
 #define CL_ALL_DEVICES_FOR_D3D11_KHR                        0x401C
 
-/* cl_context_info */
+/* cl_context_properties */
 #define CL_CONTEXT_D3D11_DEVICE_KHR                         0x401D
+
+/* cl_context_info */
 #define CL_CONTEXT_D3D11_PREFER_SHARED_RESOURCES_KHR        0x402D
 
 /* cl_mem_info */
