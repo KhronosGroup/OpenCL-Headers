@@ -4231,6 +4231,19 @@ clSetKernelArgDevicePointerEXT(
 #define CL_UNORM_INT_2_101010_EXT                           0x10E5
 
 /***************************************************************
+* cl_ext_immutable_memory_objects
+***************************************************************/
+#define cl_ext_immutable_memory_objects 1
+#define CL_EXT_IMMUTABLE_MEMORY_OBJECTS_EXTENSION_NAME \
+    "cl_ext_immutable_memory_objects"
+
+
+#define CL_EXT_IMMUTABLE_MEMORY_OBJECTS_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_mem_flags */
+#define CL_MEM_IMMUTABLE_EXT                                (1 << 6)
+
+/***************************************************************
 * cl_img_cancel_command
 ***************************************************************/
 #define cl_img_cancel_command 1
