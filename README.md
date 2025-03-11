@@ -107,7 +107,7 @@ break backward compatibility:
 
 * Very rarely, there may be bugs or other issues in the OpenCL API headers that
   cannot be fixed without breaking compatibility.
-* The OpenCL API headers for provisional features or provisional extensions may
+* The OpenCL API headers for beta features or beta extensions may
   be changed in a way that breaks compatibility.
 
 Applications or libraries that require stable OpenCL API headers are encouraged
@@ -115,20 +115,20 @@ to use tagged or released OpenCL API headers.  We will do our best to document
 any breaking changes in the description of each release.  The OpenCL API headers
 are tagged at least as often as each OpenCL specification release.
 
-## Provisional Extensions
+## Beta Extensions
 
-Provisional extensions are extensions that are still in development and are
+Beta extensions are extensions that are still in development and are
 hence subject to change. To further improve compatibility for applications that
-do not use provisional features, support for provisional extension must be
-explicitly enabled.  Support for provisional extensions is controlled by the
-`CL_ENABLE_PROVISIONAL_EXTENSIONS` preprocessor define.
+do not use beta features, support for beta extensions must be
+explicitly enabled.  Support for beta extensions is controlled by the
+`CL_ENABLE_BETA_EXTENSIONS` preprocessor define.
 
 For example, to enable support for OpenCL 3.0 APIs and all extensions, including
-provisional extensions, you may include the OpenCL API headers as follows:
+beta extensions, you may include the OpenCL API headers as follows:
 
 ```c
 #define CL_TARGET_OPENCL_VERSION 300
-#define CL_ENABLE_PROVISIONAL_EXTENSIONS
+#define CL_ENABLE_BETA_EXTENSIONS
 #include <CL/opencl.h>
 ```
 

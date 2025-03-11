@@ -20,7 +20,7 @@
 
 int extVersionMacro(void)
 {
-    // Test a non-provisional extension with non-placeholder semantic version.
+    // Test a non-beta extension with non-placeholder semantic version.
     printf("Checking version macro for the cl_khr_integer_dot_product "
            "extension\n");
 
