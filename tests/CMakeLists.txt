@@ -34,18 +34,31 @@ function(add_header_test NAME SOURCE)
     set(LANG c)
   endif()
   foreach(VERSION 100 110 120 200 210 220 300)
-    set(TEST_EXE ${NAME}_${LANG}_${VERSION})
-    list(FIND TEST_SKIP_ANSI_TESTING ${NAME} TEST_SKIP_INDEX)
-    if(NOT (${TEST_SKIP_INDEX} GREATER -1 AND MSVC AND CMAKE_C_FLAGS MATCHES "/Za"))
-      add_executable(${TEST_EXE} "${SOURCE_PATH}")
-      target_compile_definitions(${TEST_EXE}
-        PUBLIC -DCL_TARGET_OPENCL_VERSION=${VERSION}
-      )
-      target_include_directories(${TEST_EXE}
-        PUBLIC ${PROJECT_SOURCE_DIR}
-      )
-      add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
-    endif()
+    foreach(OPTION "" CL_ENABLE_BETA_EXTENSIONS)
+      if(OPTION STREQUAL "")
+        # The empty string means we're not setting any special option.
+        set(UNDERSCORE_OPTION "${OPTION}")
+        set(DEFINE_OPTION "")
+      elseif(VERSION EQUAL 300)
+        # Only test special options for OpenCL 3.0.
+        set(UNDERSCORE_OPTION "_${OPTION}")
+        set(DEFINE_OPTION "-D${OPTION}")
+      else()
+        continue()
+      endif()
+      set(TEST_EXE ${NAME}_${LANG}_${VERSION}${UNDERSCORE_OPTION})
+      list(FIND TEST_SKIP_ANSI_TESTING ${NAME} TEST_SKIP_INDEX)
+      if(NOT (${TEST_SKIP_INDEX} GREATER -1 AND MSVC AND CMAKE_C_FLAGS MATCHES "/Za"))
+        add_executable(${TEST_EXE} "${SOURCE_PATH}")
+        target_compile_definitions(${TEST_EXE}
+          PUBLIC -DCL_TARGET_OPENCL_VERSION=${VERSION} ${DEFINE_OPTION}
+        )
+        target_include_directories(${TEST_EXE}
+          PUBLIC ${PROJECT_SOURCE_DIR}
+        )
+        add_test(NAME ${TEST_EXE} COMMAND ${TEST_EXE})
+      endif()
+    endforeach(OPTION)
   endforeach(VERSION)
 endfunction(add_header_test)
 
