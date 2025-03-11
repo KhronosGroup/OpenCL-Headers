@@ -304,9 +304,26 @@ extern "C" {
 %  if shouldGenerate(extension.get('name')):
 <%
     name = extension.get('name')
+
+    # Use re.match to parse semantic major.minor.patch version
+    sem_ver = match('[0-9]+\.[0-9]+\.?[0-9]+', extension.get('revision'))
+    if not sem_ver:
+        raise TypeError(name +
+        ' XML revision field is not semantically versioned as "major.minor.patch"')
+    version = sem_ver[0].split('.')
+    version_major = version[0]
+    version_minor = version[1]
+    version_patch = version[2]
+
+    is_provisional = extension.get('provisional') == 'true'
+    provisional_label = ' (provisional)' if is_provisional else ''
 %>/***************************************************************
-* ${name}
+* ${name}${provisional_label}
 ***************************************************************/
+%if is_provisional:
+#if defined(CL_ENABLE_PROVISIONAL_EXTENSIONS)
+
+%endif
 %if extension.get('condition'):
 #if ${extension.get('condition')}
 
@@ -315,18 +332,8 @@ extern "C" {
 #define ${name.upper()}_EXTENSION_NAME ${"\\"}
     "${name}"
 
-<%
-  # Use re.match to parse semantic major.minor.patch version
-  sem_ver = match('[0-9]+\.[0-9]+\.?[0-9]+', extension.get('revision'))
-  if not sem_ver:
-    raise TypeError(name +
-      ' XML revision field is not semantically versioned as "major.minor.patch"')
-  version = sem_ver[0].split('.')
-  major = version[0]
-  minor = version[1]
-  patch = version[2]
-%>
-#define ${name.upper()}_EXTENSION_VERSION CL_MAKE_VERSION(${major}, ${minor}, ${patch})
+
+#define ${name.upper()}_EXTENSION_VERSION CL_MAKE_VERSION(${version_major}, ${version_minor}, ${version_patch})
 
 %for block in extension.findall('require'):
 %  if shouldEmit(block):
@@ -436,6 +443,10 @@ ${api.Name}(
 %endfor
 %if extension.get('condition'):
 #endif /* ${extension.get('condition')} */
+
+%endif
+%if is_provisional:
+#endif /* defined(CL_ENABLE_PROVISIONAL_EXTENSIONS) */
 
 %endif
 %  endif

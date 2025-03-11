@@ -115,12 +115,31 @@ to use tagged or released OpenCL API headers.  We will do our best to document
 any breaking changes in the description of each release.  The OpenCL API headers
 are tagged at least as often as each OpenCL specification release.
 
+## Provisional Extensions
+
+Provisional extensions are extensions that are still in development and are
+hence subject to change. To further improve compatibility for applications that
+do not use provisional features, support for provisional extension must be
+explicitly enabled.  Support for provisional extensions is controlled by the
+`CL_ENABLE_PROVISIONAL_EXTENSIONS` preprocessor define.
+
+For example, to enable support for OpenCL 3.0 APIs and all extensions, including
+provisional extensions, you may include the OpenCL API headers as follows:
+
+```c
+#define CL_TARGET_OPENCL_VERSION 300
+#define CL_ENABLE_PROVISIONAL_EXTENSIONS
+#include <CL/opencl.h>
+```
+
 ## Directory Structure
 
 ```
 README.md               This file
 LICENSE                 Source license for the OpenCL API headers
 CL/                     Unified OpenCL API headers tree
+scripts/                Scripts for generating OpenCL extension headers
+tests/                  OpenCL API header tests
 ```
 
 ## Packaging
