@@ -45,9 +45,9 @@ extern "C" {
 #endif
 
 /***************************************************************
-* cl_khr_command_buffer (provisional)
+* cl_khr_command_buffer (beta)
 ***************************************************************/
-#if defined(CL_ENABLE_PROVISIONAL_EXTENSIONS)
+#if defined(CL_ENABLE_BETA_EXTENSIONS)
 
 #define cl_khr_command_buffer 1
 #define CL_KHR_COMMAND_BUFFER_EXTENSION_NAME \
@@ -557,12 +557,12 @@ clCommandSVMMemFillKHR(
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
-#endif /* defined(CL_ENABLE_PROVISIONAL_EXTENSIONS) */
+#endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
-* cl_khr_command_buffer_multi_device (provisional)
+* cl_khr_command_buffer_multi_device (beta)
 ***************************************************************/
-#if defined(CL_ENABLE_PROVISIONAL_EXTENSIONS)
+#if defined(CL_ENABLE_BETA_EXTENSIONS)
 
 #define cl_khr_command_buffer_multi_device 1
 #define CL_KHR_COMMAND_BUFFER_MULTI_DEVICE_EXTENSION_NAME \
@@ -621,12 +621,12 @@ clRemapCommandBufferKHR(
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
-#endif /* defined(CL_ENABLE_PROVISIONAL_EXTENSIONS) */
+#endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
-* cl_khr_command_buffer_mutable_dispatch (provisional)
+* cl_khr_command_buffer_mutable_dispatch (beta)
 ***************************************************************/
-#if defined(CL_ENABLE_PROVISIONAL_EXTENSIONS)
+#if defined(CL_ENABLE_BETA_EXTENSIONS)
 
 #define cl_khr_command_buffer_mutable_dispatch 1
 #define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_NAME \
@@ -746,7 +746,7 @@ clGetMutableCommandInfoKHR(
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
-#endif /* defined(CL_ENABLE_PROVISIONAL_EXTENSIONS) */
+#endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
 * cl_khr_fp64
@@ -2060,9 +2060,9 @@ clReImportSemaphoreSyncFdKHR(
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 /***************************************************************
-* cl_khr_external_semaphore_win32 (provisional)
+* cl_khr_external_semaphore_win32 (beta)
 ***************************************************************/
-#if defined(CL_ENABLE_PROVISIONAL_EXTENSIONS)
+#if defined(CL_ENABLE_BETA_EXTENSIONS)
 
 #define cl_khr_external_semaphore_win32 1
 #define CL_KHR_EXTERNAL_SEMAPHORE_WIN32_EXTENSION_NAME \
@@ -2076,7 +2076,7 @@ clReImportSemaphoreSyncFdKHR(
 #define CL_SEMAPHORE_HANDLE_OPAQUE_WIN32_KMT_KHR            0x2057
 #define CL_SEMAPHORE_HANDLE_OPAQUE_WIN32_NAME_KHR           0x2068
 
-#endif /* defined(CL_ENABLE_PROVISIONAL_EXTENSIONS) */
+#endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
 * cl_khr_semaphore
@@ -4003,9 +4003,9 @@ clSetContentSizeBufferPoCL(
 #define CL_KHR_INT64_EXTENDED_ATOMICS_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 /***************************************************************
-* cl_khr_kernel_clock (provisional)
+* cl_khr_kernel_clock (beta)
 ***************************************************************/
-#if defined(CL_ENABLE_PROVISIONAL_EXTENSIONS)
+#if defined(CL_ENABLE_BETA_EXTENSIONS)
 
 #define cl_khr_kernel_clock 1
 #define CL_KHR_KERNEL_CLOCK_EXTENSION_NAME \
@@ -4024,7 +4024,7 @@ typedef cl_bitfield         cl_device_kernel_clock_capabilities_khr;
 #define CL_DEVICE_KERNEL_CLOCK_SCOPE_WORK_GROUP_KHR         (1 << 1)
 #define CL_DEVICE_KERNEL_CLOCK_SCOPE_SUB_GROUP_KHR          (1 << 2)
 
-#endif /* defined(CL_ENABLE_PROVISIONAL_EXTENSIONS) */
+#endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
 * cl_khr_local_int32_base_atomics

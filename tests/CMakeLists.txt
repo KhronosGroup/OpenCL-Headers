@@ -34,7 +34,7 @@ function(add_header_test NAME SOURCE)
     set(LANG c)
   endif()
   foreach(VERSION 100 110 120 200 210 220 300)
-    foreach(OPTION "" CL_ENABLE_PROVISIONAL_EXTENSIONS)
+    foreach(OPTION "" CL_ENABLE_BETA_EXTENSIONS)
       if(OPTION STREQUAL "")
         # The empty string means we're not setting any special option.
         set(UNDERSCORE_OPTION "${OPTION}")
