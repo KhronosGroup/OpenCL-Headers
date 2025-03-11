@@ -4187,8 +4187,10 @@ typedef cl_bitfield         cl_device_kernel_clock_capabilities_khr;
 #define CL_KHR_SUBGROUP_SHUFFLE_RELATIVE_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 /***************************************************************
-* cl_khr_unified_svm
+* cl_khr_unified_svm (beta)
 ***************************************************************/
+#if defined(CL_ENABLE_BETA_EXTENSIONS)
+
 #if defined(CL_VERSION_2_0)
 
 #define cl_khr_unified_svm 1
@@ -4400,6 +4402,8 @@ clGetSVMSuggestedTypeIndexKHR(
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
 #endif /* defined(CL_VERSION_2_0) */
+
+#endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
 * cl_khr_work_group_uniform_arithmetic
