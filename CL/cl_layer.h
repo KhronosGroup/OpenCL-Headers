@@ -54,7 +54,7 @@ extern "C" {
     "cl_loader_layers"
 
 
-#define CL_LOADER_LAYERS_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+#define CL_LOADER_LAYERS_EXTENSION_VERSION CL_MAKE_VERSION(2, 0, 0)
 
 typedef cl_uint             cl_layer_info;
 typedef cl_uint             cl_layer_api_version;
@@ -65,6 +65,7 @@ typedef cl_uint             cl_layer_api_version;
 
 /* Misc API enums */
 #define CL_LAYER_API_VERSION_100                            100
+#define CL_LAYER_API_VERSION_200                            200
 
 
 typedef cl_int CL_API_CALL
@@ -87,6 +88,13 @@ clInitLayer_t(
 typedef clInitLayer_t *
 clInitLayer_fn ;
 
+typedef cl_int CL_API_CALL
+clDeinitLayer_t(
+    void );
+
+typedef clDeinitLayer_t *
+clDeinitLayer_fn ;
+
 /*
 ** The function pointer typedefs prefixed with "pfn_" are provided for
 ** compatibility with earlier versions of the headers.  New code is
@@ -99,6 +107,9 @@ pfn_clGetLayerInfo ;
 
 typedef clInitLayer_t *
 pfn_clInitLayer ;
+
+typedef clDeinitLayer_t *
+pfn_clDeinitLayer ;
 
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
@@ -115,6 +126,10 @@ clInitLayer(
     const cl_icd_dispatch* target_dispatch,
     cl_uint* num_entries_ret,
     const cl_icd_dispatch** layer_dispatch_ret) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clDeinitLayer(
+    void ) ;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
