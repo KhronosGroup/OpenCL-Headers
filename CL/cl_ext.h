@@ -4242,9 +4242,6 @@ typedef cl_uint             cl_svm_pointer_info_khr;
 #define CL_SVM_ALLOC_ACCESS_DEVICE_NOREAD_KHR               (1 << 8)
 #define CL_SVM_ALLOC_ACCESS_DEVICE_NOWRITE_KHR              (1 << 9)
 
-/* cl_svm_free_flags_khr */
-#define CL_SVM_FREE_BLOCKING_KHR                            (1 << 0)
-
 /* cl_svm_pointer_info_khr */
 #define CL_SVM_INFO_TYPE_INDEX_KHR                          0x2088
 #define CL_SVM_INFO_CAPABILITIES_KHR                        0x2089
