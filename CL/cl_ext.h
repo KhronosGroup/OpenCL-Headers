@@ -4294,6 +4294,36 @@ clCancelCommandsIMG(
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
+/*************************************
+ * cl_qcom_perf_hint extension *
+ *************************************/
+
+typedef cl_uint cl_perf_hint;
+
+#define CL_CONTEXT_PERF_HINT_QCOM 0x40C2
+
+/*cl_perf_hint*/
+#define CL_PERF_HINT_HIGH_QCOM 0x40C3
+#define CL_PERF_HINT_NORMAL_QCOM 0x40C4
+#define CL_PERF_HINT_LOW_QCOM 0x40C5
+
+typedef cl_int CL_API_CALL
+clSetPerfHintQCOM_t(
+    cl_context context,
+    cl_perf_hint perf_hint);
+
+typedef clSetPerfHintQCOM_t *
+clSetPerfHintQCOM_fn ;
+
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clSetPerfHintQCOM(
+    cl_context context,
+    cl_perf_hint perf_hint);
+
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
+
 #ifdef __cplusplus
 }
 #endif
