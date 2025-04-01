@@ -4294,23 +4294,31 @@ clCancelCommandsIMG(
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
-/*************************************
- * cl_qcom_perf_hint extension *
- *************************************/
+/***************************************************************
+* cl_qcom_perf_hint
+***************************************************************/
+#define cl_qcom_perf_hint 1
+#define CL_QCOM_PERF_HINT_EXTENSION_NAME \
+    "cl_qcom_perf_hint"
 
-typedef cl_uint cl_perf_hint;
 
-#define CL_CONTEXT_PERF_HINT_QCOM 0x40C2
+#define CL_QCOM_PERF_HINT_EXTENSION_VERSION CL_MAKE_VERSION(0, 5, 0)
 
-/*cl_perf_hint*/
-#define CL_PERF_HINT_HIGH_QCOM 0x40C3
-#define CL_PERF_HINT_NORMAL_QCOM 0x40C4
-#define CL_PERF_HINT_LOW_QCOM 0x40C5
+typedef cl_uint             cl_perf_hint_qcom;
+
+/* cl_perf_hint_qcom */
+#define CL_PERF_HINT_HIGH_QCOM                              0x40C3
+#define CL_PERF_HINT_NORMAL_QCOM                            0x40C4
+#define CL_PERF_HINT_LOW_QCOM                               0x40C5
+
+/* cl_context_info */
+#define CL_CONTEXT_PERF_HINT_QCOM                           0x40C2
+
 
 typedef cl_int CL_API_CALL
 clSetPerfHintQCOM_t(
     cl_context context,
-    cl_perf_hint perf_hint);
+    cl_perf_hint_qcom perf_hint);
 
 typedef clSetPerfHintQCOM_t *
 clSetPerfHintQCOM_fn ;
@@ -4320,7 +4328,7 @@ clSetPerfHintQCOM_fn ;
 extern CL_API_ENTRY cl_int CL_API_CALL
 clSetPerfHintQCOM(
     cl_context context,
-    cl_perf_hint perf_hint);
+    cl_perf_hint_qcom perf_hint) ;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
