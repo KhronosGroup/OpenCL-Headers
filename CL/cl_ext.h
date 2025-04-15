@@ -4302,7 +4302,7 @@ clCancelCommandsIMG(
     "cl_qcom_perf_hint"
 
 
-#define CL_QCOM_PERF_HINT_EXTENSION_VERSION CL_MAKE_VERSION(0, 5, 0)
+#define CL_QCOM_PERF_HINT_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 5)
 
 typedef cl_uint             cl_perf_hint_qcom;
 
