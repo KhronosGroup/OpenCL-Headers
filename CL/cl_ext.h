@@ -885,6 +885,7 @@ clLogMessagesToStderrAPPLE(
 
 /* cl_platform_info */
 #define CL_PLATFORM_ICD_SUFFIX_KHR                          0x0920
+#define CL_PLATFORM_UNLOADABLE_KHR                          0x0921
 
 /* Error codes */
 #define CL_PLATFORM_NOT_FOUND_KHR                           -1001
