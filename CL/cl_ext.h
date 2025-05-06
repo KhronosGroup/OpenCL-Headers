@@ -4284,6 +4284,24 @@ clSetKernelArgDevicePointerEXT(
 #define CL_UNORM_INT_2_101010_EXT                           0x10E5
 
 /***************************************************************
+* cl_ext_image_unsigned_10x6_12x4_14x2
+***************************************************************/
+#define cl_ext_image_unsigned_10x6_12x4_14x2 1
+#define CL_EXT_IMAGE_UNSIGNED_10X6_12X4_14X2_EXTENSION_NAME \
+    "cl_ext_image_unsigned_10x6_12x4_14x2"
+
+
+#define CL_EXT_IMAGE_UNSIGNED_10X6_12X4_14X2_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_channel_type */
+#define CL_UNSIGNED_INT10X6_EXT                             0x10E6
+#define CL_UNSIGNED_INT12X4_EXT                             0x10E7
+#define CL_UNSIGNED_INT14X2_EXT                             0x10E8
+#define CL_UNORM_INT10X6_EXT                                0x10E1
+#define CL_UNORM_INT12X4_EXT                                0x10E9
+#define CL_UNORM_INT14X2_EXT                                0x10EA
+
+/***************************************************************
 * cl_ext_immutable_memory_objects
 ***************************************************************/
 #define cl_ext_immutable_memory_objects 1
