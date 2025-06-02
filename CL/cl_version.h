@@ -37,25 +37,25 @@
 
 /* OpenCL Version */
 #if CL_TARGET_OPENCL_VERSION >= 300 && !defined(CL_VERSION_3_0)
-#define CL_VERSION_3_0  1
+#define CL_VERSION_3_0  300
 #endif
 #if CL_TARGET_OPENCL_VERSION >= 220 && !defined(CL_VERSION_2_2)
-#define CL_VERSION_2_2  1
+#define CL_VERSION_2_2  220
 #endif
 #if CL_TARGET_OPENCL_VERSION >= 210 && !defined(CL_VERSION_2_1)
-#define CL_VERSION_2_1  1
+#define CL_VERSION_2_1  210
 #endif
 #if CL_TARGET_OPENCL_VERSION >= 200 && !defined(CL_VERSION_2_0)
-#define CL_VERSION_2_0  1
+#define CL_VERSION_2_0  200
 #endif
 #if CL_TARGET_OPENCL_VERSION >= 120 && !defined(CL_VERSION_1_2)
-#define CL_VERSION_1_2  1
+#define CL_VERSION_1_2  120
 #endif
 #if CL_TARGET_OPENCL_VERSION >= 110 && !defined(CL_VERSION_1_1)
-#define CL_VERSION_1_1  1
+#define CL_VERSION_1_1  110
 #endif
 #if CL_TARGET_OPENCL_VERSION >= 100 && !defined(CL_VERSION_1_0)
-#define CL_VERSION_1_0  1
+#define CL_VERSION_1_0  100
 #endif
 
 /* Allow deprecated APIs for older OpenCL versions. */
