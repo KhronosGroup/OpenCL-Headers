@@ -315,7 +315,8 @@ extern "C" {
     version_minor = version[1]
     version_patch = version[2]
 
-    is_beta = extension.get('provisional') == 'true'
+    # Note: when "provisional" is phased out of the XML file, it can be removed here, too
+    is_beta = extension.get('experimental') == 'true' or extension.get('provisional') == 'true'
     beta_label = ' (beta)' if is_beta else ''
 %>/***************************************************************
 * ${name}${beta_label}
