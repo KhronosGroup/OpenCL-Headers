@@ -315,7 +315,8 @@ extern "C" {
     version_minor = version[1]
     version_patch = version[2]
 
-    is_beta = extension.get('provisional') == 'true'
+    # Note: when "provisional" is phased out of the XML file, it can be removed here, too
+    is_beta = extension.get('experimental') == 'true' or extension.get('provisional') == 'true'
     beta_label = ' (beta)' if is_beta else ''
 %>/***************************************************************
 * ${name}${beta_label}
@@ -350,7 +351,11 @@ extern "C" {
 %        if type.get('name') in typedefs:
 ${typedefs[type.get('name')].Typedef.ljust(27)} ${type.get('name')};
 %        elif type.get('name') in macros:
+%            if macros[type.get('name')].Macro == '':
+${macros[type.get('name')].Define}
+%            else:
 #define ${type.get('name')}${macros[type.get('name')].Macro}
+%            endif
 %        elif type.get('name') in structs:
 <%
     struct = structs[type.get('name')]
