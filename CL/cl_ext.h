@@ -3186,7 +3186,7 @@ typedef cl_bitfield         cl_diagnostic_verbose_level_intel;
     "cl_intel_unified_shared_memory"
 
 
-#define CL_INTEL_UNIFIED_SHARED_MEMORY_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_INTEL_UNIFIED_SHARED_MEMORY_EXTENSION_VERSION CL_MAKE_VERSION(1, 1, 0)
 
 typedef cl_bitfield         cl_device_unified_shared_memory_capabilities_intel;
 typedef cl_properties       cl_mem_properties_intel;
@@ -4011,6 +4011,23 @@ clSetContentSizeBufferPoCL(
 
 
 #define CL_KHR_EXTENDED_BIT_OPS_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/***************************************************************
+* cl_khr_external_memory_android_hardware_buffer (beta)
+***************************************************************/
+#if defined(CL_ENABLE_BETA_EXTENSIONS)
+
+#define cl_khr_external_memory_android_hardware_buffer 1
+#define CL_KHR_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION_NAME \
+    "cl_khr_external_memory_android_hardware_buffer"
+
+
+#define CL_KHR_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 2)
+
+/* cl_external_memory_handle_type_khr */
+#define CL_EXTERNAL_MEMORY_HANDLE_ANDROID_HARDWARE_BUFFER_KHR 0x2070
+
+#endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
 * cl_khr_global_int32_base_atomics
