@@ -54,7 +54,7 @@ extern "C" {
     "cl_khr_command_buffer"
 
 
-#define CL_KHR_COMMAND_BUFFER_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 7)
+#define CL_KHR_COMMAND_BUFFER_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 8)
 
 typedef cl_bitfield         cl_device_command_buffer_capabilities_khr;
 typedef struct _cl_command_buffer_khr* cl_command_buffer_khr;
@@ -74,13 +74,9 @@ typedef struct _cl_mutable_command_khr* cl_mutable_command_khr;
 /* cl_device_command_buffer_capabilities_khr - bitfield */
 #define CL_COMMAND_BUFFER_CAPABILITY_KERNEL_PRINTF_KHR      (1 << 0)
 #define CL_COMMAND_BUFFER_CAPABILITY_DEVICE_SIDE_ENQUEUE_KHR (1 << 1)
-#define CL_COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR   (1 << 2)
 
 /* cl_command_buffer_properties_khr */
 #define CL_COMMAND_BUFFER_FLAGS_KHR                         0x1293
-
-/* cl_command_buffer_flags_khr - bitfield */
-#define CL_COMMAND_BUFFER_SIMULTANEOUS_USE_KHR              (1 << 0)
 
 /* Error codes */
 #define CL_INVALID_COMMAND_BUFFER_KHR                       -1138
@@ -98,7 +94,6 @@ typedef struct _cl_mutable_command_khr* cl_mutable_command_khr;
 /* cl_command_buffer_state_khr */
 #define CL_COMMAND_BUFFER_STATE_RECORDING_KHR               0
 #define CL_COMMAND_BUFFER_STATE_EXECUTABLE_KHR              1
-#define CL_COMMAND_BUFFER_STATE_PENDING_KHR                 2
 
 /* cl_command_type */
 #define CL_COMMAND_COMMAND_BUFFER_KHR                       0x12A8
@@ -633,7 +628,7 @@ clRemapCommandBufferKHR(
     "cl_khr_command_buffer_mutable_dispatch"
 
 
-#define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 3)
+#define CL_KHR_COMMAND_BUFFER_MUTABLE_DISPATCH_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 4)
 
 typedef cl_uint             cl_command_buffer_update_type_khr;
 typedef cl_bitfield         cl_mutable_dispatch_fields_khr;
@@ -664,7 +659,11 @@ typedef struct _cl_mutable_dispatch_config_khr {
 typedef cl_bitfield         cl_mutable_dispatch_asserts_khr;
 
 /* cl_command_buffer_flags_khr - bitfield */
+#define CL_COMMAND_BUFFER_SIMULTANEOUS_USE_KHR              (1 << 0)
 #define CL_COMMAND_BUFFER_MUTABLE_KHR                       (1 << 1)
+
+/* cl_device_command_buffer_capabilities_khr - bitfield */
+#define CL_COMMAND_BUFFER_CAPABILITY_SIMULTANEOUS_USE_KHR   (1 << 2)
 
 /* Error codes */
 #define CL_INVALID_MUTABLE_COMMAND_KHR                      -1141
@@ -4389,6 +4388,56 @@ clCancelCommandsIMG(
     size_t num_events_in_list) ;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
+
+/***************************************************************
+* cl_img_safety_mechanisms
+***************************************************************/
+#define cl_img_safety_mechanisms 1
+#define CL_IMG_SAFETY_MECHANISMS_EXTENSION_NAME \
+    "cl_img_safety_mechanisms"
+
+
+#define CL_IMG_SAFETY_MECHANISMS_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_context_properties */
+#define CL_CONTEXT_SAFETY_PROPERTIES_IMG                    0x40D9
+
+/* Types */
+typedef cl_bitfield         cl_context_safety_properties_img;
+
+/* cl_context_safety_properties_img */
+#define CL_CONTEXT_WORKGROUP_PROTECTION_IMG                 (1 << 0)
+#define CL_CONTEXT_ENHANCED_EVENT_EXECUTION_STATUS_IMG      (1 << 1)
+
+/* cl_device_info */
+#define CL_DEVICE_WORKGROUP_PROTECTION_SVM_CAPABILITIES_IMG 0x40DA
+#define CL_DEVICE_WORKGROUP_PROTECTION_DEVICE_ENQUEUE_CAPABILITIES_IMG 0x40DB
+#define CL_DEVICE_SAFETY_MEM_SIZE_IMG                       0x40DC
+
+/* Error codes */
+#define CL_ECC_RECOVERED_IMG                                0x40DD
+#define CL_PAGE_FAULT_IMG                                   -1127
+#define CL_SAFETY_FAULT_IMG                                 -1128
+#define CL_GENERAL_FAULT_IMG                                -1129
+#define CL_ECC_UNRECOVERED_IMG                              -1130
+
+/***************************************************************
+* cl_img_unified_svm_external_memory_dma_buf (beta)
+***************************************************************/
+#if defined(CL_ENABLE_BETA_EXTENSIONS)
+
+#define cl_img_unified_svm_external_memory_dma_buf 1
+#define CL_IMG_UNIFIED_SVM_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME \
+    "cl_img_unified_svm_external_memory_dma_buf"
+
+
+#define CL_IMG_UNIFIED_SVM_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_VERSION CL_MAKE_VERSION(1, 1, 0)
+
+/* cl_svm_alloc_properties_khr */
+#define CL_SVM_ALLOC_EXTERNAL_MEMORY_DMA_BUF_VIRTUAL_ADDRESS_IMG 0x4220
+#define CL_SVM_ALLOC_EXTERNAL_MEMORY_DMA_BUF_IMG            0x4221
+
+#endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
 * cl_qcom_perf_hint
