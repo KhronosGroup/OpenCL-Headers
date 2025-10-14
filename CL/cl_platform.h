@@ -519,6 +519,16 @@ typedef double          cl_double;
 #define  __CL_ANON_STRUCT__
 #endif
 
+/* Define capabilities for anonymous union members. */
+#if defined(__cplusplus) && __cplusplus >= 201103L
+#define  __CL_HAS_ANON_UNION__ 1
+#define  __CL_ANON_UNION__
+#else
+    /* Follow anonymous struct logic */
+#define  __CL_HAS_ANON_UNION__ __CL_HAS_ANON_STRUCT__
+#define  __CL_ANON_UNION__ __CL_ANON_STRUCT__
+#endif
+
 #if defined(_WIN32) && defined(_MSC_VER) && __CL_HAS_ANON_STRUCT__
    /* Disable warning C4201: nonstandard extension used : nameless struct/union */
     #pragma warning( push )
