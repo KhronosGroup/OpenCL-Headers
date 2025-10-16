@@ -790,6 +790,11 @@ clGetMutableCommandInfoKHR(
 #define CL_APPLE_SETMEMOBJECTDESTRUCTOR_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
 
 
+typedef void CL_CALLBACK clSetMemObjectDestructorAPPLE_callback_t(cl_mem memobj, void* user_data);
+
+typedef clSetMemObjectDestructorAPPLE_callback_t *
+clSetMemObjectDestructorAPPLE_callback_fn;
+
 typedef cl_int CL_API_CALL
 clSetMemObjectDestructorAPPLE_t(
     cl_mem memobj,
@@ -2388,6 +2393,11 @@ clSVMFreeARM_t(
 
 typedef clSVMFreeARM_t *
 clSVMFreeARM_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef void CL_CALLBACK clEnqueueSVMFreeARM_callback_t(cl_command_queue queue, cl_uint num_svm_pointers, void * svm_pointers[], void *user_data);
+
+typedef clEnqueueSVMFreeARM_callback_t *
+clEnqueueSVMFreeARM_callback_fn;
 
 typedef cl_int CL_API_CALL
 clEnqueueSVMFreeARM_t(

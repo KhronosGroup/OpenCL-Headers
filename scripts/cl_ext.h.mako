@@ -1,6 +1,6 @@
 <%
 # re.match used to parse extension semantic versions
-from re import match
+from re import match, sub
 
 # Extensions to skip by default because they are in dedicated headers:
 skipExtensions = {
@@ -391,6 +391,15 @@ ${macros[type.get('name')].Define}
 <%
     api = apisigs[func.get('name')]
 %>
+%        for paramStr in getCParameterStrings(api.Params):
+%          if 'CL_CALLBACK' in paramStr:
+typedef ${sub(r'\s*\(\s*CL_CALLBACK\s*\*\s*[0-9a-zA-Z_]*\s*\)', ' CL_CALLBACK ' + api.Name + '_callback_t', paramStr)};
+
+typedef ${api.Name}_callback_t *
+${api.Name}_callback_fn;
+
+%          endif
+%        endfor
 typedef ${api.RetType} CL_API_CALL
 ${api.Name}_t(
 %        for i, paramStr in enumerate(getCParameterStrings(api.Params)):
