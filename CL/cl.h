@@ -444,6 +444,9 @@ typedef struct _cl_name_version {
 #ifdef CL_VERSION_2_0
 #define CL_QUEUE_ON_DEVICE                          (1 << 2)
 #define CL_QUEUE_ON_DEVICE_DEFAULT                  (1 << 3)
+#define CL_QUEUE_ALL_PROPERTIES                     (CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE | CL_QUEUE_PROFILING_ENABLE | CL_QUEUE_ON_DEVICE | CL_QUEUE_ON_DEVICE_DEFAULT)
+#else
+#define CL_QUEUE_ALL_PROPERTIES                     (CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE | CL_QUEUE_PROFILING_ENABLE)
 #endif
 
 /* cl_context_info */
