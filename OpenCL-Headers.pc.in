@@ -1,7 +1,0 @@
-prefix=@PKGCONFIG_PREFIX@
-includedir=@OPENCL_INCLUDEDIR_PC@
-
-Name: OpenCL-Headers
-Description: Khronos OpenCL Headers
-Version: 3.0
-Cflags: -I${includedir}
