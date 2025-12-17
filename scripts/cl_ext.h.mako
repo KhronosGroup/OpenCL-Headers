@@ -58,6 +58,7 @@ orderedExtensions = [
     'cl_APPLE_SetMemObjectDestructor',
     'cl_APPLE_ContextLoggingFunctions',
     'cl_khr_icd',
+    'cl_khr_icd_unloadable',
     'cl_khr_il_program',
     'cl_khr_image2D_from_buffer',   # incorrect name
     'cl_khr_image2d_from_buffer',
