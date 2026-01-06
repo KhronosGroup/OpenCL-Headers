@@ -883,7 +883,7 @@ clLogMessagesToStderrAPPLE(
     "cl_khr_icd"
 
 
-#define CL_KHR_ICD_EXTENSION_VERSION CL_MAKE_VERSION(2, 0, 0)
+#define CL_KHR_ICD_EXTENSION_VERSION CL_MAKE_VERSION(2, 0, 1)
 
 /* cl_platform_info */
 #define CL_PLATFORM_ICD_SUFFIX_KHR                          0x0920
@@ -943,6 +943,19 @@ clIcdSetPlatformDispatchDataKHR(
     void* dispatch_data) ;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
+
+/***************************************************************
+* cl_khr_icd_unloadable
+***************************************************************/
+#define cl_khr_icd_unloadable 1
+#define CL_KHR_ICD_UNLOADABLE_EXTENSION_NAME \
+    "cl_khr_icd_unloadable"
+
+
+#define CL_KHR_ICD_UNLOADABLE_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_platform_info */
+#define CL_PLATFORM_UNLOADABLE_KHR                          0x0921
 
 /***************************************************************
 * cl_khr_il_program
