@@ -4672,6 +4672,28 @@ typedef cl_bitfield         cl_context_safety_properties_img;
 #endif /* defined(CL_ENABLE_BETA_EXTENSIONS) */
 
 /***************************************************************
+* cl_intel_kernel_allocations_info
+***************************************************************/
+#define cl_intel_kernel_allocations_info 1
+#define CL_INTEL_KERNEL_ALLOCATIONS_INFO_EXTENSION_NAME \
+    "cl_intel_kernel_allocations_info"
+
+
+#define CL_INTEL_KERNEL_ALLOCATIONS_INFO_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* type cl_unified_shared_memory_type_intel */
+
+typedef struct _cl_kernel_allocation_info_intel {
+    void* base;
+    size_t size;
+    cl_unified_shared_memory_type_intel type;
+    cl_int arg_index;
+} cl_kernel_allocation_info_intel;
+
+/* cl_kernel_workgroup_info */
+#define CL_KERNEL_ALLOCATIONS_INFO_INTEL                    0x425A
+
+/***************************************************************
 * cl_qcom_perf_hint
 ***************************************************************/
 #define cl_qcom_perf_hint 1
