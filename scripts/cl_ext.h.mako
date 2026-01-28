@@ -307,7 +307,7 @@ extern "C" {
     name = extension.get('name')
 
     # Use re.match to parse semantic major.minor.patch version
-    sem_ver = match('[0-9]+\.[0-9]+\.?[0-9]+', extension.get('revision'))
+    sem_ver = match(r'[0-9]+\.[0-9]+\.?[0-9]+', extension.get('revision'))
     if not sem_ver:
         raise TypeError(name +
         ' XML revision field is not semantically versioned as "major.minor.patch"')
