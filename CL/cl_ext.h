@@ -883,10 +883,15 @@ clLogMessagesToStderrAPPLE(
     "cl_khr_icd"
 
 
-#define CL_KHR_ICD_EXTENSION_VERSION CL_MAKE_VERSION(2, 0, 1)
+#define CL_KHR_ICD_EXTENSION_VERSION CL_MAKE_VERSION(2, 0, 2)
+
+typedef cl_properties       cl_instance_platform_properties_khr;
 
 /* cl_platform_info */
 #define CL_PLATFORM_ICD_SUFFIX_KHR                          0x0920
+
+/* cl_instance_platform_properties_khr */
+#define CL_INSTANCE_PLATFORM_PROPERTIES_LIST_END_KHR        0
 
 /* Error codes */
 #define CL_PLATFORM_NOT_FOUND_KHR                           -1001
@@ -924,6 +929,22 @@ clIcdSetPlatformDispatchDataKHR_t(
 typedef clIcdSetPlatformDispatchDataKHR_t *
 clIcdSetPlatformDispatchDataKHR_fn ;
 
+typedef cl_platform_id CL_API_CALL
+clIcdCreateInstancePlatformKHR_t(
+    cl_platform_id platform,
+    const cl_instance_platform_properties_khr* properties,
+    cl_int* errcode_ret);
+
+typedef clIcdCreateInstancePlatformKHR_t *
+clIcdCreateInstancePlatformKHR_fn ;
+
+typedef cl_int CL_API_CALL
+clIcdDestroyInstancePlatformKHR_t(
+    cl_platform_id platform);
+
+typedef clIcdDestroyInstancePlatformKHR_t *
+clIcdDestroyInstancePlatformKHR_fn ;
+
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY cl_int CL_API_CALL
@@ -941,6 +962,16 @@ extern CL_API_ENTRY cl_int CL_API_CALL
 clIcdSetPlatformDispatchDataKHR(
     cl_platform_id platform,
     void* dispatch_data) ;
+
+extern CL_API_ENTRY cl_platform_id CL_API_CALL
+clIcdCreateInstancePlatformKHR(
+    cl_platform_id platform,
+    const cl_instance_platform_properties_khr* properties,
+    cl_int* errcode_ret) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clIcdDestroyInstancePlatformKHR(
+    cl_platform_id platform) ;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
