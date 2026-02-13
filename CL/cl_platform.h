@@ -28,7 +28,11 @@ extern "C" {
         #define CL_API_ENTRY
     #endif
     #if !defined(CL_API_CALL)
-        #define CL_API_CALL     __stdcall
+        #if !defined(__aarch64__) && !defined(__arm64__)
+            #define CL_API_CALL __stdcall
+        #else
+            #define CL_API_CALL
+        #endif
     #endif
     #if !defined(CL_CALLBACK)
         #define CL_CALLBACK     __stdcall
