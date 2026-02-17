@@ -23,31 +23,23 @@
 extern "C" {
 #endif
 
-#if defined(_WIN32)
-    #if !defined(CL_API_ENTRY)
-        #define CL_API_ENTRY
-    #endif
-    #if !defined(CL_API_CALL)
-        #if !defined(__aarch64__) && !defined(__arm64__)
-            #define CL_API_CALL __stdcall
-        #else
-            #define CL_API_CALL
-        #endif
-    #endif
-    #if !defined(CL_CALLBACK)
-        #define CL_CALLBACK     __stdcall
-    #endif
+#if defined(_WIN32) && !defined(__aarch64__) && !defined(__arm64__)
+    #define _CL_STD_CALL __stdcall
 #else
-    #if !defined(CL_API_ENTRY)
-        #define CL_API_ENTRY
-    #endif
-    #if !defined(CL_API_CALL)
-        #define CL_API_CALL
-    #endif
-    #if !defined(CL_CALLBACK)
-        #define CL_CALLBACK
-    #endif
+    #define _CL_STD_CALL
 #endif
+
+#if !defined(CL_API_ENTRY)
+    #define CL_API_ENTRY
+#endif
+#if !defined(CL_API_CALL)
+    #define CL_API_CALL     _CL_STD_CALL
+#endif
+#if !defined(CL_CALLBACK)
+    #define CL_CALLBACK     _CL_STD_CALL
+#endif
+
+#undef _CL_STD_CALL
 
 /*
  * Deprecation flags refer to the last version of the header in which the
