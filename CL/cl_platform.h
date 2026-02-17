@@ -33,13 +33,11 @@ extern "C" {
     #define CL_API_ENTRY
 #endif
 #if !defined(CL_API_CALL)
-    #define CL_API_CALL     _CL_STD_CALL
+    #define CL_API_CALL _CL_STD_CALL
 #endif
 #if !defined(CL_CALLBACK)
-    #define CL_CALLBACK     _CL_STD_CALL
+    #define CL_CALLBACK _CL_STD_CALL
 #endif
-
-#undef _CL_STD_CALL
 
 /*
  * Deprecation flags refer to the last version of the header in which the
