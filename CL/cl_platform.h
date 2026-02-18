@@ -23,20 +23,22 @@
 extern "C" {
 #endif
 
-#if defined(_WIN32) && !defined(__aarch64__) && !defined(__arm64__)
-    #define _CL_STD_CALL __stdcall
-#else
-    #define _CL_STD_CALL
-#endif
-
 #if !defined(CL_API_ENTRY)
     #define CL_API_ENTRY
 #endif
 #if !defined(CL_API_CALL)
-    #define CL_API_CALL _CL_STD_CALL
+    #if defined(_WIN32) && !defined(__aarch64__) && !defined(__arm64__)
+        #define CL_API_CALL __stdcall
+    #else
+        #define CL_API_CALL
+    #endif
 #endif
 #if !defined(CL_CALLBACK)
-    #define CL_CALLBACK _CL_STD_CALL
+    #if defined(_WIN32) && !defined(__aarch64__) && !defined(__arm64__)
+        #define CL_CALLBACK __stdcall
+    #else
+        #define CL_CALLBACK
+    #endif
 #endif
 
 /*
