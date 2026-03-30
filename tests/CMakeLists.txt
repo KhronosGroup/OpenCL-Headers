@@ -33,14 +33,14 @@ function(add_header_test NAME SOURCE)
     set(SOURCE_PATH "../${SOURCE}")
     set(LANG c)
   endif()
-  foreach(VERSION 100 110 120 200 210 220 300)
+  foreach(VERSION 100 110 120 200 210 220 300 310)
     foreach(OPTION "" CL_ENABLE_BETA_EXTENSIONS)
       if(OPTION STREQUAL "")
         # The empty string means we're not setting any special option.
         set(UNDERSCORE_OPTION "${OPTION}")
         set(DEFINE_OPTION "")
-      elseif(VERSION EQUAL 300)
-        # Only test special options for OpenCL 3.0.
+      elseif(VERSION GREATER_EQUAL 300)
+        # Only test special options for OpenCL 3.0 and newer.
         set(UNDERSCORE_OPTION "_${OPTION}")
         set(DEFINE_OPTION "-D${OPTION}")
       else()
