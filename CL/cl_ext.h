@@ -3988,6 +3988,78 @@ clSetContentSizeBufferPoCL(
 #define CL_KHR_BYTE_ADDRESSABLE_STORE_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
 
 /***************************************************************
+* cl_khr_cooperative_matrix
+***************************************************************/
+#define cl_khr_cooperative_matrix 1
+#define CL_KHR_COOPERATIVE_MATRIX_EXTENSION_NAME \
+    "cl_khr_cooperative_matrix"
+
+
+#define CL_KHR_COOPERATIVE_MATRIX_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_device_info */
+#define CL_DEVICE_COOPERATIVE_MATRIX_POINTER_ALIGNMENT_KHR  0x107A
+#define CL_DEVICE_COOPERATIVE_MATRIX_STRIDE_MULTIPLE_KHR    0x107B
+
+/* cl_device_cooperative_matrix_info_khr */
+#define CL_DEVICE_COOPERATIVE_MATRIX_DEFAULT_SUB_GROUP_VARIANTS_KHR 0x1078
+#define CL_DEVICE_COOPERATIVE_MATRIX_SUB_GROUP_VARIANTS_KHR 0x1079
+
+typedef cl_uint             cl_device_cooperative_matrix_component_type_khr;
+typedef cl_uint             cl_device_cooperative_matrix_info_khr;
+typedef struct _cl_device_cooperative_matrix_variant_khr {
+    cl_uint m_size;
+    cl_uint n_size;
+    cl_uint k_size;
+    cl_device_cooperative_matrix_component_type_khr a_type;
+    cl_device_cooperative_matrix_component_type_khr b_type;
+    cl_device_cooperative_matrix_component_type_khr c_type;
+    cl_device_cooperative_matrix_component_type_khr result_type;
+    cl_bool saturating_accumulation;
+} cl_device_cooperative_matrix_variant_khr;
+
+/* cl_device_cooperative_matrix_component_type_khr */
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_FP16_KHR 0
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_FP32_KHR 1
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_FP64_KHR 2
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_SINT8_KHR 3
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_SINT16_KHR 4
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_SINT32_KHR 5
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_SINT64_KHR 6
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_UINT8_KHR 7
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_UINT16_KHR 8
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_UINT32_KHR 9
+#define CL_DEVICE_COOPERATIVE_MATRIX_COMPONENT_TYPE_UINT64_KHR 10
+
+
+typedef cl_int CL_API_CALL
+clGetDeviceCooperativeMatrixInfoKHR_t(
+    cl_device_id device,
+    cl_device_cooperative_matrix_info_khr param_name,
+    size_t input_value_size,
+    const void* input_value,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret);
+
+typedef clGetDeviceCooperativeMatrixInfoKHR_t *
+clGetDeviceCooperativeMatrixInfoKHR_fn ;
+
+#if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clGetDeviceCooperativeMatrixInfoKHR(
+    cl_device_id device,
+    cl_device_cooperative_matrix_info_khr param_name,
+    size_t input_value_size,
+    const void* input_value,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret) ;
+
+#endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
+
+/***************************************************************
 * cl_khr_device_enqueue_local_arg_types
 ***************************************************************/
 #define cl_khr_device_enqueue_local_arg_types 1
