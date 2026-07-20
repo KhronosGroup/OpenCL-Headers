@@ -66,6 +66,6 @@ jobs:
       run: dput ppa:${{ vars.PPA }} $GITHUB_WORKSPACE/*source.changes
 
     - name: Create GitHub release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
       with:
         files: ${{ github.workspace }}/../build/*.deb
