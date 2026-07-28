@@ -4690,7 +4690,7 @@ typedef struct _cl_kernel_allocation_info_intel {
     cl_int arg_index;
 } cl_kernel_allocation_info_intel;
 
-/* cl_kernel_workgroup_info */
+/* cl_kernel_work_group_info */
 #define CL_KERNEL_ALLOCATIONS_INFO_INTEL                    0x425A
 
 /***************************************************************
