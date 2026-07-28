@@ -2301,20 +2301,12 @@ clRetainSemaphoreKHR(
     "cl_arm_import_memory"
 
 
-#define CL_ARM_IMPORT_MEMORY_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+#define CL_ARM_IMPORT_MEMORY_EXTENSION_VERSION CL_MAKE_VERSION(1, 1, 0)
 
 typedef intptr_t            cl_import_properties_arm;
 
 /* cl_import_properties_arm */
 #define CL_IMPORT_TYPE_ARM                                  0x40B2
-#define CL_IMPORT_TYPE_HOST_ARM                             0x40B3
-#define CL_IMPORT_TYPE_DMA_BUF_ARM                          0x40B4
-#define CL_IMPORT_TYPE_PROTECTED_ARM                        0x40B5
-#define CL_IMPORT_TYPE_ANDROID_HARDWARE_BUFFER_ARM          0x41E2
-#define CL_IMPORT_DMA_BUF_DATA_CONSISTENCY_WITH_HOST_ARM    0x41E3
-#define CL_IMPORT_MEMORY_WHOLE_ALLOCATION_ARM               SIZE_MAX
-#define CL_IMPORT_ANDROID_HARDWARE_BUFFER_PLANE_INDEX_ARM   0x41EF
-#define CL_IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM   0x41F0
 
 
 typedef cl_mem CL_API_CALL
@@ -2568,23 +2560,6 @@ clSetKernelExecInfoARM(
     const void* param_value) CL_API_SUFFIX__VERSION_1_2;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
-
-/***************************************************************
-* cl_arm_get_core_id
-***************************************************************/
-#if defined(CL_VERSION_1_2)
-
-#define cl_arm_get_core_id 1
-#define CL_ARM_GET_CORE_ID_EXTENSION_NAME \
-    "cl_arm_get_core_id"
-
-
-#define CL_ARM_GET_CORE_ID_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
-
-/* cl_device_info */
-#define CL_DEVICE_COMPUTE_UNITS_BITFIELD_ARM                0x40BF
-
-#endif /* defined(CL_VERSION_1_2) */
 
 /***************************************************************
 * cl_arm_job_slot_selection
@@ -4291,13 +4266,14 @@ typedef cl_bitfield         cl_device_kernel_clock_capabilities_khr;
     "cl_khr_unified_svm"
 
 
-#define CL_KHR_UNIFIED_SVM_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 0)
+#define CL_KHR_UNIFIED_SVM_EXTENSION_VERSION CL_MAKE_VERSION(0, 9, 1)
 
 /* cl_platform_info */
 #define CL_PLATFORM_SVM_TYPE_CAPABILITIES_KHR               0x0909
 
 /* cl_device_info */
 #define CL_DEVICE_SVM_TYPE_CAPABILITIES_KHR                 0x1077
+#define CL_DEVICE_SVM_CONCURRENT_ACCESS_ATOM_SIZE_KHR       0x1078
 
 typedef cl_bitfield         cl_svm_capabilities_khr;
 
@@ -4322,6 +4298,7 @@ typedef cl_properties       cl_svm_alloc_properties_khr;
 typedef cl_bitfield         cl_svm_alloc_access_flags_khr;
 typedef cl_properties       cl_svm_free_properties_khr;
 typedef cl_bitfield         cl_svm_free_flags_khr;
+typedef cl_properties       cl_svm_copy_properties_khr;
 typedef cl_uint             cl_svm_pointer_info_khr;
 
 /* cl_svm_alloc_properties_khr */
@@ -4453,6 +4430,21 @@ clGetSVMSuggestedTypeIndexKHR_t(
 typedef clGetSVMSuggestedTypeIndexKHR_t *
 clGetSVMSuggestedTypeIndexKHR_fn ;
 
+typedef cl_int CL_API_CALL
+clEnqueueSVMMemcpyWithPropertiesKHR_t(
+    cl_command_queue command_queue,
+    cl_svm_copy_properties_khr* properties,
+    cl_bool blocking_copy,
+    void* dst_ptr,
+    const void* src_ptr,
+    size_t size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event);
+
+typedef clEnqueueSVMMemcpyWithPropertiesKHR_t *
+clEnqueueSVMMemcpyWithPropertiesKHR_fn ;
+
 #if !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES)
 
 extern CL_API_ENTRY void* CL_API_CALL
@@ -4488,6 +4480,18 @@ clGetSVMSuggestedTypeIndexKHR(
     const cl_svm_alloc_properties_khr* properties,
     size_t size,
     cl_uint* suggested_svm_type_index) ;
+
+extern CL_API_ENTRY cl_int CL_API_CALL
+clEnqueueSVMMemcpyWithPropertiesKHR(
+    cl_command_queue command_queue,
+    cl_svm_copy_properties_khr* properties,
+    cl_bool blocking_copy,
+    void* dst_ptr,
+    const void* src_ptr,
+    size_t size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event) ;
 
 #endif /* !defined(CL_NO_NON_ICD_DISPATCH_EXTENSION_PROTOTYPES) */
 
@@ -4591,6 +4595,129 @@ clSetKernelArgDevicePointerEXT(
 #define CL_MEM_IMMUTABLE_EXT                                (1 << 6)
 
 /***************************************************************
+* cl_arm_core_id
+***************************************************************/
+#if defined(CL_VERSION_1_2)
+
+#define cl_arm_core_id 1
+#define CL_ARM_CORE_ID_EXTENSION_NAME \
+    "cl_arm_core_id"
+
+
+#define CL_ARM_CORE_ID_EXTENSION_VERSION CL_MAKE_VERSION(0, 0, 0)
+
+/* cl_device_info */
+#define CL_DEVICE_COMPUTE_UNITS_BITFIELD_ARM                0x40BF
+
+#endif /* defined(CL_VERSION_1_2) */
+
+/***************************************************************
+* cl_arm_import_memory_android_hardware_buffer
+***************************************************************/
+#define cl_arm_import_memory_android_hardware_buffer 1
+#define CL_ARM_IMPORT_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION_NAME \
+    "cl_arm_import_memory_android_hardware_buffer"
+
+
+#define CL_ARM_IMPORT_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION_VERSION CL_MAKE_VERSION(1, 1, 0)
+
+/* cl_import_properties_arm */
+#define CL_IMPORT_TYPE_ANDROID_HARDWARE_BUFFER_ARM          0x41E2
+#define CL_IMPORT_ANDROID_HARDWARE_BUFFER_PLANE_INDEX_ARM   0x41EF
+#define CL_IMPORT_ANDROID_HARDWARE_BUFFER_LAYER_INDEX_ARM   0x41F0
+#define CL_IMPORT_MEMORY_WHOLE_ALLOCATION_ARM               SIZE_MAX
+
+/***************************************************************
+* cl_arm_import_memory_dma_buf
+***************************************************************/
+#define cl_arm_import_memory_dma_buf 1
+#define CL_ARM_IMPORT_MEMORY_DMA_BUF_EXTENSION_NAME \
+    "cl_arm_import_memory_dma_buf"
+
+
+#define CL_ARM_IMPORT_MEMORY_DMA_BUF_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_import_properties_arm */
+#define CL_IMPORT_TYPE_DMA_BUF_ARM                          0x40B4
+#define CL_IMPORT_DMA_BUF_DATA_CONSISTENCY_WITH_HOST_ARM    0x41E3
+
+/***************************************************************
+* cl_arm_import_memory_host
+***************************************************************/
+#define cl_arm_import_memory_host 1
+#define CL_ARM_IMPORT_MEMORY_HOST_EXTENSION_NAME \
+    "cl_arm_import_memory_host"
+
+
+#define CL_ARM_IMPORT_MEMORY_HOST_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_import_properties_arm */
+#define CL_IMPORT_TYPE_HOST_ARM                             0x40B3
+
+/***************************************************************
+* cl_arm_import_memory_protected
+***************************************************************/
+#define cl_arm_import_memory_protected 1
+#define CL_ARM_IMPORT_MEMORY_PROTECTED_EXTENSION_NAME \
+    "cl_arm_import_memory_protected"
+
+
+#define CL_ARM_IMPORT_MEMORY_PROTECTED_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_import_properties_arm */
+#define CL_IMPORT_TYPE_PROTECTED_ARM                        0x40B5
+
+/***************************************************************
+* cl_arm_integer_dot_product_accumulate_int16
+***************************************************************/
+#define cl_arm_integer_dot_product_accumulate_int16 1
+#define CL_ARM_INTEGER_DOT_PRODUCT_ACCUMULATE_INT16_EXTENSION_NAME \
+    "cl_arm_integer_dot_product_accumulate_int16"
+
+
+#define CL_ARM_INTEGER_DOT_PRODUCT_ACCUMULATE_INT16_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/***************************************************************
+* cl_arm_integer_dot_product_accumulate_int8
+***************************************************************/
+#define cl_arm_integer_dot_product_accumulate_int8 1
+#define CL_ARM_INTEGER_DOT_PRODUCT_ACCUMULATE_INT8_EXTENSION_NAME \
+    "cl_arm_integer_dot_product_accumulate_int8"
+
+
+#define CL_ARM_INTEGER_DOT_PRODUCT_ACCUMULATE_INT8_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/***************************************************************
+* cl_arm_integer_dot_product_accumulate_saturate_int8
+***************************************************************/
+#define cl_arm_integer_dot_product_accumulate_saturate_int8 1
+#define CL_ARM_INTEGER_DOT_PRODUCT_ACCUMULATE_SATURATE_INT8_EXTENSION_NAME \
+    "cl_arm_integer_dot_product_accumulate_saturate_int8"
+
+
+#define CL_ARM_INTEGER_DOT_PRODUCT_ACCUMULATE_SATURATE_INT8_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/***************************************************************
+* cl_arm_integer_dot_product_int8
+***************************************************************/
+#define cl_arm_integer_dot_product_int8 1
+#define CL_ARM_INTEGER_DOT_PRODUCT_INT8_EXTENSION_NAME \
+    "cl_arm_integer_dot_product_int8"
+
+
+#define CL_ARM_INTEGER_DOT_PRODUCT_INT8_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/***************************************************************
+* cl_arm_non_uniform_work_group_size
+***************************************************************/
+#define cl_arm_non_uniform_work_group_size 1
+#define CL_ARM_NON_UNIFORM_WORK_GROUP_SIZE_EXTENSION_NAME \
+    "cl_arm_non_uniform_work_group_size"
+
+
+#define CL_ARM_NON_UNIFORM_WORK_GROUP_SIZE_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/***************************************************************
 * cl_img_cancel_command
 ***************************************************************/
 #define cl_img_cancel_command 1
@@ -4654,6 +4781,36 @@ typedef cl_bitfield         cl_context_safety_properties_img;
 #define CL_ECC_UNRECOVERED_IMG                              -1130
 
 /***************************************************************
+* cl_img_scheduling_controls
+***************************************************************/
+#define cl_img_scheduling_controls 1
+#define CL_IMG_SCHEDULING_CONTROLS_EXTENSION_NAME \
+    "cl_img_scheduling_controls"
+
+
+#define CL_IMG_SCHEDULING_CONTROLS_EXTENSION_VERSION CL_MAKE_VERSION(0, 3, 0)
+
+/* Types */
+typedef cl_bitfield         cl_device_scheduling_controls_capabilities_img;
+
+/* cl_device_scheduling_controls_capabilities_img */
+#define CL_DEVICE_WORK_GROUP_SCHEDULING_ALGORITHM_LINEAR_ORDER_IMG (1 << 0)
+#define CL_DEVICE_WORK_GROUP_SCHEDULING_ALGORITHM_MORTON_ORDER_IMG (1 << 1)
+#define CL_DEVICE_WORK_GROUP_SCHEDULING_ALGORITHM_TWOD_MORTON_ORDER_IMG (1 << 2)
+#define CL_DEVICE_WORK_GROUP_SCHEDULING_ALGORITHM_THREED_MORTON_ORDER_IMG (1 << 3)
+#define CL_DEVICE_WORK_GROUP_ARBITRATION_ALGORITHM_TASK_DEMAND_IMG (1 << 8)
+#define CL_DEVICE_WORK_GROUP_ARBITRATION_ALGORITHM_ROUND_ROBIN_IMG (1 << 9)
+#define CL_DEVICE_WORK_GROUP_EXECUTE_COUNT_IMG              (1 << 10)
+
+/* cl_device_info */
+#define CL_DEVICE_SCHEDULING_CONTROLS_CAPABILITIES_IMG      0x4222
+
+/* cl_queue_properties */
+#define CL_COMMAND_QUEUE_SCHEDULING_WORK_GROUP_SCHEDULING_ALGORITHM_IMG 0x4223
+#define CL_COMMAND_QUEUE_SCHEDULING_WORK_GROUP_ARBITRATION_ALGORITHM_IMG 0x4224
+#define CL_COMMAND_QUEUE_SCHEDULING_WORK_GROUP_EXECUTE_COUNT_IMG 0x422B
+
+/***************************************************************
 * cl_img_unified_svm_external_memory_dma_buf (beta)
 ***************************************************************/
 #if defined(CL_ENABLE_BETA_EXTENSIONS)
@@ -4690,7 +4847,7 @@ typedef struct _cl_kernel_allocation_info_intel {
     cl_int arg_index;
 } cl_kernel_allocation_info_intel;
 
-/* cl_kernel_workgroup_info */
+/* cl_kernel_work_group_info */
 #define CL_KERNEL_ALLOCATIONS_INFO_INTEL                    0x425A
 
 /***************************************************************
