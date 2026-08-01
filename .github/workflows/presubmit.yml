@@ -16,7 +16,7 @@ jobs:
       run:
         shell: bash
     steps:
-    - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         # repository: ${{github.repository}} (default)
         fetch-depth: 0
@@ -145,7 +145,7 @@ jobs:
         echo "CTEST_EXE=ctest" >> "$GITHUB_ENV"
 
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Configure
       run: $CMAKE_EXE
@@ -309,7 +309,7 @@ jobs:
         Remove-Item ~\Downloads\*
 
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Configure (MSBuild)
       if: matrix.GEN == 'Visual Studio 17 2022'
@@ -557,7 +557,7 @@ jobs:
       CXX: ${{matrix.COMPILER.CXX}}
     steps:
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Create Build Environment
       run: |
@@ -634,7 +634,7 @@ jobs:
       CFLAGS: -Wall -Wextra -pedantic -Werror
     steps:
     - name: Checkout OpenCL-Headers
-      uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Configure
       run: cmake
