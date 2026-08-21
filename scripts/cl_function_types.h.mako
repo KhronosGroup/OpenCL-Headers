@@ -2,6 +2,7 @@
 # Gets C function parameter strings for the specified API params:
 import sys
 import json
+from re import sub
 def getCParameterStrings(params):
     strings = []
     if len(params) == 0:
@@ -41,6 +42,15 @@ def getCParameterStrings(params):
 
 %  endif
 %  for api in apis:
+%    for paramStr in getCParameterStrings(api.Params):
+%      if 'CL_CALLBACK' in paramStr:
+typedef ${sub(r'\s*\(\s*CL_CALLBACK\s*\*\s*[0-9a-zA-Z_]*\s*\)', ' CL_CALLBACK ' + api.Name + '_callback_t', paramStr)};
+
+typedef ${api.Name}_callback_t *
+${api.Name}_callback_fn;
+
+%      endif
+%    endfor
 typedef ${api.RetType} CL_API_CALL ${api.Name}_t(
 %    for i, paramStr in enumerate(getCParameterStrings(api.Params)):
 %      if i < len(api.Params)-1:
