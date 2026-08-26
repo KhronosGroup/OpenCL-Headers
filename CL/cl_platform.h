@@ -241,7 +241,7 @@ typedef double                  cl_double;
 
 #define CL_NAN              (CL_INFINITY - CL_INFINITY)
 #define CL_HUGE_VALF        ((cl_float) 1e50)
-#define CL_HUGE_VAL         ((cl_double) 1e500)
+#define CL_HUGE_VAL         ((cl_double) (1e300 * 1e300))
 #define CL_MAXFLOAT         CL_FLT_MAX
 #define CL_INFINITY         CL_HUGE_VALF
 
