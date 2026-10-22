@@ -376,7 +376,12 @@ typedef double          cl_double;
 
 /* Define basic vector types */
 #if defined( __VEC__ )
-  #if !defined(__clang__)
+  /* GCC and clang both predefine __vector, __pixel and __bool whenever
+     __VEC__ is set, so the typedefs below do not require altivec.h.
+     Including it is harmful: it aliases the short AltiVec spellings
+     (#define bool __bool), which breaks any C translation unit that
+     uses bool as a scalar after including this header. */
+  #if !defined(__clang__) && !defined(__GNUC__)
      #include <altivec.h>   /* may be omitted depending on compiler. AltiVec spec provides no way to detect whether the header is required. */
   #endif
    typedef __vector unsigned char     __cl_uchar16;
