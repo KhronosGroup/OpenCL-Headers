@@ -59,6 +59,11 @@ typedef cl_int CL_API_CALL clGetDeviceInfo_t(
 typedef clGetDeviceInfo_t *
 clGetDeviceInfo_fn CL_API_SUFFIX__VERSION_1_0;
 
+typedef void CL_CALLBACK clCreateContext_callback_t(const char* errinfo, const void* private_info, size_t cb, void* user_data);
+
+typedef clCreateContext_callback_t *
+clCreateContext_callback_fn;
+
 typedef cl_context CL_API_CALL clCreateContext_t(
     const cl_context_properties* properties,
     cl_uint num_devices,
@@ -69,6 +74,11 @@ typedef cl_context CL_API_CALL clCreateContext_t(
 
 typedef clCreateContext_t *
 clCreateContext_fn CL_API_SUFFIX__VERSION_1_0;
+
+typedef void CL_CALLBACK clCreateContextFromType_callback_t(const char* errinfo, const void* private_info, size_t cb, void* user_data);
+
+typedef clCreateContextFromType_callback_t *
+clCreateContextFromType_callback_fn;
 
 typedef cl_context CL_API_CALL clCreateContextFromType_t(
     const cl_context_properties* properties,
@@ -232,6 +242,11 @@ typedef cl_int CL_API_CALL clReleaseProgram_t(
 
 typedef clReleaseProgram_t *
 clReleaseProgram_fn CL_API_SUFFIX__VERSION_1_0;
+
+typedef void CL_CALLBACK clBuildProgram_callback_t(cl_program program, void* user_data);
+
+typedef clBuildProgram_callback_t *
+clBuildProgram_callback_fn;
 
 typedef cl_int CL_API_CALL clBuildProgram_t(
     cl_program program,
@@ -548,6 +563,11 @@ typedef cl_int CL_API_CALL clEnqueueNDRangeKernel_t(
 typedef clEnqueueNDRangeKernel_t *
 clEnqueueNDRangeKernel_fn CL_API_SUFFIX__VERSION_1_0;
 
+typedef void CL_CALLBACK clEnqueueNativeKernel_callback_t(void*);
+
+typedef clEnqueueNativeKernel_callback_t *
+clEnqueueNativeKernel_callback_fn;
+
 typedef cl_int CL_API_CALL clEnqueueNativeKernel_t(
     cl_command_queue command_queue,
     void (CL_CALLBACK* user_func)(void*),
@@ -674,6 +694,11 @@ typedef cl_mem CL_API_CALL clCreateSubBuffer_t(
 typedef clCreateSubBuffer_t *
 clCreateSubBuffer_fn CL_API_SUFFIX__VERSION_1_1;
 
+typedef void CL_CALLBACK clSetMemObjectDestructorCallback_callback_t(cl_mem memobj, void* user_data);
+
+typedef clSetMemObjectDestructorCallback_callback_t *
+clSetMemObjectDestructorCallback_callback_fn;
+
 typedef cl_int CL_API_CALL clSetMemObjectDestructorCallback_t(
     cl_mem memobj,
     void (CL_CALLBACK* pfn_notify)(cl_mem memobj, void* user_data),
@@ -695,6 +720,11 @@ typedef cl_int CL_API_CALL clSetUserEventStatus_t(
 
 typedef clSetUserEventStatus_t *
 clSetUserEventStatus_fn CL_API_SUFFIX__VERSION_1_1;
+
+typedef void CL_CALLBACK clSetEventCallback_callback_t(cl_event event, cl_int event_command_status, void *user_data);
+
+typedef clSetEventCallback_callback_t *
+clSetEventCallback_callback_fn;
 
 typedef cl_int CL_API_CALL clSetEventCallback_t(
     cl_event event,
@@ -808,6 +838,11 @@ typedef cl_program CL_API_CALL clCreateProgramWithBuiltInKernels_t(
 typedef clCreateProgramWithBuiltInKernels_t *
 clCreateProgramWithBuiltInKernels_fn CL_API_SUFFIX__VERSION_1_2;
 
+typedef void CL_CALLBACK clCompileProgram_callback_t(cl_program program, void* user_data);
+
+typedef clCompileProgram_callback_t *
+clCompileProgram_callback_fn;
+
 typedef cl_int CL_API_CALL clCompileProgram_t(
     cl_program program,
     cl_uint num_devices,
@@ -821,6 +856,11 @@ typedef cl_int CL_API_CALL clCompileProgram_t(
 
 typedef clCompileProgram_t *
 clCompileProgram_fn CL_API_SUFFIX__VERSION_1_2;
+
+typedef void CL_CALLBACK clLinkProgram_callback_t(cl_program program, void* user_data);
+
+typedef clLinkProgram_callback_t *
+clLinkProgram_callback_fn;
 
 typedef cl_program CL_API_CALL clLinkProgram_t(
     cl_context context,
@@ -992,6 +1032,11 @@ typedef cl_int CL_API_CALL clSetKernelExecInfo_t(
 typedef clSetKernelExecInfo_t *
 clSetKernelExecInfo_fn CL_API_SUFFIX__VERSION_2_0;
 
+typedef void CL_CALLBACK clEnqueueSVMFree_callback_t(cl_command_queue queue, cl_uint num_svm_pointers, void* svm_pointers[], void* user_data);
+
+typedef clEnqueueSVMFree_callback_t *
+clEnqueueSVMFree_callback_fn;
+
 typedef cl_int CL_API_CALL clEnqueueSVMFree_t(
     cl_command_queue command_queue,
     cl_uint num_svm_pointers,
@@ -1136,6 +1181,11 @@ typedef cl_int CL_API_CALL clSetProgramSpecializationConstant_t(
 typedef clSetProgramSpecializationConstant_t *
 clSetProgramSpecializationConstant_fn CL_API_SUFFIX__VERSION_2_2;
 
+typedef void CL_CALLBACK clSetProgramReleaseCallback_callback_t(cl_program program, void* user_data);
+
+typedef clSetProgramReleaseCallback_callback_t *
+clSetProgramReleaseCallback_callback_fn;
+
 typedef cl_int CL_API_CALL clSetProgramReleaseCallback_t(
     cl_program program,
     void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
@@ -1147,6 +1197,11 @@ clSetProgramReleaseCallback_fn CL_API_SUFFIX__VERSION_2_2_DEPRECATED;
 #endif /* CL_VERSION_2_2 */
 
 #ifdef CL_VERSION_3_0
+
+typedef void CL_CALLBACK clSetContextDestructorCallback_callback_t(cl_context context, void* user_data);
+
+typedef clSetContextDestructorCallback_callback_t *
+clSetContextDestructorCallback_callback_fn;
 
 typedef cl_int CL_API_CALL clSetContextDestructorCallback_t(
     cl_context context,
