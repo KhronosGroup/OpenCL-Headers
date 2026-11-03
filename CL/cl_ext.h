@@ -4690,6 +4690,48 @@ typedef struct _cl_kernel_allocation_info_intel {
 #define CL_KERNEL_ALLOCATIONS_INFO_INTEL                    0x425A
 
 /***************************************************************
+* cl_intel_level_zero_interop
+***************************************************************/
+#define cl_intel_level_zero_interop 1
+#define CL_INTEL_LEVEL_ZERO_INTEROP_EXTENSION_NAME \
+    "cl_intel_level_zero_interop"
+
+
+#define CL_INTEL_LEVEL_ZERO_INTEROP_EXTENSION_VERSION CL_MAKE_VERSION(1, 0, 0)
+
+/* cl_context_properties */
+#define CL_CONTEXT_L0_HANDLE_INTEL                          0x42B0
+
+/* cl_context_info */
+/* enum CL_CONTEXT_L0_HANDLE_INTEL */
+
+/* cl_queue_properties */
+#define CL_QUEUE_L0_IMMEDIATE_CMD_LIST_HANDLE_INTEL         0x42B1
+
+/* cl_command_queue_info */
+/* enum CL_QUEUE_L0_IMMEDIATE_CMD_LIST_HANDLE_INTEL */
+
+/* cl_event_info */
+#define CL_EVENT_L0_HANDLE_INTEL                            0x42B2
+
+/* cl_mem_properties */
+#define CL_MEM_L0_HANDLE_INTEL                              0x42B3
+#define CL_IMAGE_L0_HANDLE_INTEL                            0x42B6
+#define CL_IMAGE_L0_HANDLE_LIST_END_INTEL                   0
+
+/* cl_mem_info */
+/* enum CL_MEM_L0_HANDLE_INTEL */
+
+/* cl_image_info */
+/* enum CL_IMAGE_L0_HANDLE_INTEL */
+
+/* cl_device_info */
+#define CL_DEVICE_L0_HANDLE_INTEL                           0x42B4
+
+/* cl_platform_info */
+#define CL_PLATFORM_L0_DRIVER_HANDLE_INTEL                  0x42B5
+
+/***************************************************************
 * cl_qcom_perf_hint
 ***************************************************************/
 #define cl_qcom_perf_hint 1
